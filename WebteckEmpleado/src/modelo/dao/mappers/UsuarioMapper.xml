@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace='modelo.dao.mappers.UsuarioMapper'>
+
+
+	<select id='leerDatos' resultType='modelo.Pojo.usuariosPojo'>
+		SELECT
+		*
+		FROM
+		usuaris
+		WHERE
+		usuario = #{usuario} AND password= #{password}
+
+	</select>
+
+
+	<select id='getFoto' resultType='modelo.Pojo.usuariosPojo'>
+		SELECT
+		foto
+		FROM
+		usuaris
+		where
+		usuario #{usuario}
+
+	</select>
+
+
+	<insert id='AñadirUsuarios'>
+		INSERT INTO usuaris
+		(emailUsuario,nombre,usuario,password,foto,activado)
+		VALUES(#{emailUsuario},#{nombre},
+		#{usuario}, #{password}, #{foto},
+		#{activado})
+	</insert>
+
+<update id='ActivarUsuario'>
+		UPDATE usuaris
+		SET
+		activado ='s'
+		WHERE emailUsuario =
+		(select
+		emailUsuario from claveregistro where codigo = #{codigo})
+	</update>
+
+
+
+<update id="pantallaUsuario">
+		UPDATE usuaris
+		SET
+		pantalla = #{pantalla}
+		WHERE usuario = #{usuario}
+
+	</update>
+	
+		<delete id='eliminarUsuario'>
+		DELETE FROM usuaris WHERE emailUsuario =
+		#{emailUsuario}
+	</delete>
+
+	<delete id="eliminarClave">
+		DELETE FROM claveregistro WHERE emailUsuario =#{emailUsuario}
+	</delete>
+
+
+</mapper>

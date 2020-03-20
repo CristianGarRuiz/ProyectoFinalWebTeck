@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace='modelo.dao.mappers.ProductoMapper'>
+
+	<resultMap type="AccidentesBasicoPojo" id="datosProducto">
+		<id property='id' column='id' />
+		<result property='EXPEDIENTE' column='EXPEDIENTE' />
+		<result property='FECHA' column='FECHA' />
+		<result property='HORA' column='HORA' />
+		<result property='DIRECCION' column='DIRECCION' />
+		<result property='ID_DISTRITO' column='ID_DISTRITO' />
+		<result property='ID_TIPO_ACCIDENTE' column='ID_TIPO_ACCIDENTE' />
+		<result property='ID_TIPO_VEHICULO' column='ID_TIPO_VEHICULO' />
+		<result property='ID_SEXO' column='ID_SEXO' />
+
+	</resultMap>
+
+
+
+
+	<select id="leerProductos" resultMap="datosProducto">
+		select
+		ACCIDENTES.ID,
+		ACCIDENTES.EXPEDIENTE,ACCIDENTES.FECHA,ACCIDENTES.HORA,ACCIDENTES.DIRECCION,ACCIDENTES.ID_DISTRITO,ACCIDENTES.ID_TIPO_ACCIDENTE,ACCIDENTES.ID_TIPO_VEHICULO,
+		ACCIDENTES.ID_SEXO 
+		from
+		ACCIDENTES
+		where
+		ACCIDENTES.ID
+		=#{id}
+	</select>
+
+   
+
+<select id="leerTipoGenero" resultType="TipoSexoPojo">
+		select
+		*
+		from
+		TIPOS_SEXO
+	</select>
+   
+<select id="leerTipoMarca" resultType="TipoSexoPojo">
+		select
+		*
+		from
+		TIPOS_SEXO
+	</select>
+
+
+	<delete id="eliminarProducto">
+
+		DELETE FROM ACCIDENTES where ACCIDENTES.ID = #{id}
+	</delete>
+
+
+	<update id='updateProducto'
+		parameterType='AccidentesBasicoPojo'>
+		UPDATE
+		ACCIDENTES
+		SET
+
+		EXPEDIENTE = #{EXPEDIENTE},
+		FECHA = #{FECHA},
+		HORA = #{HORA},
+		DIRECCION
+		=#{DIRECCION},
+		ID_DISTRITO = #{ID_DISTRITO},
+		ID_TIPO_ACCIDENTE
+		=#{ID_TIPO_ACCIDENTE},
+		ID_TIPO_VEHICULO = #{ID_TIPO_VEHICULO},
+		ID_SEXO
+		=#{ID_SEXO}
+		WHERE ACCIDENTES.id = #{id}
+	</update>
+
+	<insert id='InsertarProducto'
+		parameterType='AccidentesBasicoPojo' useGeneratedKeys='true'
+		keyProperty='id'>
+		INSERT INTO ACCIDENTES(EXPEDIENTE,
+		FECHA,
+		HORA ,
+		DIRECCION,
+		ID_DISTRITO ,
+		ID_TIPO_ACCIDENTE,
+		ID_TIPO_VEHICULO,
+		ID_SEXO)
+		VALUES(#{EXPEDIENTE}, #{FECHA}, #{HORA},
+		#{DIRECCION}, #{ID_DISTRITO},
+		#{ID_TIPO_ACCIDENTE},
+		#{ID_TIPO_VEHICULO}, #{ID_SEXO})
+	</insert>
+
+
+</mapper>
