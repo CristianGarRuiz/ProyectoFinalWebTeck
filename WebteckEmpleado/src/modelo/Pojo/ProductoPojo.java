@@ -1,5 +1,7 @@
 package modelo.Pojo;
 
+import java.util.ArrayList;
+
 public class ProductoPojo {
 
 	private int id;
@@ -7,6 +9,7 @@ public class ProductoPojo {
 	private int anyo;
 	private String foto;
 	private String descripcion;
+	private int precio;
 	private int idGenero;
 	private int idPlataforma;
 
@@ -14,7 +17,7 @@ public class ProductoPojo {
 		super();
 	}
 
-	public ProductoPojo(int id, String titulo, int anyo, String foto, String descripcion, int idGenero,
+	public ProductoPojo(int id, String titulo, int anyo, String foto, String descripcion, int precio, int idGenero,
 			int idPlataforma) {
 		super();
 		this.id = id;
@@ -22,6 +25,7 @@ public class ProductoPojo {
 		this.anyo = anyo;
 		this.foto = foto;
 		this.descripcion = descripcion;
+		this.precio = precio;
 		this.idGenero = idGenero;
 		this.idPlataforma = idPlataforma;
 	}
@@ -64,6 +68,14 @@ public class ProductoPojo {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public int getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(int precio) {
+		this.precio = precio;
 	}
 
 	public int getIdGenero() {

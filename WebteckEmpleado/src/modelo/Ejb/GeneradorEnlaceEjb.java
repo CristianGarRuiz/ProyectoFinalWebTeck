@@ -1,5 +1,11 @@
 package modelo.Ejb;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
+
+@Stateless
+@LocalBean
 public class GeneradorEnlaceEjb {
 
 	public String generarEnlace(int codigo) {

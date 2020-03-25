@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='modelo.dao.mappers.UsuarioMapper'>
 
 
-	<select id='leerDatos' resultType='modelo.Pojo.usuariosPojo'>
+	<select id='leerDatos' resultType='modelo.Pojo.UsuarioPojo'>
 		SELECT
 		*
 		FROM
@@ -14,7 +16,18 @@
 	</select>
 
 
-	<select id='getFoto' resultType='modelo.Pojo.usuariosPojo'>
+	<select id='leerDatosEmpleado' resultType='modelo.Pojo.UsuarioPojo'>
+		SELECT
+		*
+		FROM
+		empleados
+		WHERE
+		usuario = #{usuario} AND password= #{password}
+
+	</select>
+
+
+	<select id='getFoto' resultType='modelo.Pojo.UsuarioPojo'>
 		SELECT
 		foto
 		FROM
@@ -33,7 +46,7 @@
 		#{activado})
 	</insert>
 
-<update id='ActivarUsuario'>
+	<update id='ActivarUsuario'>
 		UPDATE usuaris
 		SET
 		activado ='s'
@@ -44,21 +57,23 @@
 
 
 
-<update id="pantallaUsuario">
+	<update id="pantallaUsuario">
 		UPDATE usuaris
 		SET
 		pantalla = #{pantalla}
-		WHERE usuario = #{usuario}
+		WHERE usuario
+		= #{usuario}
 
 	</update>
-	
-		<delete id='eliminarUsuario'>
+
+	<delete id='eliminarUsuario'>
 		DELETE FROM usuaris WHERE emailUsuario =
 		#{emailUsuario}
 	</delete>
 
 	<delete id="eliminarClave">
-		DELETE FROM claveregistro WHERE emailUsuario =#{emailUsuario}
+		DELETE FROM claveregistro WHERE emailUsuario
+		=#{emailUsuario}
 	</delete>
 
 

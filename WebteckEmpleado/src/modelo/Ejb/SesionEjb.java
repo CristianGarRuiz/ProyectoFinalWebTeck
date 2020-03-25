@@ -1,9 +1,13 @@
 package modelo.Ejb;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.servlet.http.HttpSession;
 
 import modelo.Pojo.UsuarioPojo;
 
+@Stateless
+@LocalBean
 public class SesionEjb {
 
 	public UsuarioPojo usuariosLogeado(HttpSession session) {
@@ -11,7 +15,6 @@ public class SesionEjb {
 		UsuarioPojo usuario = null;
 
 		if (session != null) {
-
 			usuario = (UsuarioPojo) session.getAttribute("usuario");
 		}
 

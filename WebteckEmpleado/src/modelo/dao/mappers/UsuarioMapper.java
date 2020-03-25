@@ -15,6 +15,8 @@ public interface UsuarioMapper {
 	 * @return
 	 */
 	public UsuarioPojo leerDatos(@Param("usuario") String user, @Param("password") String paswd);
+	
+	public UsuarioPojo leerDatosEmpleado(@Param("usuario") String user,@Param("password") String paswd);
 
 	/**
 	 * recoje la imagen de un usuario que hace login

@@ -9,14 +9,14 @@ import java.util.Date;
  * @author cristian
  *
  */
-public class Registropojo {
+public class RegistroPojo {
 
 	private int id;
 	private String emailUsuario;
 	private String clave;
 	private Date fechaHora;
 
-	public Registropojo(int id, String emailUsuario, String clave, Date fechaHora) {
+	public RegistroPojo(int id, String emailUsuario, String clave, Date fechaHora) {
 		super();
 		this.id = id;
 		this.emailUsuario = emailUsuario;
