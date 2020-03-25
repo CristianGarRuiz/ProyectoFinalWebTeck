@@ -14,16 +14,16 @@
 		<result property='idGenero' column='idGenero' />
 		<result property='idPlataforma' column='idPlataforma' />
 	</resultMap>
-	
-	
-<!-- 	<resultMap type="ProductoPojo" id="datosProducto"> -->
-<!-- 		<result property='titulo' column='titulo' /> -->
-<!-- 		<result property='anyo' column='anyo' /> -->
-<!-- 		<result property='precio' column='precio' /> -->
-<!-- 		<result property='descripcion' column='descripcion' /> -->
-<!-- 		<result property='genero' column='genero' />  -->
-<!-- 		 <result property='plataforma' column='plataforma' />   -->
-<!-- 	</resultMap> -->
+
+
+	<!-- <resultMap type="ProductoPojo" id="datosProducto"> -->
+	<!-- <result property='titulo' column='titulo' /> -->
+	<!-- <result property='anyo' column='anyo' /> -->
+	<!-- <result property='precio' column='precio' /> -->
+	<!-- <result property='descripcion' column='descripcion' /> -->
+	<!-- <result property='genero' column='genero' /> -->
+	<!-- <result property='plataforma' column='plataforma' /> -->
+	<!-- </resultMap> -->
 
 	<select id="leerProductosporNombre" resultMap="datosProducto">
 
@@ -45,8 +45,8 @@
 		from
 		productos
 		where
-		productos.titulo like #{nombre};
-		
+		productos.titulo like '%' || #{nombre}|| '%';
+
 	</select>
 
 

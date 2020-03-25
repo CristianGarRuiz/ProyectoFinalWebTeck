@@ -8,6 +8,16 @@
 <%@page import="modelo.Pojo.VentasPojo"%>
 <%@page import="modelo.Pojo.UsuarioPojo"%>
 
+
+<%@ page import="modelo.Ejb.SesionEjb"%>
+<%@page import="modelo.Ejb.UsuarioEjb"%>
+
+
+
+<%!UsuarioEjb usuarios;%>
+
+<%!SesionEjb sessiones;%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,6 +56,7 @@
 		String inicio = (String) request.getAttribute("inicio");
 		String fin = (String) request.getAttribute("fin");
 	%>
+	
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
