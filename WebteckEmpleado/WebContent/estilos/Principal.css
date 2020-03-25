@@ -1,0 +1,62 @@
+/* Make the image fully responsive */
+.carousel-inner img {
+    width: 100%;
+    height: 10%;
+}
+
+#carousel1{
+    height: 10%;
+    width: 100%;
+}
+
+.product-item{
+    height: 70%;
+    width: 24%;
+    border: 3px solid black;
+    padding: 3%;
+    margin-inline-start: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+    border-radius: 3%;
+}
+.benefit{
+
+    background-color: wheat;
+}
+.botonCarrito{
+    background-color: orangered;
+    height: 25%;
+    width: 42%;
+    text-align: center;
+    margin: auto;
+    margin-top: 6%;
+    border-radius: 6%;
+    text-decoration: none;
+    display: block;
+    
+}
+
+.añadirCarrito{
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.botonCarrito :hover{
+   color: rgba(255, 255, 255, 1) !important;
+  box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+  transition: all 0.2s ease;
+  text-decoration: none;
+  cursor: pointer
+}
+#BotonBusqueda{
+    cursor: pointer;
+}
+#BotonForm{
+    margin-left: 52%;
+    width: 167%;
+    height: 98%;
+    border-radius: 4%;
+    cursor: pointer;
+}
