@@ -38,12 +38,11 @@
 	</select>
 
 
-	<insert id='AñadirUsuarios'>
-		INSERT INTO usuaris
-		(emailUsuario,nombre,usuario,password,foto,activado)
+	<insert id='AñadirEmpleado'>
+		INSERT INTO empleados
+		(email,nombre,usuario,password,foto)
 		VALUES(#{emailUsuario},#{nombre},
-		#{usuario}, #{password}, #{foto},
-		#{activado})
+		#{usuario}, #{password}, #{foto})
 	</insert>
 
 	<update id='ActivarUsuario'>

@@ -1,13 +1,16 @@
+
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="javax.naming.Context"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.ArrayList"%>
-<%@ page import="modelo.Pojo.UsuarioPojo"%>
-<%@ page import="modelo.Pojo.MarcaPojo"%>
-<%@ page import="modelo.Pojo.CategoriaPojo"%>
+
+<%@page import="modelo.Pojo.UsuarioPojo"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>ControlEmpleados</title>
+<title>ControlVentas</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -31,18 +34,20 @@
 </head>
 <body>
 
+
 	<%
 		String error = (String) request.getParameter("error");
-		UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
 	%>
 
-
-
+	<%
+		UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
+		String titulo = (String) request.getAttribute("titulo");
+	%>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
-		</a> <a style="color: cyan" class="navbar-brand" href="#Puestos">WebTeck</a>
+		</a> <a style="color: cyan" class="navbar-brand" href="Pagina">WebTeck</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
@@ -51,18 +56,18 @@
 		<div class="container-fluid  col-sm-11">
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="#texto">Informacion</a>
+					<li class="nav-item"><a class="nav-link" href="BuscarProducto">BuscarProducto</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#puestos">Añadir
+					<li class="nav-item"><a class="nav-link" href="Crear">Añadir
 							Producto</a></li>
-					<li class="nav-item"><a class="nav-link" href="#Info">Ventas</a>
+					<li class="nav-item"><a class="nav-link" href="InfoVentas">InfoVentas</a>
 					</li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="Login"><button type="submit"
 									<i class="fas fa-door-open" style="font-size:18px"></i>></button>Login</a>
-							<a class="dropdown-item" href="ComprobarAdmin"><button
+							<a class="dropdown-item" href="LogearUsuarios"><button
 									type="submit"
 									<i class="fas fa-portrait" style="font-size:19px"></i>></button>Registro</a>
 						</div></li>
@@ -74,7 +79,7 @@
 		style="margin-top: 4%;">
 		<div class="row">
 			<ul>
-				<h5 style="margin-top: 20%">Control de Empleados</h5>
+				<h5 style="margin-top: 20%">Control de Administrador</h5>
 
 				<%
 					if (usu == null) {
@@ -88,7 +93,7 @@
 					} else {
 				%>
 				<div id="Datos">
-					<img alt="" src="Imagenes/<%=usu.getFoto()%>" style="height: 35px; border-radius: 4%;"><br /> <br />
+					<img alt="" src="Imagenes/<%=usu.getFoto()%>"><br /> <br />
 					<p
 						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
 						Bienvenido :
@@ -118,58 +123,17 @@
 			
 		</div>
 	</div>
-	<script>
-		window.onload = function() {
-			document.getElementById("Login12").setAttribute('href', '#');
-		}
-	</script>
 
 
+	<FORM action="ComprobarAdmin" method="post">
+		Contraseña Administrador: <INPUT type="password" name="codigo" /> <BR /> <INPUT
+			type="submit" value="Validar Credenciales" />
+	</FORM>
 
-
-	<h2 id='TextoAccidente'>Añadir un nuevo Producto</h2>
-	<br>
-	<br>
-	<br>
-	<br>
-
-	<form action="Crear" method="post">
-		<label for="Titulo">Titulo:</label> <input type="text" name="Titulo"
-			required="required" placeholder="Titulo.." /> <br /> 
-			<label for="Año">Año:</label> 
-			<input type="number" name="Anyo" required="required" placeholder="Año" /> 
-			<br /> <br /> 
-			<label
-			for="Precio">Precio:</label> <input type="number" name="Precio"
-			required="required" placeholder="Precio" /> <br /> <br /> <label
-			for="Descripcion">Descripcion:</label> <input type="text"
-			name="Descripcion" required="required" placeholder="Descripcion.." />
-		<br /> <label for="Descripcion">Foto:</label> <input type="File"
-			name="Imagen" required="required" placeholder="Imagen .." /> <br />
-
-		<br /> <label for="marca">Marca:</label> <select name="Marca">
-			<%
-				ArrayList<MarcaPojo> mar = (ArrayList<MarcaPojo>) request.getAttribute("marca");
-				if (mar != null) {
-					for (MarcaPojo d : mar) {
-						out.print("<option value='" + d.getId() + "'>" + d.getNombre() + "</option>");
-					}
-				}
-			%>
-		</select> <label for="categoria">Categoria:</label> <select name=Categoria>
-			<%
-				ArrayList<CategoriaPojo> cate = (ArrayList<CategoriaPojo>) request.getAttribute("categoria");
-				if (cate != null) {
-					for (CategoriaPojo d : cate) {
-						out.print("<option value='" + d.getId() + "'>" + d.getNombre() + "</option>");
-					}
-				}
-			%>
-
-		</select> <br /> <br /> <input type="submit" value="Crear" />
-	</form>
-
-	<button id='CancelarAcc' type='button'
-		onClick='window.location.replace("Principal")'>Cancelar</button>
 </body>
+<footer class="container-fluid text-center bg-dark">
+	<h3 id="nombre">Cristian Garcia</h3>
+	<i class="fa fa-copyright" style="font-size: 36px; color: cyan;">
+		webteckControl</i>
+</footer>
 </html>

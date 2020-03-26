@@ -9,6 +9,7 @@
 		<result property='titulo' column='titulo' />
 		<result property='anyo' column='anyo' />
 		<result property='precio' column='precio' />
+		<result property='stock' column='stock' />
 		<result property='descripcion' column='descripcion' />
 		<result property='foto' column='foto' />
 		<result property='idGenero' column='idGenero' />
@@ -16,37 +17,31 @@
 	</resultMap>
 
 
-	<!-- <resultMap type="ProductoPojo" id="datosProducto"> -->
-	<!-- <result property='titulo' column='titulo' /> -->
-	<!-- <result property='anyo' column='anyo' /> -->
-	<!-- <result property='precio' column='precio' /> -->
-	<!-- <result property='descripcion' column='descripcion' /> -->
-	<!-- <result property='genero' column='genero' /> -->
-	<!-- <result property='plataforma' column='plataforma' /> -->
-	<!-- </resultMap> -->
+	<resultMap type="BusquedaPojo" id="nombreProducto">
+		<result property='titulo' column='titulo' />
+		<result property='anyo' column='anyo' />
+		<result property='precio' column='precio' />
+		<result property='descripcion' column='descripcion' />
+		<result property='genero' column='genero' />
+		<result property='plataforma' column='plataforma' />
+	</resultMap>
 
-	<select id="leerProductosporNombre" resultMap="datosProducto">
-
-		<!-- select -->
-		<!-- productos.titulo as titulo,productos.anyo as anyo, productos.precio 
-			as precio ,productos.descripcion as descripcion, -->
-		<!-- generos.nombre as genero , plataformas.nombre as plataforma -->
-		<!-- from -->
-		<!-- productos , plataformas,generos -->
-		<!-- where -->
-		<!-- productos.idPlataforma = plataformas.id and productos.idGenero = generos.id 
-			and -->
-		<!-- productos.titulo like #{nombre}; -->
-
+	<select id="BuscarProductoporNombre" resultMap="nombreProducto">
 
 		select
-		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,
-		productos.idGenero,productos.idPlataforma,productos.id
+		productos.titulo as titulo,productos.anyo as anyo, productos.precio
+		as precio ,productos.descripcion as descripcion,
+		generos.nombre as genero , plataformas.nombre as plataforma
+		
 		from
-		productos
+		productos,plataformas,generos
+		
 		where
-		productos.titulo like '%' || #{nombre}|| '%';
-
+		productos.idPlataforma = plataformas.id 
+		and
+		productos.idGenero = generos.id
+		and
+		productos.titulo like #{titulo};
 	</select>
 
 
@@ -116,6 +111,5 @@
 		#{idGenero},
 		#{idPlataforma})
 	</insert>
-
-
+	
 </mapper>

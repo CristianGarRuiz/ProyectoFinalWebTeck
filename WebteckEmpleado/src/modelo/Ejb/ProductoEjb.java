@@ -36,9 +36,9 @@ public class ProductoEjb {
 
 	}
 	
-	public ArrayList<ProductoPojo> leerProductosporNombre(String nombre)  throws SQLException {
+	public ArrayList<BusquedaPojo> BuscarProductoporNombre(String titulo)  throws SQLException {
 		ProductosDao ProductoDao = new ProductosDao();
-		return ProductoDao.leerProductosporNombre(nombre);
+		return ProductoDao.BuscarProductoporNombre(titulo);
 
 	}
 
@@ -73,5 +73,7 @@ public class ProductoEjb {
 
 		Productodao.insertProducto(producto);
 	}
+	
+
 	
 }

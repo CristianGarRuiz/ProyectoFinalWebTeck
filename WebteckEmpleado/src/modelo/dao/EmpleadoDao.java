@@ -36,13 +36,13 @@ public class EmpleadoDao {
 		}
 	}
 
-	public void AñadirUsuarios(UsuarioPojo usuario) {
+	public void AñadirEmpleado(UsuarioPojo usu) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 
-			UsuarioMapper usuAñadirUsuario = sqlSession.getMapper(UsuarioMapper.class);
-			usuAñadirUsuario.AñadirUsuarios(usuario.getEmailUsuario(), usuario.getNombre(), usuario.getUsuario(),
-					usuario.getPassword(), usuario.getFoto(), usuario.getActivado());
+			UsuarioMapper AñadirEmpleado = sqlSession.getMapper(UsuarioMapper.class);
+			AñadirEmpleado.AñadirEmpleado(usu.getEmailUsuario(), usu.getNombre(), usu.getUsuario(),
+					usu.getPassword(), usu.getFoto());
 			sqlSession.commit();
 
 		} finally {

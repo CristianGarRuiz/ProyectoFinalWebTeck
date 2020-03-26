@@ -33,7 +33,7 @@ public class DarBajaEmpleado extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Pagina.jsp");
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Eliminar.jsp");
 
 		try {
 			// Variable que recibe el email

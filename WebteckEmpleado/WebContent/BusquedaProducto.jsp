@@ -4,7 +4,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <%@page import="modelo.Pojo.UsuarioPojo"%>
 <%@page import="modelo.Pojo.BusquedaPojo"%>
 <%@page import="modelo.Pojo.ProductoPojo"%>
@@ -44,7 +44,7 @@
 	<%
 		ArrayList<ProductoPojo> prod = (ArrayList<ProductoPojo>) request.getAttribute("productos");
 		UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
-		String nombre = (String) request.getAttribute("nombre");
+		String titulo = (String) request.getAttribute("titulo");
 	%>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
@@ -70,7 +70,7 @@
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="Login"><button type="submit"
 									<i class="fas fa-door-open" style="font-size:18px"></i>></button>Login</a>
-							<a class="dropdown-item" href="LogearUsuarios"><button
+							<a class="dropdown-item" href="ComprobarAdmin"><button
 									type="submit"
 									<i class="fas fa-portrait" style="font-size:19px"></i>></button>Registro</a>
 						</div></li>
@@ -129,15 +129,15 @@
 
 
 	<FORM action="BuscarProducto" method="post">
-		Nombre del Producto: <INPUT type="text" name="nombre" /> <BR /> 
-		<INPUT type="submit" value="Buscar" />
+		Nombre del Producto: <INPUT type="text" name="titulo" /> <BR /> <INPUT
+			type="submit" value="Buscar" />
 	</FORM>
 
 
 	<%
-		if (prod != null && nombre != null  && nombre!="") {
+		if (prod != null && titulo != null && titulo != "") {
 			out.print("<Busqueda Producto>");
-			out.print("Busqueda por Nombre Producto : " + nombre);
+			out.print("Busqueda por Nombre Producto : " + titulo);
 			out.print("<br><br>");
 			out.print("<table class=table table-hover>");
 			out.print("<th> Nombre Producto :</th>");
@@ -151,12 +151,12 @@
 			for (ProductoPojo juga : prod) {
 
 				out.print("<tr>");
-				out.print("<td>" + juga.getTitulo()+ "</td>");
+				out.print("<td>" + juga.getTitulo() + "</td>");
 				out.print("<td>" + juga.getAnyo() + "$" + "</td>");
 				out.print("<td>" + juga.getPrecio() + "</td>");
 				out.print("<td>" + juga.getDescripcion() + "</td>");
-// 				out.print("<td>" + juga.getGenero() + "</td>");
-// 				out.print("<td>" + juga.getPlataforma() + "</td>");
+				// 				out.print("<td>" + juga.getGenero() + "</td>");
+				// 				out.print("<td>" + juga.getPlataforma() + "</td>");
 
 			}
 			out.print("</table>");

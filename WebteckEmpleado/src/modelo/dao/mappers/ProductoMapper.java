@@ -12,7 +12,7 @@ public interface ProductoMapper {
 	
 	public ProductoPojo leerProductos(@Param("id") int id);
 	
-	public ArrayList<ProductoPojo> leerProductosporNombre(@Param("nombre") String nombre);
+	public ArrayList<BusquedaPojo> BuscarProductoporNombre(@Param("titulo") String titulo);
 
 	public void eliminarProducto(@Param("id") int id);
 
@@ -26,6 +26,4 @@ public interface ProductoMapper {
 
 	public ArrayList<CategoriaPojo> leerTotalCategorias();
 	
-	
-
 }

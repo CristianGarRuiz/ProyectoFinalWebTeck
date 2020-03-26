@@ -15,7 +15,6 @@ import modelo.Ejb.ProductoEjb;
 import modelo.Ejb.SesionEjb;
 import modelo.Ejb.UsuarioEjb;
 import modelo.Pojo.BusquedaPojo;
-import modelo.Pojo.ProductoPojo;
 import modelo.Pojo.UsuarioPojo;
 
 @WebServlet("/BuscarProducto")
@@ -49,25 +48,25 @@ public class BuscarProducto extends HttpServlet {
 			throws ServletException, IOException {
 
 		// creoa la variable inico y fin para las fecha
-		String nombre = request.getParameter("nombre");
+		String titulo = request.getParameter("titulo");
 		String error = null;
 		// dispache para la pagina
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/BusquedaProducto.jsp");
 
 		try {
 			// el arraylist de las estadisticas del ejb con las fecha pasadas
-		   ArrayList<ProductoPojo> productos = productoEjb.leerProductosporNombre(nombre);
+		   ArrayList<BusquedaPojo> productos = productoEjb.BuscarProductoporNombre(titulo);
 
 			// recogo los atributos de las estancias que he creado
 			request.setAttribute("productos", productos);
-			request.setAttribute("nombre", nombre);
+			request.setAttribute("titulo", titulo);
 			request.setAttribute("error", error);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		// los datos que le paso no son nulos pues redirigo a la pagina con los datos
-		if (nombre != null) {
+		if (titulo != null) {
 			rs.forward(request, response);
 //			loggerNormal.debug(" Realizando la consultas sin fallos");
 

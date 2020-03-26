@@ -9,6 +9,7 @@ import modelo.Pojo.CategoriaPojo;
 import modelo.Pojo.MarcaPojo;
 import modelo.Pojo.ProductoPojo;
 import modelo.dao.mappers.ProductoMapper;
+import modelo.dao.mappers.UsuarioMapper;
 
 public class ProductosDao {
 	
@@ -43,20 +44,19 @@ public class ProductosDao {
 
 	}
 	
-	public ArrayList<ProductoPojo> leerProductosporNombre(String nombre) {
+	public ArrayList<BusquedaPojo> BuscarProductoporNombre(String titulo) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
-			ProductoMapper leerProductos = sqlSession.getMapper(ProductoMapper.class);
-			return  leerProductos.leerProductosporNombre(nombre);
-
-			
+			ProductoMapper nombreProd = sqlSession.getMapper(ProductoMapper.class);
+			return  nombreProd.BuscarProductoporNombre(titulo);
 
 		} finally {
 			sqlSession.close();
 		}
 
 	}
+	
 	
 	public ArrayList<MarcaPojo> leerTotalMarcas() {
 
@@ -120,5 +120,6 @@ public class ProductosDao {
 			sqlSession.close();
 		}
 	}
+	
 
 }

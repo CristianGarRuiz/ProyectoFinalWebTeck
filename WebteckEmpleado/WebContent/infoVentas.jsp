@@ -81,7 +81,7 @@
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="Login"><button type="submit"
 									<i class="fas fa-door-open" style="font-size:18px"></i>></button>Login</a>
-							<a class="dropdown-item" href="LogearUsuarios"><button
+							<a class="dropdown-item" href="ComprobarAdmin"><button
 									type="submit"
 									<i class="fas fa-portrait" style="font-size:19px"></i>></button>Registro</a>
 						</div></li>
@@ -107,7 +107,7 @@
 					} else {
 				%>
 				<div id="Datos">
-					<img alt="" src="Imagenes/<%=usu.getFoto()%>"><br /> <br />
+					<img alt="" src="Imagenes/<%=usu.getFoto()%>" style="height: 35px; border-radius: 4%;"><br /> <br />
 					<p
 						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
 						Bienvenido :

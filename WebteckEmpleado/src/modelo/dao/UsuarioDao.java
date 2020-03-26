@@ -3,7 +3,6 @@ package modelo.dao;
 import org.apache.ibatis.session.SqlSession;
 import modelo.dao.MyBatisUtil;
 import modelo.Pojo.UsuarioPojo;
-
 import modelo.dao.mappers.UsuarioMapper;
 
 public class UsuarioDao {
@@ -53,15 +52,14 @@ public class UsuarioDao {
 		try {
 
 			UsuarioMapper usuAñadirUsuario = sqlSession.getMapper(UsuarioMapper.class);
-			usuAñadirUsuario.AñadirUsuarios(usuario.getEmailUsuario(), usuario.getNombre(), usuario.getUsuario(),
-					usuario.getPassword(), usuario.getFoto(), usuario.getActivado());
+			usuAñadirUsuario.AñadirEmpleado(usuario.getEmailUsuario(), usuario.getNombre(), usuario.getUsuario(),
+					usuario.getPassword(), usuario.getFoto());
 			sqlSession.commit();
 
 		} finally {
 			sqlSession.close();
 		}
 	}
-
 	/**
 	 * este metodo elimina un usuario por su cuenta de correo
 	 * 

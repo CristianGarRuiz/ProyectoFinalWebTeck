@@ -10,6 +10,7 @@ public class ProductoPojo {
 	private String foto;
 	private String descripcion;
 	private int precio;
+	private int stock;
 	private int idGenero;
 	private int idPlataforma;
 
@@ -17,7 +18,7 @@ public class ProductoPojo {
 		super();
 	}
 
-	public ProductoPojo(int id, String titulo, int anyo, String foto, String descripcion, int precio, int idGenero,
+	public ProductoPojo(int id, String titulo, int anyo, String foto, String descripcion, int precio,int stock, int idGenero,
 			int idPlataforma) {
 		super();
 		this.id = id;
@@ -26,6 +27,7 @@ public class ProductoPojo {
 		this.foto = foto;
 		this.descripcion = descripcion;
 		this.precio = precio;
+		this.stock=stock;
 		this.idGenero = idGenero;
 		this.idPlataforma = idPlataforma;
 	}
@@ -94,4 +96,13 @@ public class ProductoPojo {
 		this.idPlataforma = idPlataforma;
 	}
 
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
+	
 }

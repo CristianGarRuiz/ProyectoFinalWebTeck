@@ -4,8 +4,6 @@ import java.sql.SQLException;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-
-import modelo.dao.CodigoDAO;
 import modelo.dao.EmpleadoDao;
 import modelo.dao.UsuarioDao;
 import modelo.Pojo.UsuarioPojo;
@@ -52,19 +50,17 @@ public class UsuarioEjb {
 	 * asociado y devuelve el codigo
 	 * 
 	 * @param usu
+	 * @return 
 	 * @return
 	 * @throws SQLException
 	 */
-//	public int añadirUsuario(UsuarioPojo usu) throws SQLException {
-//		UsuarioDao userDao = new UsuarioDao();
-//		userDao.AñadirUsuarios(usu);
-//
-//		int codigo = (int) (Math.random() * 10000 + 1);
-//		CodigoDAO codigoDao = new CodigoDAO();
-//		codigoDao.insertCodigo(codigo, usu.getEmailUsuario());
-//		return codigo;
-//
-//	}
+	
+	public void AñadirEmpleado(UsuarioPojo usu) throws SQLException {
+		EmpleadoDao userDao = new EmpleadoDao();
+		userDao.AñadirEmpleado(usu);
+
+
+	}
 
 	/**
 	 * este metodo elimina un usuario por su correo

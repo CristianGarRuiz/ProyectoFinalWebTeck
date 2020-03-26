@@ -34,11 +34,9 @@ public interface UsuarioMapper {
 	 * @param usuario
 	 * @param pass
 	 * @param foto
-	 * @param activado
 	 */
-	public void AñadirUsuarios(@Param("emailUsuario") String emailUsuario, @Param("nombre") String nombre,
-			@Param("usuario") String usuario, @Param("password") String pass, @Param("foto") String foto,
-			@Param("activado") String activado);
+	public void AñadirEmpleado(@Param("emailUsuario") String emailUsuario, @Param("nombre") String nombre,
+			@Param("usuario") String usuario, @Param("password") String pass, @Param("foto") String foto);
 	
 
 	/**

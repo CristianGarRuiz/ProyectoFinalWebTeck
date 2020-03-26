@@ -14,8 +14,7 @@
 			alias='RegistroPojo'></typeAlias>
 			<typeAlias type='modelo.Pojo.VentasPojo'
 			alias='VentasPojo'></typeAlias>
-			<typeAlias type='modelo.Pojo.BusquedaPojo'
-			alias='BusquedaPojo'></typeAlias>
+			<typeAlias type='modelo.Pojo.BusquedaPojo' alias='BusquedaPojo'></typeAlias>
 	</typeAliases>
 	<environments default='development'>
 		<environment id='development'>
