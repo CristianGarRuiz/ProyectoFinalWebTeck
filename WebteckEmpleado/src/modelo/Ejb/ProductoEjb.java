@@ -9,6 +9,7 @@ import modelo.Pojo.BusquedaPojo;
 import modelo.Pojo.CategoriaPojo;
 import modelo.Pojo.MarcaPojo;
 import modelo.Pojo.ProductoPojo;
+import modelo.Pojo.ProductoTiendaPojo;
 
 @Stateless
 @LocalBean
@@ -41,7 +42,13 @@ public class ProductoEjb {
 		return ProductoDao.BuscarProductoporNombre(titulo);
 
 	}
+	
+	public ArrayList<ProductoTiendaPojo> BuscarProductoporNombreTienda(String titulo)  throws SQLException {
+		ProductosDao ProductoDao = new ProductosDao();
+		return ProductoDao.BuscarProductoporNombreTienda(titulo);
 
+	}
+	
 	
 	public void eliminarProducto(int id) {
 

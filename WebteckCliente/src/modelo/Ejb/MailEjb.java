@@ -2,6 +2,8 @@ package modelo.Ejb;
 
 import java.util.Properties;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -14,7 +16,9 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-public class MailsEjb {
+@Stateless
+@LocalBean
+public class MailEjb {
 
 	public void sendMail(String para, String mensaje, String ausnto) throws MessagingException {
 

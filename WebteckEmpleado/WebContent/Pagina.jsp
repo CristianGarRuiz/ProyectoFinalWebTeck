@@ -42,7 +42,7 @@
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
-		</a> <a style="color: cyan" class="navbar-brand" href="#Puestos">WebTeck</a>
+		</a> <a style="color: cyan" class="navbar-brand" href="Pagina">WebTeck</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
@@ -60,10 +60,11 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="Login"><button type="submit"
+							<a id="Login12" class="dropdown-item" href="Login"><button
+									type="submit"
 									<i class="fas fa-door-open" style="font-size:18px"></i>></button>Login</a>
-									
-							<a class="dropdown-item" href="ComprobarAdmin"><button
+
+							<a id="Login13" class="dropdown-item" href="ComprobarAdmin"><button
 									type="submit"
 									<i class="fas fa-portrait" style="font-size:19px"></i>></button>Registro</a>
 						</div></li>
@@ -82,14 +83,19 @@
 				%>
 				<div id="Datos">
 					<p
-						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">No
-						Registrado</p>
+						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
+						No Registrado <i class='far fa-user-circle'
+							style='margin-left: 48%; font-size: 28px; color: white; align-items: center; display: contents;'></i>
+					</p>
+
+
 				</div>
 				<%
 					} else {
 				%>
 				<div id="Datos">
-					<img alt="" src="Imagenes/<%=usu.getFoto()%>" style="height: 35px; border-radius: 4%;"><br /> <br />
+					<img alt="" src="Imagenes/<%=usu.getFoto()%>"
+						style="height: 35px; border-radius: 4%;"><br /> <br />
 					<p
 						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
 						Bienvenido :
@@ -107,7 +113,7 @@
 									type='button' onClick='window.location.replace("Logout")'>Cerrar
 									Sesion</button></a> <a class="dropdown-item" href="#">
 								<button type='button'
-									onClick='window.location.replace("OpcionesUsuario")'>Opciones</button>
+									onClick='window.location.replace("OpcionesEliminarusu")'>BajaEmpleado</button>
 							</a>
 						</div>
 					</div>
@@ -120,16 +126,17 @@
 		</div>
 	</div>
 
-	<div class="container">
-		<h3>Total Productos :</h3>
-		<%
-			if (producto != null) {
+	<div class="table-responsive">
 
-				out.print("<table class=table table-hover>");
+		<%
+			if (producto != null && usu != null) {
+				out.print("<h3>Total Productos :</h3>");
+				out.print("<table class= table table-responsive table-xs table-sm table-striped table-bordered table-hover >");
 				out.print("<th> Nombre:</th>");
 				out.print("<th> Descripcion:</th>");
 				out.print("<th> Año:</th>");
 				out.print("<th> Precio:</th>");
+				out.print("<th> Stock:</th>");
 				out.print("<th> Modificar:</th>");
 				out.print("<th> Eliminar:</th>");
 				out.print("</tr>");
@@ -141,6 +148,7 @@
 					out.print("<td>" + prod.getDescripcion() + "</td>");
 					out.print("<td>" + prod.getAnyo() + "</td>");
 					out.print("<td>" + prod.getPrecio() + "$" + "</td>");
+					out.print("<td>" + prod.getStock() + " Uni" + "</td>");
 					out.print("<td><a href=\"Editar?id=" + prod.getId() + "\"> Modificar </a></td>");
 					out.print("<td><a href=\"Eliminar?id=" + prod.getId() + "\"> Eliminar </a></td>");
 					out.print("</tr>");
@@ -148,10 +156,21 @@
 				}
 				out.print("</table>");
 			} else {
-
+				out.print("<h3>Logeate Para ver la Informacion</h3>");
 			}
 		%>
-
+		<%
+			if (usu != null) {
+		%>
+		<script>
+			window.onload = function() {
+				document.getElementById("Login12").setAttribute('href', '#');
+				document.getElementById("Login13").setAttribute('href', '#');
+			}
+		</script>
+		<%
+			}
+		%>
 
 	</div>
 </body>

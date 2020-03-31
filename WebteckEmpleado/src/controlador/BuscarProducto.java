@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 import modelo.Ejb.ProductoEjb;
 import modelo.Ejb.SesionEjb;
 import modelo.Ejb.UsuarioEjb;
@@ -20,6 +24,8 @@ import modelo.Pojo.UsuarioPojo;
 @WebServlet("/BuscarProducto")
 public class BuscarProducto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger loggerError = (Logger) LoggerFactory.getLogger("Error");
+	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
 
 	@EJB
 	UsuarioEjb usuarioEjb;
@@ -46,10 +52,11 @@ public class BuscarProducto extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		HttpSession session = request.getSession();
 		// creoa la variable inico y fin para las fecha
 		String titulo = request.getParameter("titulo");
 		String error = null;
+		UsuarioPojo usuario = sesionesEjb.usuariosLogeado(session);
 		// dispache para la pagina
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/BusquedaProducto.jsp");
 
@@ -61,20 +68,21 @@ public class BuscarProducto extends HttpServlet {
 			request.setAttribute("productos", productos);
 			request.setAttribute("titulo", titulo);
 			request.setAttribute("error", error);
+			request.setAttribute("usuario", usuario);
 		} catch (Exception e) {
-			e.printStackTrace();
+			loggerError.error(e.getMessage() +  "Error al realizar la consultas por nombre");
+			
 		}
 
 		// los datos que le paso no son nulos pues redirigo a la pagina con los datos
-		if (titulo != null) {
+		if (titulo != null ) {
 			rs.forward(request, response);
-//			loggerNormal.debug(" Realizando la consultas sin fallos");
+			loggerNormal.debug(" Realizando la consultas sin fallos");
 
 		} else {
 			// sino dirigo con el error
-			response.sendRedirect("Pagina?error=hay fechas Incorrectas");
+			response.sendRedirect("BuscarProducto?error=hay");
 
-//			loggerError.error("Error al realizar la consultas por fechas");
 		}
 
 	}

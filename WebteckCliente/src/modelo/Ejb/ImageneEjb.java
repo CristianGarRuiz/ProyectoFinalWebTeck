@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author cristian
  *
  */
-public class ImagenesEjb {
+public class ImageneEjb {
 
 	private static final String UPLOAD_DIRECTORY = "Imagenes";
 

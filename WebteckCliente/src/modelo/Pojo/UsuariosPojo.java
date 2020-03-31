@@ -91,5 +91,5 @@ public class UsuariosPojo {
 	public void setActivado(String activado) {
 		this.activado = activado;
 	}
-
+	
 }

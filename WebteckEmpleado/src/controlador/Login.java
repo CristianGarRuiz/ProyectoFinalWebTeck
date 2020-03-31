@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 import modelo.Ejb.SesionEjb;
 import modelo.Ejb.UsuarioEjb;
 import modelo.Pojo.UsuarioPojo;
@@ -18,6 +22,9 @@ import modelo.Pojo.UsuarioPojo;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private static final Logger loggerError = (Logger) LoggerFactory.getLogger("Error");
+	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
 	/**
 	 * EJB para trabajar con sesiones
 	 */
@@ -74,7 +81,7 @@ public class Login extends HttpServlet {
 			try {
 				usuario = usuariosEJB.leerDatosEmpleado(user, paswd);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				loggerError.error(e.getMessage()+ "Error al entrar con el usuario");
 			}
 
 			// Si no tenemos usuario, es una sesión no válida y la invalidamos
@@ -87,7 +94,9 @@ public class Login extends HttpServlet {
 				session = request.getSession(true);
 				sesionesEJB.loginUsuario(session, usuario);
 				// Lo redirigimos a la página principal
+				loggerNormal.debug("Entramos sin problemas con el  usuario");
 				response.sendRedirect("Pagina");
+				
 
 			}
 		}

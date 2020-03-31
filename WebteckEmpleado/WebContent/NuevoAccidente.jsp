@@ -28,12 +28,13 @@
 <link type="text/css" href="estilos/Principal.css" rel="stylesheet" />
 <link type="text/css" href="estilos/principalEmpleados.css"
 	rel="stylesheet" />
+<link type="text/css" href="estilos/AñadirProducto.css" rel="stylesheet" />
 </head>
-<body>
+<body style="background-image: url(imagenes/fondoLogin.png)">
 
 	<%
 		String error = (String) request.getParameter("error");
-		UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
+			UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
 	%>
 
 
@@ -42,7 +43,7 @@
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
-		</a> <a style="color: cyan" class="navbar-brand" href="#Puestos">WebTeck</a>
+		</a> <a style="color: cyan" class="navbar-brand" href="Pagina">WebTeck</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
@@ -51,18 +52,19 @@
 		<div class="container-fluid  col-sm-11">
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="#texto">Informacion</a>
+					<li class="nav-item"><a class="nav-link" href="BuscarProducto">BuscarProducto</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#puestos">Añadir
+					<li class="nav-item"><a class="nav-link" href="Crear">Añadir
 							Producto</a></li>
-					<li class="nav-item"><a class="nav-link" href="#Info">Ventas</a>
+					<li class="nav-item"><a class="nav-link" href="InfoVentas">InfoVentas</a>
 					</li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="Login"><button type="submit"
+							<a id="Login12" class="dropdown-item" id="Login12" href="Login"><button
+									type="submit"
 									<i class="fas fa-door-open" style="font-size:18px"></i>></button>Login</a>
-							<a class="dropdown-item" href="ComprobarAdmin"><button
+							<a id="Login13" class="dropdown-item" href="ComprobarAdmin"><button
 									type="submit"
 									<i class="fas fa-portrait" style="font-size:19px"></i>></button>Registro</a>
 						</div></li>
@@ -88,7 +90,8 @@
 					} else {
 				%>
 				<div id="Datos">
-					<img alt="" src="Imagenes/<%=usu.getFoto()%>" style="height: 35px; border-radius: 4%;"><br /> <br />
+					<img alt="" src="Imagenes/<%=usu.getFoto()%>"
+						style="height: 35px; border-radius: 4%;"><br /> <br />
 					<p
 						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
 						Bienvenido :
@@ -118,58 +121,81 @@
 			
 		</div>
 	</div>
+
+	<h2 id='TextoProducto'>Añadir un nuevo Producto</h2>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div id="Formulario" class="container">
+		<form class="form-horizontal" action="Crear" method="post">
+			<label for="Titulo">Titulo:</label> <input type="text" name="Titulo"
+				required="required" placeholder="Titulo.." /> <br /> <label
+				for="Año">Año:</label> <input type="number" name="Anyo"
+				required="required" placeholder="Año" /> <br /> <br /> <label
+				for="Precio">Precio:</label> <input type="number" name="Precio"
+				required="required" placeholder="Precio" /> <br /> <br />
+				<label
+				for="Precio">Stock:</label> <input type="number" name="Stock"
+				required="required" placeholder="Stock" /> <br /> <br /> 
+				<label
+				for="Descripcion">Descripcion:</label> <input type="text"
+				name="Descripcion" required="required" placeholder="Descripcion.." />
+			<br /> <label for="Descripcion">Foto:</label> <input type="File"
+				name="Imagen" required="required" placeholder="Imagen .." /> <br />
+
+			<br /> <label for="marca">Marca:</label> <select name="Marca">
+				<%
+					ArrayList<MarcaPojo> mar = (ArrayList<MarcaPojo>) request.getAttribute("marca");
+									if (mar != null) {
+										for (MarcaPojo d : mar) {
+											out.print("<option value='" + d.getId() + "'>" + d.getNombre() + "</option>");
+										}
+									}
+				%>
+			</select> <label for="categoria">Categoria:</label> <select name=Categoria>
+				<%
+					ArrayList<CategoriaPojo> cate = (ArrayList<CategoriaPojo>) request.getAttribute("categoria");
+							if (cate != null) {
+								for (CategoriaPojo d : cate) {
+									out.print("<option value='" + d.getId() + "'>" + d.getNombre() + "</option>");
+								}
+							}
+				%>
+
+			</select> <br /> <br /> <input id="Crear" type="submit" value="Crear" />
+			<button id='CancelarProd' type='button'
+				onClick='window.location.replace("Pagina")'>Cancelar</button>
+		</form>
+	</div>
+
+<%
+		if (usu != null) {
+	%>
 	<script>
 		window.onload = function() {
 			document.getElementById("Login12").setAttribute('href', '#');
+			document.getElementById("Login13").setAttribute('href', '#');
 		}
 	</script>
+	<%
+		}
+	%>
+	<%
+		if (usu == null) {
+	%>
+	<script>
+		window.onload = function() {
+			 alert("No esta Logeado para esta Funcion");
+			 window.location='Pagina'; 
+		}
+	</script>
+	<%
+		}
+	%>
+	
+	
+	
 
-
-
-
-	<h2 id='TextoAccidente'>Añadir un nuevo Producto</h2>
-	<br>
-	<br>
-	<br>
-	<br>
-
-	<form action="Crear" method="post">
-		<label for="Titulo">Titulo:</label> <input type="text" name="Titulo"
-			required="required" placeholder="Titulo.." /> <br /> 
-			<label for="Año">Año:</label> 
-			<input type="number" name="Anyo" required="required" placeholder="Año" /> 
-			<br /> <br /> 
-			<label
-			for="Precio">Precio:</label> <input type="number" name="Precio"
-			required="required" placeholder="Precio" /> <br /> <br /> <label
-			for="Descripcion">Descripcion:</label> <input type="text"
-			name="Descripcion" required="required" placeholder="Descripcion.." />
-		<br /> <label for="Descripcion">Foto:</label> <input type="File"
-			name="Imagen" required="required" placeholder="Imagen .." /> <br />
-
-		<br /> <label for="marca">Marca:</label> <select name="Marca">
-			<%
-				ArrayList<MarcaPojo> mar = (ArrayList<MarcaPojo>) request.getAttribute("marca");
-				if (mar != null) {
-					for (MarcaPojo d : mar) {
-						out.print("<option value='" + d.getId() + "'>" + d.getNombre() + "</option>");
-					}
-				}
-			%>
-		</select> <label for="categoria">Categoria:</label> <select name=Categoria>
-			<%
-				ArrayList<CategoriaPojo> cate = (ArrayList<CategoriaPojo>) request.getAttribute("categoria");
-				if (cate != null) {
-					for (CategoriaPojo d : cate) {
-						out.print("<option value='" + d.getId() + "'>" + d.getNombre() + "</option>");
-					}
-				}
-			%>
-
-		</select> <br /> <br /> <input type="submit" value="Crear" />
-	</form>
-
-	<button id='CancelarAcc' type='button'
-		onClick='window.location.replace("Principal")'>Cancelar</button>
 </body>
 </html>

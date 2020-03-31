@@ -8,6 +8,7 @@ import modelo.Pojo.BusquedaPojo;
 import modelo.Pojo.CategoriaPojo;
 import modelo.Pojo.MarcaPojo;
 import modelo.Pojo.ProductoPojo;
+import modelo.Pojo.ProductoTiendaPojo;
 import modelo.dao.mappers.ProductoMapper;
 import modelo.dao.mappers.UsuarioMapper;
 
@@ -56,7 +57,18 @@ public class ProductosDao {
 		}
 
 	}
-	
+	public ArrayList<ProductoTiendaPojo> BuscarProductoporNombreTienda(String titulo) {
+
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ProductoMapper nombreProd = sqlSession.getMapper(ProductoMapper.class);
+			return  nombreProd.BuscarProductoporNombreTienda(titulo);
+
+		} finally {
+			sqlSession.close();
+		}
+
+	}
 	
 	public ArrayList<MarcaPojo> leerTotalMarcas() {
 

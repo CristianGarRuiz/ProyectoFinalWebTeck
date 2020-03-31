@@ -1,7 +1,6 @@
 package modelo.dao.mappers;
 
 import org.apache.ibatis.annotations.Param;
-
 import modelo.Pojo.UsuarioPojo;
 
 public interface UsuarioMapper {
@@ -35,9 +34,13 @@ public interface UsuarioMapper {
 	 * @param pass
 	 * @param foto
 	 */
+	public void AñadirUsuarios(@Param("emailUsuario") String emailUsuario, @Param("nombre") String nombre,
+			@Param("usuario") String usuario, @Param("password") String pass, @Param("foto") String foto,
+			@Param("activado") String activado);
+	
+	
 	public void AñadirEmpleado(@Param("emailUsuario") String emailUsuario, @Param("nombre") String nombre,
 			@Param("usuario") String usuario, @Param("password") String pass, @Param("foto") String foto);
-	
 
 	/**
 	 * elimina un usuario por su email en nuestra pagina
@@ -46,6 +49,11 @@ public interface UsuarioMapper {
 	 */
 	public void eliminarUsuario(@Param("emailUsuario") String emailUsuario);
 
+	
+	
+	
+	public void eliminarEmpleado(@Param("emailUsuario") String emailUsuario);
+	
 	/**
 	 * elimina la clave relaciona con email del usuario eliminado
 	 * 
@@ -78,5 +86,8 @@ public interface UsuarioMapper {
 	 */
 
 	public void pantallaUsuario(@Param("pantalla") String pantalla, @Param("usuario") String usuario);
+	
+	
+	public void updateContraseña(UsuarioPojo usu);
 
 }

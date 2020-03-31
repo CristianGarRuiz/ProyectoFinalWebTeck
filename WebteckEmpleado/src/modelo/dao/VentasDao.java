@@ -21,5 +21,18 @@ public class VentasDao {
 		}
 
 	}
+	
+	public ArrayList<VentasPojo> leerProductosporEmail(String emailUsuario) {
+
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			VentasMapper leerProductos = sqlSession.getMapper(VentasMapper.class);
+			return  leerProductos.leerProductosporEmail(emailUsuario);
+
+		} finally {
+			sqlSession.close();
+		}
+
+	}
 
 }

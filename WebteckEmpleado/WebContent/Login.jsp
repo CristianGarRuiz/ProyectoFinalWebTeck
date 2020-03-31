@@ -29,7 +29,7 @@
 
 	<%
 		String error = (String) request.getParameter("error");
-		UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
+			UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
 	%>
 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -53,8 +53,6 @@
 					</li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
-					<li class="nav-items dropdown"><a
-						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="#"><button type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
@@ -64,12 +62,13 @@
 				</ul>
 			</div>
 	</nav>
-	<h2 id="TextLogin">Login Usuario</h2>
-	<p>
-		<i class='far fa-user-circle'
-			style='margin-left: 48%; font-size: 58px; color: black'></i>
-	</p>
-
+	<div id="infoLog" class="container">
+		<h2 id="TextLogin">Login Usuario</h2>
+		<p>
+			<i class='far fa-user-circle'
+				style='margin-left: 47%; font-size: 58px; color: black'></i>
+		</p>
+	</div>
 	<div id="Formulario" class="container">
 		<form class="form-horizontal" action="Login" method="post">
 			<div class="form-group">
@@ -104,16 +103,22 @@
 						Login</button>
 				</div>
 			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button id="CancelarLog" type="submit" class="btn btn-info"
+						onClick='window.location.replace("Pagina")'>Cancelar</button>
+				</div>
+			</div>
 		</form>
-		<button type='button' onClick='window.location.replace("Pagina")'>Cancelar</button>
 		<%
 			if (error != null) {
 		%>
-		<h4>errores en el usuario o password/o no estas Registrado</h4>
+		<h4 style="color: red;">Error en el usuario o password/o no
+			estas Registrado</h4>
 		<button type='button'
 			onClick='window.location.replace("LogearUsuarios")'>Registrate</button>
 		<button type='button' onClick='window.location.replace("Login")'>Reintentar</button>
-		<img id='Dino' src='dino.gif'>
 		<%
 			}
 		%>

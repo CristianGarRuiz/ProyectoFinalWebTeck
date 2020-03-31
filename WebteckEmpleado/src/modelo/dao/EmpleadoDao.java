@@ -56,12 +56,12 @@ public class EmpleadoDao {
 	 * @param correo
 	 * @throws SQLException
 	 */
-	public void eliminarUsuario(String emailUsuario) {
+	public void eliminarEmpleado(String emailUsuario) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			UsuarioMapper eliUsu = sqlSession.getMapper(UsuarioMapper.class);
-			eliUsu.eliminarUsuario(emailUsuario);
+			eliUsu.eliminarEmpleado(emailUsuario);
 			sqlSession.commit();
 
 		} finally {

@@ -28,7 +28,8 @@ import modelo.Pojo.UsuarioPojo;
 @WebServlet("/Crear")
 public class Crear extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-//	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
+	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
+	private static final Logger loggerError = (Logger) LoggerFactory.getLogger("Error");
 
 	/**
 	 * EJB para trabajar con los servicios
@@ -89,13 +90,15 @@ public class Crear extends HttpServlet {
 		String precio = request.getParameter("Precio");
 		String Descripcion = request.getParameter("Descripcion");
 		String Imagen = request.getParameter("Imagen");
+		String stock = request.getParameter("Stock");
 		int Id_Marca = Integer.parseInt(request.getParameter("Marca"));
 		int Id_Categoria = Integer.parseInt(request.getParameter("Categoria"));
 		int Año = Integer.parseInt(año);
 		int Precio = Integer.parseInt(precio);
+		int Stock = Integer.parseInt(stock);
 
 		// compruebo que los datos no sean nulos
-		if (Titulo != null && Descripcion != null && año != null && precio != null) {
+		if (Titulo != null && Descripcion != null && año != null && precio != null && stock != null) {
 			// Si nos dan información de un accidente la insertamos.
 			ProductoPojo e = new ProductoPojo();
 
@@ -106,12 +109,14 @@ public class Crear extends HttpServlet {
 			e.setFoto(Imagen);
 			e.setIdGenero(Id_Marca);
 			e.setIdPlataforma(Id_Categoria);
-
+			e.setStock(Stock);
 			productoEjb.insertProducto(e);
 		}
-//		loggerNormal.debug(" Realizando un insert  Con los datos " + "Expediente: " + Expediente + "Fecha: " + Fecha
-//				+ "Hora : " + Hora + "direccion: " + Direccion + " IdDsitrito" + Id_Distrito + " idtipoAccidente"
-//				+ Id_TipoAcci + " idTipoVehiculo" + Id_TipoVehi + " idSexo" + Id_Sexo);
+		loggerNormal.debug(" Realizando un insert  Con los datos " + "Titulo: " + Titulo + "Año: " + Año
+				+ "Precio : " + Precio + "Descripcion: " + Descripcion + " Imagen" + Imagen + " Marca"+Id_Marca+
+				" Plataforma" + Id_Categoria + " Stock" + Stock);
+		
+		loggerError.error("Error al insertar un producto nuevo");
 
 		// Finalmente enviamos a la página principal
 		response.sendRedirect("Pagina");

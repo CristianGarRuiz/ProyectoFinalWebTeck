@@ -56,7 +56,7 @@
 		String inicio = (String) request.getAttribute("inicio");
 		String fin = (String) request.getAttribute("fin");
 	%>
-	
+
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
@@ -79,9 +79,9 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="Login"><button type="submit"
+							<a id="Login12" class="dropdown-item" href="Login"><button type="submit"
 									<i class="fas fa-door-open" style="font-size:18px"></i>></button>Login</a>
-							<a class="dropdown-item" href="ComprobarAdmin"><button
+							<a id="Login13"  class="dropdown-item" href="ComprobarAdmin"><button
 									type="submit"
 									<i class="fas fa-portrait" style="font-size:19px"></i>></button>Registro</a>
 						</div></li>
@@ -107,7 +107,8 @@
 					} else {
 				%>
 				<div id="Datos">
-					<img alt="" src="Imagenes/<%=usu.getFoto()%>" style="height: 35px; border-radius: 4%;"><br /> <br />
+					<img alt="" src="Imagenes/<%=usu.getFoto()%>"
+						style="height: 35px; border-radius: 4%;"><br /> <br />
 					<p
 						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
 						Bienvenido :
@@ -148,33 +149,57 @@
 
 	<%
 		if (vents != null && inicio != null && fin != null && inicio != "" && fin != "") {
-			out.print("<Ventas por Fechas>");
-			out.print("Fechas : " + inicio + ": " + fin);
-			out.print("<br><br>");
-			out.print("<table class=table table-hover>");
-			out.print("<th> Nombre Producto :</th>");
-			out.print("<th> Precio Producto :</th>");
-			out.print("<th> Fecha Venta :</th>");
-			out.print("<th> Nombre Cliente:</th>");
-			out.print("</tr>");
+		out.print("<Ventas por Fechas>");
+		out.print("Fechas : " + inicio + ": " + fin);
+		out.print("<br><br>");
+		out.print("<table class=table table-hover>");
+		out.print("<th> Nombre Producto :</th>");
+		out.print("<th> Precio Producto :</th>");
+		out.print("<th> Fecha Venta :</th>");
+		out.print("<th> Nombre Cliente:</th>");
+		out.print("</tr>");
 
-			for (VentasPojo juga : vents) {
+		for (VentasPojo juga : vents) {
 
-				out.print("<tr>");
-				out.print("<td>" + juga.getTitulo() + "</td>");
-				out.print("<td>" + juga.getPrecio() + "$" + "</td>");
-				out.print("<td>" + juga.getFecha() + "</td>");
-				out.print("<td>" + juga.getNombre() + "</td>");
+			out.print("<tr>");
+			out.print("<td>" + juga.getTitulo() + "</td>");
+			out.print("<td>" + juga.getPrecio() + "$" + "</td>");
+			out.print("<td>" + juga.getFecha() + "</td>");
+			out.print("<td>" + juga.getNombre() + "</td>");
 
+		}
+		out.print("</table>");
+
+			} else {
+		out.print("<h4>Introduce Fechas</h4>");
 			}
-			out.print("</table>");
-
-		} else {
-			out.print("<h4>Fechas sin Resultados</h4>");
-			out.print("<button type='button' onClick='window.location.replace('Pagina')'>VolveraIntentar</button>");
+	%>
+	<%
+		if (usu != null) {
+	%>
+	<script>
+		window.onload = function() {
+			document.getElementById("Login12").setAttribute('href', '#');
+			document.getElementById("Login13").setAttribute('href', '#');
+		}
+	</script>
+	<%
 		}
 	%>
 
+
+	<%
+		if (usu == null) {
+	%>
+	<script>
+		window.onload = function() {
+			alert("No esta Logeado para esta Funcion");
+			window.location = 'Pagina';
+		}
+	</script>
+	<%
+		}
+	%>
 
 
 

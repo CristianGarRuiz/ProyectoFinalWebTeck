@@ -18,6 +18,7 @@
 
 
 	<resultMap type="BusquedaPojo" id="nombreProducto">
+		<id property='id' column='id' />
 		<result property='titulo' column='titulo' />
 		<result property='anyo' column='anyo' />
 		<result property='precio' column='precio' />
@@ -30,25 +31,62 @@
 
 		select
 		productos.titulo as titulo,productos.anyo as anyo, productos.precio
-		as precio ,productos.descripcion as descripcion,
-		generos.nombre as genero , plataformas.nombre as plataforma
-		
+		as
+		precio ,productos.descripcion as descripcion,
+		generos.nombre as genero
+		, plataformas.nombre as plataforma,productos.id as id
+
 		from
 		productos,plataformas,generos
-		
+
 		where
-		productos.idPlataforma = plataformas.id 
+		productos.idPlataforma = plataformas.id
 		and
 		productos.idGenero = generos.id
 		and
-		productos.titulo like #{titulo};
+		productos.titulo like '%' #{titulo}
+		'%';
+	</select>
+
+
+	<resultMap type="ProductoTienda" id="tiendaProducto">
+		<id property='id' column='id' />
+		<result property='titulo' column='titulo' />
+		<result property='anyo' column='anyo' />
+		<result property='precio' column='precio' />
+		<result property='stock' column='stock' />
+		<result property='descripcion' column='descripcion' />
+		<result property='foto' column='foto' />
+		<result property='genero' column='genero' />
+		<result property='plataforma' column='plataforma' />
+	</resultMap>
+
+	<select id="BuscarProductoporNombreTienda" resultMap="tiendaProducto">
+
+		select
+		productos.titulo as titulo,productos.anyo as anyo, productos.precio
+		as
+		precio ,producto.stock as stock,productos.descripcion as descripcion,productos.foto as foto,
+		generos.nombre as genero
+		, plataformas.nombre as plataforma,productos.id as id
+
+		from
+		productos,plataformas,generos
+
+		where
+		productos.idPlataforma = plataformas.id
+		and
+		productos.idGenero = generos.id
+		and
+		productos.titulo like '%' #{titulo}
+		'%';
 	</select>
 
 
 	<select id="leerProductos" resultMap="datosProducto">
 		select
 		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,
-		productos.idGenero,productos.idPlataforma,productos.id
+		productos.idGenero,productos.idPlataforma,productos.id, productos.stock
 		from
 		productos
 		where
@@ -60,7 +98,7 @@
 
 	<select id="leerTotalProductos" resultMap="datosProducto">
 		select
-		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,productos.id
+		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,productos.id,productos.stock
 		from
 		productos
 	</select>
@@ -93,6 +131,7 @@
 
 		titulo = #{titulo},
 		precio = #{precio},
+		stock = #{stock},
 		anyo = #{anyo},
 		foto =#{foto},
 		descripcion = #{descripcion},
@@ -105,11 +144,12 @@
 	<insert id='insertProducto' parameterType='ProductoPojo'
 		useGeneratedKeys='true' keyProperty='id'>
 		insert into productos
-		(titulo,precio,anyo,foto,descripcion,idGenero,idPlataforma)
-		VALUES(#{titulo}, #{precio}, #{anyo},
+		(titulo,precio,anyo,stock,foto,descripcion,idGenero,idPlataforma)
+		VALUES(#{titulo}, #{precio}, 
+		#{anyo},#{stock},
 		#{foto}, #{descripcion},
 		#{idGenero},
 		#{idPlataforma})
 	</insert>
-	
+
 </mapper>

@@ -7,12 +7,15 @@ import modelo.Pojo.BusquedaPojo;
 import modelo.Pojo.CategoriaPojo;
 import modelo.Pojo.MarcaPojo;
 import modelo.Pojo.ProductoPojo;
+import modelo.Pojo.ProductoTiendaPojo;
 
 public interface ProductoMapper {
-	
+
 	public ProductoPojo leerProductos(@Param("id") int id);
-	
+
 	public ArrayList<BusquedaPojo> BuscarProductoporNombre(@Param("titulo") String titulo);
+
+	public ArrayList<ProductoTiendaPojo> BuscarProductoporNombreTienda(@Param("titulo") String titulo);
 
 	public void eliminarProducto(@Param("id") int id);
 
@@ -25,5 +28,5 @@ public interface ProductoMapper {
 	public ArrayList<MarcaPojo> leerTotalMarcas();
 
 	public ArrayList<CategoriaPojo> leerTotalCategorias();
-	
+
 }

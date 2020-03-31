@@ -21,10 +21,9 @@ import modelo.Pojo.MarcaPojo;
 import modelo.Pojo.ProductoPojo;
 import modelo.Pojo.UsuarioPojo;
 
-
-
 /**
  * este metodo lo utilizaremos para editar un accidente que tenemos en bd
+ * 
  * @author cristian
  *
  */
@@ -65,19 +64,19 @@ public class Editar extends HttpServlet {
 		ProductoPojo producto = null;
 		ArrayList<MarcaPojo> marca = null;
 		ArrayList<CategoriaPojo> categoria = null;
-		
+
 		try {
 			producto = productoEjb.leerProducto(identificador);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		try {
 			marca = productoEjb.leerTotalMarcas();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		try {
 			categoria = productoEjb.leerTotalCategorias();
 		} catch (SQLException e) {
@@ -102,6 +101,7 @@ public class Editar extends HttpServlet {
 		String Titulo = request.getParameter("Titulo");
 		String año = request.getParameter("Anyo");
 		String precio = request.getParameter("Precio");
+		String stock = request.getParameter("Stock");
 		String Descricion = request.getParameter("Descripcion");
 		String marca = request.getParameter("Marca");
 		String categoria = request.getParameter("Categoria");
@@ -109,6 +109,7 @@ public class Editar extends HttpServlet {
 		// Pasa las varibale que son String a int por su formato del pojo
 		int Año = Integer.parseInt(año);
 		int Precio = Integer.parseInt(precio);
+		int Stock = Integer.parseInt(stock);
 		int Marca = Integer.parseInt(marca);
 		int Categoria = Integer.parseInt(categoria);
 
@@ -125,6 +126,7 @@ public class Editar extends HttpServlet {
 				u.setTitulo(Titulo);
 				u.setAnyo(Año);
 				u.setPrecio(Precio);
+				u.setStock(Stock);
 				u.setDescripcion(Descricion);
 				u.setIdGenero(Marca);
 				u.setIdPlataforma(Categoria);
@@ -133,11 +135,10 @@ public class Editar extends HttpServlet {
 
 			}
 		} catch (Exception e) {
-//			loggerNormal.debug(" Realizando un update de los datos del accidentecon id " + id + " Con los datos "
-//					+ "Expediente: " + Expedinete + "Fecha: " + Fecha + "Hora : " + Hora + "direccion: " + Direccion
-//					+ " IdDsitrito" + idDistrito + " idtipoAccidente" + idTipoAccidente + " idTipoVehiculo"
-//					+ idtipoVehiculo + " idSexo" + idSexo);
-//			loggerError.error("Error al realizar un update de las estadisticas de los jugadores");
+			loggerNormal.debug(" Realizando un update de los datos del accidentecon id " + id + " Con los datos "
+					+ "Titulo: " + Titulo + "Año: " + Año + "Precio : " + Precio + "Descripcion: " + Descricion
+					+ " Stock" + Stock + " Marca" + Marca + " Categoria" + Categoria);
+			loggerError.error("Error al realizar un update de las estadisticas de los jugadores");
 
 		}
 		// Finalmente enviamos a la página principal

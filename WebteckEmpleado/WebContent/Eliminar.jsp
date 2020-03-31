@@ -21,19 +21,19 @@
 
 	<%
 		String error = (String) request.getParameter("error");
-			UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
+		UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
 	%>
 
 	<%
 		Context context = null;
 
-			context = new InitialContext();
+		context = new InitialContext();
 
-			usuarios = (UsuarioEjb) context.lookup("java:global/WebteckEmpleado/UsuarioEjb");
-			sessiones = (SesionEjb) context.lookup("java:global/WebteckEmpleado/SesionesEjb");
+		usuarios = (UsuarioEjb) context.lookup("java:global/WebteckEmpleado/UsuarioEjb");
+		sessiones = (SesionEjb) context.lookup("java:global/WebteckEmpleado/SesionEjb");
 
-			UsuarioPojo usuariosP = sessiones.usuariosLogeado(session);
-			usuariosP = (UsuarioPojo) request.getAttribute("usuario");
+		UsuarioPojo usuariosP = sessiones.usuariosLogeado(session);
+		usuariosP = (UsuarioPojo) request.getAttribute("usuario");
 	%>
 
 
@@ -50,10 +50,8 @@
 	%>
 	<h4>Hay errores en el usuario o password/o no estas Registrado</h4>
 	<button type='button'
-		onClick='window.location.replace("LogearUsuarios\)'>Registrate</button>
-	<button type='button' onClick='window.location.replace(\Login")'>Reintentar</button>
-
-	<img id='Dino' src='dino.gif'>
+		onClick='window.location.replace("LogearUsuarios")'>Registrate</button>
+	<button type='button' onClick='window.location.replace("Login")'>Reintentar</button>
 	<%
 		}
 	%>
@@ -61,7 +59,7 @@
 		function eliminarUsuario() {
 			console.log("eliminarUsuario -----------------------------------------------");
 			if(confirm(" Seguro que deseas eliminar la Cuenta?¿")) {
-				window.location.replace("Eliminar?emailUsuario=<%=usuariosP.getEmailUsuario()%>");
+				window.location.replace("DarBajaEmpleado?emailUsuario=<%=usuariosP.getEmailUsuario()%>");
 			}
 		}
 	</script>

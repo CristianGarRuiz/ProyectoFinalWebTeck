@@ -1,17 +1,23 @@
 package modelo.Ejb;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.servlet.http.HttpSession;
 
 import modelo.Pojo.UsuariosPojo;
 
+@Stateless
+@LocalBean
 public class SesionesEjb {
 
-	public UsuariosPojo usuarioLogeado(HttpSession session) {
+	public UsuariosPojo usuariosLogeado(HttpSession session) {
+
 		UsuariosPojo usuario = null;
 
 		if (session != null) {
 			usuario = (UsuariosPojo) session.getAttribute("usuario");
 		}
+
 		return usuario;
 
 	}
@@ -22,27 +28,13 @@ public class SesionesEjb {
 			session.setAttribute("usuario", usuario);
 			session.setMaxInactiveInterval(30 * 60);
 		}
+
 	}
 
 	public void logoutUsuario(HttpSession session) {
-
 		if (session != null) {
 			session.invalidate();
 		}
-
 	}
 
-	public String getPantalla(HttpSession session) {
-
-		String pantalla;
-		pantalla = (String) session.getAttribute("pantalla");
-		return pantalla;
-	}
-	
-	
-	public void cambiarPantalla(HttpSession session, String pantalla) {
-		if(session!=null) {
-			session.setAttribute("pantalla", pantalla);
-		}
-	}
 }

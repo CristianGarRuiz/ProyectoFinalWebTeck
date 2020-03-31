@@ -20,10 +20,11 @@ import modelo.Ejb.UsuarioEjb;
 /**
  * Servlet implementation class Eliminar
  */
-@WebServlet("/DarbajaEmpleado")
+@WebServlet("/DarBajaEmpleado")
 public class DarBajaEmpleado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger loggerError = (Logger) LoggerFactory.getLogger("Error");
+	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
 	@EJB
 	UsuarioEjb usuarioEjb;
 
@@ -33,13 +34,13 @@ public class DarBajaEmpleado extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Eliminar.jsp");
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Pagina.jsp");
 
 		try {
 			// Variable que recibe el email
 			String emailUsuario = request.getParameter("emailUsuario");
 			// Llamo al ejb del usuario y al metodo que elimina ese usuario con el correo
-			usuarioEjb.eliminarUsuario(emailUsuario);
+			usuarioEjb.eliminarEmpleado(emailUsuario);
 
 			// cunado el usuario esta eliminado le cierro la sesion
 			sesionesEjb.logoutUsuario(session);
@@ -49,9 +50,10 @@ public class DarBajaEmpleado extends HttpServlet {
 
 		} catch (Exception e) {
 			loggerError.error(e.getMessage() + "Error al eliminar un usuario con el email propio");
+			
 
 		}
-
+		loggerNormal.debug("Eliminado Correctamente");
 		rs.forward(request, response);
 
 	}

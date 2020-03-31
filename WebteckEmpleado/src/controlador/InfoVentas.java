@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 import modelo.Ejb.SesionEjb;
 import modelo.Ejb.UsuarioEjb;
 import modelo.Ejb.VentasEjb;
@@ -21,6 +25,8 @@ import modelo.Pojo.VentasPojo;
 @WebServlet("/InfoVentas")
 public class InfoVentas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger loggerError = (Logger) LoggerFactory.getLogger("Error");
+	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
 	@EJB
 	UsuarioEjb usuarioEjb;
 
@@ -67,19 +73,19 @@ public class InfoVentas extends HttpServlet {
 			request.setAttribute("inicio", inicio);
 			request.setAttribute("fin", fin);
 		} catch (Exception e) {
-			e.printStackTrace();
+			loggerError.error( e.getMessage()+ "Error al realizar la consultas por fechas");
 		}
 
 		// los datos que le paso no son nulos pues redirigo a la pagina con los datos
 		if (inicio != null && fin != null) {
 			rs.forward(request, response);
-//			loggerNormal.debug(" Realizando la consultas sin fallos");
+			loggerNormal.debug(" Realizando la consultas sin fallos");
 
 		} else {
 			// sino dirigo con el error
 			response.sendRedirect("PaginaPrincipal?error=hay fechas Incorrectas");
 
-//			loggerError.error("Error al realizar la consultas por fechas");
+			
 		}
 
 	}

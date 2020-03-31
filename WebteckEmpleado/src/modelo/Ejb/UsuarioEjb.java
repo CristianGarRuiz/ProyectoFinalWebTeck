@@ -5,7 +5,10 @@ import java.sql.SQLException;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import modelo.dao.EmpleadoDao;
+import modelo.dao.ProductosDao;
 import modelo.dao.UsuarioDao;
+import modelo.dao.CodigoDAO;
+import modelo.Pojo.ProductoPojo;
 import modelo.Pojo.UsuarioPojo;
 
 
@@ -27,7 +30,10 @@ public class UsuarioEjb {
 		return userDAO.leerDatosEmpleado(user, paswd);
 
 	}
-
+	public void eliminarEmpleado(String emailUsuario) throws SQLException {
+		EmpleadoDao userDao = new EmpleadoDao();
+		userDao.eliminarEmpleado(emailUsuario);
+	}
 	/**
 	 * este metodo recoge la foto de los usuario
 	 * 
@@ -59,6 +65,17 @@ public class UsuarioEjb {
 		EmpleadoDao userDao = new EmpleadoDao();
 		userDao.AñadirEmpleado(usu);
 
+
+	}
+	
+	public int añadirUsuario(UsuarioPojo usu) throws SQLException {
+		UsuarioDao userDao = new UsuarioDao();
+		userDao.AñadirUsuarios(usu);
+
+		int codigo = (int) (Math.random() * 10000 + 1);
+		CodigoDAO codigoDao = new CodigoDAO();
+		codigoDao.insertCodigo(codigo, usu.getEmailUsuario());
+		return codigo;
 
 	}
 
@@ -106,6 +123,12 @@ public class UsuarioEjb {
 	public void pantallaUsuario(String pantalla, String usuario) {
 		UsuarioDao userDao = new UsuarioDao();
 		userDao.pantallaUsuario(pantalla, usuario);
+	}
+	
+	
+	public void updateContraseña(UsuarioPojo usu) {
+		UsuarioDao userDao = new UsuarioDao();
+		userDao.updateContraseña(usu);
 	}
 
 }

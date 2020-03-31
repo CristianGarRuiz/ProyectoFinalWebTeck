@@ -23,6 +23,7 @@ import modelo.Pojo.UsuarioPojo;
 public class LogearUsuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger loggerError = (Logger) LoggerFactory.getLogger("Error");
+	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
 
 	@EJB
 	UsuarioEjb usuariosEJB;
@@ -90,8 +91,10 @@ public class LogearUsuarios extends HttpServlet {
 		try {
 
 			usuariosEJB.AñadirEmpleado(usu);
-
+         
 			rsCorreo.forward(request, response);
+			
+			loggerNormal.debug("Añadidoo el empleado sin problemas");
 
 		} catch (Exception e) {
 			loggerError.error(e.getMessage() + "Error en añadirusuario / enlace de codigo/enviar el correo ");

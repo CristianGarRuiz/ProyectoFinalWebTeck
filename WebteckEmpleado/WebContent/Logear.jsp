@@ -31,10 +31,10 @@
 <link type="text/css" href="estilos/Principal.css" rel="stylesheet" />
 <link type="text/css" href="estilos/Registro.css" rel="stylesheet" />
 </head>
-<body style="background-image: url(imagenes/fondoLogin.png)" >
+<body style="background-image: url(imagenes/fondoLogin.png)">
 	<%
 		String error = (String) request.getParameter("error");
-		UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
+			UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
 	%>
 
 	<h2 id="TextLogin">Registro Empleado</h2>
@@ -43,12 +43,13 @@
 	</p>
 
 	<div id="Formulario" class="container">
-		<form class="form-horizontal" action="LogearUsuarios" method="post">
+		<form class="form-horizontal" action="LogearUsuarios" method="post"
+			enctype="multipart/form-data">
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="email"><i
+				<label class="control-label col-sm-2" for="emailUsuario"><i
 					class='fas fa-user' style='margin-top: 2%; font-size: 24px'></i>Email:</label>
 				<div class="col-sm-10">
-					<input type="email" required="" class="form-control" id="email"
+					<input type="email" required="" class="form-control" id="emailUsuario"
 						placeholder="Entrar email" name="emailUsuario">
 				</div>
 			</div>

@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 import modelo.Ejb.ProductoEjb;
 import modelo.Ejb.SesionEjb;
 import modelo.Ejb.UsuarioEjb;
@@ -22,6 +25,8 @@ import modelo.Pojo.UsuarioPojo;
 @WebServlet("/Pagina")
 public class Pagina extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger loggerError = (Logger) LoggerFactory.getLogger("Error");
+	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
 
 	@EJB
 	UsuarioEjb usuarioEjb;
@@ -46,9 +51,10 @@ public class Pagina extends HttpServlet {
 			request.setAttribute("usuario", usuario);
 			request.setAttribute("producto", producto);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			loggerError.error( e.getMessage() + "Error al mostrar la pagina principal");
+			
 		}
-
+		loggerNormal.debug("Entrando en Principal sin fallos");
 		rs.forward(request, response);
 
 	}

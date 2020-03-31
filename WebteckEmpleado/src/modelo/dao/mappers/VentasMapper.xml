@@ -23,4 +23,17 @@
 		ventas.fecha between #{inicio} and #{fin};
 
 	</select>
+	
+	
+	<select id="leerProductosporEmail" resultMap="datosVentas">
+
+		select
+		productos.titulo as titulo ,productos.precio as precio ,ventas.fecha as fecha ,usuaris.nombre as nombre
+		from
+		ventas ,productos,usuaris
+		where
+		ventas.idProducto= productos.id and ventas.emailUsuario= usuaris.emailUsuario and
+		ventas.emailUsuario = #{emailUsuario};
+
+	</select>
 </mapper>

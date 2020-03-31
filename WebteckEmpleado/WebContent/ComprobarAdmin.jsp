@@ -41,7 +41,7 @@
 
 	<%
 		UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
-		String titulo = (String) request.getAttribute("titulo");
+			String titulo = (String) request.getAttribute("titulo");
 	%>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
@@ -65,9 +65,9 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="Login"><button type="submit"
+							<a id="Login12" class="dropdown-item" href="Login"><button type="submit"
 									<i class="fas fa-door-open" style="font-size:18px"></i>></button>Login</a>
-							<a class="dropdown-item" href="LogearUsuarios"><button
+							<a  id="Login13" class="dropdown-item" href="LogearUsuarios"><button
 									type="submit"
 									<i class="fas fa-portrait" style="font-size:19px"></i>></button>Registro</a>
 						</div></li>
@@ -110,8 +110,8 @@
 									Imagen</button></a> <a class="dropdown-item" href="#"><button
 									type='button' onClick='window.location.replace("Logout")'>Cerrar
 									Sesion</button></a> <a class="dropdown-item" href="#">
-								<button type='button'
-									onClick='window.location.replace("OpcionesUsuario")'>Opciones</button>
+									<button type='button'
+									onClick='window.location.replace("OpcionesEliminarusu")'>BajaEmpleado</button>
 							</a>
 						</div>
 					</div>
@@ -129,6 +129,19 @@
 		Contraseña Administrador: <INPUT type="password" name="codigo" /> <BR /> <INPUT
 			type="submit" value="Validar Credenciales" />
 	</FORM>
+	
+	<%
+		if (usu != null) {
+	%>
+	<script>
+		window.onload = function() {
+			document.getElementById("Login12").setAttribute('href', '#');
+			document.getElementById("Login13").setAttribute('href', '#');
+		}
+	</script>
+	<%
+		}
+	%>
 
 </body>
 <footer class="container-fluid text-center bg-dark">

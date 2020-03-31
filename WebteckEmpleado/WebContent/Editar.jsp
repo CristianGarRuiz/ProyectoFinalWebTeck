@@ -35,7 +35,7 @@
 <link type="text/css" href="estilos/principalEmpleados.css"
 	rel="stylesheet" />
 </head>
-<body>
+<body style="background-image: url(imagenes/fondoLogin.png)">
 
 	<%
 		String error = (String) request.getParameter("error");
@@ -67,12 +67,11 @@
 					</li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
-					<li class="nav-items dropdown"><a
-						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="Login"><button type="submit"
+							<a id="Login12" class="dropdown-item" href="Login"><button
+									type="submit"
 									<i class="fas fa-door-open" style="font-size:18px"></i>></button>Login</a>
-							<a class="dropdown-item" href="ComprobarAdmin"><button
+							<a id="Login13" class="dropdown-item" href="ComprobarAdmin"><button
 									type="submit"
 									<i class="fas fa-portrait" style="font-size:19px"></i>></button>Registro</a>
 						</div></li>
@@ -98,7 +97,8 @@
 					} else {
 				%>
 				<div id="Datos">
-					<img alt="" src="Imagenes/<%=usu.getFoto()%>" style="height: 35px; border-radius: 4%;"><br /> <br />
+					<img alt="" src="Imagenes/<%=usu.getFoto()%>"
+						style="height: 35px; border-radius: 4%;"><br /> <br />
 					<p
 						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
 						Bienvenido :
@@ -116,7 +116,7 @@
 									type='button' onClick='window.location.replace("Logout")'>Cerrar
 									Sesion</button></a> <a class="dropdown-item" href="#">
 								<button type='button'
-									onClick='window.location.replace("OpcionesUsuario")'>Opciones</button>
+									onClick='window.location.replace("OpcionesEliminarusu")'>BajaEmpleado</button>
 							</a>
 						</div>
 					</div>
@@ -129,81 +129,103 @@
 		</div>
 	</div>
 
+	<div id="EditarProducto" class="container">
+
+		<%
+			if (prod == null) {
+				out.println("<br/>");
+				out.println("<br/>");
+				out.println("<a href=\"Login\"> Login</a>");
+			} else {
+				out.println("<form class='form-horizontal'  action=\"Editar\" method=\"post\">");
+
+				out.println("<input type=\"hidden\" name=\"id\" value=\"" + prod.getId() + "\" /> ");
+
+				out.println("<label for=\"Titulo\">Titulo:</label>");
+				out.println("<input type=\"text\" name=\"Titulo\" value=\"" + prod.getTitulo() + "\" /> ");
+				out.println("<br/>");
+				out.println("<label for=\"Año\">Año:</label>");
+				out.println("<input type=\"number\" name=\"Anyo\" value=\"" + prod.getAnyo() + "\" /> ");
+				out.println("<br/>");
+				out.println("<label for=\"Precio\">Precio:</label>");
+				out.println("<input type=\"number\" name=\"Precio\" value=\"" + prod.getPrecio() + "\" /> ");
+				out.println("<br/>");
+				out.println("<label for=\"Stock\">Stock:</label>");
+				out.println("<input type=\"number\" name=\"Stock\" value=\"" + prod.getStock() + "\" /> ");
+				out.println("<br/>");
+				out.println("<label for=\"Descripcion\">Descripcion:</label>");
+				out.println("<input type=\"text\" name=\"Descripcion\" value=\"" + prod.getDescripcion() + "\" /> ");
+				out.println("<br/>");
+				out.println("<label for=\"Marca\">Marca:</label> ");
+				out.println(" <select name=\"Marca\">");
+
+				ArrayList<MarcaPojo> marc = (ArrayList<MarcaPojo>) request.getAttribute("marca");
+				if (marc != null) {
+					for (MarcaPojo d : marc) {
+
+						out.print("<option value='" + d.getId() + "' ");
+						if (d.getId() == prod.getIdGenero()) {
+							out.println("selected");
+						}
+						out.println(">" + d.getNombre() + "</option>");
+
+					}
+				}
+
+				out.println("</select>");
+				out.println("<label for=\"Categoria\">Categoria:</label>");
+				out.println("<select name=Categoria>");
+				ArrayList<CategoriaPojo> cat = (ArrayList<CategoriaPojo>) request.getAttribute("categoria");
+				if (cat != null) {
+					for (CategoriaPojo d : cat) {
+
+						out.print("<option value='" + d.getId() + "' ");
+						if (d.getId() == prod.getIdPlataforma()) {
+							out.println("selected");
+						}
+						out.println(">" + d.getNombre() + "</option>");
+
+					}
+				}
+				out.print("<br><br>");
+				out.print(
+						"<button id='ButtonRetorno' type='button' onClick='window.location.replace('Pagina')'>Volver atras</button>");
+				out.println("<input type= \"submit\" value= \"Editar\" /> ");
+				out.println("</form>");
+			}
+		%>
+
+	</div>
+
+
+	<%
+		if (usu != null) {
+	%>
 	<script>
 		window.onload = function() {
 			document.getElementById("Login12").setAttribute('href', '#');
+			document.getElementById("Login13").setAttribute('href', '#');
 		}
 	</script>
+	<%
+		}
+	%>
 
 
 
 	<%
-		if (prod == null) {
-			out.println("<br/>");
-			out.println("<br/>");
-			out.println("<a href=\"Login\"> Login</a>");
-		} else {
-			out.println("<form action=\"Editar\" method=\"post\">");
-
-			out.println("<input type=\"hidden\" name=\"id\" value=\"" + prod.getId() + "\" /> ");
-
-			out.println("<label for=\"Titulo\">Titulo:</label>");
-			out.println("<input type=\"text\" name=\"Titulo\" value=\"" + prod.getTitulo() + "\" /> ");
-			out.println("<br/>");
-			out.println("<label for=\"Año\">Año:</label>");
-			out.println("<input type=\"number\" name=\"Anyo\" value=\"" + prod.getAnyo() + "\" /> ");
-			out.println("<br/>");
-			out.println("<label for=\"Precio\">Precio:</label>");
-			out.println("<input type=\"number\" name=\"Precio\" value=\"" + prod.getPrecio() + "\" /> ");
-			out.println("<br/>");
-			out.println("<label for=\"Descripcion\">Descripcion:</label>");
-			out.println("<input type=\"text\" name=\"Descripcion\" value=\"" + prod.getDescripcion() + "\" /> ");
-			out.println("<br/>");
-			out.println("<label for=\"Marca\">Marca:</label> ");
-			out.println(" <select name=\"Marca\">");
-
-			ArrayList<MarcaPojo> marc = (ArrayList<MarcaPojo>) request.getAttribute("marca");
-			if (marc != null) {
-				for (MarcaPojo d : marc) {
-
-					out.print("<option value='" + d.getId() + "' ");
-					if (d.getId() == prod.getIdGenero()) {
-						out.println("selected");
-					}
-					out.println(">" + d.getNombre() + "</option>");
-
-				}
-			}
-
-			out.println("</select>");
-			out.println("<label for=\"Categoria\">Categoria:</label>");
-			out.println("<select name=Categoria>");
-			ArrayList<CategoriaPojo> cat = (ArrayList<CategoriaPojo>) request.getAttribute("categoria");
-			if (cat != null) {
-				for (CategoriaPojo d : cat) {
-
-					out.print("<option value='" + d.getId() + "' ");
-					if (d.getId() == prod.getIdPlataforma()) {
-						out.println("selected");
-					}
-					out.println(">" + d.getNombre() + "</option>");
-
-				}
-			}
-
-			out.println("<input type= \"submit\" value= \"Editar\" /> ");
-			out.println("</form>");
+		if (usu == null) {
+	%>
+	<script>
+		window.onload = function() {
+			alert("No esta Logeado para esta Funcion");
+			window.location = 'Pagina';
+		}
+	</script>
+	<%
 		}
 	%>
 
-	<button id='ButtonRetorno' type='button'
-		onClick='window.location.replace("Pagina")'>Volver a Lista</button>
-
 </body>
 
-<footer class="container-fluid text-center bg-dark">
-	<h3 id="nombre">Cristian Garcia</h3>
-	<i class="fa fa-copyright" style="font-size: 36px; color: cyan;">
-		webteckControl</i>
-</footer>
 </html>

@@ -42,7 +42,7 @@
 	%>
 
 	<%
-		ArrayList<ProductoPojo> prod = (ArrayList<ProductoPojo>) request.getAttribute("productos");
+		ArrayList<BusquedaPojo> prod = (ArrayList<BusquedaPojo>) request.getAttribute("productos");
 		UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
 		String titulo = (String) request.getAttribute("titulo");
 	%>
@@ -68,9 +68,10 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="Login"><button type="submit"
+							<a id="Login12" class="dropdown-item" href="Login"><button
+									type="submit"
 									<i class="fas fa-door-open" style="font-size:18px"></i>></button>Login</a>
-							<a class="dropdown-item" href="ComprobarAdmin"><button
+							<a id="Login13" class="dropdown-item" href="ComprobarAdmin"><button
 									type="submit"
 									<i class="fas fa-portrait" style="font-size:19px"></i>></button>Registro</a>
 						</div></li>
@@ -96,7 +97,8 @@
 					} else {
 				%>
 				<div id="Datos">
-					<img alt="" src="Imagenes/<%=usu.getFoto()%>"><br /> <br />
+					<img alt="" src="Imagenes/<%=usu.getFoto()%>" 
+					style="height: 35px; border-radius: 4%;" ><br /> <br />
 					<p
 						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
 						Bienvenido :
@@ -114,7 +116,7 @@
 									type='button' onClick='window.location.replace("Logout")'>Cerrar
 									Sesion</button></a> <a class="dropdown-item" href="#">
 								<button type='button'
-									onClick='window.location.replace("OpcionesUsuario")'>Opciones</button>
+									onClick='window.location.replace("OpcionesEliminarusu")'>BajaEmpleado</button>
 							</a>
 						</div>
 					</div>
@@ -136,39 +138,76 @@
 
 	<%
 		if (prod != null && titulo != null && titulo != "") {
-			out.print("<Busqueda Producto>");
-			out.print("Busqueda por Nombre Producto : " + titulo);
-			out.print("<br><br>");
-			out.print("<table class=table table-hover>");
-			out.print("<th> Nombre Producto :</th>");
-			out.print("<th> Año Producto :</th>");
-			out.print("<th> Precio Producto :</th>");
-			out.print("<th> Descripcion Producto:</th>");
-			out.print("<th> Marca Producto :</th>");
-			out.print("<th> Plataforma Producto:</th>");
-			out.print("</tr>");
+		out.print("<Busqueda Producto>");
+		out.print("Busqueda por Nombre Producto : " + titulo);
+		out.print("<br><br>");
+		out.print("<table class=table table-hover table-responsive>");
+		out.print("<th> Nombre Producto :</th>");
+		out.print("<th> Año Producto :</th>");
+		out.print("<th> Precio Producto :</th>");
+		out.print("<th> Descripcion Producto:</th>");
+		out.print("<th> Marca Producto :</th>");
+		out.print("<th> Plataforma Producto:</th>");
+		out.print("<th> Modificar :</th>");
+		out.print("<th> Eliminar : Producto:</th>");
+		out.print("</tr>");
 
-			for (ProductoPojo juga : prod) {
+		for (BusquedaPojo juga : prod) {
 
-				out.print("<tr>");
-				out.print("<td>" + juga.getTitulo() + "</td>");
-				out.print("<td>" + juga.getAnyo() + "$" + "</td>");
-				out.print("<td>" + juga.getPrecio() + "</td>");
-				out.print("<td>" + juga.getDescripcion() + "</td>");
-				// 				out.print("<td>" + juga.getGenero() + "</td>");
-				// 				out.print("<td>" + juga.getPlataforma() + "</td>");
+			out.print("<tr>");
+			out.print("<td>" + juga.getTitulo() + "</td>");
+			out.print("<td>" + juga.getAnyo() + "$" + "</td>");
+			out.print("<td>" + juga.getPrecio() + "</td>");
+			out.print("<td>" + juga.getDescripcion() + "</td>");
+			out.print("<td>" + juga.getGenero() + "</td>");
+			out.print("<td>" + juga.getPlataforma() + "</td>");
+			out.print("<td><a href=\"Editar?id=" + juga.getId() + "\"> Modificar </a></td>");
+			out.print("<td><a href=\"Eliminar?id=" + juga.getId() + "\"> Eliminar </a></td>");
 
+		}
+		out.print("</table>");
+
+			} else {
+		out.print("<h4>Buscar Productos</h4>");
 			}
-			out.print("</table>");
+	%>
+	
+		<%
+			if (error != null) {
+		%>
+		<h4 style="color: red;" ><h4>Fechas sin Resultados</h4>
+		<button type='button'
+			onClick='window.location.replace("Pagina")'>VolveraIntentar</button>
+		<%
+			}
+		%>
 
-		} else {
-			out.print("<h4>Fechas sin Resultados</h4>");
-			out.print("<button type='button' onClick='window.location.replace('Pagina')'>VolveraIntentar</button>");
+
+	<%
+		if (usu != null) {
+	%>
+	<script>
+		window.onload = function() {
+			document.getElementById("Login12").setAttribute('href', '#');
+			document.getElementById("Login13").setAttribute('href', '#');
+		}
+	</script>
+	<%
 		}
 	%>
 
-
-
+<%
+		if (usu == null) {
+	%>
+	<script>
+		window.onload = function() {
+			 alert("No esta Logeado para esta Funcion");
+			 window.location='Pagina'; 
+		}
+	</script>
+	<%
+		}
+	%>
 
 
 </body>

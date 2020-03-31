@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+#Formulario {
+	border-radius: 1%;
+	background-color: threedlightshadow;
+}
+
+#TextLogin {
+	margin-left: 43%;
+	margin-top: 6%;
+}
+
+#botonLogin {
+	margin-left: 43%;
+	margin-bottom: 4%;
+	height: 40px;
+	width: 30%;
+}
+
+footer {
+	clear: both;
+	position: relative;
+	height: 200px;
+	margin-top: -200px;
+}
+
+#botonLogin:hover {
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+	transition: all 0.2s ease;
+}
+
+input {
+	border-radius: 3%;
+}
+
+#TextoProducto {
+	text-align: center;
+}
+
+#CancelarProd {
+	margin-left: 2%;
+	margin-top: 0%;
+	background-color: cadetblue;
+	border: 3px solid cadetblue;
+	border-radius: 6%;
+}
+
+#Crear {
+	margin-left: 2%;
+	margin-top: 0%;
+	background-color: cadetblue;
+	border: 3px solid cadetblue;
+	border-radius: 6%;
+}
+
+#Crear:hover {
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+	transition: all 0.2s ease
+}
+
+#CancelarProd:hover {
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+	transition: all 0.2s ease
+}

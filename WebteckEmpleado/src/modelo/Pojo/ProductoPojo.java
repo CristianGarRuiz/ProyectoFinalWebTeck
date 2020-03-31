@@ -1,6 +1,5 @@
 package modelo.Pojo;
 
-import java.util.ArrayList;
 
 public class ProductoPojo {
 

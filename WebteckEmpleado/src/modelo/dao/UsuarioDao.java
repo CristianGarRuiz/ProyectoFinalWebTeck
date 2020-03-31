@@ -52,8 +52,8 @@ public class UsuarioDao {
 		try {
 
 			UsuarioMapper usuAñadirUsuario = sqlSession.getMapper(UsuarioMapper.class);
-			usuAñadirUsuario.AñadirEmpleado(usuario.getEmailUsuario(), usuario.getNombre(), usuario.getUsuario(),
-					usuario.getPassword(), usuario.getFoto());
+			usuAñadirUsuario.AñadirUsuarios(usuario.getEmailUsuario(), usuario.getNombre(), usuario.getUsuario(),
+					usuario.getPassword(), usuario.getFoto(), usuario.getActivado());
 			sqlSession.commit();
 
 		} finally {
@@ -155,6 +155,18 @@ public class UsuarioDao {
 			sqlSession.close();
 		}
 
+	}
+	
+	
+	public void updateContraseña(UsuarioPojo usu) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			UsuarioMapper accidenteEdi = sqlSession.getMapper(UsuarioMapper.class);
+			accidenteEdi.updateContraseña(usu);
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}
 	}
 
 }

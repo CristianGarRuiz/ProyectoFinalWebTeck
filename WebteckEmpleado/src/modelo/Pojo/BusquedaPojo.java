@@ -2,6 +2,7 @@ package modelo.Pojo;
 
 public class BusquedaPojo {
 
+	private int id;
 	private String titulo;
 	private int anyo;
 	private int precio;
@@ -9,8 +10,10 @@ public class BusquedaPojo {
 	private String genero;
 	private String plataforma;
 
-	public BusquedaPojo(String titulo, int anyo, int precio, String descripcion, String genero, String plataforma) {
+	public BusquedaPojo(int id, String titulo, int anyo, int precio, String descripcion, String genero,
+			String plataforma) {
 		super();
+		this.id = id;
 		this.titulo = titulo;
 		this.anyo = anyo;
 		this.precio = precio;
@@ -24,7 +27,13 @@ public class BusquedaPojo {
 
 	}
 
-	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getTitulo() {
 		return titulo;

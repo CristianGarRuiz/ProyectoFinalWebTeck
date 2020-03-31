@@ -16,13 +16,15 @@
 	</select>
 
 
-	<select id='leerDatosEmpleado' resultType='modelo.Pojo.UsuarioPojo'>
+	<select id='leerDatosEmpleado'
+		resultType='modelo.Pojo.UsuarioPojo'>
 		SELECT
 		*
 		FROM
 		empleados
 		WHERE
-		usuario = #{usuario} AND password= #{password}
+		usuario = #{usuario} AND password=
+		#{password}
 
 	</select>
 
@@ -37,10 +39,17 @@
 
 	</select>
 
-
+	<insert id='AñadirUsuarios'>
+		INSERT INTO usuaris
+		(emailUsuario,nombre,usuario,password,foto,activado)
+		VALUES(#{emailUsuario},#{nombre},
+		#{usuario}, #{password}, #{foto},
+		#{activado})
+	</insert>
+	
 	<insert id='AñadirEmpleado'>
 		INSERT INTO empleados
-		(email,nombre,usuario,password,foto)
+		(emailUsuario,nombre,usuario,password,foto)
 		VALUES(#{emailUsuario},#{nombre},
 		#{usuario}, #{password}, #{foto})
 	</insert>
@@ -70,10 +79,24 @@
 		#{emailUsuario}
 	</delete>
 
+	<delete id='eliminarEmpleado'>
+		DELETE FROM empleados WHERE emailUsuario =
+		#{emailUsuario}
+	</delete>
+
 	<delete id="eliminarClave">
 		DELETE FROM claveregistro WHERE emailUsuario
 		=#{emailUsuario}
 	</delete>
 
+
+	<update id='updateContraseña' parameterType='UsuarioPojo'>
+		UPDATE
+		usuaris
+		SET
+
+		password = #{password}
+		WHERE usuaris.emailUsuario = #{emailUsuario}
+	</update>
 
 </mapper>

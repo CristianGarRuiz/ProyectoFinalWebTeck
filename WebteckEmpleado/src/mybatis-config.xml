@@ -3,18 +3,16 @@
 <configuration>
 	<properties resource='jdbc.properties'></properties>
 	<typeAliases>
-		<typeAlias type='modelo.Pojo.UsuarioPojo'
-			alias='UsuarioPojo'></typeAlias>
-		<typeAlias type='modelo.Pojo.CategoriaPojo'
-			alias='CategoriaPojo'></typeAlias>
-		<typeAlias type='modelo.Pojo.MarcaPojo' alias='MarcaPojo'></typeAlias>
-		<typeAlias type='modelo.Pojo.ProductoPojo'
-			alias='ProductoPojo'></typeAlias>
-		<typeAlias type='modelo.Pojo.RegistroPojo'
-			alias='RegistroPojo'></typeAlias>
-			<typeAlias type='modelo.Pojo.VentasPojo'
-			alias='VentasPojo'></typeAlias>
+			<typeAlias type='modelo.Pojo.UsuarioPojo' alias='UsuarioPojo'></typeAlias>
+			<typeAlias type='modelo.Pojo.CategoriaPojo' alias='CategoriaPojo'></typeAlias>
+			<typeAlias type='modelo.Pojo.MarcaPojo' alias='MarcaPojo'></typeAlias>
+			<typeAlias type='modelo.Pojo.ProductoPojo'	alias='ProductoPojo'></typeAlias>
+			<typeAlias type='modelo.Pojo.RegistroPojo' alias='RegistroPojo'></typeAlias>
+			<typeAlias type='modelo.Pojo.VentasPojo' alias='VentasPojo'></typeAlias>
 			<typeAlias type='modelo.Pojo.BusquedaPojo' alias='BusquedaPojo'></typeAlias>
+			<typeAlias type='modelo.Pojo.ProductoTiendaPojo' alias='ProductoTienda'></typeAlias>
+			<typeAlias type='modelo.Pojo.ValorcionPojo' alias='ValorcionPojo'></typeAlias>
+				<typeAlias type='modelo.Pojo.PreguntaPojo' alias='PreguntaPojo'></typeAlias>
 	</typeAliases>
 	<environments default='development'>
 		<environment id='development'>
@@ -32,5 +30,6 @@
 		<mapper resource='modelo/dao/mappers/ProductoMapper.xml' />
 		<mapper resource='modelo/dao/mappers/UsuarioMapper.xml' />
 		<mapper resource='modelo/dao/mappers/VentasMapper.xml' />
+		<mapper resource='modelo/dao/mappers/ValoracionMapper.xml' />
 	</mappers>
 </configuration>
