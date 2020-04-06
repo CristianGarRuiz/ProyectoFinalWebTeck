@@ -31,5 +31,6 @@
 		<mapper resource='modelo/dao/mappers/UsuarioMapper.xml' />
 		<mapper resource='modelo/dao/mappers/VentasMapper.xml' />
 		<mapper resource='modelo/dao/mappers/ValoracionMapper.xml' />
+		<mapper resource='modelo/dao/mappers/PreguntaMapper.xml' />
 	</mappers>
 </configuration>

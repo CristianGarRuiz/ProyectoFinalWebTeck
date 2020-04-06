@@ -30,8 +30,7 @@
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 	crossorigin="anonymous">
 <link rel="icon" type="imagenes/iconIma.gif" href="iconIma.gif">
-<link type="text/css" href="estilos/Principal.css" rel="stylesheet" />
-<link type="text/css" href="estilos/principalEmpleados.css"
+<link type="text/css" href="estilos/BusquedaProducto.css"
 	rel="stylesheet" />
 </head>
 <body>

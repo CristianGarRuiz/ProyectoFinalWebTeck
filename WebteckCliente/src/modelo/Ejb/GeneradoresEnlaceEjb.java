@@ -6,7 +6,7 @@ import javax.ejb.Stateless;
 
 @Stateless
 @LocalBean
-public class GeneradorEnlaceEjb {
+public class GeneradoresEnlaceEjb {
 
 	public String generarEnlace(int codigo) {
 		return "http://localhost:8080/WebteckEmpleado/claveRegistro?codigo=" + codigo;

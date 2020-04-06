@@ -1,8 +1,7 @@
 package controlador;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
+
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,53 +10,51 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.slf4j.LoggerFactory;
-import ch.qos.logback.classic.Logger;
-import modelo.Ejb.ProductoEjb;
-import modelo.Ejb.SesionEjb;
-import modelo.Ejb.UsuarioEjb;
-import modelo.Pojo.ProductoPojo;
-import modelo.Pojo.UsuarioPojo;
 
-@WebServlet("/Pagina")
-public class Pagina extends HttpServlet {
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
+import modelo.Ejb.SesionesEjb;
+import modelo.Ejb.UsuariosEjb;
+
+/**
+ * Servlet implementation class Eliminar
+ */
+@WebServlet("/DarBajaEmpleado")
+public class DarBajaUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger loggerError = (Logger) LoggerFactory.getLogger("Error");
 	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
+	@EJB
+	UsuariosEjb usuarioEjb;
 
 	@EJB
-	UsuarioEjb usuarioEjb;
-
-	@EJB
-	SesionEjb sesionesEjb;
-
-	@EJB
-	ProductoEjb productoEjb;
+	SesionesEjb sesionesEjb;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
-		UsuarioPojo usuario = sesionesEjb.usuariosLogeado(session);
-		ArrayList<ProductoPojo> producto;
-
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Pagina.jsp");
 
 		try {
-			producto = productoEjb.leerTotalProductos();
-			request.setAttribute("usuario", usuario);
-			request.setAttribute("producto", producto);
-		} catch (SQLException e) {
-			loggerError.error( e.getMessage() + "Error al mostrar la pagina principal");
+			// Variable que recibe el email
+			String emailUsuario = request.getParameter("emailUsuario");
+			// Llamo al ejb del usuario y al metodo que elimina ese usuario con el correo
+//			usuarioEjb.eliminarEmpleado(emailUsuario);
+
+			// cunado el usuario esta eliminado le cierro la sesion
+			sesionesEjb.logoutUsuario(session);
+
+			// recojo la request de la variable instanciada
+			request.setAttribute("emailUsuario", emailUsuario);
+
+		} catch (Exception e) {
+			loggerError.error(e.getMessage() + "Error al eliminar un usuario con el email propio");
 			
+
 		}
-		loggerNormal.debug("Entrando en Principal sin fallos");
+		loggerNormal.debug("Eliminado Correctamente");
 		rs.forward(request, response);
-
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 
 	}
 

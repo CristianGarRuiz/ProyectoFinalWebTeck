@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='modelo.dao.mappers.PreguntaMapper'>
+
+	<resultMap type="PreguntaPojo" id="PreguntaProducto">
+		<id property='id' column='id' />
+		<result property='nombre' column='nombre' />
+		<result property='respuesta' column='respuesta' />
+	</resultMap>
+
+
+	<select id="getRespuestaPreguntas" resultMap="PreguntaProducto">
+
+		select
+		*
+		from
+		preguntas
+		where
+		preguntas.nombre like '%' #{nombre} '%';
+	</select>
+
+</mapper>

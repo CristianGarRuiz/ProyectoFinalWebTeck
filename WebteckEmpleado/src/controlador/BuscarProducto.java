@@ -42,7 +42,6 @@ public class BuscarProducto extends HttpServlet {
 		HttpSession session = request.getSession();
 		String error = request.getParameter("error");
 		UsuarioPojo usuario = sesionesEjb.usuariosLogeado(session);
-		
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/BusquedaProducto.jsp");
 		request.setAttribute("error", error);
 		request.setAttribute("usuario", usuario);

@@ -1,0 +1,66 @@
+#UsuarioLog {
+	float: right;
+	position: relative;
+	margin-left: 754px;
+}
+
+#Datos {
+	margin-left: 72%;
+	height: 74px;
+	width: 116%;
+}
+
+#Menuopciones {
+	margin-left: -65%;
+	margin-top: -14%;
+}
+
+
+#RegistroEmpleado {
+	margin-left: 36%;
+	margin-top: 15%;
+	display: inline-grid;
+	font-size: large;
+	text-align: center;
+	background-color: white;
+	border: 3px solid white;
+	border-radius: 1%;
+}
+
+#EditarProducto {
+	margin-left: 35%;
+	margin-top: 0.1%;
+	padding: 2%;
+	display: flex;
+	position: relative;
+	width: 45%;
+	height: 310px;
+}
+
+}
+table {
+	width: 100%;
+}
+
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 15px;
+	text-align: left;
+}
+
+table#t01 tr:nth-child(even) {
+	background-color: #eee;
+}
+
+table#t01 tr:nth-child(odd) {
+	background-color: #fff;
+}
+
+table#t01 th {
+	background-color: black;
+	color: white;
+}

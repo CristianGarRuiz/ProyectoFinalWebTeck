@@ -1,0 +1,138 @@
+/* Make the image fully responsive */
+.product-item {
+	height: 70%;
+	width: 24%;
+	border: 3px solid black;
+	padding: 3%;
+	margin-inline-start: auto;
+	margin-right: auto;
+	margin-bottom: 2%;
+	border-radius: 3%;
+	position: relative;
+	display: inline-grid;
+	margin-left: 0.7%;
+}
+
+#Pregunta {
+	position: static;
+	display: block;
+	z-index: 1;
+	width: 4%;
+	height: 52px;
+	display: scroll;
+	position: fixed;
+	bottom: 20%;
+	right: 0%;
+	margin-right: 3%;
+	font-size: 30px;
+	text-align: center;
+}
+
+#Pregunta:hover {
+	cursor: pointer;
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+	transition: all 0.2s ease;
+	text-decoration: none;
+}
+
+.benefit {
+	background-color: wheat;
+}
+
+.botonCarrito {
+	background-color: orangered;
+	height: 25%;
+	width: 42%;
+	text-align: center;
+	margin: auto;
+	margin-top: 6%;
+	border-radius: 6%;
+	text-decoration: none;
+	display: block;
+}
+
+#fichaProd {
+	margin-top: 5%;
+	margin-left: auto;
+	margin-bottom: 3%;
+}
+
+#Datos {
+	margin-left: 11%;
+	height: 74px;
+	width: 116%;
+}
+
+#CarritoTienda {
+	background-color: orange;
+	margin-top: 3%;
+	height: 84%;
+	width: 84%;
+	text-align: center;
+	border: 2px solid cornflowerblue;
+	border-radius: 4%;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+#BusquedaTitulo {
+	margin-top: 8%;
+}
+
+#CarritoTienda:hover {
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+	transition: all 0.2s ease;
+	text-decoration: none;
+	cursor: pointer
+}
+
+#FichaProducto {
+	background-color: orange;
+	margin-top: 3%;
+	height: 84%;
+	width: 84%;
+	text-align: center;
+	border: 2px solid cornflowerblue;
+	border-radius: 4%;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+#FichaProducto:hover {
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+	transition: all 0.2s ease;
+	text-decoration: none;
+	cursor: pointer
+}
+
+#Menuopciones {
+	margin-left: -70%;
+	margin-top: -36%;
+}
+
+.botonCarrito :hover {
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+	transition: all 0.2s ease;
+	text-decoration: none;
+	cursor: pointer
+}
+
+#BotonBusqueda {
+	cursor: pointer;
+}
+
+#BotonForm {
+	margin-left: 52%;
+	width: 167%;
+	height: 98%;
+	border-radius: 4%;
+	cursor: pointer;
+}

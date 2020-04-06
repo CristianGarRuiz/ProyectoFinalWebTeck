@@ -18,7 +18,7 @@ public class UsuariosEjb {
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target1 = cliente
-				.target("http://localhost:8080/SeguridadVial/controlador/leerDatos/patata23/" + nombre + "/" + pass);
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getUsuario/patata23/" + nombre + "/" + pass);
 
 		UsuariosPojo usuario = target1.request().get(UsuariosPojo.class);
 
@@ -34,30 +34,15 @@ public class UsuariosEjb {
 	 * @throws SQLException
 	 */
 
-	
-//	public String getFoto(UsuariosPojo usu) throws SQLException {
-//
-//		daoUsuario userFoto = new daoUsuario();
-//
-//		return userFoto.getFoto(usu);
-//
-//	}
-	
-	
-	// ESTE METODO NOSE COMO PASARLO 
-	//ARRIBA TE DEJO COMO LO TENIA ANTES
 	public String getFoto(UsuariosPojo usu) throws SQLException {
 
-		
-		
 		Client cliente = ClientBuilder.newClient();
 
-		WebTarget target1 = cliente.target("http://localhost:8080/SeguridadVial/controlador/getFoto/patata23/" + usu);
-
+		WebTarget target1 = cliente.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getFoto/patata23/" + usu);
 
 		UsuariosPojo usuario = target1.request().get(UsuariosPojo.class);
 
-		return usuario;
+		return usuario.getFoto();
 
 	}
 
@@ -71,16 +56,17 @@ public class UsuariosEjb {
 	 * @return
 	 * @throws SQLException
 	 */
-   
-	
-	// ESTE TAMPOCO
-	public int añadirUsuario(UsuarioPojo usu) throws SQLException {
-		UsuarioDao userDao = new UsuarioDao();
-		userDao.AñadirUsuarios(usu);
+
+	public int añadirUsuario(UsuariosPojo usu) {
+		Client cliente = ClientBuilder.newClient();
 
 		int codigo = (int) (Math.random() * 10000 + 1);
-		CodigoDAO codigoDao = new CodigoDAO();
-		codigoDao.insertCodigo(codigo, usu.getEmailUsuario());
+
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/nuevoUsuario/patata23/" + usu + "/" + codigo);
+
+		target1.request().get(UsuariosPojo.class);
+
 		return codigo;
 
 	}
@@ -97,7 +83,7 @@ public class UsuariosEjb {
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target2 = cliente
-				.target("http://localhost:8080/SeguridadVial/controlador/eliminarUsuario/patata23/" + emailUsuario);
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/eliminarUsuario/patata23/" + emailUsuario);
 
 		target2.request().delete(UsuariosPojo.class);
 	}
@@ -108,12 +94,15 @@ public class UsuariosEjb {
 	 * @param codigo
 	 * @throws SQLException
 	 */
-	
-	// ESTE TAMPOCO ES UN UPDATE
-	//ARRIBA TE DEJO COMO LO TENIA ANTES
+
 	public void ActivarUsuario(int codigo) throws SQLException {
-		UsuarioDao userDao = new UsuarioDao();
-		userDao.activarUsuario(codigo);
+		Client cliente = ClientBuilder.newClient();
+
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/activaUsuario/patata23/" + codigo);
+
+		target1.request().get();
+
 	}
 
 	/**
@@ -124,32 +113,33 @@ public class UsuariosEjb {
 	 * @param usuario
 	 */
 
-	
 //	public void pantallaUsuario(String pantalla,String usuario ) {
 //		daoUsuario userDao = new daoUsuario();
 //		userDao.pantallaUsuario(pantalla, usuario);
 //	}
 //	
-	
-	//ESTE NOSE SI LO HE PASADO BIEN PORQUE 
+
+	// ESTE NOSE SI LO HE PASADO BIEN PORQUE
 	// ANTES NO TENIA UNA ENTIDAD POJO COMO ABAJO
-	public void pantallaUsuario(String pantalla , String usuario) {
+	public void pantallaUsuario(String pantalla, String usuario) {
 
 		Client cliente = ClientBuilder.newClient();
 
-		WebTarget target2 = cliente.target("http://localhost:8080/SeguridadVial/ControladorRest/pantallaUsuario/patata23/" + pantalla+"/"+usuario);
+		WebTarget target2 = cliente
+	  .target("http://localhost:8080/WebteckEmpleado/ControladorRest/pantallaUsuario/patata23/" + pantalla + "/"
+						+ usuario);
 
-		target2.request().put(Entity.json(UsuariosPojo.class));
+		target2.request().get();
 	}
-	
-	
 
+	
+	
 	public void updateContraseña(UsuariosPojo usu) {
 
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target2 = cliente
-				.target("http://localhost:8080/SeguridadVial/ControladorRest/updateContraseña/patata23");
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/updateContraseña/patata23");
 
 		target2.request().put(Entity.json(usu));
 	}

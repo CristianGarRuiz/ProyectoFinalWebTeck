@@ -1,11 +1,8 @@
-package Controlador.rest;
+package ControladorRest;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.ejb.EJB;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -13,7 +10,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import modelo.Ejb.PreguntaEjb;
 import modelo.Ejb.ProductoEjb;
 import modelo.Ejb.UsuarioEjb;
@@ -22,15 +18,13 @@ import modelo.Ejb.VentasEjb;
 import modelo.Pojo.CategoriaPojo;
 import modelo.Pojo.MarcaPojo;
 import modelo.Pojo.PreguntaPojo;
-import modelo.Pojo.ProductoPojo;
 import modelo.Pojo.ProductoTiendaPojo;
 import modelo.Pojo.UsuarioPojo;
 import modelo.Pojo.ValorcionPojo;
 import modelo.Pojo.VentasPojo;
 
-@WebServlet("/ControladorRest")
-public class ControladorRest extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@Path("/ControladorRest")
+public class ControladorRest {
 
 	@EJB
 	UsuarioEjb usuarioEjb;
@@ -61,13 +55,14 @@ public class ControladorRest extends HttpServlet {
 	}
 
 	@GET
-	@Path("/getProducto/{token}/{id}")
+	@Path("/getProductoTienda/{token}/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ProductoPojo getAccidente(@PathParam("token") String token, @PathParam("id") int id) throws SQLException {
+	public ArrayList<ProductoTiendaPojo> getProductoTienda(@PathParam("token") String token, @PathParam("id") int id)
+			throws SQLException {
 
-		ProductoPojo producto = null;
+		ArrayList<ProductoTiendaPojo> producto = null;
 		if (token.equals("patata23")) {
-			producto = productoEjb.leerProducto(id);
+			producto = productoEjb.leerProductoTienda(id);
 		}
 		return producto;
 	}
@@ -84,7 +79,10 @@ public class ControladorRest extends HttpServlet {
 	public ArrayList<MarcaPojo> leerTipoAccidente(@PathParam("token") String token) throws SQLException {
 
 		ArrayList<MarcaPojo> tipoMarca = null;
-		tipoMarca = productoEjb.leerTotalMarcas();
+
+		if (token.equals("patata23")) {
+			tipoMarca = productoEjb.leerTotalMarcas();
+		}
 
 		return tipoMarca;
 
@@ -148,11 +146,12 @@ public class ControladorRest extends HttpServlet {
 	@GET
 	@Path("/getTotalProductos/{token}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ProductoPojo> leerTotalProductos(@PathParam("token") String token) throws SQLException {
+	public ArrayList<ProductoTiendaPojo> leerTotalProductos(@PathParam("token") String token) throws SQLException {
 
-		ArrayList<ProductoPojo> productos = null;
+		ArrayList<ProductoTiendaPojo> productos = null;
+
 		if (token.equals("patata23")) {
-			productos = productoEjb.leerTotalProductos();
+			productos = productoEjb.leerTotalTienda();
 		}
 		return productos;
 
@@ -177,6 +176,7 @@ public class ControladorRest extends HttpServlet {
 	public ArrayList<VentasPojo> leerProductosporEmail(@PathParam("token") String token,
 			@PathParam("emailUsuario") String emailUsuario) throws SQLException {
 		ArrayList<VentasPojo> venta = null;
+		
 		if (token.equals("patata23")) {
 
 			venta = ventasEjb.leerProductosporEmail(emailUsuario);
@@ -185,11 +185,12 @@ public class ControladorRest extends HttpServlet {
 	}
 
 	@GET
-	@Path("/getRespuestaPreguntas/{token}/{pregunta}")
+	@Path("/getRespuesta/{token}/{pregunta}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<PreguntaPojo> getRespuestaPreguntas(@PathParam("token") String token,
 			@PathParam("pregunta") String pregunta) throws SQLException {
 		ArrayList<PreguntaPojo> respuesta = null;
+		
 		if (token.equals("patata23")) {
 
 			respuesta = preguntaEjb.getRespuestaPreguntas(pregunta);

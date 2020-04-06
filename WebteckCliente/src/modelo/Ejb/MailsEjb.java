@@ -18,7 +18,7 @@ import javax.mail.internet.MimeMultipart;
 
 @Stateless
 @LocalBean
-public class MailEjb {
+public class MailsEjb {
 
 	public void sendMail(String para, String mensaje, String ausnto) throws MessagingException {
 

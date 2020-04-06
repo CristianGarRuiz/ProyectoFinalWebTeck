@@ -28,6 +28,20 @@ public class ProductosDao {
 
 	}
 	
+	public ArrayList<ProductoTiendaPojo> leerTotalTienda() {
+
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+
+			ProductoMapper usuleerProducto = sqlSession.getMapper(ProductoMapper.class);
+			return usuleerProducto.leerTotalTienda();
+
+		} finally {
+			sqlSession.close();
+		}
+
+	}
+	
 
 	
 	public ProductoPojo leerProductos(int id) {
@@ -38,6 +52,19 @@ public class ProductosDao {
 			ProductoPojo a = leerProducto.leerProductos(id);
 
 			return a;
+
+		} finally {
+			sqlSession.close();
+		}
+
+	}
+
+	public ArrayList<ProductoTiendaPojo> leerProductosTienda(int id) {
+
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ProductoMapper leerProducto = sqlSession.getMapper(ProductoMapper.class);
+			return leerProducto.leerProductosTienda(id);
 
 		} finally {
 			sqlSession.close();

@@ -8,6 +8,6 @@ import modelo.Pojo.PreguntaPojo;
 
 public interface PreguntaMapper {
 	
-	public ArrayList<PreguntaPojo> getRespuestaPreguntas(@Param("pregunta") String pregunta);
+	public ArrayList<PreguntaPojo> getRespuestaPreguntas(@Param("nombre") String nombre);
 
 }

@@ -19,6 +19,11 @@ public class ProductoEjb {
 		ProductosDao ProductoDao = new ProductosDao();
 		return ProductoDao.leerTotalProductos();
 	}
+	
+	public ArrayList<ProductoTiendaPojo> leerTotalTienda() throws SQLException {
+		ProductosDao ProductoDao = new ProductosDao();
+		return ProductoDao.leerTotalTienda();
+	}
 
 	public ArrayList<MarcaPojo> leerTotalMarcas() throws SQLException {
 		ProductosDao ProductoDao = new ProductosDao();
@@ -34,6 +39,13 @@ public class ProductoEjb {
 
 		ProductosDao ProductoDao = new ProductosDao();
 		return ProductoDao.leerProductos(id);
+
+	}
+	
+	public ArrayList<ProductoTiendaPojo> leerProductoTienda(int id) throws SQLException {
+
+		ProductosDao ProductoDao = new ProductosDao();
+		return ProductoDao.leerProductosTienda(id);
 
 	}
 	

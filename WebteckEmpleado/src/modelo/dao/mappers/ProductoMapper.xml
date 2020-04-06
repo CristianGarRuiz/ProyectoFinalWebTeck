@@ -40,11 +40,13 @@
 		productos,plataformas,generos
 
 		where
-		productos.idPlataforma = plataformas.id
+		productos.idPlataforma =
+		plataformas.id
 		and
 		productos.idGenero = generos.id
 		and
-		productos.titulo like '%' #{titulo}
+		productos.titulo
+		like '%' #{titulo}
 		'%';
 	</select>
 
@@ -59,26 +61,38 @@
 		<result property='foto' column='foto' />
 		<result property='genero' column='genero' />
 		<result property='plataforma' column='plataforma' />
+		<result property='comentario' column='comentarios' />
+		<result property='valoracion' column='valoraciones' />
+
 	</resultMap>
 
-	<select id="BuscarProductoporNombreTienda" resultMap="tiendaProducto">
-
-		select
-		productos.titulo as titulo,productos.anyo as anyo, productos.precio
+	<select id="BuscarProductoporNombreTienda"
+		resultMap="tiendaProducto">
+        select
+		productos.titulo as titulo,productos.anyo as anyo,
+		productos.precio
 		as
-		precio ,producto.stock as stock,productos.descripcion as descripcion,productos.foto as foto,
+		precio ,productos.stock as
+		stock,productos.descripcion as
+		descripcion,productos.foto as foto,
 		generos.nombre as genero
-		, plataformas.nombre as plataforma,productos.id as id
+		,
+		plataformas.nombre as plataforma,productos.id
+		as
+		id,valoraciones.valoraciones as valoraciones
+		,comentarios.comentarios
+		as comentarios
 
 		from
-		productos,plataformas,generos
-
+		productos,plataformas,generos,valoraciones,comentarios
 		where
-		productos.idPlataforma = plataformas.id
-		and
-		productos.idGenero = generos.id
-		and
-		productos.titulo like '%' #{titulo}
+		productos.idPlataforma = plataformas.id and productos.idGenero =
+		generos.id and
+		valoraciones.idProducto = productos.id and
+		comentarios.idProducto =
+		productos.id and
+		productos.titulo like '%'
+		#{titulo}
 		'%';
 	</select>
 
@@ -86,10 +100,35 @@
 	<select id="leerProductos" resultMap="datosProducto">
 		select
 		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,
-		productos.idGenero,productos.idPlataforma,productos.id, productos.stock
+		productos.idGenero,productos.idPlataforma,productos.id,
+		productos.stock
 		from
 		productos
 		where
+		productos.id=#{id}
+
+	</select>
+
+	<select id="leerProductosTienda" resultMap="tiendaProducto">
+	   select
+		productos.titulo as titulo,productos.anyo as anyo, productos.precio
+		as
+		precio ,productos.stock as stock,productos.descripcion as
+		descripcion,productos.foto as foto,
+		generos.nombre as genero
+		,
+		plataformas.nombre as plataforma,productos.id as
+		id,valoraciones.valoraciones as valoraciones ,comentarios.comentarios
+		as comentarios
+
+		from
+		productos,plataformas,generos,valoraciones,comentarios
+		where
+		productos.idPlataforma = plataformas.id and productos.idGenero =
+		generos.id and
+		valoraciones.idProducto = productos.id and
+		comentarios.idProducto =
+		productos.id and
 		productos.id=#{id}
 
 	</select>
@@ -101,6 +140,32 @@
 		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,productos.id,productos.stock
 		from
 		productos
+	</select>
+
+	<select id="leerTotalTienda" resultMap="tiendaProducto">
+		select
+		productos.titulo as titulo,productos.anyo as anyo,
+		productos.precio
+		as
+		precio ,productos.stock as
+		stock,productos.descripcion as
+		descripcion,productos.foto as foto,
+		generos.nombre as genero
+		,
+		plataformas.nombre as plataforma,productos.id
+		as
+		id,valoraciones.valoraciones as valoraciones
+		,comentarios.comentarios
+		as comentarios
+
+		from
+		productos,plataformas,generos,valoraciones,comentarios
+		where
+		productos.idPlataforma = plataformas.id and productos.idGenero =
+		generos.id and
+		valoraciones.idProducto = productos.id and
+		comentarios.idProducto =
+		productos.id;
 	</select>
 
 
@@ -145,7 +210,7 @@
 		useGeneratedKeys='true' keyProperty='id'>
 		insert into productos
 		(titulo,precio,anyo,stock,foto,descripcion,idGenero,idPlataforma)
-		VALUES(#{titulo}, #{precio}, 
+		VALUES(#{titulo}, #{precio},
 		#{anyo},#{stock},
 		#{foto}, #{descripcion},
 		#{idGenero},
