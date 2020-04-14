@@ -18,9 +18,7 @@ public class VentaEjb {
 
 		Client cliente = ClientBuilder.newClient();
 
-		WebTarget target1 = cliente
-				.target("http://localhost:8080/WebteckCliente/ControladorRest/leerProductosporEmail/patata23/"
-						+ emailUsuario);
+		WebTarget target1 = cliente	.target("http://localhost:8080/WebteckEmpleado/ControladorRest/leerProductosporEmail/patata23/"+ emailUsuario);
 
 		ArrayList<VentaPojo> lista = (ArrayList<VentaPojo>) target1.request().get(new GenericType<List<VentaPojo>>() {
 		});

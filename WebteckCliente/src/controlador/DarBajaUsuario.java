@@ -40,7 +40,9 @@ public class DarBajaUsuario extends HttpServlet {
 			// Variable que recibe el email
 			String emailUsuario = request.getParameter("emailUsuario");
 			// Llamo al ejb del usuario y al metodo que elimina ese usuario con el correo
-//			usuarioEjb.eliminarEmpleado(emailUsuario);
+			
+			
+			usuarioEjb.eliminarUsuarios(emailUsuario);
 
 			// cunado el usuario esta eliminado le cierro la sesion
 			sesionesEjb.logoutUsuario(session);

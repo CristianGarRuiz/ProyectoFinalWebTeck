@@ -1,3 +1,4 @@
+<%@page import="modelo.Pojo.ValorcionesPojo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -37,8 +38,17 @@
 		String error = (String) request.getParameter("error");
 		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
 
+		String comentario = (String) request.getParameter("comentario");
+		String valoraciones = (String) request.getParameter("valoracion");
+
 		ArrayList<ProductosTiendaPojo> productosTienda = (ArrayList<ProductosTiendaPojo>) request
 				.getAttribute("productosTienda");
+
+		ArrayList<ValorcionesPojo> comentariosProd = (ArrayList<ValorcionesPojo>) request
+				.getAttribute("comentariosProd");
+
+		ArrayList<ValorcionesPojo> valoracionesProd = (ArrayList<ValorcionesPojo>) request
+				.getAttribute("valoracionesProd");
 	%>
 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -164,9 +174,9 @@
 						d-flex flex-column align-items-center'>
 
 						<%
-						   int productosZero = prod.getStock();
-						
-							if (prod.getStock() > 10) {
+							int productosZero = prod.getStock();
+
+									if (prod.getStock() > 10) {
 						%>
 						<span style="color: green;"> Disponibles: <%=prod.getStock()%></span>
 
@@ -208,18 +218,250 @@
 
 
 			</div>
-
-
 		</div>
-
-		<%
-			}
-		%>
-		<%
-			}
-		%>
-
 	</div>
+
+	<div class="container">
+		<h2>Comentarios y Valoraciones</h2>
+		<ul class="nav nav-tabs">
+			<ul id="Coments" class="tabs">
+				<li class="nav-item"><a class="nav-link active" href="#tab1">Valoraciones</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#tab2">Comentarios</a>
+				</li>
+			</ul>
+		</ul>
+	</div>
+
+	<div class="secciones">
+
+		<article id="tab1">
+			<div class="container-fluid">
+				<div class="container mt-3">
+					<h3>Valoraciones</h3>
+					<button type="button" id="botonValor" class="btn btn-primary"
+						data-toggle="modal" data-target="#myModal">Valorar</button>
+
+					<!-- The Modal Valoracion -->
+					<div class="modal" id="myModal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<!-- Modal Header -->
+								<div class="modal-header">
+									<h4 class="modal-title">Añadir Valoracion</h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+
+								<!-- Modal body -->
+								<div class="modal-body">
+
+									<form action="Ficha" method="post">
+										<input type="hidden" name="id" value="<%=prod.getId()%>">
+										Valora de 1 a 10 este Producto : <select
+											class="browser-default custom-select" name="valoraciones">
+											<option selected>Puntuacion</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+										</select>
+										<button class="añadirValor" type="submit" name="ComentButton">Comentar</button>
+
+									</form>
+								</div>
+
+
+								<!-- Modal footer -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger"
+										data-dismiss="modal">Close</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+
+					<%
+						if (valoracionesProd != null) {
+					%>
+					<%
+						for (ValorcionesPojo prods : valoracionesProd) {
+					%>
+
+
+					<div class="media border p-3">
+						<img src="Imagenes/" <%=prods.getFoto()%>>
+						<div class="media-body">
+							<h7> Usuario : <%=prods.getEmailUsuario()%> </h7>
+							<p style="margin-top: 1%;">
+								Valoracion :
+								<%
+								int valoracion = prods.getValoraciones();
+
+												if ((valoracion > 0) && (valoracion <= 3)) {
+							%>
+
+								<img
+									style="height: 21%; position: relative; display: flex; width: 11%; margin-left: 9%; margin-bottom: 1%; margin-top: -2%;"
+									id="imgValor" alt="" src="imagenes/img1Estrella.jpg">
+
+								<%
+									} else if ((valoracion >= 3) && (valoracion == 4)) {
+								%>
+								<img
+									style="height: 21%; position: relative; display: flex; width: 11%; margin-left: 9%; margin-bottom: 1%; margin-top: -2%;"
+									id="imgValor" alt="" src="imagenes/img2Estrella.jpg">
+								<%
+									} else if ((valoracion > 4) && (valoracion <= 6)) {
+								%>
+								<img
+									style="height: 21%; position: relative; display: flex; width: 11%; margin-left: 9%; margin-bottom: 1%; margin-top: -2%;"
+									id="imgValor" alt="" src="imagenes/img3Estrella.jpg">
+								<%
+									} else if (valoracion >= 6 && (valoracion <= 8)) {
+								%>
+
+								<img
+									style="height: 21%; position: relative; display: flex; width: 11%; margin-left: 9%; margin-bottom: 1%; margin-top: -2%;"
+									id="imgValor" alt="" src="imagenes/img4Estrella.jpg">
+								<%
+									} else if (valoracion > 8 && (valoracion <= 10)) {
+								%>
+								<img
+									style="height: 21%; position: relative; display: flex; width: 11%; margin-left: 9%; margin-bottom: 1%; margin-top: -2%;"
+									id="imgValor" alt="" src="imagenes/img5Estrella.jpg">
+
+
+								<%
+									}
+								%>
+							
+						</div>
+
+
+					</div>
+					<%
+						}
+					%>
+					<%
+						}
+					%>
+				</div>
+			</div>
+
+
+		</article>
+
+
+
+
+
+
+		<article id="tab2">
+			<div class="container-fluid">
+				<div class="container mt-3">
+					<h3>Comentarios</h3>
+					<button type="button" id="botonComent" class="btn btn-primary"
+						data-toggle="modal" data-target="#myModal1">Comentar</button>
+
+					<!-- The Modal Comentario -->
+					<div class="modal" id="myModal1">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<!-- Modal Header -->
+								<div class="modal-header">
+									<h4 class="modal-title">Añadir Comentario</h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+
+								<!-- Modal body -->
+								<div id="cuerpoModal" class="modal-body">
+									<form action="Ficha" method="post">
+										<input type="hidden" name="id" value="<%=prod.getId()%>">
+										Comentario:
+										<textarea type="text" name="comentario" id="comen"></textarea>
+										<button class="añadirValor" type="submit" name="ComentButton">Comentar</button>
+
+									</form>
+								</div>
+
+								<!-- Modal footer -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger"
+										data-dismiss="modal">Close</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+
+					<%
+						if (comentariosProd != null) {
+					%>
+					<%
+						for (ValorcionesPojo prods : comentariosProd) {
+					%>
+
+					<div class="media border p-3">
+						<img src="Imagenes/" <%=prods.getFoto()%> alt="">
+						<div class="media-body">
+							<h7> Usuario : <%=prods.getEmailUsuario()%> </h7>
+							<p>
+								Comentario :
+								<%=prods.getComentarios()%></p>
+						</div>
+					</div>
+
+					<%
+						}
+					%>
+					<%
+						}
+					%>
+
+					<%
+						}
+					%>
+					<%
+						}
+					%>
+				</div>
+			</div>
+		</article>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$('ul.tabs li a:first').addClass('active');
+			$('.secciones article').hide();
+			$('.secciones article:first').show();
+
+			$('ul.tabs li a').click(function() {
+				$('ul.tabs li a').removeClass('active');
+				$(this).addClass('active');
+				$('.secciones article').hide();
+
+				var activeTab = $(this).attr('href');
+				$(activeTab).show();
+				return false;
+			});
+		});
+	</script>
+
 
 	<div class="jumbotron text-center bg-dark" style="margin-bottom: 0;"
 		id="Footer">

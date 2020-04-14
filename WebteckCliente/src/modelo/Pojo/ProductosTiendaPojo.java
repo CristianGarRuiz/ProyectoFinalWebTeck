@@ -13,6 +13,8 @@ public class ProductosTiendaPojo {
 	private String plataforma;
 	private String comentario;
 	private int valoracion;
+	private String usuario;
+	private String fotoUsuario;
 
 	public ProductosTiendaPojo() {
 		super();
@@ -20,7 +22,7 @@ public class ProductosTiendaPojo {
 	}
 
 	public ProductosTiendaPojo(int id, String titulo, int anyo, String foto, String descripcion, int precio, int stock,
-			String genero, String plataforma, String comentario, int valoracion) {
+			String genero, String plataforma, String comentario, int valoracion, String usuario,String fotoUsuario) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -33,6 +35,26 @@ public class ProductosTiendaPojo {
 		this.plataforma = plataforma;
 		this.comentario = comentario;
 		this.valoracion = valoracion;
+		this.usuario = usuario;
+		this.fotoUsuario = fotoUsuario;
+	}
+	
+	
+
+	public String getFotoUsuario() {
+		return fotoUsuario;
+	}
+
+	public void setFotoUsuario(String fotoUsuario) {
+		this.fotoUsuario = fotoUsuario;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getComentario() {

@@ -41,6 +41,10 @@
 
 		ArrayList<ProductosTiendaPojo> productosTienda = (ArrayList<ProductosTiendaPojo>) request
 				.getAttribute("productosTienda");
+
+		ArrayList<ProductosTiendaPojo> productosMedia = (ArrayList<ProductosTiendaPojo>) request
+				.getAttribute("productosMedia");
+
 		String titulo = (String) request.getAttribute("titulo");
 		String pregunta = (String) request.getAttribute("pregunta");
 		ArrayList<ProductosTiendaPojo> Busquedaproducto = (ArrayList<ProductosTiendaPojo>) request
@@ -70,8 +74,9 @@
 								if (cate != null) {
 									for (CategoriasPojo d : cate) {
 
-										out.println("<a class='dropdown-item' href='#'><button type='submit'></button>" + d.getNombre()
+										out.println("<a class='dropdown-item' href='porCategoria?id="+ d.getId()+ "'><button type='submit'></button>" + d.getNombre()
 												+ "</a>");
+										
 									}
 								}
 							%>
@@ -134,6 +139,8 @@
 										Sesion</button></a> <a class="dropdown-item" href="#">
 									<button type='button'
 										onClick='window.location.replace("OpcionesEliminarusu")'>BajaUsuario</button>
+										<a class="dropdown-item" href="#"><button type='button'
+										onClick='window.location.replace("comprasUsuarios")'>Ver compras realizadas</button>
 								</a>
 							</div>
 						</div>
@@ -246,9 +253,130 @@
 	</form>
 	</div>
 
-	<div class="main-content  col-sm-5 col-md-12 col-lg-12">
+	<div class="best_sellers">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_title new_arrivals_title">
+						<h2>Productos mejor Valorados</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="product_slider_container"
+						style="margin-bottom: 7%; margin-left: -5%;">
+						<div class="owl-carousel owl-theme product_slider"
+							style="display: flex; position: relative; margin-left: 9%; padding: 0%; margin-bottom: -3%; margin-block: 6%;">
 
-		<h3 style="text-align: center">Productos</h3>
+							<!-- Slide 1 -->
+							<%
+								if (productosMedia != null) {
+							%>
+							<%
+								for (ProductosTiendaPojo prod : productosMedia) {
+							%>
+
+							<div class="owl-item product_slider_item">
+								<div class="product-item">
+									<div class="product discount">
+										<div class="product_image">
+											<img src="Imagenes/" <%=prod.getFoto()%> alt="">
+										</div>
+										<div class="favorite favorite_left"></div>
+										<div
+											class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+											<span><%=prod.getPrecio()%></span>
+										</div>
+										<div class="product_info">
+											<h6 class="product_name">
+												<a href="single.html"><%=prod.getTitulo()%></a>
+											</h6>
+											<div class="product_price">
+												<span><%=prod.getPrecio()%></span>
+											</div>
+										</div>
+
+										<p style="margin-top: 1%;">
+											Valoracion :
+											<%
+											int valoracion = prod.getValoracion();
+
+													if ((valoracion > 0) && (valoracion <= 3)) {
+										%>
+											height: 21%; position: relative; display: flex; width: 59%;
+											margin-left: 51%; margin-bottom: 1%; margin-top: -12%; <img
+												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												id="imgValor" alt="" src="imagenes/img1Estrella.jpg">
+
+											<%
+												} else if ((valoracion >= 3) && (valoracion == 4)) {
+											%>
+											<img
+												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												id="imgValor" alt="" src="imagenes/img2Estrella.jpg">
+											<%
+												} else if ((valoracion > 4) && (valoracion <= 6)) {
+											%>
+											<img
+												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												id="imgValor" alt="" src="imagenes/img3Estrella.jpg">
+											<%
+												} else if (valoracion >= 6 && (valoracion <= 8)) {
+											%>
+
+											<img
+												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												id="imgValor" alt="" src="imagenes/img4Estrella.jpg">
+											<%
+												} else if (valoracion > 8 && (valoracion <= 10)) {
+											%>
+											<img
+												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												id="imgValor" alt="" src="imagenes/img5Estrella.jpg">
+
+
+											<%
+												}
+											%>
+
+
+											<a class="bestSellerProd" href='Editar?id=<%=prod.getId()%>'>
+												Añadir a Carrito </a> <a class="bestSellerProd"
+												href='Ficha?id=<%=prod.getId()%>'> Ver Producto </a>
+									</div>
+								</div>
+							</div>
+
+							<%
+								}
+							%>
+							<%
+								}
+							%>
+
+						</div>
+
+
+
+						<!-- Slider Navigation -->
+
+						<div
+							class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+							<i class="fa fa-chevron-left" aria-hidden="true"></i>
+						</div>
+						<div
+							class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+							<i class="fa fa-chevron-right" aria-hidden="true"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<h3 style="text-align: center">Productos</h3>
+	<div class="main-content  col-sm-5 col-md-12 col-lg-12">
 		<div class="row">
 
 			<%
@@ -268,39 +396,57 @@
 					<div
 						class='product_bubble product_bubble_right product_bubble_red
 						d-flex flex-column align-items-center'>
-						<span> <%=prod.getStock()%></span>
+						<span> <%
+ 	int productosZero = prod.getStock();
+
+ 			if (prod.getStock() > 10) {
+ %> <span style="color: green;"> Disponibles: <%=prod.getStock()%></span>
+							<%
+								} else if (prod.getStock() <= 5) {
+							%> <span style="color: red;"> Disponibles: <%=prod.getStock()%></span>
+							<%
+								} else if (productosZero == 0) {
+							%> <span style="color: red"> No Disponibles : <%=prod.getStock()%></span>
+							<%
+								} else {
+							%> <span style="color: green;"> Disponibles: <%=prod.getStock()%></span>
+							<%
+								}
+							%></span>
 					</div>
 					<div class='product_info'>
 						<h6 class='product_name'>
 							<a> <%=prod.getTitulo()%></a>
 						</h6>
 						<div class='product_price'>
-							<span> <%=prod.getPrecio()%></span>
+							<span> <%=prod.getPrecio()%> $
+							</span>
 						</div>
+					</div>
+					<div
+						style="position: relative; display: flex; margin-left: 11%; height: 23%; width: 132%; padding: 0%; flex-wrap: wrap;">
+						<a id="CarritoTienda" href='Editar?id=<%=prod.getId()%>'>
+							Añadir a Carrito </a><br>
+						<br>
+						</n>
+						<br>
+						<a id="FichaProducto" href='Ficha?id=<%=prod.getId()%>'> Ver
+							Producto </a>
 					</div>
 				</div>
 
-				<a id="CarritoTienda" href='Editar?id=<%=prod.getId()%>'> Añadir
-					a Carrito </a> <a id="FichaProducto" href='Ficha?id=<%=prod.getId()%>'>
-					Ver Producto </a>
+
 
 
 			</div>
-
+			<%
+				}
+			%>
+			<%
+				}
+			%>
 
 		</div>
-
-		<%
-			}
-		%>
-		<%
-			}
-		%>
-
-
-
-
-
 	</div>
 
 	<div class="benefit ">

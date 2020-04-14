@@ -19,8 +19,28 @@
 	margin-bottom: 2%;
 	border-radius: 3%;
 	position: relative;
-	display: inline-grid;
+	display: inline-flex;
 	margin-left: 0.7%;
+}
+
+.bestSellerProd {
+	height: 10%;
+	width: 80%;
+	margin-top: 2%;
+	position: relative;
+	display: flow-root;
+	text-align: center;
+	background-color: orange;
+	margin-top: 19%; height : 13%;
+	width: 84%;
+	text-align: center;
+	border: 2px solid cornflowerblue;
+	border-radius: 4%;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+	text-decoration: none;
+	height: 13%;
 }
 
 #Pregunta {
@@ -81,9 +101,11 @@
 	cursor: pointer;
 	text-decoration: none;
 }
-#BusquedaTitulo{
+
+#BusquedaTitulo {
 	margin-top: 30%;
 }
+
 #CarritoTienda:hover {
 	color: rgba(255, 255, 255, 1) !important;
 	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
@@ -137,4 +159,83 @@
 	height: 98%;
 	border-radius: 4%;
 	cursor: pointer;
+}
+
+.product_slider_nav {
+	position: absolute;
+	width: 30px;
+	height: 70px;
+	background: #d3d3d6;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	z-index: 2;
+	cursor: pointer;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: all 300ms ease;
+	-moz-transition: all 300ms ease;
+	-ms-transition: all 300ms ease;
+	-o-transition: all 300ms ease;
+	transition: all 300ms ease;
+}
+
+.product_slider_container:hover .product_slider_nav {
+	visibility: visible;
+	opacity: 1;
+}
+
+.product_slider_nav i {
+	color: #FFFFFF;
+	font-size: 12px;
+}
+
+.product_slider_nav_left {
+	top: 50%;
+	left: 0;
+}
+
+.product_slider_nav_right {
+	top: 50%;
+	right: 0;
+}
+
+/*********************************
+7. Best Sellers
+*********************************/
+.product_slider_container {
+	width: 100%;
+	height: 340px;
+	margin-top: 73px;
+}
+
+.product_slider_container::after {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 1px;
+	height: 100%;
+	background: #FFFFFF;
+	content: '';
+	z-index: 1;
+}
+
+.product_slider {
+	overflow: visible !important;
+}
+
+.product_slider_item .product-item {
+	height: 340px;
+}
+
+.product_slider_item {
+	width: 20%;
+	display: contents;
+}
+
+.product_slider_item .product-item {
+	width: 100% !important;
 }

@@ -45,10 +45,9 @@
 		<div class="container-fluid  col-sm-11">
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="BuscarProducto">BuscarProducto</a>
+					<li class="nav-item"><a class="nav-link" href="Principal">Principal</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="Crear">Añadir
-							Producto</a></li>
+					<li class="nav-item"><a class="nav-link" href="Categorias">Categorias</a></li>
 					<li class="nav-item"><a class="nav-link" href="InfoVentas">InfoVentas</a>
 					</li>
 					<li class="nav-items dropdown"><a

@@ -16,7 +16,6 @@ import modelo.Ejb.ProductosEjb;
 import modelo.Ejb.SesionesEjb;
 import modelo.Ejb.UsuariosEjb;
 import modelo.Pojo.CategoriasPojo;
-import modelo.Pojo.PreguntasPojo;
 import modelo.Pojo.ProductosTiendaPojo;
 import modelo.Pojo.UsuariosPojo;
 
@@ -44,6 +43,7 @@ public class Principal extends HttpServlet {
 		String error = request.getParameter("error");
 		ArrayList<ProductosTiendaPojo> productosTienda = productosEjb.leerTotalProductos();
 		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
+		ArrayList<ProductosTiendaPojo> productosMedia = productosEjb.leerTotalProductosMedia();
 
 		RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/Principal.jsp");
 		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/PrincipalNocturna.jsp");
@@ -51,6 +51,7 @@ public class Principal extends HttpServlet {
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("pantalla", pantalla);
 		request.setAttribute("productosTienda", productosTienda);
+		request.setAttribute("productosMedia", productosMedia);
 		request.setAttribute("categorias", categorias);
 		request.setAttribute("error", error);
 
@@ -83,11 +84,10 @@ public class Principal extends HttpServlet {
 		if (pantalla == null || pantalla.equals("D")) {
 
 			ArrayList<ProductosTiendaPojo> Busquedaproducto = productosEjb.BuscarProductoporNombreTienda(titulo);
-		
+
 			request.setAttribute("Busquedaproducto", Busquedaproducto);
 			rs.forward(request, response);
-			
-			
+
 		} else {
 			ArrayList<ProductosTiendaPojo> Busquedaproducto = productosEjb.BuscarProductoporNombreTienda(titulo);
 			request.setAttribute("Busquedaproducto", Busquedaproducto);

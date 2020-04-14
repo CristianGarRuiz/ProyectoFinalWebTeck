@@ -6,14 +6,25 @@ public class ValorcionesPojo {
 	private String emailUsuario;
 	private int valoraciones;
 	private String comentarios;
+	private String foto;
 
-	public ValorcionesPojo(int id, int idProducto, String emailUsuario, int valoraciones, String comentarios) {
+	public ValorcionesPojo(int id, int idProducto, String emailUsuario, int valoraciones, String comentarios,
+			String foto) {
 		super();
 		this.id = id;
 		this.idProducto = idProducto;
 		this.emailUsuario = emailUsuario;
 		this.valoraciones = valoraciones;
 		this.comentarios = comentarios;
+		this.foto = foto;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public ValorcionesPojo() {

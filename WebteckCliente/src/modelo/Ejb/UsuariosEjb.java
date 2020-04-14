@@ -83,7 +83,7 @@ public class UsuariosEjb {
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target2 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/eliminarUsuario/patata23/" + emailUsuario);
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/dropUsuarios/patata23/" + emailUsuario);
 
 		target2.request().delete(UsuariosPojo.class);
 	}
