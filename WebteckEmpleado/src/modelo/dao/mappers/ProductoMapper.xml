@@ -63,12 +63,31 @@
 		<result property='plataforma' column='plataforma' />
 		<result property='comentario' column='comentarios' />
 		<result property='valoracion' column='valoraciones' />
+		<result property="usuario" column="usuarios" />
+		<result property="fotoUsuario" column="fotoUsuario" />
 
 	</resultMap>
 
+
+	<select id="leerTotalProductosMedia" resultMap="tiendaProducto">
+		SELECT
+		round(AVG(v.valoraciones))as valoraciones ,p.titulo as titulo,p.foto
+		as foto ,p.id as id ,p.precio as precio
+		FROM
+		valoraciones v
+		INNER JOIN
+		productos p ON p.id = v.idProducto
+		GROUP BY v.idProducto
+		having
+		avg(v.valoraciones)>=7 limit 4 ;
+
+
+
+	</select>
+
 	<select id="BuscarProductoporNombreTienda"
 		resultMap="tiendaProducto">
-        select
+		select
 		productos.titulo as titulo,productos.anyo as anyo,
 		productos.precio
 		as
@@ -96,7 +115,6 @@
 		'%';
 	</select>
 
-
 	<select id="leerProductos" resultMap="datosProducto">
 		select
 		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,
@@ -109,29 +127,66 @@
 
 	</select>
 
+
+	<select id="leerProductosCategoriaid" resultMap="datosProducto">
+		select
+		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,
+		productos.idGenero,productos.idPlataforma,productos.id,
+		productos.stock
+		from
+		productos
+		where
+		productos.idPlataforma =#{id}
+
+	</select>
+
+
+	<select id="contarProductoCategoria" resultMap="tiendaProducto">
+		select
+		count(productos.titulo) as titulo
+		from
+		plataformas,productos
+		where
+		plataformas.id = productos.idPlataforma and
+		productos.idPlataforma =#{id}
+
+	</select>
+
+
+	<select id="leerCategoriaId" resultMap="datosProducto">
+		select
+		*
+		from
+		plataformas,productos
+		where
+		plataformas.id = productos.idPlataforma and
+		plataformas.id=#{id}
+
+	</select>
+
 	<select id="leerProductosTienda" resultMap="tiendaProducto">
-	   select
+		select
 		productos.titulo as titulo,productos.anyo as anyo, productos.precio
 		as
-		precio ,productos.stock as stock,productos.descripcion as
+		precio
+		,productos.stock as stock,productos.descripcion as
 		descripcion,productos.foto as foto,
 		generos.nombre as genero
 		,
-		plataformas.nombre as plataforma,productos.id as
-		id,valoraciones.valoraciones as valoraciones ,comentarios.comentarios
-		as comentarios
+		plataformas.nombre as plataforma,productos.id
 
 		from
-		productos,plataformas,generos,valoraciones,comentarios
+		productos,plataformas,generos
 		where
-		productos.idPlataforma = plataformas.id and productos.idGenero =
-		generos.id and
-		valoraciones.idProducto = productos.id and
-		comentarios.idProducto =
-		productos.id and
-		productos.id=#{id}
+		productos.idPlataforma =
+		plataformas.id and productos.idGenero = generos.id
+		and
+		productos.id
+		=#{id}
 
 	</select>
+
+
 
 
 
@@ -143,29 +198,16 @@
 	</select>
 
 	<select id="leerTotalTienda" resultMap="tiendaProducto">
-		select
-		productos.titulo as titulo,productos.anyo as anyo,
-		productos.precio
-		as
-		precio ,productos.stock as
-		stock,productos.descripcion as
-		descripcion,productos.foto as foto,
-		generos.nombre as genero
-		,
-		plataformas.nombre as plataforma,productos.id
-		as
-		id,valoraciones.valoraciones as valoraciones
-		,comentarios.comentarios
-		as comentarios
+		SELECT
+		round(AVG(v.valoraciones))as valoraciones ,p.titulo as titulo ,p.foto
+		as foto,p.id as id ,p.precio
+		as precio,p.stock as stock
+		FROM
+		valoraciones v
+		INNER JOIN productos p ON p.id = v.idProducto
+		GROUP BY
+		v.idProducto;
 
-		from
-		productos,plataformas,generos,valoraciones,comentarios
-		where
-		productos.idPlataforma = plataformas.id and productos.idGenero =
-		generos.id and
-		valoraciones.idProducto = productos.id and
-		comentarios.idProducto =
-		productos.id;
 	</select>
 
 

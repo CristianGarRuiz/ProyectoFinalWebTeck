@@ -6,14 +6,64 @@
 <mapper namespace='modelo.dao.mappers.ValoracionMapper'>
 
 
-		<insert id='insertValoracion' parameterType='ValorcionPojo'
+	<insert id='insertValoracion' parameterType='ValorcionPojo'
 		useGeneratedKeys='true' keyProperty='id'>
-		insert into valoracion
-		(idProducto,emailUsuario,valoraciones,comentarios)
-		VALUES(#{idProducto}, #{emailUsuario}, 
-		#{valoraciones},#{comentarios})
+		insert into valoraciones
+		(idProducto,emailUsuario,valoraciones)
+		VALUES(#{idProducto},
+		#{emailUsuario},#{valoraciones})
 	</insert>
 
 
+	<insert id='insertComentario' parameterType='ValorcionPojo'
+		useGeneratedKeys='true' keyProperty='id'>
+		insert into comentarios
+		(idProducto,emailUsuario,comentarios)
+		VALUES(#{idProducto},
+		#{emailUsuario},#{comentarios})
+	</insert>
 
+	<resultMap type="ValorcionPojo" id="tiendaValoraciones">
+		<id property='id' column='id' />
+		<result property='idProducto' column='idProducto' />
+		<result property='emailUsuario' column='usuarios' />
+		<result property='foto' column='fotoUsuario' />
+		<result property='valoraciones' column='valoracion' />
+		<result property='comentarios' column='comentario' />
+
+	</resultMap>
+
+	<select id="leerComentariosTienda" resultMap="tiendaValoraciones">
+
+		select
+		comentarios.comentarios as comentario, usuaris.usuario as usuarios,
+		usuaris.foto as fotoUsuario,productos.id as idProducto,comentarios.id as id
+
+		from
+		productos,comentarios,usuaris
+		where
+		comentarios.idProducto =productos.id
+		and
+		comentarios.emailUsuario=usuaris.emailUsuario and
+		productos.id=
+		#{id}
+
+	</select>
+
+
+	<select id="leerValoracionesTienda" resultMap="tiendaValoraciones">
+
+		select
+		valoraciones.valoraciones as valoracion, usuaris.usuario as
+		usuarios, usuaris.foto as fotoUsuario,productos.id as idProducto
+
+		from
+		productos,valoraciones,usuaris
+		where
+		valoraciones.idProducto
+		=productos.id and
+		valoraciones.emailUsuario=usuaris.emailUsuario and
+		productos.id= #{id}
+
+	</select>
 </mapper>

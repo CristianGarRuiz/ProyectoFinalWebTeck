@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -53,7 +54,6 @@ public class ControladorRest {
 		}
 		return usuario;
 	}
-
 	@GET
 	@Path("/getProductoTienda/{token}/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -66,7 +66,76 @@ public class ControladorRest {
 		}
 		return producto;
 	}
+	
+	@GET
+	@Path("/getProductoTiendaCategoriaid/{token}/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<ProductoTiendaPojo> getProductoTiendaCategoriaId(@PathParam("token") String token, @PathParam("id") int id)
+			throws SQLException {
 
+		ArrayList<ProductoTiendaPojo> producto = null;
+		if (token.equals("patata23")) {
+			producto = productoEjb.leerProductoTiendaCategoriaid(id);
+		}
+		return producto;
+	}
+	@GET
+	@Path("/contarProductoporCategoria/{token}/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ProductoTiendaPojo contarProductoCategoria(@PathParam("token") String token, @PathParam("id") int id)
+			throws SQLException {
+
+		ProductoTiendaPojo producto = null;
+		if (token.equals("patata23")) {
+			producto = productoEjb.contarProductoCategoria(id);
+		}
+		return producto;
+	}
+	
+	
+	@GET
+	@Path("/getComentarios/{token}/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<ValorcionPojo> getComentariosTienda(@PathParam("token") String token, @PathParam("id") int id)
+			throws SQLException {
+
+		ArrayList<ValorcionPojo> leerComentarios = null;
+		if (token.equals("patata23")) {
+			leerComentarios = valoracionEjb.leerComentarioTienda(id);
+		}
+		return leerComentarios;
+	}
+	
+	
+	@GET
+	@Path("/getValoraciones/{token}/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<ValorcionPojo> getValoracionTienda(@PathParam("token") String token, @PathParam("id") int id)
+			throws SQLException {
+
+		ArrayList<ValorcionPojo> leerValoraciones = null;
+		if (token.equals("patata23")) {
+			leerValoraciones = valoracionEjb.leerValoracionTienda(id);
+		}
+		return leerValoraciones;
+	}
+	
+	
+	
+	
+	@GET
+	@Path("/getCategoriaId/{token}/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<CategoriaPojo> getCategoriaporId(@PathParam("token") String token, @PathParam("id") int id)
+			throws SQLException {
+
+		ArrayList<CategoriaPojo> leerCategoriaId = null;
+		if (token.equals("patata23")) {
+			leerCategoriaId = productoEjb.leerCategoriaId(id);
+		}
+		return leerCategoriaId;
+	}
+	
 	/**
 	 * este metodo retorna todos los tipos de accidentes
 	 * 
@@ -142,6 +211,38 @@ public class ControladorRest {
 			valoracionEjb.AñadirValoracion(valor);
 		}
 	}
+	
+	
+	@PUT
+	@Path("/newComentario/{token}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+
+	public void newComentario(@PathParam("token") String token, ValorcionPojo valor) throws SQLException {
+
+		if (token.equals("patata23")) {
+			valoracionEjb.AñadirComentario(valor);
+		}
+	}
+	
+	
+
+	/**
+	 * este metodo borra un accidente por la id
+	 * 
+	 * @param id
+	 * @throws SQLException 
+	 */
+	@DELETE
+	@Path("/dropUsuarios/{token}/{emailUsuario}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void dropUsuarios(@PathParam("token") String token, @PathParam("emailUsuario") String emailUsuario) throws SQLException {
+		if (token.equals("patata23")) {
+			usuarioEjb.eliminarUsuario(emailUsuario);
+		}
+	}
+	
+	
 
 	@GET
 	@Path("/getTotalProductos/{token}")
@@ -152,6 +253,20 @@ public class ControladorRest {
 
 		if (token.equals("patata23")) {
 			productos = productoEjb.leerTotalTienda();
+		}
+		return productos;
+
+	}
+
+	@GET
+	@Path("/getTopMediaProductos/{token}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<ProductoTiendaPojo> leerTotalProductosMedia(@PathParam("token") String token) throws SQLException {
+
+		ArrayList<ProductoTiendaPojo> productos = null;
+
+		if (token.equals("patata23")) {
+			productos = productoEjb.leerTotalProductosMedia();
 		}
 		return productos;
 
@@ -176,7 +291,7 @@ public class ControladorRest {
 	public ArrayList<VentasPojo> leerProductosporEmail(@PathParam("token") String token,
 			@PathParam("emailUsuario") String emailUsuario) throws SQLException {
 		ArrayList<VentasPojo> venta = null;
-		
+
 		if (token.equals("patata23")) {
 
 			venta = ventasEjb.leerProductosporEmail(emailUsuario);
@@ -190,10 +305,24 @@ public class ControladorRest {
 	public ArrayList<PreguntaPojo> getRespuestaPreguntas(@PathParam("token") String token,
 			@PathParam("pregunta") String pregunta) throws SQLException {
 		ArrayList<PreguntaPojo> respuesta = null;
-		
+
 		if (token.equals("patata23")) {
 
 			respuesta = preguntaEjb.getRespuestaPreguntas(pregunta);
+		}
+		return respuesta;
+	}
+	
+	@GET
+	@Path("/leerProductosporEmail/{token}/{emailUsuario}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<VentasPojo> getproductosPorEmail(@PathParam("token") String token,
+			@PathParam("emailUsuario") String emailUsuario) throws SQLException {
+		ArrayList<VentasPojo> respuesta = null;
+
+		if (token.equals("patata23")) {
+
+			respuesta = ventasEjb.leerProductosporEmail(emailUsuario);
 		}
 		return respuesta;
 	}

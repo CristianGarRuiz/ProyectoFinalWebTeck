@@ -24,6 +24,11 @@ public class ProductoEjb {
 		ProductosDao ProductoDao = new ProductosDao();
 		return ProductoDao.leerTotalTienda();
 	}
+	
+	public ArrayList<ProductoTiendaPojo> leerTotalProductosMedia() throws SQLException {
+		ProductosDao ProductoDao = new ProductosDao();
+		return ProductoDao.leerTotalProductosMedia();
+	}
 
 	public ArrayList<MarcaPojo> leerTotalMarcas() throws SQLException {
 		ProductosDao ProductoDao = new ProductosDao();
@@ -42,10 +47,33 @@ public class ProductoEjb {
 
 	}
 	
+	
+	
+	
+	public ArrayList<CategoriaPojo> leerCategoriaId(int id) throws SQLException {
+
+		ProductosDao ProductoDao = new ProductosDao();
+		return ProductoDao.leerCategoriaId(id);
+
+	}
+	
 	public ArrayList<ProductoTiendaPojo> leerProductoTienda(int id) throws SQLException {
 
 		ProductosDao ProductoDao = new ProductosDao();
 		return ProductoDao.leerProductosTienda(id);
+
+	}
+	public ArrayList<ProductoTiendaPojo> leerProductoTiendaCategoriaid(int id) throws SQLException {
+
+		ProductosDao ProductoDao = new ProductosDao();
+		return ProductoDao.leerProductosTiendaCategoriaid(id);
+
+	}
+	
+	public ProductoTiendaPojo contarProductoCategoria(int id) throws SQLException {
+
+		ProductosDao ProductoDao = new ProductosDao();
+		return ProductoDao.contarProductoCategoria(id);
 
 	}
 	
