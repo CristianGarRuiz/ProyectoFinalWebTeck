@@ -75,19 +75,6 @@ public class UsuariosEjb {
 	 * @return
 	 * @throws SQLException
 	 */
-
-//	public int añadirUsuario(UsuariosPojo usu) {
-//		Client cliente = ClientBuilder.newClient();
-//
-//		int codigo = (int) (Math.random() * 10000 + 1);
-//
-//		WebTarget target1 = cliente.target("http://localhost:8080/WebteckEmpleado/ControladorRest/nuevoUsuario/patata23/" + usu + "/" + codigo);
-//
-//		target1.request().get(UsuariosPojo.class);
-//
-//		return codigo;
-//
-//	}
 	
 	public int añadirUsuario(UsuariosPojo usu) {
 		Client cliente = ClientBuilder.newClient();
