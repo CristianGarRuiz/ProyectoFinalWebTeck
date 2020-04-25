@@ -1,9 +1,10 @@
+<%@page import="modelo.Pojo.ProductosTiendaPojo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ page import="modelo.Pojo.UsuariosPojo"%>
-<%@ page import="modelo.Pojo.VentaPojo"%>
+<%@ page import="modelo.Pojo.MarcasPojo"%>
+<%@ page import="modelo.Pojo.CategoriasPojo"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,22 +29,25 @@
 <link type="text/css" href="estilos/Principal.css" rel="stylesheet" />
 </head>
 <body>
-
-
 	<%
 		String error = (String) request.getParameter("error");
 
 		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
 
-		ArrayList<VentaPojo> ventasCliente = (ArrayList<VentaPojo>) request.getAttribute("ventasCliente");
+		ArrayList<MarcasPojo> MarcasID = (ArrayList<MarcasPojo>) request.getAttribute("MarcasID");
 
-		String emailUsuario = (String) request.getAttribute("emailUsuario");
+		ArrayList<ProductosTiendaPojo> productosMarcaid = (ArrayList<ProductosTiendaPojo>) request
+				.getAttribute("productosMarcaid");
+
+		ProductosTiendaPojo contarProds = (ProductosTiendaPojo) request.getAttribute("contarProds");
 	%>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+
+
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
-		</a> <a style="color: cyan" class="navbar-brand" href="#Puestos">WebTeck</a>
+		</a> <a style="color: cyan" class="navbar-brand" href="Principal">WebTeck</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
@@ -57,13 +61,32 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categorias</a>
 						<div class="dropdown-menu">
-							<%-- 						<% --%>
-							// ArrayList
-							<CategoriasPojo> cate = (ArrayList<CategoriasPojo>)
-							request.getAttribute("categorias"); // if (cate != null) { // for
-							(CategoriasPojo d : cate) { // out.println("<a
-								class='dropdown-item' href='#'><button type='submit'></button>"
-								+ d.getNombre() // + "</a>"); // } // } <%-- 						%> --%>
+							<%
+								ArrayList<CategoriasPojo> cate = (ArrayList<CategoriasPojo>) request.getAttribute("categorias");
+								if (cate != null) {
+									for (CategoriasPojo d : cate) {
+
+										out.println("<a class='dropdown-item' href='porCategoria?id=" + d.getId()
+												+ "'><button type='submit'></button>" + d.getNombre() + "</a>");
+
+									}
+								}
+							%>
+						</div></li>
+						<li class="nav-items dropdown"><a
+						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Marcas</a>
+						<div class="dropdown-menu">
+							<%
+								ArrayList<MarcasPojo> marca = (ArrayList<MarcasPojo>) request.getAttribute("marcas");
+								if (cate != null) {
+									for (MarcasPojo d : marca) {
+
+										out.println("<a class='dropdown-item' href='porMarca?id=" + d.getId()
+												+ "'><button type='submit'></button>" + d.getNombre() + "</a>");
+
+									}
+								}
+							%>
 						</div></li>
 
 					</li>
@@ -72,9 +95,9 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#"><button type="submit"
+							<a class="dropdown-item" href="Login"><button type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
-							<a class="dropdown-item" href="#"><button type="submit"
+							<a class="dropdown-item" href="LogeaUsuarios"><button type="submit"
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
@@ -100,7 +123,7 @@
 					<!-- Brand/logo -->
 
 					<%
-						if  ((usu != null) && (usu.getUsuario() != null)) {
+						if ((usu != null) && (usu.getUsuario() != null)) {
 					%>
 					<div id="Datos">
 						<img alt="" src="Imagenes/<%=usu.getFoto()%>"
@@ -117,13 +140,17 @@
 								Usuario</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 								<a class="dropdown-item" href="#"><button type='button'
-										onClick='window.location.replace("cambiarImagen")'>Cambiar
+										onClick='window.location.replace("cambiarImagenUsuario")'>Cambiar
 										Imagen</button></a> <a class="dropdown-item" href="#"><button
 										type='button' onClick='window.location.replace("Logout")'>Cerrar
 										Sesion</button></a> <a class="dropdown-item" href="#">
 									<button type='button'
-										onClick='window.location.replace("OpcionesEliminarusu")'>BajaUsuario</button>
-								</a>
+										onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
+									<a class="dropdown-item" href="#"><button type='button'
+											onClick='window.location.replace("comprasUsuarios")'>Ver
+											compras realizadas</button> </a>
+											<a class="dropdown-item" href="#"><button type='button'
+											onClick='window.location.replace("FichaUsuario")'>Datos Usuario</button> </a>
 							</div>
 						</div>
 
@@ -147,65 +174,86 @@
 					</ul>
 			</div>
 	</nav>
+	</div>
+	</nav>
 
-	<div class="container"
-		style="position: relative; display: inline-flex; margin-top: 9%;">
 
-		<%
-			if (ventasCliente != null && emailUsuario != null && emailUsuario != "") {
-				out.print("<Busqueda Producto>");
-				out.print("Recuperacion de comprar del usuario : " + emailUsuario);
-				out.print("<br><br>");
-				out.print("<table class=table table-hover table-responsive>");
-				out.print("<th> Nombre Producto :</th>");
-				out.print("<th> Fecha de la Compra :</th>");
-				out.print("<th> Precio Producto :</th>");
-				out.print("<th> Nombre del Usuario de la Compra:</th>");
-				out.print("</tr>");
+	<h3 style="text-align: center; margin-top: 9%; ">Productos de categoria</h3>
+	<h5>
+		Total Productos :
+		<%=contarProds.getTitulo()%></h5>
+	<div class="main-content  col-sm-5 col-md-12 col-lg-12">
+		<div class="row">
 
-				for (VentaPojo juga : ventasCliente) {
+			<%
+				if (productosMarcaid != null) {
+			%>
 
-					out.print("<tr>");
-					out.print("<td>" + juga.getTitulo() + "</td>");
-					out.print("<td>" + juga.getFecha() + "</td>");
-					out.print("<td>" + juga.getPrecio() + "$" + "</td>");
-					out.print("<td>" + juga.getNombre() + "</td>");
 
+			<%
+				for (ProductosTiendaPojo prod : productosMarcaid) {
+			%>
+
+			<div class='product-item'>
+				<div class='product discount product_filter'>
+					<div class='product_image'>
+
+						<img src='Imagenes/' <%=prod.getFoto()%> alt=''>
+					</div>
+					<div class='favorite favorite_left'></div>
+					<div
+						class='product_bubble product_bubble_right product_bubble_red
+						d-flex flex-column align-items-center'>
+						<span> <%
+ 	int productosZero = prod.getStock();
+
+ 			if (prod.getStock() > 10) {
+ %> <span style="color: green;"> Disponibles: <%=prod.getStock()%></span>
+							<%
+								} else if (prod.getStock() <= 5) {
+							%> <span style="color: red;"> Disponibles: <%=prod.getStock()%></span>
+							<%
+								} else if (productosZero == 0) {
+							%> <span style="color: red"> No Disponibles : <%=prod.getStock()%></span>
+							<%
+								} else {
+							%> <span style="color: green;"> Disponibles: <%=prod.getStock()%></span>
+							<%
+								}
+							%></span>
+					</div>
+					<div class='product_info'>
+						<h6 class='product_name'>
+							<a> <%=prod.getTitulo()%></a>
+						</h6>
+						<div class='product_price'>
+							<span> <%=prod.getPrecio()%> $
+							</span>
+						</div>
+					</div>
+					<div
+						style="position: relative; display: flex; margin-left: 11%; height: 23%; width: 132%; padding: 0%; flex-wrap: wrap;">
+						<a id="CarritoTienda" href='Editar?id=<%=prod.getId()%>'>
+							Añadir a Carrito </a><br> <br>
+						</n>
+						<br> <a id="FichaProducto" href='Ficha?id=<%=prod.getId()%>'>
+							Ver Producto </a>
+					</div>
+				</div>
+
+
+
+
+			</div>
+			<%
 				}
-				out.print("</table>");
+			%>
+			<%
+				}
+			%>
 
-			} else {
-				out.print("<h4>No tenemos Ventas</h4>");
-			}
-		%>
+		</div>
 	</div>
 
-	<button type='button' onClick='window.location.replace("Principal")'>Volver
-		a Principal</button>
-
-	<%
-		if (error != null) {
-	%>
-	<h4 style="color: red;">
-		<h4>Fechas sin Resultados</h4>
-		<button type='button' onClick='window.location.replace("Pagina")'>VolveraIntentar</button>
-		<%
-			}
-		%>
-
-
-		<%
-			if (usu != null) {
-		%>
-		<script>
-			window.onload = function() {
-				document.getElementById("Login12").setAttribute('href', '#');
-				document.getElementById("Login13").setAttribute('href', '#');
-			}
-		</script>
-		<%
-			}
-		%>
-	
 </body>
 </html>

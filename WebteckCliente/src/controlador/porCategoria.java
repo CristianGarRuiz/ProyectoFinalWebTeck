@@ -18,6 +18,7 @@ import modelo.Ejb.SesionesEjb;
 import modelo.Ejb.UsuariosEjb;
 import modelo.Ejb.VentaEjb;
 import modelo.Pojo.CategoriasPojo;
+import modelo.Pojo.MarcasPojo;
 import modelo.Pojo.ProductosTiendaPojo;
 import modelo.Pojo.UsuariosPojo;
 
@@ -57,7 +58,10 @@ public class porCategoria extends HttpServlet {
 		ArrayList<CategoriasPojo> categoriasID = productosEjb.leerCategoriaId(id);
 		ArrayList<ProductosTiendaPojo> productosCategoriaid = productosEjb.leerProductoidCategoria(id);
 		ProductosTiendaPojo contarProd = productosEjb.contarProductosporCategoria(id);
-
+		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
+		ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
+		
+		
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("pantalla", pantalla);
 		request.setAttribute("error", error);
@@ -65,6 +69,8 @@ public class porCategoria extends HttpServlet {
 		request.setAttribute("categoriasID", categoriasID);
 		request.setAttribute("productosCategoriaid", productosCategoriaid);
 		request.setAttribute("contarProd", contarProd);
+		request.setAttribute("categorias", categorias);
+		request.setAttribute("marcas", marcas);
 
 		if (pantalla == null || pantalla.equals("D")) {
 			rsPagina.forward(request, response);

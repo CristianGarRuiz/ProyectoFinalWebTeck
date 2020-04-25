@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Logger;
 import modelo.Ejb.SesionEjb;
 import modelo.Ejb.UsuarioEjb;
+import modelo.Pojo.UsuarioPojo;
 
 /**
  * Servlet implementation class Eliminar
@@ -34,11 +35,12 @@ public class DarBajaEmpleado extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		UsuarioPojo usuario = sesionesEjb.usuariosLogeado(session);
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Pagina.jsp");
 
 		try {
 			// Variable que recibe el email
-			String emailUsuario = request.getParameter("emailUsuario");
+			String emailUsuario = usuario.getEmailUsuario();
 			// Llamo al ejb del usuario y al metodo que elimina ese usuario con el correo
 			usuarioEjb.eliminarEmpleado(emailUsuario);
 

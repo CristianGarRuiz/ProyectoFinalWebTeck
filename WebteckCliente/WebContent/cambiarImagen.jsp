@@ -37,46 +37,15 @@
 		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
 	%>
 
-	<h2 id="TextLogin">Registro Cliente</h2>
+	<h2 id="TextLogin">Cambiar Imagen Usuario</h2>
 	<p>
 		<i class='fas fa-user-cog' style='font-size: 58px; margin-left: 49%;'></i></i>
 	</p>
 
 	<div id="Formulario" class="container">
-		<form class="form-horizontal" action="LogeaUsuarios" method="post"
+		<form class="form-horizontal" action="cambiarImagenUsuario" method="post"
 			enctype="multipart/form-data">
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="emailUsuario"><i
-					class='fas fa-user' style='margin-top: 2%; font-size: 24px'></i>Email:</label>
-				<div class="col-sm-10">
-					<input type="email" required="" class="form-control" id="emailUsuario"
-						placeholder="Entrar email" name="emailUsuario">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="nombre"><i
-					class='fas fa-lock' style='font-size: 24px'></i> Nombre:</label>
-				<div class="col-sm-10">
-					<input type="text" required="" class="form-control" id="nombre"
-						placeholder="Entar nombre" name="nombre">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="pwd"><i
-					class='fas fa-lock' style='font-size: 24px'></i> Contraseña:</label>
-				<div class="col-sm-10">
-					<input type="password" required="" class="form-control" id="pwd"
-						placeholder="Entar password" name="password">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="pwd"><i
-					class='fas fa-user' style='font-size: 24px'></i> Usuario:</label>
-				<div class="col-sm-10">
-					<input type="text" required="" class="form-control" id="usuario"
-						placeholder="Entar usuario" name="usuario">
-				</div>
-			</div>
+			
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd"><i
 					class='far fa-image' style='font-size: 24px'></i>Imagen:</label>
@@ -85,18 +54,11 @@
 						placeholder="Entar Imagen" name="foto">
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<div class="checkbox">
-						<label><input type="checkbox" name="remember">
-							Recordarme</label>
-					</div>
-				</div>
-			</div>
+
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button id="botonLogin" type="submit" value="LogeaUsuarios"
-						class="btn btn-info">Registrar</button>
+						class="btn btn-info">CambiarImagen</button>
 				</div>
 			</div>
 

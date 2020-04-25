@@ -30,7 +30,7 @@
 	<select id="BuscarProductoporNombre" resultMap="nombreProducto">
 
 		select
-		productos.titulo as titulo,productos.anyo as anyo, productos.precio
+		distinct productos.titulo as titulo,productos.anyo as anyo, productos.precio
 		as
 		precio ,productos.descripcion as descripcion,
 		generos.nombre as genero
@@ -98,18 +98,13 @@
 		,
 		plataformas.nombre as plataforma,productos.id
 		as
-		id,valoraciones.valoraciones as valoraciones
-		,comentarios.comentarios
-		as comentarios
+		id
 
 		from
-		productos,plataformas,generos,valoraciones,comentarios
+		productos,plataformas,generos
 		where
 		productos.idPlataforma = plataformas.id and productos.idGenero =
-		generos.id and
-		valoraciones.idProducto = productos.id and
-		comentarios.idProducto =
-		productos.id and
+		generos.id  and
 		productos.titulo like '%'
 		#{titulo}
 		'%';
@@ -141,6 +136,19 @@
 	</select>
 
 
+	<select id="leerProductosMarcaid" resultMap="datosProducto">
+		select
+		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,
+		productos.idGenero,productos.idPlataforma,productos.id,
+		productos.stock
+		from
+		productos
+		where
+		productos.idGenero =#{id}
+
+	</select>
+
+
 	<select id="contarProductoCategoria" resultMap="tiendaProducto">
 		select
 		count(productos.titulo) as titulo
@@ -148,10 +156,22 @@
 		plataformas,productos
 		where
 		plataformas.id = productos.idPlataforma and
-		productos.idPlataforma =#{id}
+		productos.idPlataforma
+		=#{id}
 
 	</select>
 
+	<select id="contarProductoMarca" resultMap="tiendaProducto">
+		select
+		count(productos.titulo) as titulo
+		from
+		generos,productos
+		where
+		generos.id = productos.idGenero and
+		productos.idGenero
+		=#{id}
+
+	</select>
 
 	<select id="leerCategoriaId" resultMap="datosProducto">
 		select
@@ -161,6 +181,17 @@
 		where
 		plataformas.id = productos.idPlataforma and
 		plataformas.id=#{id}
+
+	</select>
+
+	<select id="leerMarcaId" resultMap="datosProducto">
+		select
+		*
+		from
+		generos,productos
+		where
+		generos.id = productos.idGenero and
+		generos.id=#{id}
 
 	</select>
 

@@ -1,11 +1,19 @@
+
+<%@page import="javax.naming.InitialContext"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="javax.naming.Context"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+
 <%@ page import="modelo.Pojo.UsuariosPojo"%>
-<%@ page import="modelo.Pojo.VentaPojo"%>
+<%@ page import="modelo.Pojo.DireccionesPojo"%>
+<%@ page import="modelo.Pojo.CategoriasPojo"%>
+<%@ page import="modelo.Pojo.MarcasPojo" %>
+
 <!DOCTYPE html>
 <html>
+<head>
 <head>
 <title>Webteck</title>
 <meta charset="utf-8">
@@ -26,24 +34,27 @@
 	crossorigin="anonymous">
 <link rel="icon" type="imagenes/iconIma.gif" href="iconIma.gif">
 <link type="text/css" href="estilos/Principal.css" rel="stylesheet" />
+<link type="text/css" href="estilos/FichaUsuario.css" rel="stylesheet" />
 </head>
-<body>
+</head>
 
+
+<body style="background-image: url(imagenes/fondoLogin.png)">
 
 	<%
 		String error = (String) request.getParameter("error");
-
-		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
-
-		ArrayList<VentaPojo> ventasCliente = (ArrayList<VentaPojo>) request.getAttribute("ventasCliente");
-
-		String emailUsuario = (String) request.getAttribute("emailUsuario");
 	%>
+
+	<%
+		DireccionesPojo prod = (DireccionesPojo) request.getAttribute("direccion");
+		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
+	%>
+
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
-		</a> <a style="color: cyan" class="navbar-brand" href="#Puestos">WebTeck</a>
+		</a> <a style="color: cyan" class="navbar-brand" href="Principal">WebTeck</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
@@ -57,13 +68,32 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categorias</a>
 						<div class="dropdown-menu">
-							<%-- 						<% --%>
-							// ArrayList
-							<CategoriasPojo> cate = (ArrayList<CategoriasPojo>)
-							request.getAttribute("categorias"); // if (cate != null) { // for
-							(CategoriasPojo d : cate) { // out.println("<a
-								class='dropdown-item' href='#'><button type='submit'></button>"
-								+ d.getNombre() // + "</a>"); // } // } <%-- 						%> --%>
+							<%
+								ArrayList<CategoriasPojo> cate = (ArrayList<CategoriasPojo>) request.getAttribute("categorias");
+								if (cate != null) {
+									for (CategoriasPojo d : cate) {
+
+										out.println("<a class='dropdown-item' href='porCategoria?id=" + d.getId()
+												+ "'><button type='submit'></button>" + d.getNombre() + "</a>");
+
+									}
+								}
+							%>
+						</div></li>
+					<li class="nav-items dropdown"><a
+						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Marcas</a>
+						<div class="dropdown-menu">
+							<%
+								ArrayList<MarcasPojo> marca = (ArrayList<MarcasPojo>) request.getAttribute("marcas");
+								if (cate != null) {
+									for (MarcasPojo d : marca) {
+
+										out.println("<a class='dropdown-item' href='porMarca?id=" + d.getId()
+												+ "'><button type='submit'></button>" + d.getNombre() + "</a>");
+
+									}
+								}
+							%>
 						</div></li>
 
 					</li>
@@ -72,9 +102,10 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#"><button type="submit"
+							<a class="dropdown-item" href="Login"><button type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
-							<a class="dropdown-item" href="#"><button type="submit"
+							<a class="dropdown-item" href="LogeaUsuarios"><button
+									type="submit"
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
@@ -100,7 +131,7 @@
 					<!-- Brand/logo -->
 
 					<%
-						if  ((usu != null) && (usu.getUsuario() != null)) {
+						if ((usu != null) && (usu.getUsuario() != null)) {
 					%>
 					<div id="Datos">
 						<img alt="" src="Imagenes/<%=usu.getFoto()%>"
@@ -117,13 +148,18 @@
 								Usuario</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 								<a class="dropdown-item" href="#"><button type='button'
-										onClick='window.location.replace("cambiarImagen")'>Cambiar
+										onClick='window.location.replace("cambiarImagenUsuario")'>Cambiar
 										Imagen</button></a> <a class="dropdown-item" href="#"><button
 										type='button' onClick='window.location.replace("Logout")'>Cerrar
 										Sesion</button></a> <a class="dropdown-item" href="#">
 									<button type='button'
-										onClick='window.location.replace("OpcionesEliminarusu")'>BajaUsuario</button>
-								</a>
+										onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
+									<a class="dropdown-item" href="#"><button type='button'
+											onClick='window.location.replace("comprasUsuarios")'>Ver
+											compras realizadas</button> </a> <a class="dropdown-item" href="#"><button
+											type='button'
+											onClick='window.location.replace("FichaUsuario")'>Datos
+											Usuario</button> </a>
 							</div>
 						</div>
 
@@ -147,65 +183,76 @@
 					</ul>
 			</div>
 	</nav>
-
-	<div class="container"
-		style="position: relative; display: inline-flex; margin-top: 9%;">
+	</div>
+	</nav>
+	<div id="EditarDireccion" class="container">
 
 		<%
-			if (ventasCliente != null && emailUsuario != null && emailUsuario != "") {
-				out.print("<Busqueda Producto>");
-				out.print("Recuperacion de comprar del usuario : " + emailUsuario);
-				out.print("<br><br>");
-				out.print("<table class=table table-hover table-responsive>");
-				out.print("<th> Nombre Producto :</th>");
-				out.print("<th> Fecha de la Compra :</th>");
-				out.print("<th> Precio Producto :</th>");
-				out.print("<th> Nombre del Usuario de la Compra:</th>");
-				out.print("</tr>");
-
-				for (VentaPojo juga : ventasCliente) {
-
-					out.print("<tr>");
-					out.print("<td>" + juga.getTitulo() + "</td>");
-					out.print("<td>" + juga.getFecha() + "</td>");
-					out.print("<td>" + juga.getPrecio() + "$" + "</td>");
-					out.print("<td>" + juga.getNombre() + "</td>");
-
-				}
-				out.print("</table>");
-
+			if (prod == null) {
+				out.println("<br/>");
+				out.println("<br/>");
+				out.println("<a href=\"Login\"> Login</a>");
 			} else {
-				out.print("<h4>No tenemos Ventas</h4>");
+				out.println("<form class='form-horizontal'  action=\"EditarDireccion\" method=\"post\">");
+
+				out.println(
+						"<input type=\"hidden\" name=\"emailUsuario\" value=\"" + prod.getEmailUsuario() + "\" /> ");
+				out.println("<input type=\"hidden\" name=\"id\" value=\"" + prod.getId() + "\" /> ");
+				out.println("<label for=\"Titulo\">Titulo:</label>");
+				out.println("<input type=\"text\" name=\"Direccion\" value=\"" + prod.getDireccion() + "\" /> ");
+				out.println("<br/>");
+				out.println("<label for=\"Localidad\">: Localidad</label>");
+				out.println("<input type=\"text\" name=\"Localidad\" value=\"" + prod.getLocalidad() + "\" /> ");
+				out.println("<br/>");
+				out.println("<label for=\"Provincia\">Provincia:</label>");
+				out.println("<input type=\"text\" name=\"Provincia\" value=\"" + prod.getProvincia() + "\" /> ");
+				out.println("<br/>");
+				out.println("<label for=\"Vivienda\">Vivienda:</label>");
+				out.println("<input type=\"text\" name=\"Vivienda\" value=\"" + prod.getVivienda() + "\" /> ");
+				out.println("<br/>");
+				out.println("<label for=\"CodigoPostal\">CP:</label>");
+				out.println(
+						"<input type=\"number\" name=\"CodigoPostal\" value=\"" + prod.getCodigoPostal() + "\" /> ");
+				out.println("<br/>");
+				out.print("<br><br>");
+				out.print(
+						"<button id='ButtonRetorno' type='button' onClick='window.location.replace('Principal')'>Volver atras</button>");
+				out.println("<input type= \"submit\" value= \"Editar\" /> ");
+				out.println("</form>");
 			}
 		%>
+
 	</div>
 
-	<button type='button' onClick='window.location.replace("Principal")'>Volver
-		a Principal</button>
 
 	<%
-		if (error != null) {
+		if (usu != null) {
 	%>
-	<h4 style="color: red;">
-		<h4>Fechas sin Resultados</h4>
-		<button type='button' onClick='window.location.replace("Pagina")'>VolveraIntentar</button>
-		<%
-			}
-		%>
+	<script>
+		window.onload = function() {
+			document.getElementById("Login12").setAttribute('href', '#');
+			document.getElementById("Login13").setAttribute('href', '#');
+		}
+	</script>
+	<%
+		}
+	%>
 
 
-		<%
-			if (usu != null) {
-		%>
-		<script>
-			window.onload = function() {
-				document.getElementById("Login12").setAttribute('href', '#');
-				document.getElementById("Login13").setAttribute('href', '#');
-			}
-		</script>
-		<%
-			}
-		%>
-	
+
+	<%
+		if (usu == null) {
+	%>
+	<script>
+		window.onload = function() {
+			alert("No esta Logeado para esta Funcion");
+			window.location = 'Pagina';
+		}
+	</script>
+	<%
+		}
+	%>
+
 </body>
+
 </html>

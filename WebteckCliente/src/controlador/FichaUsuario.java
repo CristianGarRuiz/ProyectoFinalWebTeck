@@ -11,76 +11,64 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import modelo.Ejb.PreguntasEjb;
+import modelo.Ejb.DireccionesEjb;
 import modelo.Ejb.ProductosEjb;
 import modelo.Ejb.SesionesEjb;
 import modelo.Ejb.UsuariosEjb;
-import modelo.Ejb.VentaEjb;
 import modelo.Pojo.CategoriasPojo;
+import modelo.Pojo.DireccionesPojo;
 import modelo.Pojo.MarcasPojo;
-import modelo.Pojo.ProductosTiendaPojo;
 import modelo.Pojo.UsuariosPojo;
-import modelo.Pojo.VentaPojo;
 
-
-@WebServlet("/comprasUsuarios")
-public class comprasUsuarios extends HttpServlet {
+@WebServlet("/FichaUsuario")
+public class FichaUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	@EJB
 	UsuariosEjb usuarioEjb;
 
 	@EJB
-	ProductosEjb productosEjb;
+	ProductosEjb productoEjb;
 
 	@EJB
 	SesionesEjb sesionesEjb;
 
 	@EJB
-	PreguntasEjb preguntasEjb;
-	
+	DireccionesEjb direccionesEjb;
 	
 	@EJB
-	VentaEjb ventaEjb;
+	ProductosEjb productosEjb;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 		UsuariosPojo usuario = sesionesEjb.usuariosLogeado(session);
 		String pantalla = sesionesEjb.getPantalla(session);
 		String error = request.getParameter("error");
-		
-		
-		RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/comprasUsuarios.jsp");
-		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/comprasUsuariosNocturno.jsp");
-		
+		String emailUsuario = usuario.getEmailUsuario();
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/OpcPerfil.jsp");
+
+		ArrayList<DireccionesPojo> direccionesUsuarios = direccionesEjb.leerDatosporMail(emailUsuario);
+		ArrayList<UsuariosPojo> datosUsuario = usuarioEjb.leerDatosUsuario(emailUsuario);
 		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
 		ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
-		String emailUsuario = usuario.getEmailUsuario();
-		
-		ArrayList<VentaPojo> ventasCliente = ventaEjb.leerProductosporEmail(emailUsuario);
-		
-		
+
+		request.setAttribute("error", error);
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("pantalla", pantalla);
-		request.setAttribute("error", error);
-		request.setAttribute("emailUsuario", emailUsuario);
-		request.setAttribute("ventasCliente", ventasCliente);
+		request.setAttribute("direccionesUsuarios", direccionesUsuarios);
+		request.setAttribute("datosUsuario", datosUsuario);
 		request.setAttribute("categorias", categorias);
 		request.setAttribute("marcas", marcas);
 
-		if (pantalla == null || pantalla.equals("D")) {
-			rsPagina.forward(request, response);
-		} else {
-			rsNocturna.forward(request, response);
-		}
+		rs.forward(request, response);
 
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 	}
 
 }

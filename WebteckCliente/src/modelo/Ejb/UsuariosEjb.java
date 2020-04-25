@@ -1,6 +1,8 @@
 package modelo.Ejb;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -8,6 +10,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 import modelo.Pojo.UsuariosPojo;
 
 @Stateless
@@ -17,13 +20,28 @@ public class UsuariosEjb {
 	public UsuariosPojo leerDato(String nombre, String pass) {
 		Client cliente = ClientBuilder.newClient();
 
-		WebTarget target1 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getUsuario/patata23/" + nombre + "/" + pass);
+		WebTarget target1 = cliente.target(
+				"http://localhost:8080/WebteckEmpleado/ControladorRest/getUsuario/patata23/" + nombre + "/" + pass);
 
 		UsuariosPojo usuario = target1.request().get(UsuariosPojo.class);
 
 		return usuario;
 
+	}
+
+	public ArrayList<UsuariosPojo> leerDatosUsuario(String emailUsuario) {
+
+		Client cliente = ClientBuilder.newClient();
+
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getDatosUsuario/patata23/"
+						+ emailUsuario);
+
+		ArrayList<UsuariosPojo> lista = (ArrayList<UsuariosPojo>) target1.request()
+				.get(new GenericType<List<UsuariosPojo>>() {
+				});
+
+		return lista;
 	}
 
 	/**
@@ -38,7 +56,8 @@ public class UsuariosEjb {
 
 		Client cliente = ClientBuilder.newClient();
 
-		WebTarget target1 = cliente.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getFoto/patata23/" + usu);
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getFoto/patata23/" + usu);
 
 		UsuariosPojo usuario = target1.request().get(UsuariosPojo.class);
 
@@ -57,19 +76,32 @@ public class UsuariosEjb {
 	 * @throws SQLException
 	 */
 
+//	public int añadirUsuario(UsuariosPojo usu) {
+//		Client cliente = ClientBuilder.newClient();
+//
+//		int codigo = (int) (Math.random() * 10000 + 1);
+//
+//		WebTarget target1 = cliente.target("http://localhost:8080/WebteckEmpleado/ControladorRest/nuevoUsuario/patata23/" + usu + "/" + codigo);
+//
+//		target1.request().get(UsuariosPojo.class);
+//
+//		return codigo;
+//
+//	}
+	
 	public int añadirUsuario(UsuariosPojo usu) {
 		Client cliente = ClientBuilder.newClient();
 
 		int codigo = (int) (Math.random() * 10000 + 1);
 
-		WebTarget target1 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/nuevoUsuario/patata23/" + usu + "/" + codigo);
+		WebTarget target1 = cliente.target("http://localhost:8080/WebteckEmpleado/ControladorRest/nuevoUsuario/patata23/" + usu + "/" + codigo);
 
 		target1.request().get(UsuariosPojo.class);
 
 		return codigo;
 
 	}
+
 
 	/**
 	 * este metodo elimina un usuario por su correo
@@ -99,7 +131,7 @@ public class UsuariosEjb {
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target1 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/activaUsuario/patata23/" + codigo);
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/activarUsuario/patata23/" + codigo);
 
 		target1.request().get();
 
@@ -126,20 +158,28 @@ public class UsuariosEjb {
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target2 = cliente
-	  .target("http://localhost:8080/WebteckEmpleado/ControladorRest/pantallaUsuario/patata23/" + pantalla + "/"
-						+ usuario);
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/pantallaUsuario/patata23/" + pantalla
+						+ "/" + usuario);
 
 		target2.request().get();
 	}
 
-	
-	
 	public void updateContraseña(UsuariosPojo usu) {
 
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target2 = cliente
 				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/updateContraseña/patata23");
+
+		target2.request().put(Entity.json(usu));
+	}
+	
+	public void updateFoto(UsuariosPojo usu) {
+
+		Client cliente = ClientBuilder.newClient();
+
+		WebTarget target2 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/updateFoto/patata23");
 
 		target2.request().put(Entity.json(usu));
 	}

@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Eliminar</title>
+<title>Eliminar Cuenta</title>
 </head>
 <body>
 
@@ -30,16 +30,16 @@
 
 		context = new InitialContext();
 
-// 		usuarios = (UsuarioEjb) context.lookup("java:global/Imcmvc/UsuarioEjb");
-// 		sessiones = (SesionesEjb) context.lookup("java:global/Imcmvc/SesionesEjb");
+		// 		usuarios = (UsuarioEjb) context.lookup("java:global/Imcmvc/UsuarioEjb");
+		// 		sessiones = (SesionesEjb) context.lookup("java:global/Imcmvc/SesionesEjb");
 
-// 		UsuariosPojo usuariosP = sessiones.usuarioLogeado(session);
-// 		usuariosP = (UsuariosPojo) request.getAttribute("usuario");
+		// 		UsuariosPojo usuariosP = sessiones.usuarioLogeado(session);
+		// 		usuariosP = (UsuariosPojo) request.getAttribute("usuario");
 	%>
 
 
-	Eliminar Usuario
-	<button type='button' onClick='window.location.replace("Pagina")'>Volver
+	Eliminar esta Cuenta ?¿
+	<button type='button' onClick='window.location.replace("Principal")'>Volver
 		a Principal</button>
 
 	<button id="eliminar" type='button' onClick='eliminarUsuario()'>Eliminar</button>
@@ -53,18 +53,17 @@
 	<button type='button'
 		onClick='window.location.replace("LogearUsuarios\)'>Registrate</button>
 	<button type='button' onClick='window.location.replace(\Login")'>Reintentar</button>
-
-	<img id='Dino' src='dino.gif'>
 	<%
 		}
 	%>
 	<script>
-// 		function eliminarUsuario() {
-// 			console.log("eliminarUsuario -----------------------------------------------");
-// 			if(confirm(" Seguro que deseas eliminar la Cuenta?¿")) {
-<%-- 				window.location.replace("Eliminar?emailUsuario=<%=usuariosP.getEmailUsuario()%>"); --%>
-// 			}
-// 		}
+ 		function eliminarUsuario() {
+ 			console.log("eliminarUsuario -----------------------------------------------");
+ 			if(confirm(" Seguro que deseas eliminar la Cuenta?¿")) {
+				window.location.replace("DarBajaUsuario?emailUsuario=<%=usu.getEmailUsuario()%>"); 
+
+			}
+ 		}
 	</script>
 </body>
 </html>

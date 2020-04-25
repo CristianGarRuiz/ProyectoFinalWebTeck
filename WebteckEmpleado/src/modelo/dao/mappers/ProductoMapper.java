@@ -15,11 +15,17 @@ public interface ProductoMapper {
 
 	public ArrayList<CategoriaPojo> leerCategoriaId(@Param("id") int id);
 
+	public ArrayList<MarcaPojo> leerMarcaId(@Param("id") int id);
+
 	public ArrayList<ProductoTiendaPojo> leerProductosTienda(@Param("id") int id);
 
 	public ArrayList<ProductoTiendaPojo> leerProductosCategoriaid(@Param("id") int id);
+	
+	public ArrayList<ProductoTiendaPojo> leerProductosMarcaid(@Param("id") int id);
 
 	public ProductoTiendaPojo contarProductoCategoria(@Param("id") int id);
+	
+	public ProductoTiendaPojo contarProductoMarca(@Param("id") int id);
 
 	public ArrayList<BusquedaPojo> BuscarProductoporNombre(@Param("titulo") String titulo);
 

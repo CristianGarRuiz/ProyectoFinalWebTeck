@@ -11,12 +11,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import modelo.Ejb.DireccionEjb;
 import modelo.Ejb.PreguntaEjb;
 import modelo.Ejb.ProductoEjb;
 import modelo.Ejb.UsuarioEjb;
 import modelo.Ejb.ValoracionEjb;
 import modelo.Ejb.VentasEjb;
 import modelo.Pojo.CategoriaPojo;
+import modelo.Pojo.DireccionPojo;
 import modelo.Pojo.MarcaPojo;
 import modelo.Pojo.PreguntaPojo;
 import modelo.Pojo.ProductoTiendaPojo;
@@ -42,6 +44,9 @@ public class ControladorRest {
 	@EJB
 	VentasEjb ventasEjb;
 
+	@EJB
+	DireccionEjb direccionEjb;
+
 	@GET
 	@Path("/getUsuario/{token}/{nombre}/{pass}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -54,6 +59,7 @@ public class ControladorRest {
 		}
 		return usuario;
 	}
+
 	@GET
 	@Path("/getProductoTienda/{token}/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -66,12 +72,25 @@ public class ControladorRest {
 		}
 		return producto;
 	}
-	
+
+	@GET
+	@Path("/getProductoTiendaMarcaid/{token}/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<ProductoTiendaPojo> getProductoTiendaMarcaId(@PathParam("token") String token,
+			@PathParam("id") int id) throws SQLException {
+
+		ArrayList<ProductoTiendaPojo> producto = null;
+		if (token.equals("patata23")) {
+			producto = productoEjb.leerProductoTiendaMarcaid(id);
+		}
+		return producto;
+	}
+
 	@GET
 	@Path("/getProductoTiendaCategoriaid/{token}/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ProductoTiendaPojo> getProductoTiendaCategoriaId(@PathParam("token") String token, @PathParam("id") int id)
-			throws SQLException {
+	public ArrayList<ProductoTiendaPojo> getProductoTiendaCategoriaId(@PathParam("token") String token,
+			@PathParam("id") int id) throws SQLException {
 
 		ArrayList<ProductoTiendaPojo> producto = null;
 		if (token.equals("patata23")) {
@@ -79,6 +98,7 @@ public class ControladorRest {
 		}
 		return producto;
 	}
+
 	@GET
 	@Path("/contarProductoporCategoria/{token}/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -91,8 +111,20 @@ public class ControladorRest {
 		}
 		return producto;
 	}
-	
-	
+
+	@GET
+	@Path("/contarProductoporMarca/{token}/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ProductoTiendaPojo contarProductoMarca(@PathParam("token") String token, @PathParam("id") int id)
+			throws SQLException {
+
+		ProductoTiendaPojo producto = null;
+		if (token.equals("patata23")) {
+			producto = productoEjb.contarProductoMarca(id);
+		}
+		return producto;
+	}
+
 	@GET
 	@Path("/getComentarios/{token}/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -105,8 +137,7 @@ public class ControladorRest {
 		}
 		return leerComentarios;
 	}
-	
-	
+
 	@GET
 	@Path("/getValoraciones/{token}/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -119,10 +150,7 @@ public class ControladorRest {
 		}
 		return leerValoraciones;
 	}
-	
-	
-	
-	
+
 	@GET
 	@Path("/getCategoriaId/{token}/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -135,7 +163,20 @@ public class ControladorRest {
 		}
 		return leerCategoriaId;
 	}
-	
+
+	@GET
+	@Path("/getMarcaId/{token}/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<MarcaPojo> getMarcaporId(@PathParam("token") String token, @PathParam("id") int id)
+			throws SQLException {
+
+		ArrayList<MarcaPojo> leerMarcaId = null;
+		if (token.equals("patata23")) {
+			leerMarcaId = productoEjb.leerMarcaId(id);
+		}
+		return leerMarcaId;
+	}
+
 	/**
 	 * este metodo retorna todos los tipos de accidentes
 	 * 
@@ -189,14 +230,38 @@ public class ControladorRest {
 	}
 
 	@PUT
-	@Path("/newUsuario/{token}")
+	@Path("/nuevoUsuario/{token}/{codigo}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 
-	public void newUsuario(@PathParam("token") String token, UsuarioPojo usu) throws SQLException {
+	public void newUsuario(@PathParam("token") String token, UsuarioPojo usu, int codigo) throws SQLException {
 
 		if (token.equals("patata23")) {
 			usuarioEjb.añadirUsuario(usu);
+		}
+	}
+
+	@PUT
+	@Path("/activarUsuario/{token}/{codigo}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+
+	public void ActivarUsuario(@PathParam("token") String token, int codigo) throws SQLException {
+
+		if (token.equals("patata23")) {
+			usuarioEjb.ActivarUsuario(codigo);
+		}
+	}
+
+	@PUT
+	@Path("/pantallaUsuario/{token}/{pantalla}/{usuario}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+
+	public void PantallaUsuario(@PathParam("token") String token, String pantalla, String usuario) throws SQLException {
+
+		if (token.equals("patata23")) {
+			usuarioEjb.pantallaUsuario(pantalla, usuario);
 		}
 	}
 
@@ -211,8 +276,7 @@ public class ControladorRest {
 			valoracionEjb.AñadirValoracion(valor);
 		}
 	}
-	
-	
+
 	@PUT
 	@Path("/newComentario/{token}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -224,25 +288,58 @@ public class ControladorRest {
 			valoracionEjb.AñadirComentario(valor);
 		}
 	}
-	
-	
+
+	@PUT
+	@Path("/newDireccion/{token}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+
+	public void newDireccion(@PathParam("token") String token, DireccionPojo direccion) throws SQLException {
+
+		if (token.equals("patata23")) {
+			direccionEjb.insertDireccion(direccion);
+		}
+	}
+
+	@GET
+	@Path("/getDireccion/{token}/{emailUsuario}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<DireccionPojo> leerDirecciones(@PathParam("token") String token,
+			@PathParam("emailUsuario") String emailUsuario) throws SQLException {
+		ArrayList<DireccionPojo> direcciones = null;
+
+		if (token.equals("patata23")) {
+
+			direcciones = direccionEjb.leerDirecciones(emailUsuario);
+		}
+		return direcciones;
+	}
 
 	/**
 	 * este metodo borra un accidente por la id
 	 * 
 	 * @param id
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	@DELETE
 	@Path("/dropUsuarios/{token}/{emailUsuario}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void dropUsuarios(@PathParam("token") String token, @PathParam("emailUsuario") String emailUsuario) throws SQLException {
+	public void dropUsuarios(@PathParam("token") String token, @PathParam("emailUsuario") String emailUsuario)
+			throws SQLException {
 		if (token.equals("patata23")) {
 			usuarioEjb.eliminarUsuario(emailUsuario);
 		}
 	}
-	
-	
+
+	@DELETE
+	@Path("/dropDireccion/{token}/{emailUsuario}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void dropDireccion(@PathParam("token") String token, @PathParam("emailUsuario") String emailUsuario)
+			throws SQLException {
+		if (token.equals("patata23")) {
+			direccionEjb.eliminarDireccion(emailUsuario);
+		}
+	}
 
 	@GET
 	@Path("/getTotalProductos/{token}")
@@ -286,6 +383,19 @@ public class ControladorRest {
 	}
 
 	@GET
+	@Path("/getDatosUsuario/{token}/{emailUsuario}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<UsuarioPojo> getDatosUsuarioporEmailUsuario(@PathParam("token") String token,
+			@PathParam("emailUsuario") String emailUsuario) throws SQLException {
+		ArrayList<UsuarioPojo> datosUsu = null;
+		if (token.equals("patata23")) {
+
+			datosUsu = usuarioEjb.getDatosUsuarioporEmailUsuario(emailUsuario);
+		}
+		return datosUsu;
+	}
+
+	@GET
 	@Path("/getVenta/{token}/{emailUsuario}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<VentasPojo> leerProductosporEmail(@PathParam("token") String token,
@@ -312,7 +422,7 @@ public class ControladorRest {
 		}
 		return respuesta;
 	}
-	
+
 	@GET
 	@Path("/leerProductosporEmail/{token}/{emailUsuario}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -325,6 +435,43 @@ public class ControladorRest {
 			respuesta = ventasEjb.leerProductosporEmail(emailUsuario);
 		}
 		return respuesta;
+	}
+
+	@PUT
+	@Path("/updateDireccion/{token}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public void updateJugador(@PathParam("token") String token, DireccionPojo direccion) {
+
+		if (token.equals("patata23")) {
+			direccionEjb.updateDireccion(direccion);
+		}
+
+	}
+	
+	@PUT
+	@Path("/updateFoto/{token}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public void updateImagen(@PathParam("token") String token, UsuarioPojo usu) {
+
+		if (token.equals("patata23")) {
+			usuarioEjb.updateImagen(usu);
+		}
+
+	}
+
+	@GET
+	@Path("/getDirecciones/{token}/{emailUsuario}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public DireccionPojo direccionPorNombre(@PathParam("token") String token,
+			@PathParam("emailUsuario") String emailUsuario) throws SQLException {
+
+		DireccionPojo direccion = null;
+		if (token.equals("patata23")) {
+			direccion = direccionEjb.direccionPorNombre(emailUsuario);
+		}
+		return direccion;
 	}
 
 }

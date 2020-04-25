@@ -62,44 +62,26 @@
 			</div>
 	</nav>
 	<div id="infoLog" class="container">
-		<h2 id="TextLogin">Login Usuario</h2>
+		<h2 id="TextLogin">Correo Modificacion Contraseña</h2>
 		<p>
 			<i class='far fa-user-circle'
 				style='margin-left: 47%; font-size: 58px; color: black'></i>
 		</p>
 	</div>
 	<div id="Formulario" class="container">
-		<form class="form-horizontal" action="Login" method="post">
+		<form class="form-horizontal" action="updateContraseña" method="post">
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="Usuario"><i
-					class='fas fa-user' style='margin-top: 2%; font-size: 24px'></i>Usuario:</label>
+				<label class="control-label col-sm-2" for="emailUsuario"><i
+					class='fas fa-user' style='margin-top: 2%; font-size: 24px'></i>emailUsuario:</label>
 				<div class="col-sm-10">
 					<input type="text" required="" class="form-control" id="email"
-						placeholder="Entrar Usuario" name="usuario">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="pwd"><i
-					class='fas fa-lock' style='font-size: 24px'></i> Contraseña:</label>
-				<div class="col-sm-10">
-					<input type="password" required="" class="form-control" id="pwd"
-						placeholder="Entar password" name="password" required
-						pattern="^[a-z0-9_-]{3,15}$"
-						title="El número de referencia consta de 3 letras mayúsculas y 4 dígitos." />
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<div class="checkbox">
-						<label><input type="checkbox" name="remember">
-							Recordarme</label>
-					</div>
+						placeholder="Entrar emailUsuario" name="emailUsuario">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button id="botonLogin" type="submit" class="btn btn-info">
-						Login</button>
+						Enviar Correo</button>
 				</div>
 			</div>
 
@@ -113,12 +95,8 @@
 		<%
 			if (error != null) {
 		%>
-		<h4 style="color: red;">Error en el usuario o password/o no
-			estas Registrado</h4>
-		<button type='button'
-			onClick='window.location.replace("LogearUsuarios")'>Registrate</button>
-		<button type='button' onClick='window.location.replace("Login")'>Reintentar</button>
-		<button type='button' onClick='window.location.replace("updateContraseña")'>Cambiar Contraseña</button>
+		<h4 style="color: red;">Error en el correo</h4>
+		<button type='button' onClick='window.location.replace("updateContraseña")'>Reintentar</button>
 		<%
 			}
 		%>

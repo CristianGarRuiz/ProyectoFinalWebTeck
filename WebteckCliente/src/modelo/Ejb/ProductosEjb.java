@@ -8,10 +8,8 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
-import modelo.Pojo.BusquedasPojo;
 import modelo.Pojo.CategoriasPojo;
 import modelo.Pojo.MarcasPojo;
-import modelo.Pojo.ProductosPojo;
 import modelo.Pojo.ProductosTiendaPojo;
 
 
@@ -56,7 +54,7 @@ public class ProductosEjb {
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target1 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/leerTotalMarcas/patata23");
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getTipoMarca/patata23");
 
 		ArrayList<MarcasPojo> lista = (ArrayList<MarcasPojo>) target1.request()
 				.get(new GenericType<List<MarcasPojo>>() {
@@ -120,6 +118,20 @@ public class ProductosEjb {
 				});
 		return lista;
 	}
+	
+	
+	public ArrayList<ProductosTiendaPojo> leerProductoidMarca(int id) {
+
+		Client cliente = ClientBuilder.newClient();
+
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getProductoTiendaMarcaid/patata23/" + id);
+
+		ArrayList<ProductosTiendaPojo> lista = (ArrayList<ProductosTiendaPojo>) target1.request()
+				.get(new GenericType<List<ProductosTiendaPojo>>() {
+				});
+		return lista;
+	}
 
 	
 	public ProductosTiendaPojo contarProductosporCategoria(int id) {
@@ -133,7 +145,17 @@ public class ProductosEjb {
 
 		return prod;
 	}
+	public ProductosTiendaPojo contarProductosporMarca(int id) {
 
+		Client cliente = ClientBuilder.newClient();
+
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/contarProductoporMarca/patata23/" + id);
+
+		ProductosTiendaPojo prod = target1.request().get(ProductosTiendaPojo.class);
+
+		return prod;
+	}
 	
 	
 	
@@ -150,6 +172,19 @@ public class ProductosEjb {
 		return lista;
 	}
 	
+	public ArrayList<MarcasPojo> leerMarcasId( int id ) {
+
+		Client cliente = ClientBuilder.newClient();
+
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getMarcaId/patata23/"+ id);
+
+		ArrayList<MarcasPojo> lista = (ArrayList<MarcasPojo>) target1.request()
+				.get(new GenericType<List<MarcasPojo>>() {
+				});
+
+		return lista;
+	}
 	
 	
 	

@@ -4,6 +4,8 @@
 	pageEncoding="UTF-8"%>
 
 <%@ page import="modelo.Pojo.UsuariosPojo"%>
+<%@ page import="modelo.Pojo.CategoriasPojo" %>
+<%@ page import="modelo.Pojo.MarcasPojo" %>
 
 <!DOCTYPE html>
 <html>
@@ -41,11 +43,11 @@
 		ArrayList<PreguntasPojo> preguntas = (ArrayList<PreguntasPojo>) request.getAttribute("preguntas");
 	%>
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
-		</a> <a style="color: cyan" class="navbar-brand" href="#Puestos">WebTeck</a>
+		</a> <a style="color: cyan" class="navbar-brand" href="Principal">WebTeck</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
@@ -56,16 +58,46 @@
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link" href="#texto">Informacion</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#puestos">Categorias</a>
+					<li class="nav-items dropdown"><a
+						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categorias</a>
+						<div class="dropdown-menu">
+							<%
+								ArrayList<CategoriasPojo> cate = (ArrayList<CategoriasPojo>) request.getAttribute("categorias");
+								if (cate != null) {
+									for (CategoriasPojo d : cate) {
+
+										out.println("<a class='dropdown-item' href='porCategoria?id=" + d.getId()
+												+ "'><button type='submit'></button>" + d.getNombre() + "</a>");
+
+									}
+								}
+							%>
+						</div></li>
+						<li class="nav-items dropdown"><a
+						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Marcas</a>
+						<div class="dropdown-menu">
+							<%
+								ArrayList<MarcasPojo> marca = (ArrayList<MarcasPojo>) request.getAttribute("marcas");
+								if (cate != null) {
+									for (MarcasPojo d : marca) {
+
+										out.println("<a class='dropdown-item' href='porMarca?id=" + d.getId()
+												+ "'><button type='submit'></button>" + d.getNombre() + "</a>");
+
+									}
+								}
+							%>
+						</div></li>
+
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#Info">Contacto</a>
 					</li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#"><button type="submit"
+							<a class="dropdown-item" href="Login"><button type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
-							<a class="dropdown-item" href="#"><button type="submit"
+							<a class="dropdown-item" href="LogeaUsuarios"><button type="submit"
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
@@ -83,12 +115,15 @@
 
 
 
+
+
+
 				</nav>
 				<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
 					<!-- Brand/logo -->
 
 					<%
-						if (usu.getUsuario() != null) {
+						if ((usu != null) && (usu.getUsuario() != null)) {
 					%>
 					<div id="Datos">
 						<img alt="" src="Imagenes/<%=usu.getFoto()%>"
@@ -105,13 +140,17 @@
 								Usuario</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 								<a class="dropdown-item" href="#"><button type='button'
-										onClick='window.location.replace("cambiarImagen")'>Cambiar
+										onClick='window.location.replace("cambiarImagenUsuario")'>Cambiar
 										Imagen</button></a> <a class="dropdown-item" href="#"><button
 										type='button' onClick='window.location.replace("Logout")'>Cerrar
 										Sesion</button></a> <a class="dropdown-item" href="#">
 									<button type='button'
-										onClick='window.location.replace("OpcionesEliminarusu")'>BajaUsuario</button>
-								</a>
+										onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
+									<a class="dropdown-item" href="#"><button type='button'
+											onClick='window.location.replace("comprasUsuarios")'>Ver
+											compras realizadas</button> </a>
+											<a class="dropdown-item" href="#"><button type='button'
+											onClick='window.location.replace("FichaUsuario")'>Datos Usuario</button> </a>
 							</div>
 						</div>
 
@@ -137,7 +176,6 @@
 	</nav>
 	</div>
 	</nav>
-
 	<div class="main-content  col-sm-5 col-md-12 col-lg-12">
 
 		<h3 id="BusquedaTitulo" style="text-align: center">

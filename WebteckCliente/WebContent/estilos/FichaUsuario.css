@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.cajaDatosUsuario {
+	display: flex;
+	position: relative;
+	margin-top: 20%;
+	border: 2px solid;
+	width: 34%;
+	align-content: center;
+	text-align: center;
+	border-radius: 3%;
+}
+
+#EditarDireccion {
+	display: flex;
+	position: relative;
+	margin-top: 14%;
+	margin-left: 39%;
+}
+
+#TituloDire {
+	position: relative;
+	display: flex;
+	margin-left: 37%;
+	margin-top: 3%;
+}
+
+#DatosDirrecion {
+	position: relative;
+	display: flex;
+}
+
+.Direccion_Usuarios {
+	position: relative;
+	display: inline-grid;
+	border: 2px solid;
+	height: 62%;
+	width: 26%;
+	margin-left: -1%;
+	margin-top: 19%;
+	border-radius: 3%;
+}
+
+.Datos_usuarios {
+	margin-top: -8%;
+	display: flex;
+	position: relative;
+	margin-left: 38%;
+	height: 43%;
+	width: 66%;
+}

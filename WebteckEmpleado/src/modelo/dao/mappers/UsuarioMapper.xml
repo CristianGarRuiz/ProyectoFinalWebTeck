@@ -5,6 +5,26 @@
 <mapper namespace='modelo.dao.mappers.UsuarioMapper'>
 
 
+
+	<resultMap type="UsuarioPojo" id="datosUsuarios">
+		<id property='emailUsuario' column='emailUsuario' />
+		<result property='nombre' column='nombre' />
+		<result property='foto' column='foto' />
+		<result property='usuario' column='usuario' />
+	</resultMap>
+
+
+	<select id="getDatosUsuarioporEmailUsuario"
+		resultMap="datosUsuarios">
+
+		select
+		usuaris.emailUsuario,usuaris.nombre,usuaris.usuario ,usuaris.foto
+		from
+		usuaris
+		where
+		usuaris.emailUsuario = #{emailUsuario};
+	</select>
+
 	<select id='leerDatos' resultType='modelo.Pojo.UsuarioPojo'>
 		SELECT
 		*
@@ -46,7 +66,7 @@
 		#{usuario}, #{password}, #{foto},
 		#{activado})
 	</insert>
-	
+
 	<insert id='AñadirEmpleado'>
 		INSERT INTO empleados
 		(emailUsuario,nombre,usuario,password,foto)
@@ -96,6 +116,17 @@
 		SET
 
 		password = #{password}
+		WHERE usuaris.emailUsuario = #{emailUsuario}
+	</update>
+	
+	
+	
+	<update id='updateImagen' parameterType='UsuarioPojo'>
+		UPDATE
+		usuaris
+		SET
+
+		foto = #{foto}
 		WHERE usuaris.emailUsuario = #{emailUsuario}
 	</update>
 

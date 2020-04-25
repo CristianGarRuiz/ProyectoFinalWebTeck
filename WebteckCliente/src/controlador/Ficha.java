@@ -16,6 +16,8 @@ import modelo.Ejb.ProductosEjb;
 import modelo.Ejb.SesionesEjb;
 import modelo.Ejb.UsuariosEjb;
 import modelo.Ejb.ValoracionesEjb;
+import modelo.Pojo.CategoriasPojo;
+import modelo.Pojo.MarcasPojo;
 import modelo.Pojo.ProductosTiendaPojo;
 import modelo.Pojo.UsuariosPojo;
 import modelo.Pojo.ValorcionesPojo;
@@ -35,6 +37,9 @@ public class Ficha extends HttpServlet {
 
 	@EJB
 	ValoracionesEjb valoracionesEjb;
+	
+	@EJB
+	ProductosEjb productosEjb;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -51,6 +56,8 @@ public class Ficha extends HttpServlet {
 		ArrayList<ProductosTiendaPojo> productosTienda = productoEjb.leerProducto(indentificador);
 		ArrayList<ValorcionesPojo> comentariosProd = valoracionesEjb.leerComentario(indentificador);
 		ArrayList<ValorcionesPojo> valoracionesProd = valoracionesEjb.leerValoracion(indentificador);
+		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
+		ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
 
 		request.setAttribute("error", error);
 		request.setAttribute("usuario", usuario);
@@ -58,6 +65,8 @@ public class Ficha extends HttpServlet {
 		request.setAttribute("productosTienda", productosTienda);
 		request.setAttribute("comentariosProd", comentariosProd);
 		request.setAttribute("valoracionesProd", valoracionesProd);
+		request.setAttribute("categorias", categorias);
+		request.setAttribute("marcas", marcas);
 
 		rs.forward(request, response);
 
@@ -73,8 +82,6 @@ public class Ficha extends HttpServlet {
 		String id = request.getParameter("id");
 		Integer indentificador = Integer.valueOf(id);
 
-
-
 		int idProducto = indentificador;
 		String emailUsuario = usuario.getEmailUsuario();
 
@@ -88,17 +95,16 @@ public class Ficha extends HttpServlet {
 		request.setAttribute("emailUsuario", emailUsuario);
 		request.setAttribute("valoraciones", valoraciones);
 		request.setAttribute("comentario", comentario);
+		request.setAttribute("pantalla", pantalla);
 
 		if (valora != null) {
 			ValorcionesPojo v = new ValorcionesPojo();
-			
+
 			v.setValoraciones(valoraciones);
 			v.setEmailUsuario(emailUsuario);
 			v.setIdProducto(idProducto);
-			
+
 			valoracionesEjb.añadirValoracion(v);
-			
-			
 
 		} else {
 			response.sendRedirect("error?Hay");

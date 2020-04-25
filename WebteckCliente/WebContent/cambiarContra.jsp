@@ -62,20 +62,20 @@
 			</div>
 	</nav>
 	<div id="infoLog" class="container">
-		<h2 id="TextLogin">Login Usuario</h2>
+		<h2 id="TextLogin">Cambiar Contraseña</h2>
 		<p>
 			<i class='far fa-user-circle'
 				style='margin-left: 47%; font-size: 58px; color: black'></i>
 		</p>
 	</div>
 	<div id="Formulario" class="container">
-		<form class="form-horizontal" action="Login" method="post">
+		<form class="form-horizontal" action="cambiarContra" method="post">
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="Usuario"><i
-					class='fas fa-user' style='margin-top: 2%; font-size: 24px'></i>Usuario:</label>
+				<label class="control-label col-sm-2" for="emailUsuario"><i
+					class='fas fa-user' style='margin-top: 2%; font-size: 24px'></i>emailUsuario:</label>
 				<div class="col-sm-10">
 					<input type="text" required="" class="form-control" id="email"
-						placeholder="Entrar Usuario" name="usuario">
+						placeholder="Entrar emailUsuario" name="emailUsuario">
 				</div>
 			</div>
 			<div class="form-group">
@@ -88,27 +88,14 @@
 						title="El número de referencia consta de 3 letras mayúsculas y 4 dígitos." />
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<div class="checkbox">
-						<label><input type="checkbox" name="remember">
-							Recordarme</label>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button id="botonLogin" type="submit" class="btn btn-info">
-						Login</button>
-				</div>
-			</div>
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button id="CancelarLog" type="submit" class="btn btn-info"
-						onClick='window.location.replace("Pagina")'>Cancelar</button>
+					<button id="botonLogin" type="submit" class="btn btn-info">
+						Cambiar Contraseña</button>
 				</div>
 			</div>
+
 		</form>
 		<%
 			if (error != null) {
@@ -118,7 +105,6 @@
 		<button type='button'
 			onClick='window.location.replace("LogearUsuarios")'>Registrate</button>
 		<button type='button' onClick='window.location.replace("Login")'>Reintentar</button>
-		<button type='button' onClick='window.location.replace("updateContraseña")'>Cambiar Contraseña</button>
 		<%
 			}
 		%>

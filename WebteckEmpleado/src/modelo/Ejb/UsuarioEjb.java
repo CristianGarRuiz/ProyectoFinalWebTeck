@@ -1,14 +1,13 @@
 package modelo.Ejb;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import modelo.dao.EmpleadoDao;
-import modelo.dao.ProductosDao;
 import modelo.dao.UsuarioDao;
 import modelo.dao.CodigoDAO;
-import modelo.Pojo.ProductoPojo;
 import modelo.Pojo.UsuarioPojo;
 
 
@@ -102,6 +101,12 @@ public class UsuarioEjb {
 		userDao.activarUsuario(codigo);
 	}
 
+	
+	public ArrayList<UsuarioPojo> getDatosUsuarioporEmailUsuario(String emailUsuario)  throws SQLException {
+		UsuarioDao userDao = new UsuarioDao();
+		return userDao.getDatosUsuarioporEmailUsuario(emailUsuario);
+
+	}
 	/**
 	 * este metodo serviria para contar los usuarios
 	 * 
@@ -129,6 +134,11 @@ public class UsuarioEjb {
 	public void updateContraseña(UsuarioPojo usu) {
 		UsuarioDao userDao = new UsuarioDao();
 		userDao.updateContraseña(usu);
+	}
+	
+	public void updateImagen(UsuarioPojo usu) {
+		UsuarioDao userDao = new UsuarioDao();
+		userDao.updateImagen(usu);
 	}
 
 }

@@ -16,6 +16,7 @@ import modelo.Ejb.ProductosEjb;
 import modelo.Ejb.SesionesEjb;
 import modelo.Ejb.UsuariosEjb;
 import modelo.Pojo.CategoriasPojo;
+import modelo.Pojo.MarcasPojo;
 import modelo.Pojo.ProductosTiendaPojo;
 import modelo.Pojo.UsuariosPojo;
 
@@ -43,6 +44,7 @@ public class Principal extends HttpServlet {
 		String error = request.getParameter("error");
 		ArrayList<ProductosTiendaPojo> productosTienda = productosEjb.leerTotalProductos();
 		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
+		ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
 		ArrayList<ProductosTiendaPojo> productosMedia = productosEjb.leerTotalProductosMedia();
 
 		RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/Principal.jsp");
@@ -53,6 +55,7 @@ public class Principal extends HttpServlet {
 		request.setAttribute("productosTienda", productosTienda);
 		request.setAttribute("productosMedia", productosMedia);
 		request.setAttribute("categorias", categorias);
+		request.setAttribute("marcas", marcas);
 		request.setAttribute("error", error);
 
 		if (pantalla == null || pantalla.equals("D")) {

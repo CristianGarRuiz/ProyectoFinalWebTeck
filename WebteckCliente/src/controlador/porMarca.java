@@ -16,15 +16,15 @@ import modelo.Ejb.PreguntasEjb;
 import modelo.Ejb.ProductosEjb;
 import modelo.Ejb.SesionesEjb;
 import modelo.Ejb.UsuariosEjb;
+import modelo.Ejb.VentaEjb;
 import modelo.Pojo.CategoriasPojo;
 import modelo.Pojo.MarcasPojo;
-import modelo.Pojo.PreguntasPojo;
+import modelo.Pojo.ProductosTiendaPojo;
 import modelo.Pojo.UsuariosPojo;
 
-@WebServlet("/PreguntasFrecuentes")
-public class PreguntasFrecuentes extends HttpServlet {
+@WebServlet("/porMarca")
+public class porMarca extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	@EJB
 	UsuariosEjb usuarioEjb;
 
@@ -37,6 +37,9 @@ public class PreguntasFrecuentes extends HttpServlet {
 	@EJB
 	PreguntasEjb preguntasEjb;
 
+	@EJB
+	VentaEjb ventaEjb;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -45,14 +48,27 @@ public class PreguntasFrecuentes extends HttpServlet {
 		String pantalla = sesionesEjb.getPantalla(session);
 		String error = request.getParameter("error");
 
-		RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/Preguntas.jsp");
-		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/PrincipalNocturna.jsp");
+		RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/mostrarProductoporMarca.jsp");
+		RequestDispatcher rsNocturna = getServletContext()
+				.getRequestDispatcher("/mostrarProductoporCategoriaNocturno.jsp");
+
+		String eseid = request.getParameter("id");
+
+		Integer id = Integer.valueOf(eseid);
+
+		ArrayList<MarcasPojo> MarcasID = productosEjb.leerMarcasId(id);
+		ArrayList<ProductosTiendaPojo> productosMarcaid = productosEjb.leerProductoidMarca(id);
+		ProductosTiendaPojo contarProds = productosEjb.contarProductosporMarca(id);
 		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
 		ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
-		
+
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("pantalla", pantalla);
 		request.setAttribute("error", error);
+		request.setAttribute("id", id);
+		request.setAttribute("MarcasID", MarcasID);
+		request.setAttribute("productosMarcaid", productosMarcaid);
+		request.setAttribute("contarProds", contarProds);
 		request.setAttribute("categorias", categorias);
 		request.setAttribute("marcas", marcas);
 
@@ -66,37 +82,6 @@ public class PreguntasFrecuentes extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		HttpSession session = request.getSession();
-		String error = request.getParameter("error");
-		UsuariosPojo usuario = sesionesEjb.usuariosLogeado(session);
-		String pantalla = sesionesEjb.getPantalla(session);
-		String pregunta = request.getParameter("pregunta");
-		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
-		ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
-
-		RequestDispatcher rs1 = getServletContext().getRequestDispatcher("/Preguntas.jsp");
-		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/Preguntas.jsp");
-
-		request.setAttribute("usuario", usuario);
-		request.setAttribute("pregunta", pregunta);
-		request.setAttribute("pantalla", pantalla);
-		request.setAttribute("error", error);
-		request.setAttribute("categorias", categorias);
-		request.setAttribute("marcas", marcas);
-		if (pantalla == null || pantalla.equals("D")) {
-
-			ArrayList<PreguntasPojo> preguntas = preguntasEjb.RespuestaPreguntas(pregunta);
-
-			request.setAttribute("preguntas", preguntas);
-			rs1.forward(request, response);
-
-		} else {
-			ArrayList<PreguntasPojo> preguntas = preguntasEjb.RespuestaPreguntas(pregunta);
-			request.setAttribute("preguntas", preguntas);
-			rsNocturna.forward(request, response);
-
-		}
 
 	}
 

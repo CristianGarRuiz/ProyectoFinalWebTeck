@@ -131,7 +131,9 @@
 		<%
 			if (producto != null && usu != null) {
 				out.print("<h3>Total Productos :</h3>");
-				out.print("<table class= table table-responsive table-xs table-sm table-striped table-bordered table-hover >");
+				out.print(
+						"<table class= table table-responsive table-xs table-sm table-striped table-bordered table-hover >");
+				out.print("<th> Imagen:</th>");
 				out.print("<th> Nombre:</th>");
 				out.print("<th> Descripcion:</th>");
 				out.print("<th> Año:</th>");
@@ -144,6 +146,7 @@
 				for (ProductoPojo prod : producto) {
 
 					out.print("<tr>");
+					out.print("<td> <img src= Imagenes/'" + prod.getFoto() + "'  alt=''></td>");
 					out.print("<td>" + prod.getTitulo() + "</td>");
 					out.print("<td>" + prod.getDescripcion() + "</td>");
 					out.print("<td>" + prod.getAnyo() + "</td>");

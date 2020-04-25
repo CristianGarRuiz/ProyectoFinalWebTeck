@@ -1,5 +1,7 @@
 package modelo.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import modelo.dao.MyBatisUtil;
 import modelo.Pojo.UsuarioPojo;
@@ -21,6 +23,21 @@ public class UsuarioDao {
 
 	}
 
+	
+	public ArrayList<UsuarioPojo> getDatosUsuarioporEmailUsuario(String emailUsuario) {
+
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			UsuarioMapper datosUsu = sqlSession.getMapper(UsuarioMapper.class);
+			return datosUsu.getDatosUsuarioporEmailUsuario(emailUsuario);
+
+		} finally {
+			sqlSession.close();
+		}
+
+	}
+	
+	
 	/**
 	 * este metodo recojo la foto del usuario que hace entra ne la pagina
 	 * 
@@ -163,6 +180,18 @@ public class UsuarioDao {
 		try {
 			UsuarioMapper accidenteEdi = sqlSession.getMapper(UsuarioMapper.class);
 			accidenteEdi.updateContraseña(usu);
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	
+	public void updateImagen(UsuarioPojo usu) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			UsuarioMapper accidenteEdi = sqlSession.getMapper(UsuarioMapper.class);
+			accidenteEdi.updateImagen(usu);
 			sqlSession.commit();
 		} finally {
 			sqlSession.close();

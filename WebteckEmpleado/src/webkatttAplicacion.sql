@@ -55,12 +55,33 @@ pantalla varchar(30) default 'D',
 activado varchar(50) default 'N');
 
 
+create table direccionesUsuarios(
+id int not null primary key auto_increment,
+direccion varchar (200),
+vivienda varchar(150),
+localidad varchar(50),
+provincia varchar(50),
+codigoPostal int(6),
+emailUsuario varchar(100),
+foreign key (emailUsuario) 
+	references usuaris(emailUsuario)
+	on update cascade
+	on delete cascade);
+
+
 create table empleados(
-email varchar(100) not null primary key,
+emailUsuario varchar(100) not null primary key,
 nombre varchar(100) ,
 usuario varchar(100) not null,
 `password` varchar(100) not null,
 foto varchar(100));
+
+
+create table preguntas(
+id int  not null primary key auto_increment,
+nombre varchar(100) ,
+respuesta varchar(1000) not null
+);
 
 create table claveregistro(
 codigo int not null,
@@ -76,7 +97,6 @@ id int not null primary key auto_increment,
 idProducto int,
 emailUsuario varchar(100),
 valoraciones int,
-comentarios varchar(200),
 foreign key (idProducto) 
 	references productos(id)
 	on update cascade
@@ -87,9 +107,23 @@ foreign key (emailUsuario)
 	on delete cascade);
 
 
+create table comentarios(
+id int not null primary key auto_increment,
+idProducto int,
+emailUsuario varchar(100),
+comentarios varchar(400),
+foreign key (idProducto) 
+	references productos(id)
+	on update cascade
+	on delete cascade,
+foreign key (emailUsuario) 
+	references usuaris(emailUsuario)
+	on update cascade
+	on delete cascade);
+
 
 insert into usuaris (emailUsuario,nombre,usuario,`password`,foto,administrador) values (  'pepe@gmail.com','pepe' ,'pepe1234','1234','usuario.jpg','');
-insert into empleados (email,nombre,usuario,`password`,foto) values ('pepe@gmail.com','cristian' ,'cristian','1234','usuario.jpg');
+insert into empleados (emailUsuario,nombre,usuario,`password`,foto) values ('pepe@gmail.com','cristian' ,'cristian','1234','usuario.jpg');
 
 
 insert into plataformas (nombre) values ('ordenadores');
@@ -348,20 +382,44 @@ Pantalla AMOLED premium con protección ocular avanzada
 Metal esmerilado y vidrio. Impresionante RGB
 Diseño característico del tiburón negro',3,2);
 
-insert into valoraciones (idProducto,emailUsuario,valoraciones,comentarios) values (1,'pepe@gmail.com',8,'Buen producto');
-insert into valoraciones (idProducto,emailUsuario,valoraciones,comentarios) values (2,'pepe@gmail.com',5,'Buen producto Calida Increible');
-insert into valoraciones (idProducto,emailUsuario,valoraciones,comentarios) values (3,'pepe@gmail.com',6,'Producto Excelente');
-insert into valoraciones (idProducto,emailUsuario,valoraciones,comentarios) values (4,'pepe@gmail.com',3,'Producto poco bueno');
-insert into valoraciones (idProducto,emailUsuario,valoraciones,comentarios) values (5,'pepe@gmail.com',6,'Buen producto');
-insert into valoraciones (idProducto,emailUsuario,valoraciones,comentarios) values (6,'pepe@gmail.com',7,'Bastante Bueno');
-insert into valoraciones (idProducto,emailUsuario,valoraciones,comentarios) values (7,'pepe@gmail.com',9,'Increible super eficiente');
-insert into valoraciones (idProducto,emailUsuario,valoraciones,comentarios) values (8,'pepe@gmail.com',2,'Nefasto el producto , esperaba mas');
-insert into valoraciones (idProducto,emailUsuario,valoraciones,comentarios) values (9,'pepe@gmail.com',1,'Sin comentarios algo muy malo');
-insert into valoraciones (idProducto,emailUsuario,valoraciones,comentarios) values (10,'pepe@gmail.com',5,'Decente dentro de lo que cabe');
-insert into valoraciones (idProducto,emailUsuario,valoraciones,comentarios) values (11,'pepe@gmail.com',7,'Buen producto');
-insert into valoraciones (idProducto,emailUsuario,valoraciones,comentarios) values (12,'pepe@gmail.com',4,'No tiene la calida suficiente ');
+insert into valoraciones (idProducto,emailUsuario,valoraciones) values (1,'pepe@gmail.com',8);
+insert into valoraciones (idProducto,emailUsuario,valoraciones) values (2,'pepe@gmail.com',5);
+insert into valoraciones (idProducto,emailUsuario,valoraciones) values (3,'pepe@gmail.com',6);
+insert into valoraciones (idProducto,emailUsuario,valoraciones) values (4,'pepe@gmail.com',3);
+insert into valoraciones (idProducto,emailUsuario,valoraciones) values (5,'pepe@gmail.com',6);
+insert into valoraciones (idProducto,emailUsuario,valoraciones) values (6,'pepe@gmail.com',7);
+insert into valoraciones (idProducto,emailUsuario,valoraciones) values (7,'pepe@gmail.com',9);
+insert into valoraciones (idProducto,emailUsuario,valoraciones) values (8,'pepe@gmail.com',2);
+insert into valoraciones (idProducto,emailUsuario,valoraciones) values (9,'pepe@gmail.com',1);
+insert into valoraciones (idProducto,emailUsuario,valoraciones) values (10,'pepe@gmail.com',5);
+insert into valoraciones (idProducto,emailUsuario,valoraciones) values (11,'pepe@gmail.com',7);
+insert into valoraciones (idProducto,emailUsuario,valoraciones) values (12,'pepe@gmail.com',4);
+
+insert into comentarios (idProducto,emailUsuario,comentarios) values (1,'pepe@gmail.com','Buen producto');
+insert into comentarios (idProducto,emailUsuario,comentarios) values (2,'pepe@gmail.com','Buen producto Calida Increible');
+insert into comentarios (idProducto,emailUsuario,comentarios) values (3,'pepe@gmail.com','Producto Excelente');
+insert into comentarios (idProducto,emailUsuario,comentarios) values (4,'pepe@gmail.com','Producto poco bueno');
+insert into comentarios (idProducto,emailUsuario,comentarios) values (5,'pepe@gmail.com','Buen producto');
+insert into comentarios (idProducto,emailUsuario,comentarios) values (6,'pepe@gmail.com','Bastante Bueno');
+insert into comentarios (idProducto,emailUsuario,comentarios) values (7,'pepe@gmail.com','Increible super eficiente');
+insert into comentarios (idProducto,emailUsuario,comentarios) values (8,'pepe@gmail.com','Nefasto el producto , esperaba mas');
+insert into comentarios (idProducto,emailUsuario,comentarios) values (9,'pepe@gmail.com','Sin comentarios algo muy malo');
+insert into comentarios (idProducto,emailUsuario,comentarios) values (10,'pepe@gmail.com','Decente dentro de lo que cabe');
+insert into comentarios (idProducto,emailUsuario,comentarios) values (11,'pepe@gmail.com','Buen producto');
+insert into comentarios (idProducto,emailUsuario,comentarios) values (12,'pepe@gmail.com','No tiene la calida suficiente ');
 
 insert into ventas (fecha,idProducto,emailUsuario) values('2020/03/15',1,'pepe@gmail.com');
+
+
+
+
+insert into preguntas (id,nombre,respuesta) values (1,'Cuanto Tardara mi pedido','Tardar entre 7 - 10 en llegarte despues de que recibamos el pago');
+insert into preguntas (id,nombre,respuesta) values (2,'cuanto tarda en recibir el pago ','Depende de tu entidad bancaria pero normalmente no son mas de 24 horas');
+insert into preguntas (id,nombre,respuesta) values (3,'enviais a islas','Se envia a Ceuta y Melilla , Islas menos Canarias ');
+insert into preguntas (id,nombre,respuesta) values (4,'no recibido mi pedido','Ponte con nuestra atencion al cliente y miraremos de Solucionar el problema');
+insert into preguntas (id,nombre,respuesta) values (5,'Cuanto Tardara el envio ','Tardar entre 7 - 10 en llegarte despues de que recibamos el pago');
+
+
 
 select
 productos.titulo as ti,productos.precio,ventas.fecha,usuaris.nombre
@@ -389,9 +447,9 @@ productos;
 select
 *
 from 
-empleados;
+usuaris;
 
-delete from productos where productos.id = 1;
+delete from productos where productos.id = 2;
 
 
 select
@@ -417,4 +475,244 @@ productos.titulo like '%xbox%';
 		from
 		productos
 		where
+		productos.titulo like '%xbox%';
+        
+        select
+        *
+        from
+        comentarios,productos
+        where
+        comentarios.idProducto = productos.id;
+        
+        
+          select
+        *
+        from
+        valoraciones,productos
+        where
+        valoraciones.idProducto = productos.id;
+        
+        UPDATE
+		usuaris
+		SET
+
+		password = 12345
+		WHERE usuaris.emailUsuario = 'pepe@gmail.com';
+        
+        
+        select
+        *
+        from 
+        ventas,productos
+        where ventas.emailUsuario = 'pepe@gmail.com';
+        
+        select
+        distinct comentarios,productos.titulo
+        from
+        comentarios,productos,usuaris
+        where
+        comentarios.idProducto=productos.id and comentarios.emailUsuario= usuaris.emailUsuario and
+        usuaris.usuario = 'pepe1234';
+        
+        
+   select
+		 productos.titulo as titulo,productos.anyo as anyo, productos.precio
+		as
+		precio ,productos.stock as stock,productos.descripcion as
+		descripcion,productos.foto as foto,
+		generos.nombre as genero
+		,
+		plataformas.nombre as plataforma,productos.id 
+
+		from
+		productos,plataformas,generos
+        where
+        productos.idPlataforma = plataformas.id and productos.idGenero = generos.id 
+        and 
+        productos.id = 6;
+		
+        select
+        productos.titulo as titulo ,productos.precio as precio ,ventas.fecha as fecha ,usuaris.nombre as nombre
+		from
+		ventas ,productos,usuaris
+		where
+		ventas.idProducto= productos.id and ventas.emailUsuario= usuaris.emailUsuario and
+		ventas.emailUsuario = 'pepe@gmail.com';
+        
+        
+        select
+        *
+        from 
+        preguntas
+        where
+        preguntas.nombre like '%mi pedido%';
+        
+
+       SELECT 
+       round(AVG(valoraciones.valoraciones)), productos.titulo
+       FROM productos INNER JOIN valoraciones
+       ON productos.id = valoraciones.idProducto
+       GROUP BY productos.titulo
+       HAVING   AVG(valoraciones.valoraciones) >= 7 ;
+       
+       
+        
+ SELECT
+	round(AVG(v.valoraciones))as valoraciones ,p.titulo as titulo ,p.foto as foto,p.id as id ,p.precio as precio
+FROM
+	valoraciones v
+INNER JOIN productos p ON p.id = v.idProducto
+GROUP BY v.idProducto
+having avg(v.valoraciones)>=7 limit 4 ;
+
+
+	select
+		*
+
+		from
+		productos,valoraciones
+		where
+		productos.id = valoraciones.idProducto;
+        
+        
+select
+		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,productos.id,productos.stock
+		from
+		productos;
+        
+        select
+		productos.titulo as
+		titulo,productos.anyo as anyo,
+		productos.precio
+		as
+		precio
+		,productos.stock as
+		stock,productos.descripcion as
+		descripcion,productos.foto as foto,
+		generos.nombre as genero
+		,
+		plataformas.nombre as plataforma,productos.id
+		as
+		id
+
+		from
+		productos,plataformas,generos
+		where
+		productos.idPlataforma = plataformas.id and productos.idGenero =
+		generos.id ;
+        
+       SELECT
+	round(AVG(v.valoraciones))as valoraciones ,p.titulo as titulo ,p.foto as foto,p.id as id ,p.precio as precio,p.stock as stock
+FROM
+	valoraciones v
+INNER JOIN productos p ON p.id = v.idProducto
+GROUP BY v.idProducto;
+
+
+select
+count(productos.titulo)
+from
+plataformas,productos
+where
+plataformas.id = productos.idPlataforma and
+productos.idPlataforma = 4;
+
+
+select
+*
+from
+plataformas,productos
+where
+plataformas.id = productos.idPlataforma and
+productos.idPlataforma = 4;
+
+
+select
+*
+from 
+plataformas;
+
+
+select
+*
+from 
+usuaris;
+
+select
+usuaris.emailUsuario,usuaris.nombre, usuaris.usuario ,usuaris.foto
+from 
+usuaris
+where
+usuaris.emailUsuario = 'pepe@gmail.com';
+        
+ select
+ *
+ from
+ direccionesUsuarios;
+		select
+		*
+		from
+		generos,productos
+		where
+		generos.id = productos.idGenero and
+		generos.id=1;
+        
+        	select
+		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,
+		productos.idGenero,productos.idPlataforma,productos.id,
+		productos.stock
+		from
+		productos
+		where
+		productos.idGenero =1;
+ select
+ *
+ from 
+ direccionesUsuarios;
+ 
+ delete 
+ from 
+ direccionesUsuarios
+ where
+ emailUsuario= 'cris@gmail.com';
+ 
+ select
+ *
+ from 
+ usuaris;
+ 
+ select
+ *
+ from 
+ empleados;
+ 
+    UPDATE
+		usuaris
+		SET
+
+		password = 12345
+		WHERE usuaris.emailUsuario = 'pepe@gmail.com';
+        
+        insert into usuaris (emailUsuario,nombre,usuario,`password`,foto,administrador) values (  'cris@gmail.com','cris' ,'cris123','1234','usuario.jpg','');
+        
+        insert into empleados (emailUsuario,nombre,usuario,`password`,foto) values ('pepe2@gmail.com','cris' ,'cris','1234','usuario.jpg');
+
+
+
+	select
+		 distinct productos.titulo as titulo,productos.anyo as anyo,
+		productos.precio
+		as
+		precio ,productos.stock as
+		stock,productos.descripcion as
+		descripcion,productos.foto as foto,
+		generos.nombre as genero
+		,
+		plataformas.nombre as plataforma,productos.id
+		as id
+		from
+		productos,plataformas,generos
+		where
+		productos.idPlataforma = plataformas.id and productos.idGenero =
+		generos.id   and
 		productos.titulo like '%xbox%';

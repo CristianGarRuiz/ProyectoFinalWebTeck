@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='modelo.dao.mappers.DireccionMapper'>
+
+	<resultMap type="DireccionPojo" id="datosDireccion">
+		<id property='id' column='id' />
+		<result property='direccion' column='direccion' />
+		<result property='vivienda' column='vivienda' />
+		<result property='localidad' column='localidad' />
+		<result property='provincia' column='provincia' />
+		<result property='codigoPostal' column='codigoPostal' />
+		<result property='emailUsuario' column='emailUsuario' />
+	</resultMap>
+
+
+	<update id='updateDireccion' parameterType='DireccionPojo'>
+		UPDATE
+		direccionesUsuarios
+		SET
+		direccion =#{direccion},
+		vivienda =#{vivienda},
+		localidad =#{localidad},
+		provincia=#{provincia},
+		codigoPostal =#{codigoPostal}
+		WHERE direccionesUsuarios.emailUsuario =#{emailUsuario}
+	</update>
+
+
+
+	<select id="leerDirecciones" resultMap="datosDireccion">
+		select
+
+		direccionesUsuarios.direccion,direccionesUsuarios.vivienda,direccionesUsuarios.localidad,direccionesUsuarios.provincia,
+		direccionesUsuarios.codigoPostal,direccionesUsuarios.emailUsuario
+		from
+		direccionesUsuarios
+		where
+		direccionesUsuarios.emailUsuario=#{emailUsuario}
+	</select>
+
+
+   <select id="direccionPorNombre" resultMap="datosDireccion">
+		select
+
+		direccionesUsuarios.direccion,direccionesUsuarios.vivienda,direccionesUsuarios.localidad,direccionesUsuarios.provincia,
+		direccionesUsuarios.codigoPostal, direccionesUsuarios.id,direccionesUsuarios.emailUsuario
+		from
+		direccionesUsuarios
+		where
+		direccionesUsuarios.emailUsuario=#{emailUsuario}
+	</select>
+
+
+	<insert id='insertDireccion' parameterType='DireccionPojo'
+		useGeneratedKeys='true' keyProperty='id'>
+		insert into direccionesUsuarios
+		(direccion,vivienda,localidad,provincia,codigoPostal,emailUsuario)
+		VALUES(#{direccion}, #{vivienda},
+		#{localidad},#{provincia},
+		#{codigoPostal}, #{emailUsuario})
+	</insert>
+	
+	<delete id='eliminarDireccion'>
+		DELETE FROM direccionesUsuarios WHERE emailUsuario =
+		#{emailUsuario}
+	</delete>
+
+
+</mapper>

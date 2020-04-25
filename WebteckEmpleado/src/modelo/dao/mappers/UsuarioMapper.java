@@ -1,10 +1,12 @@
 package modelo.dao.mappers;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Param;
 import modelo.Pojo.UsuarioPojo;
 
 public interface UsuarioMapper {
-	
+
 	/**
 	 * recojo los datos de un usuario y comprueba que cumpla con el usuario y
 	 * password
@@ -14,8 +16,10 @@ public interface UsuarioMapper {
 	 * @return
 	 */
 	public UsuarioPojo leerDatos(@Param("usuario") String user, @Param("password") String paswd);
-	
-	public UsuarioPojo leerDatosEmpleado(@Param("usuario") String user,@Param("password") String paswd);
+
+	public ArrayList<UsuarioPojo> getDatosUsuarioporEmailUsuario(@Param("emailUsuario") String emailUsuario);
+
+	public UsuarioPojo leerDatosEmpleado(@Param("usuario") String user, @Param("password") String paswd);
 
 	/**
 	 * recoje la imagen de un usuario que hace login
@@ -37,8 +41,7 @@ public interface UsuarioMapper {
 	public void AñadirUsuarios(@Param("emailUsuario") String emailUsuario, @Param("nombre") String nombre,
 			@Param("usuario") String usuario, @Param("password") String pass, @Param("foto") String foto,
 			@Param("activado") String activado);
-	
-	
+
 	public void AñadirEmpleado(@Param("emailUsuario") String emailUsuario, @Param("nombre") String nombre,
 			@Param("usuario") String usuario, @Param("password") String pass, @Param("foto") String foto);
 
@@ -49,11 +52,8 @@ public interface UsuarioMapper {
 	 */
 	public void eliminarUsuario(@Param("emailUsuario") String emailUsuario);
 
-	
-	
-	
 	public void eliminarEmpleado(@Param("emailUsuario") String emailUsuario);
-	
+
 	/**
 	 * elimina la clave relaciona con email del usuario eliminado
 	 * 
@@ -86,8 +86,9 @@ public interface UsuarioMapper {
 	 */
 
 	public void pantallaUsuario(@Param("pantalla") String pantalla, @Param("usuario") String usuario);
-	
-	
+
 	public void updateContraseña(UsuarioPojo usu);
+
+	public void updateImagen(UsuarioPojo usu);
 
 }
