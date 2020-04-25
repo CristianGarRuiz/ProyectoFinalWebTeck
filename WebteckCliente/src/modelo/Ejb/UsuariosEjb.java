@@ -96,7 +96,7 @@ public class UsuariosEjb {
 
 		WebTarget target1 = cliente.target("http://localhost:8080/WebteckEmpleado/ControladorRest/nuevoUsuario/patata23/" + usu + "/" + codigo);
 
-		target1.request().get(UsuariosPojo.class);
+		target1.request().put(Entity.json(usu));
 
 		return codigo;
 
@@ -133,7 +133,7 @@ public class UsuariosEjb {
 		WebTarget target1 = cliente
 				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/activarUsuario/patata23/" + codigo);
 
-		target1.request().get();
+		target1.request().put(Entity.json(codigo));
 
 	}
 

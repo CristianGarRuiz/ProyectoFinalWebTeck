@@ -8,7 +8,7 @@ import javax.ejb.Stateless;
 public class GeneradoresEnlaceEjb {
 
 	public String generarEnlace(int codigo) {
-		return "http://localhost:8080/WebteckEmpleado/claveRegistro?codigo=" + codigo;
+		return "http://localhost:8080/WebteckCliente/claveRegistro?codigo=" + codigo;
 	}
 
 	public String generarEnlaceUpdateContraseña() {

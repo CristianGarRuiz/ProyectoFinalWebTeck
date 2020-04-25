@@ -229,11 +229,10 @@ public class ControladorRest {
 
 	}
 
-	@PUT
-	@Path("/nuevoUsuario/{token}/{codigo}")
+	@GET
+	@Path("/nuevoUsuario/{token}/{usu}/{codigo}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-
 	public void newUsuario(@PathParam("token") String token, UsuarioPojo usu, int codigo) throws SQLException {
 
 		if (token.equals("patata23")) {

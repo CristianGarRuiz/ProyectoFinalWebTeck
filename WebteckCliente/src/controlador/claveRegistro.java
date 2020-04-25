@@ -28,7 +28,7 @@ public class claveRegistro extends HttpServlet {
 	// Luego lo redirige a pagina
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Pagina.jsp");
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Principal.jsp");
 		try {
 			usuarioEJB.ActivarUsuario(Integer.parseInt(request.getParameter("codigo")));
 
