@@ -30,9 +30,15 @@ public class claveRegistro extends HttpServlet {
 			throws ServletException, IOException {
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Principal.jsp");
 		try {
-			usuarioEJB.ActivarUsuario(Integer.parseInt(request.getParameter("codigo")));
+			
+			String codi = request.getParameter("codigo");
+			int codigo = Integer.parseInt(codi);
+			
+			usuarioEJB.activarUsuario(codigo);
 
 			rs.forward(request, response);
+			
+			
 		} catch (NumberFormatException e) {
 			loggerError
 					.error(e.getMessage() + "Erro al activar el usuario y hacer la dereccion del usuario a la pagina");

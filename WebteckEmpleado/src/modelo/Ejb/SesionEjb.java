@@ -37,4 +37,27 @@ public class SesionEjb {
 		}
 	}
 
+	public String getPantalla(HttpSession session) {
+		String pantalla;
+		pantalla = (String) session.getAttribute("pantalla");
+
+		return pantalla;
+
+	}
+
+	/**
+	 * este metodo comprueba que no sea nula la session y cambia el valor de
+	 * pantalla en session
+	 * 
+	 * @param session
+	 * @param pantalla
+	 */
+	public void cambiarPantalla(HttpSession session, String pantalla) {
+
+		if (session != null) {
+			session.setAttribute("pantalla", pantalla);
+		}
+
+	}
+
 }

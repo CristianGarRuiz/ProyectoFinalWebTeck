@@ -37,7 +37,7 @@ public class Ficha extends HttpServlet {
 
 	@EJB
 	ValoracionesEjb valoracionesEjb;
-	
+
 	@EJB
 	ProductosEjb productosEjb;
 
@@ -52,6 +52,7 @@ public class Ficha extends HttpServlet {
 		Integer indentificador = Integer.valueOf(id);
 
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/FichaProducto.jsp");
+		RequestDispatcher rsN = getServletContext().getRequestDispatcher("/FichaProductoNocturna.jsp");
 
 		ArrayList<ProductosTiendaPojo> productosTienda = productoEjb.leerProducto(indentificador);
 		ArrayList<ValorcionesPojo> comentariosProd = valoracionesEjb.leerComentario(indentificador);
@@ -68,7 +69,11 @@ public class Ficha extends HttpServlet {
 		request.setAttribute("categorias", categorias);
 		request.setAttribute("marcas", marcas);
 
-		rs.forward(request, response);
+		if (pantalla == null || pantalla.equals("D")) {
+			rs.forward(request, response);
+		} else {
+			rsN.forward(request, response);
+		}
 
 	}
 

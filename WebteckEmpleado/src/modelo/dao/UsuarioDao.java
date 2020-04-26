@@ -126,7 +126,7 @@ public class UsuarioDao {
 		try {
 
 			UsuarioMapper usuActi = sqlSession.getMapper(UsuarioMapper.class);
-			usuActi.ActivarUsuario(codigo);
+			usuActi.activarUsuario(codigo);
 			sqlSession.commit();
 
 		} finally {

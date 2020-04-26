@@ -67,7 +67,7 @@ public interface UsuarioMapper {
 	 * @param codigo
 	 */
 
-	public void ActivarUsuario(@Param("codigo") Integer codigo);
+	public void activarUsuario(@Param("codigo") Integer codigo);
 
 	/**
 	 * hace una cuenta total de los usuario creado en nuestra pagina

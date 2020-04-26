@@ -32,3 +32,37 @@
 input {
 	border-radius: 3%;
 }
+
+#contaLoginBotonesError {
+	position: relative;
+	display: flex;
+	margin-left: 20%;
+	margin-right: auto;
+}
+
+#botonErrorLogin {
+	display: flex;
+	background: cornflowerblue;
+	border-radius: 5px;
+	margin-bottom: 3%;
+	align-content: center;
+	height: 57px;
+	width: 22%;
+	text-align: center;
+	font-size: larger;
+	border: none;
+	color: white;
+	margin-inline-start: auto;
+	text-align: center;
+	box-shadow: 0 9px #999;
+}
+
+#botonErrorLogin:hover {
+	background-color: #379eed
+}
+
+#botonErrorLogin:active {
+	background-color: #379eed;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
+}

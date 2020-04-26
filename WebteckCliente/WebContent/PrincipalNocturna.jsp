@@ -30,7 +30,7 @@
 <link rel="icon" type="imagenes/iconIma.gif" href="iconIma.gif">
 <link type="text/css" href="estilos/Principal.css" rel="stylesheet" />
 </head>
-<body>
+<body style="background-color: gray;">
 
 
 	<%
@@ -161,7 +161,7 @@
 											<a class="dropdown-item" href="#"><button type='button'
 											onClick='window.location.replace("FichaUsuario")'>Datos Usuario</button> </a>
 											<a class="dropdown-item" href="#"><button type='button'
-											onClick='window.location.replace("cambioPantalla")'>Cambiar Pantalla</button> </a>
+											onClick='window.location.replace("cambioPantalla")'>Cambiar Modo</button> </a>
 							</div>
 						</div>
 
@@ -209,7 +209,7 @@
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="imagenes/lenovolegi.jpg" alt="lenovoLegion" width="700"
+				<img src="imagenes/lenovolegi.jpg" alt="LenovoLegion" width="700"
 					height="300">
 				<div class="carousel-caption">
 					<h3>Lenovo LEGION</h3>

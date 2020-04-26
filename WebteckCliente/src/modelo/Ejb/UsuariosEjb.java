@@ -114,11 +114,11 @@ public class UsuariosEjb {
 	 * @throws SQLException
 	 */
 
-	public void ActivarUsuario(int codigo) throws SQLException {
+	public void activarUsuario(int codigo) throws SQLException {
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target1 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/activarUsuario/patata23/" + codigo);
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/activarUsu/patata23/" + codigo);
 
 		target1.request().put(Entity.json(codigo));
 
@@ -145,7 +145,7 @@ public class UsuariosEjb {
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target2 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/pantallaUsuario/patata23/" + pantalla
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/pantallaUsu/patata23/" + pantalla
 						+ "/" + usuario);
 
 		target2.request().get();

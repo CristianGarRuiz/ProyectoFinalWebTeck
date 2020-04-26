@@ -67,11 +67,10 @@ public class UsuarioEjb {
 
 	}
 	
-	public int añadirUsuario(UsuarioPojo usu) throws SQLException {
+	public int añadirUsuario(UsuarioPojo usu, int codigo) throws SQLException {
 		UsuarioDao userDao = new UsuarioDao();
 		userDao.AñadirUsuarios(usu);
-
-		int codigo = (int) (Math.random() * 10000 + 1);
+		
 		CodigoDAO codigoDao = new CodigoDAO();
 		codigoDao.insertCodigo(codigo, usu.getEmailUsuario());
 		return codigo;
@@ -96,7 +95,7 @@ public class UsuarioEjb {
 	 * @param codigo
 	 * @throws SQLException
 	 */
-	public void ActivarUsuario(int codigo) throws SQLException {
+	public void activarUsuario(int codigo) throws SQLException {
 		UsuarioDao userDao = new UsuarioDao();
 		userDao.activarUsuario(codigo);
 	}

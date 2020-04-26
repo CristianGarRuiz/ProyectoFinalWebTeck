@@ -74,13 +74,14 @@
 		#{usuario}, #{password}, #{foto})
 	</insert>
 
-	<update id='ActivarUsuario'>
+	<update id='activarUsuario'>
 		UPDATE usuaris
 		SET
 		activado ='s'
 		WHERE emailUsuario =
-		(select
-		emailUsuario from claveregistro where codigo = #{codigo})
+		(SELECT
+		emailUsuario FROM claveregistro WHERE codigo =
+		#{codigo})
 	</update>
 
 
@@ -90,7 +91,7 @@
 		SET
 		pantalla = #{pantalla}
 		WHERE usuario
-		= #{usuario}
+		=#{usuario}
 
 	</update>
 

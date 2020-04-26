@@ -40,7 +40,9 @@ public class Principal extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		UsuariosPojo usuario = sesionesEjb.usuariosLogeado(session);
+		
 		String pantalla = sesionesEjb.getPantalla(session);
+		
 		String error = request.getParameter("error");
 		ArrayList<ProductosTiendaPojo> productosTienda = productosEjb.leerTotalProductos();
 		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();

@@ -27,6 +27,7 @@ public class SesionesEjb {
 		if (session != null) {
 			session.setAttribute("usuario", usuario);
 			session.setMaxInactiveInterval(30 * 60);
+			session.setAttribute("pantalla", usuario.getPantalla());
 		}
 
 	}

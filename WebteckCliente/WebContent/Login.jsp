@@ -29,7 +29,7 @@
 
 	<%
 		String error = (String) request.getParameter("error");
-			UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
+		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
 	%>
 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -113,12 +113,17 @@
 		<%
 			if (error != null) {
 		%>
-		<h4 style="color: red;">Error en el usuario o password/o no
-			estas Registrado</h4>
-		<button type='button'
-			onClick='window.location.replace("LogearUsuarios")'>Registrate</button>
-		<button type='button' onClick='window.location.replace("Login")'>Reintentar</button>
-		<button type='button' onClick='window.location.replace("updateContraseña")'>Cambiar Contraseña</button>
+		<h4 style="color: red;">Error en el usuario o password/o no estas
+			Registrado</h4>
+		<div id="contaLoginBotonesError" class="container col-sm-11 col-md-6" >
+			<button id="botonErrorLogin" type='button'
+				onClick='window.location.replace("LogeaUsuarios")'>Registrate</button>
+			<button id="botonErrorLogin" type='button'
+				onClick='window.location.replace("Login")'>Reintentar</button>
+			<button id="botonErrorLogin" type='button'
+				onClick='window.location.replace("updateContraseña")'>Cambiar
+				Contraseña</button>
+		</div>
 		<%
 			}
 		%>

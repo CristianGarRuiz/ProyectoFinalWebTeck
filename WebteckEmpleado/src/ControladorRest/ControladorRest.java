@@ -229,35 +229,34 @@ public class ControladorRest {
 
 	}
 
-	@GET
+	@PUT
 	@Path("/nuevoUsuario/{token}/{usu}/{codigo}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public void newUsuario(@PathParam("token") String token, UsuarioPojo usu, @PathParam("codigo") int codigo) throws SQLException {
 
 		if (token.equals("patata23")) {
-			usuarioEjb.añadirUsuario(usu);
+			usuarioEjb.añadirUsuario(usu,codigo);
 		}
 	}
 
 	@PUT
-	@Path("/activarUsuario/{token}/{codigo}")
+	@Path("/activarUsu/{token}/{codigo}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-
-	public void ActivarUsuario(@PathParam("token") String token, int codigo) throws SQLException {
+	public void activarUsuario(@PathParam("token") String token, @PathParam("codigo") int codigo) throws SQLException {
 
 		if (token.equals("patata23")) {
-			usuarioEjb.ActivarUsuario(codigo);
+			usuarioEjb.activarUsuario(codigo);
 		}
 	}
 
-	@PUT
-	@Path("/pantallaUsuario/{token}/{pantalla}/{usuario}")
+	@GET
+	@Path("/pantallaUsu/{token}/{pantalla}/{usuario}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 
-	public void PantallaUsuario(@PathParam("token") String token, String pantalla, String usuario) throws SQLException {
+	public void pantallaUsuario(@PathParam("token") String token,@PathParam("pantalla") String pantalla, @PathParam("usuario")String usuario) throws SQLException {
 
 		if (token.equals("patata23")) {
 			usuarioEjb.pantallaUsuario(pantalla, usuario);
