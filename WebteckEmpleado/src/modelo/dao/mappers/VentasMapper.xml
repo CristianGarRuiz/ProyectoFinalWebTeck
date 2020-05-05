@@ -10,6 +10,7 @@
 		<result property='precio' column='precio' />
 		<result property='fecha' column='fecha' />
 		<result property='nombre' column='nombre' />
+			<result property='codigoPedido' column='codigoPedido' />
 	</resultMap>
 
 	<select id="leerProductosporFecha" resultMap="datosVentas">
@@ -28,7 +29,8 @@
 	<select id="leerProductosporEmail" resultMap="datosVentas">
 
 		select
-		productos.titulo as titulo ,productos.precio as precio ,ventas.fecha as fecha ,usuaris.nombre as nombre
+		productos.titulo as titulo ,productos.precio as precio ,ventas.fecha as fecha ,usuaris.nombre as nombre,
+		ventas.codigoPedido as codigoPedido
 		from
 		ventas ,productos,usuaris
 		where
@@ -36,4 +38,13 @@
 		ventas.emailUsuario = #{emailUsuario};
 
 	</select>
+	
+	<insert id='insertarVenta' parameterType='ProductoPojo'
+		useGeneratedKeys='true' keyProperty='id'>
+		insert into ventas
+		(codigoPedido,fecha,idProducto,emailUsuario)
+		VALUES(#{codigoPedido},#{fecha}, #{idProducto},
+		#{emailUsuario})
+	</insert>
+	
 </mapper>

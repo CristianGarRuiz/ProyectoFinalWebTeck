@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='modelo.dao.mappers.CarritoMapper'>
+
+
+
+	<resultMap type="CarritoPojo" id="CarritoCliente">
+		<id property='id' column='id' />
+		<result property='titulo' column='titulo' />
+		<result property='idProducto' column='idProducto' />
+		<result property='precio' column='precio' />
+		<result property='stock' column='stock' />
+		<result property='emailUsuario' column='emailUsuario' />
+		<result property='foto' column='foto' />
+		<result property="titulo" column="titulo" />
+
+
+	</resultMap>
+
+
+	<select id="contarProductoCarrito" resultMap="CarritoCliente">
+		select
+		count(idProducto) as idProducto
+		from
+		carritoCliente
+		where
+		carritoCliente.emailUsuario = #{emailUsuario};
+
+	</select>
+	
+	
+	<select id="SumaCarrito" resultMap="CarritoCliente">
+		 select
+	  sum(productos.precio)as precio
+      from 
+      carritoCliente,productos
+      where 
+      productos.id = carritoCliente.idProducto and
+      carritoCliente.emailUsuario = #{emailUsuario};
+
+	</select>
+	
+	
+	<select id="contarProductoCarritoCantidad" resultMap="CarritoCliente">
+	 select
+        count(carritoCliente.idProducto) as idProducto
+        from 
+        carritoCliente
+        where
+        carritoCliente.idProducto = #{idProducto} and
+        carritoCliente.emailUsuario= #{emailUsuario};
+
+	</select>
+	
+
+
+	<delete id="eliminarProductoCarrito">
+
+		delete from carritoCliente where idProducto= #{idProducto} and
+		emailUsuario = #{emailUsuario};
+	</delete>
+
+
+	<insert id='insertProductoCarrito' parameterType='CarritoPojo'
+		useGeneratedKeys='true' keyProperty='id'>
+		insert into carritoCliente
+		(idProducto,emailUsuario)
+		VALUES(#{idProducto}, #{emailUsuario})
+	</insert>
+
+	<select id="ProductoCarritoporEmail" resultMap="CarritoCliente">
+		select
+		productos.foto as foto ,productos.id as idProducto,productos.precio as
+		precio ,productos.stock as stock, productos.titulo as titulo
+		from
+		carritoCliente,productos
+		where
+		carritoCliente.idProducto= productos.id
+		and
+		carritoCliente.emailUsuario = #{emailUsuario};
+	</select>
+
+</mapper>

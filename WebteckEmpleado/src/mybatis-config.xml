@@ -23,6 +23,8 @@
 			alias='PreguntaPojo'></typeAlias>
 		<typeAlias type='modelo.Pojo.DireccionPojo'
 			alias='DireccionPojo'></typeAlias>
+			<typeAlias type='modelo.Pojo.CarritoPojo'
+			alias='CarritoPojo'></typeAlias>
 	</typeAliases>
 	<environments default='development'>
 		<environment id='development'>
@@ -43,5 +45,6 @@
 		<mapper resource='modelo/dao/mappers/ValoracionMapper.xml' />
 		<mapper resource='modelo/dao/mappers/PreguntaMapper.xml' />
 		<mapper resource='modelo/dao/mappers/DireccionMapper.xml' />
+		<mapper resource='modelo/dao/mappers/CarritoMapper.xml' />
 	</mappers>
 </configuration>

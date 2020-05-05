@@ -2,7 +2,6 @@ package controlador;
 
 import java.io.IOException;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,24 +9,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.LoggerFactory;
-
-import ch.qos.logback.classic.Logger;
-import modelo.Ejb.DireccionesEjb;
+import modelo.Ejb.CarritosEjb;
+import modelo.Ejb.ProductosEjb;
 import modelo.Ejb.SesionesEjb;
+import modelo.Ejb.UsuariosEjb;
+import modelo.Pojo.CarritosPojo;
 import modelo.Pojo.UsuariosPojo;
 
-@WebServlet("/EliminarDireccion")
-public class EliminarDireccion extends HttpServlet {
+@WebServlet("/AñadirCarrito")
+public class AñadirCarrito extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger loggerError = (Logger) LoggerFactory.getLogger("Error");
-	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
 
 	@EJB
-	DireccionesEjb direccionEjb;
+	UsuariosEjb usuarioEjb;
 
 	@EJB
 	SesionesEjb sesionesEjb;
+
+	@EJB
+	ProductosEjb productosEjb;
+
+	@EJB
+	CarritosEjb carritoEjb;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -35,22 +38,32 @@ public class EliminarDireccion extends HttpServlet {
 		HttpSession session = request.getSession();
 		UsuariosPojo usuario = sesionesEjb.usuariosLogeado(session);
 		String error = request.getParameter("error");
+		String id = request.getParameter("id");
+		Integer indentificador = Integer.valueOf(id);
+
+		int idProducto = indentificador;
 		String emailUsuario = usuario.getEmailUsuario();
 
 		request.setAttribute("error", error);
-		request.setAttribute("usuario", usuario);
+		request.setAttribute("idProducto", idProducto);
 		request.setAttribute("emailUsuario", emailUsuario);
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Principal.jsp");
 
-		try {
+		if (id != null && emailUsuario != null) {
 
-			direccionEjb.eliminarDireccion(emailUsuario);
-		} catch (Exception e) {
-			loggerError.error(e.getMessage() + "Error al eliminar una direccion de un usuario con el email propio");
+			CarritosPojo car = new CarritosPojo();
+
+			car.setEmailUsuario(emailUsuario);
+			car.setIdProducto(idProducto);
+
+			carritoEjb.añadirProductoCarro(car);
+
+			response.sendRedirect("Principal");
+
+		} else {
+
+			response.sendRedirect("error?Hay");
 
 		}
-		loggerNormal.debug("Eliminado Correctamente");
-		response.sendRedirect("Principal");
 
 	}
 
@@ -58,5 +71,4 @@ public class EliminarDireccion extends HttpServlet {
 			throws ServletException, IOException {
 
 	}
-
 }

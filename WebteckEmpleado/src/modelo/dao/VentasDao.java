@@ -34,5 +34,16 @@ public class VentasDao {
 		}
 
 	}
+	
+	public void insertarVenta(VentasPojo venta) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			VentasMapper AcciMapper = sqlSession.getMapper(VentasMapper.class);
+			AcciMapper.insertarVenta(venta);
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}
+	}
 
 }

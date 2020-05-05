@@ -30,7 +30,8 @@
 	<select id="BuscarProductoporNombre" resultMap="nombreProducto">
 
 		select
-		distinct productos.titulo as titulo,productos.anyo as anyo, productos.precio
+		distinct
+		productos.titulo as titulo,productos.anyo as anyo, productos.precio
 		as
 		precio ,productos.descripcion as descripcion,
 		generos.nombre as genero
@@ -103,9 +104,11 @@
 		from
 		productos,plataformas,generos
 		where
-		productos.idPlataforma = plataformas.id and productos.idGenero =
-		generos.id  and
-		productos.titulo like '%'
+		productos.idPlataforma =
+		plataformas.id and productos.idGenero =
+		generos.id and
+		productos.titulo
+		like '%'
 		#{titulo}
 		'%';
 	</select>
@@ -167,7 +170,8 @@
 		from
 		generos,productos
 		where
-		generos.id = productos.idGenero and
+		generos.id
+		= productos.idGenero and
 		productos.idGenero
 		=#{id}
 
@@ -278,6 +282,13 @@
 		#{idPlataforma}
 		WHERE productos.id = #{id}
 	</update>
+
+	<update id='updateProductoCantidad'>
+
+		update productos set productos.stock = #{stock} - #{cantidad} where
+		productos.id = #{idProducto};
+	</update>
+
 
 	<insert id='insertProducto' parameterType='ProductoPojo'
 		useGeneratedKeys='true' keyProperty='id'>

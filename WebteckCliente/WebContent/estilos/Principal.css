@@ -31,7 +31,8 @@
 	display: flow-root;
 	text-align: center;
 	background-color: orange;
-	margin-top: 19%; height : 13%;
+	margin-top: 19%;
+	height: 13%;
 	width: 84%;
 	text-align: center;
 	border: 2px solid cornflowerblue;
@@ -107,6 +108,14 @@
 }
 
 #CarritoTienda:hover {
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+	transition: all 0.2s ease;
+	text-decoration: none;
+	cursor: pointer
+}
+
+.bestSellerProd:hover {
 	color: rgba(255, 255, 255, 1) !important;
 	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
 	transition: all 0.2s ease;

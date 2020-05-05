@@ -22,4 +22,11 @@ public class VentasEjb {
 		return VentasDao.leerProductosporEmail(emailUsuario);
 
 	}
+	
+	
+	public  void insertarVenta(VentasPojo venta) {
+		VentasDao Ventasdao = new VentasDao();
+
+		Ventasdao.insertarVenta(venta);
+	}
 }

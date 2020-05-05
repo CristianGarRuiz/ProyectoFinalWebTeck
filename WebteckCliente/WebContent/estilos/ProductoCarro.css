@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+#cajaDatosProductos {
+	position: relative;
+	display: flex;
+}
+
+#MensajeCarro {
+	position: relative;
+	display: flex;
+}
+
+#TituloDire {
+	background-color: white;
+	border-radius: 3px;
+}
+
+#idCarrito {
+	background-color: white;
+	border-radius: 3px;
+}
+
+#CarritoProd {
+	position: relative;
+	display: flow-root;
+	text-align: center;
+	background-color: orange;
+	margin-top: 19%;
+	height: 13%;
+	width: 84%;
+	text-align: center;
+	border: 2px solid cornflowerblue;
+	border-radius: 4%;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+	text-decoration: none;
+	height: 13%;
+}
+
+
+#CarritoProd:hover {
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+	transition: all 0.2s ease;
+	text-decoration: none;
+	cursor: pointer
+}
+
+
+#PagarProducto:hover {
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+	transition: all 0.2s ease;
+	text-decoration: none;
+	cursor: pointer
+}
+
+#PagarProducto {
+	position: relative;
+	display: flow-root;
+	text-align: center;
+	background-color: orange;
+	margin-top: 19%;
+	height: 13%;
+	width: 84%;
+	text-align: center;
+	border: 2px solid cornflowerblue;
+	border-radius: 4%;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+	text-decoration: none;
+	height: 13%;
+}
+
+#OpcionesCarrito {
+	position: relative;
+	display: flex;
+	margin-top: -20%;
+}
+
+#OpcionesDireccion {
+	position: relative;
+	display: flex;
+	margin-top: -14%;
+}
+
+#SinDatosDireccion {
+	background-color: white;
+	border-radius: 3px;
+}
+
+#botonErrorLogin {
+	position: relative;
+	display: flow-root;
+	text-align: center;
+	background-color: orange;
+	margin-top: 4%;
+	height: 13%;
+	width: 84%;
+	text-align: center;
+	border: 2px solid cornflowerblue;
+	border-radius: 4%;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+	text-decoration: none;
+	height: 25%;
+}

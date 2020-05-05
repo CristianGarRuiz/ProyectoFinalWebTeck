@@ -20,11 +20,11 @@ public interface ProductoMapper {
 	public ArrayList<ProductoTiendaPojo> leerProductosTienda(@Param("id") int id);
 
 	public ArrayList<ProductoTiendaPojo> leerProductosCategoriaid(@Param("id") int id);
-	
+
 	public ArrayList<ProductoTiendaPojo> leerProductosMarcaid(@Param("id") int id);
 
 	public ProductoTiendaPojo contarProductoCategoria(@Param("id") int id);
-	
+
 	public ProductoTiendaPojo contarProductoMarca(@Param("id") int id);
 
 	public ArrayList<BusquedaPojo> BuscarProductoporNombre(@Param("titulo") String titulo);
@@ -34,6 +34,9 @@ public interface ProductoMapper {
 	public void eliminarProducto(@Param("id") int id);
 
 	public void updateProducto(ProductoPojo producto);
+
+	public void updateProductoCantidad(@Param("stock") int stock, @Param("cantidad") int cantidad,
+			@Param("idProducto") int idProducto);
 
 	public void insertProducto(ProductoPojo producto);
 

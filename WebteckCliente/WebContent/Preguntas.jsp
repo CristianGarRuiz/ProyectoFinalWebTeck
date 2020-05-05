@@ -4,8 +4,9 @@
 	pageEncoding="UTF-8"%>
 
 <%@ page import="modelo.Pojo.UsuariosPojo"%>
-<%@ page import="modelo.Pojo.CategoriasPojo" %>
-<%@ page import="modelo.Pojo.MarcasPojo" %>
+<%@ page import="modelo.Pojo.CategoriasPojo"%>
+<%@ page import="modelo.Pojo.MarcasPojo"%>
+<%@ page import="modelo.Pojo.CarritosPojo"%>
 
 <!DOCTYPE html>
 <html>
@@ -41,9 +42,11 @@
 
 		String pregunta = (String) request.getAttribute("pregunta");
 		ArrayList<PreguntasPojo> preguntas = (ArrayList<PreguntasPojo>) request.getAttribute("preguntas");
+
+		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-		<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -73,7 +76,7 @@
 								}
 							%>
 						</div></li>
-						<li class="nav-items dropdown"><a
+					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Marcas</a>
 						<div class="dropdown-menu">
 							<%
@@ -95,9 +98,10 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="Login"><button type="submit"
+							<a  id="Login12" class="dropdown-item" href="Login"><button type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
-							<a class="dropdown-item" href="LogeaUsuarios"><button type="submit"
+							<a  id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
+									type="submit"
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
@@ -148,9 +152,13 @@
 										onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
 									<a class="dropdown-item" href="#"><button type='button'
 											onClick='window.location.replace("comprasUsuarios")'>Ver
-											compras realizadas</button> </a>
-											<a class="dropdown-item" href="#"><button type='button'
-											onClick='window.location.replace("FichaUsuario")'>Datos Usuario</button> </a>
+											compras realizadas</button> </a> <a class="dropdown-item" href="#"><button
+											type='button'
+											onClick='window.location.replace("FichaUsuario")'>Datos
+											Usuario</button> </a> <a class="dropdown-item" href="#"><button
+											type='button'
+											onClick='window.location.replace("cambioPantalla")'>Cambiar
+											Pantalla</button> </a>
 							</div>
 						</div>
 
@@ -166,12 +174,32 @@
 					<%
 						}
 					%>
+					<%
+						if (usu != null) {
+					%>
+
+					<ul class="checkout">
+						<a style="margin-right: 2%" href="VerCarrito"> <i
+							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+							id="checkout_items" class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+						</a>
+					</ul>
+
+					<%
+						} else {
+					%>
 					<ul class="checkout">
 						<a style="margin-right: 2%" href="#"> <i
 							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							id="checkout_items" class="checkout_items">0</span>
+							id="checkout_items" class="checkout_items">Logeate</span>
 						</a>
 					</ul>
+
+
+					<%
+						}
+					%>
+				
 			</div>
 	</nav>
 	</div>
@@ -179,7 +207,7 @@
 	<div class="main-content  col-sm-5 col-md-12 col-lg-12">
 
 		<h3 id="BusquedaTitulo" style="text-align: center">
-			Pregunta relacionadas con  :
+			Pregunta relacionadas con :
 			<%=pregunta%></h3>
 		<div class="row"></div>
 
@@ -266,4 +294,17 @@
 		</div>
 	</div>
 </body>
+
+<%
+			if (usu != null) {
+		%>
+		<script>
+			window.onload = function() {
+				document.getElementById("Login12").setAttribute('href', '#');
+				document.getElementById("Login13").setAttribute('href', '#');
+			}
+		</script>
+		<%
+			}
+		%>
 </html>

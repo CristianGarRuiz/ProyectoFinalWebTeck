@@ -4,6 +4,7 @@
 
 <%@ page import="modelo.Pojo.UsuariosPojo"%>
 <%@ page import="modelo.Pojo.VentaPojo"%>
+<%@page import="modelo.Pojo.CarritosPojo"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +39,8 @@
 		ArrayList<VentaPojo> ventasCliente = (ArrayList<VentaPojo>) request.getAttribute("ventasCliente");
 
 		String emailUsuario = (String) request.getAttribute("emailUsuario");
+
+		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
@@ -70,11 +73,11 @@
 					<li class="nav-item"><a class="nav-link" href="#Info">Contacto</a>
 					</li>
 					<li class="nav-items dropdown"><a
-						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
+						class="nav-link dropdown-toggle"   data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#"><button type="submit"
+							<a  id="Login12" class="dropdown-item" href="#"><button type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
-							<a class="dropdown-item" href="#"><button type="submit"
+							<a  id="Login13" class="dropdown-item" href="#"><button type="submit"
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
@@ -100,7 +103,7 @@
 					<!-- Brand/logo -->
 
 					<%
-						if  ((usu != null) && (usu.getUsuario() != null)) {
+						if ((usu != null) && (usu.getUsuario() != null)) {
 					%>
 					<div id="Datos">
 						<img alt="" src="Imagenes/<%=usu.getFoto()%>"
@@ -117,12 +120,21 @@
 								Usuario</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 								<a class="dropdown-item" href="#"><button type='button'
-										onClick='window.location.replace("cambiarImagen")'>Cambiar
+										onClick='window.location.replace("cambiarImagenUsuario")'>Cambiar
 										Imagen</button></a> <a class="dropdown-item" href="#"><button
 										type='button' onClick='window.location.replace("Logout")'>Cerrar
 										Sesion</button></a> <a class="dropdown-item" href="#">
 									<button type='button'
-										onClick='window.location.replace("OpcionesEliminarusu")'>BajaUsuario</button>
+										onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
+									<a class="dropdown-item" href="#"><button type='button'
+											onClick='window.location.replace("comprasUsuarios")'>Ver
+											compras realizadas</button> </a> <a class="dropdown-item" href="#"><button
+											type='button'
+											onClick='window.location.replace("FichaUsuario")'>Datos
+											Usuario</button> </a> <a class="dropdown-item" href="#"><button
+											type='button'
+											onClick='window.location.replace("cambioPantalla")'>Cambiar
+											Pantalla</button> </a>
 								</a>
 							</div>
 						</div>
@@ -139,12 +151,33 @@
 					<%
 						}
 					%>
+
+					<%
+						if (usu != null) {
+					%>
+
+					<ul class="checkout">
+						<a style="margin-right: 2%" href="VerCarrito"> <i
+							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+							id="checkout_items" class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+						</a>
+					</ul>
+
+					<%
+						} else {
+					%>
 					<ul class="checkout">
 						<a style="margin-right: 2%" href="#"> <i
 							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							id="checkout_items" class="checkout_items">0</span>
+							id="checkout_items" class="checkout_items">Logeate</span>
 						</a>
 					</ul>
+
+
+					<%
+						}
+					%>
+				
 			</div>
 	</nav>
 
@@ -157,6 +190,7 @@
 				out.print("Recuperacion de comprar del usuario : " + emailUsuario);
 				out.print("<br><br>");
 				out.print("<table class=table table-hover table-responsive>");
+				out.print("<th> Codigo Venta Producto :</th>");
 				out.print("<th> Nombre Producto :</th>");
 				out.print("<th> Fecha de la Compra :</th>");
 				out.print("<th> Precio Producto :</th>");
@@ -166,6 +200,7 @@
 				for (VentaPojo juga : ventasCliente) {
 
 					out.print("<tr>");
+					out.print("<td>" + juga.getCodigoPedido() + "</td>");
 					out.print("<td>" + juga.getTitulo() + "</td>");
 					out.print("<td>" + juga.getFecha() + "</td>");
 					out.print("<td>" + juga.getPrecio() + "$" + "</td>");

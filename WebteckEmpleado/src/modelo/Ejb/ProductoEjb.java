@@ -99,6 +99,8 @@ public class ProductoEjb {
 
 	}
 	
+	
+	
 	public ArrayList<BusquedaPojo> BuscarProductoporNombre(String titulo)  throws SQLException {
 		ProductosDao ProductoDao = new ProductosDao();
 		return ProductoDao.BuscarProductoporNombre(titulo);
@@ -131,6 +133,13 @@ public class ProductoEjb {
 		Productodao.updateProducto(producto);
 	}
 
+	
+	public void updateProductoCantidad(int stock, int cantidad,int idProducto) {
+		ProductosDao Productodao = new ProductosDao();
+
+		Productodao.updateProductoCantidad(stock,cantidad,idProducto);
+	}
+	
 	/**
 	 * este metodo inserta un accidente
 	 * 

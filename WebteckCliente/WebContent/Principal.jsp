@@ -1,3 +1,4 @@
+<%@page import="modelo.Pojo.CarritosPojo"%>
 <%@page import="modelo.Pojo.MarcasPojo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -35,6 +36,7 @@
 
 	<%
 		String error = (String) request.getParameter("error");
+		String emailUsuario = (String) request.getParameter("emailUsuario");
 
 		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
 
@@ -50,6 +52,8 @@
 		String pregunta = (String) request.getAttribute("pregunta");
 		ArrayList<ProductosTiendaPojo> Busquedaproducto = (ArrayList<ProductosTiendaPojo>) request
 				.getAttribute("Busquedaproducto");
+
+		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -82,7 +86,7 @@
 								}
 							%>
 						</div></li>
-						<li class="nav-items dropdown"><a
+					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Marcas</a>
 						<div class="dropdown-menu">
 							<%
@@ -104,9 +108,11 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="Login"><button type="submit"
+							<a id="Login12" class="dropdown-item" href="Login"><button
+									type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
-							<a class="dropdown-item" href="LogeaUsuarios"><button type="submit"
+							<a id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
+									type="submit"
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
@@ -157,11 +163,13 @@
 										onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
 									<a class="dropdown-item" href="#"><button type='button'
 											onClick='window.location.replace("comprasUsuarios")'>Ver
-											compras realizadas</button> </a>
-											<a class="dropdown-item" href="#"><button type='button'
-											onClick='window.location.replace("FichaUsuario")'>Datos Usuario</button> </a>
-											<a class="dropdown-item" href="#"><button type='button'
-											onClick='window.location.replace("cambioPantalla")'>Cambiar Pantalla</button> </a>
+											compras realizadas</button> </a> <a class="dropdown-item" href="#"><button
+											type='button'
+											onClick='window.location.replace("FichaUsuario")'>Datos
+											Usuario</button> </a> <a class="dropdown-item" href="#"><button
+											type='button'
+											onClick='window.location.replace("cambioPantalla")'>Cambiar
+											Pantalla</button> </a>
 							</div>
 						</div>
 
@@ -177,12 +185,33 @@
 					<%
 						}
 					%>
+
+					<%
+						if (usu != null) {
+					%>
+
+					<ul class="checkout">
+						<a style="margin-right: 2%" href="VerCarrito"> <i
+							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+							id="checkout_items" class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+						</a>
+					</ul>
+
+					<%
+						} else {
+					%>
 					<ul class="checkout">
 						<a style="margin-right: 2%" href="#"> <i
 							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							id="checkout_items" class="checkout_items">0</span>
+							id="checkout_items" class="checkout_items">Logeate</span>
 						</a>
 					</ul>
+
+
+					<%
+						}
+					%>
+				
 			</div>
 	</nav>
 	</div>
@@ -361,8 +390,9 @@
 											%>
 
 
-											<a class="bestSellerProd" href='Editar?id=<%=prod.getId()%>'>
-												Añadir a Carrito </a> <a class="bestSellerProd"
+											<a class="bestSellerProd" style="text-decoration: none;"
+												href='AñadirCarrito?id=<%=prod.getId()%>'> Añadir a
+												Carrito </a> <a  style="text-decoration: none;" class="bestSellerProd"
 												href='Ficha?id=<%=prod.getId()%>'> Ver Producto </a>
 									</div>
 								</div>
@@ -445,7 +475,7 @@
 					</div>
 					<div
 						style="position: relative; display: flex; margin-left: 11%; height: 23%; width: 132%; padding: 0%; flex-wrap: wrap;">
-						<a id="CarritoTienda" href='Editar?id=<%=prod.getId()%>'>
+						<a id="CarritoTienda" href='AñadirCarrito?id=<%=prod.getId()%>'>
 							Añadir a Carrito </a><br> <br>
 						</n>
 						<br> <a id="FichaProducto" href='Ficha?id=<%=prod.getId()%>'>
@@ -581,12 +611,20 @@
 
 					<h2>Siguenos en :</h2>
 					<hr>
-					<a class="Icon" href="https://twitter.com/login"
-						<button type="submit"> <i class='fab fa-twitter' style='font-size:36px; '> </i></button>></a>
-					<a class="Icon" href="https://www.facebook.com/"
-						<button type="submit"> <i class='fab fa-facebook-square' style='font-size:36px'></i></button>></a>
-					<a class="Icon" href="https://www.youtube.com/"
-						<button type="submit"><i class='fab fa-youtube' style='font-size:36px;color: red'></i> </button>></a>
+					<a class="Icon" href="https://twitter.com/login">
+						<button type="submit">
+							<i class='fab fa-twitter' style='font-size: 36px; color: #27bcf8'></i>
+						</button>
+					</a> <a class="Icon" href="https://www.facebook.com/">
+						<button type="submit">
+							<i class='fab fa-facebook-square'
+								style='font-size: 36px; color: #43c3f3'></i>
+						</button>
+					</a> <a class="Icon" href="https://www.youtube.com/">
+						<button type="submit">
+							<i class='fab fa-youtube' style='font-size: 36px; color: red'></i>
+						</button>
+					</a>
 				</div>
 
 				<div class="container col-md-2">
@@ -608,5 +646,37 @@
 
 		</div>
 	</div>
+
+	<%
+		if (error != null) {
+	%>
+	<h4 style="color: red;">Error en el usuario o password/o no estas
+		Registrado</h4>
+	<div id="contaLoginBotonesError" class="container col-sm-11 col-md-6">
+		<button id="botonErrorLogin" type='button'
+			onClick='window.location.replace("LogeaUsuarios")'>Registrate</button>
+		<button id="botonErrorLogin" type='button'
+			onClick='window.location.replace("Login")'>Reintentar</button>
+		<button id="botonErrorLogin" type='button'
+			onClick='window.location.replace("updateContraseña")'>Cambiar
+			Contraseña</button>
+	</div>
+	<%
+		}
+	%>
+
+	<%
+		if (usu != null) {
+	%>
+	<script>
+		window.onload = function() {
+			document.getElementById("Login12").setAttribute('href', '#');
+			document.getElementById("Login13").setAttribute('href', '#');
+		}
+	</script>
+	<%
+		}
+	%>
+
 </body>
 </html>

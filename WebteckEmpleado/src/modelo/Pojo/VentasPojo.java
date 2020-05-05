@@ -6,18 +6,49 @@ public class VentasPojo {
 	private int precio;
 	private String fecha;
 	private String nombre;
+	private int idProducto;
+	private String emailUsuario;
+	private int codigoPedido;
 
-	public VentasPojo(String titulo, int precio, String fecha, String nombre) {
+	public VentasPojo(String titulo, int precio, String fecha, String nombre, String emailUsuario, int idProducto,
+			int codigoPedido) {
 		super();
 		this.titulo = titulo;
 		this.precio = precio;
 		this.fecha = fecha;
 		this.nombre = nombre;
+		this.idProducto = idProducto;
+		this.emailUsuario = emailUsuario;
+		this.codigoPedido = codigoPedido;
 	}
 
 	public VentasPojo() {
 		super();
 
+	}
+
+	public int getCodigoPedido() {
+		return codigoPedido;
+	}
+
+	public void setCodigoPedido(int codigoPedido) {
+		this.codigoPedido = codigoPedido;
+	}
+
+	public int getIdProducto() {
+		return idProducto;
+	}
+
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public String getEmailUsuario() {
+		return emailUsuario;
+	}
+
+	public void setEmailUsuario(String emailUsuario) {
+		this.emailUsuario = emailUsuario;
 	}
 
 	public String getTitulo() {

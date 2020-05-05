@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.Ejb.CarritosEjb;
 import modelo.Ejb.PreguntasEjb;
 import modelo.Ejb.ProductosEjb;
 import modelo.Ejb.SesionesEjb;
 import modelo.Ejb.UsuariosEjb;
 import modelo.Ejb.VentaEjb;
+import modelo.Pojo.CarritosPojo;
 import modelo.Pojo.CategoriasPojo;
 import modelo.Pojo.MarcasPojo;
 import modelo.Pojo.ProductosTiendaPojo;
@@ -40,6 +42,9 @@ public class porCategoria extends HttpServlet {
 	@EJB
 	VentaEjb ventaEjb;
 
+	@EJB
+	CarritosEjb carritoEjb;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -47,9 +52,11 @@ public class porCategoria extends HttpServlet {
 		UsuariosPojo usuario = sesionesEjb.usuariosLogeado(session);
 		String pantalla = sesionesEjb.getPantalla(session);
 		String error = request.getParameter("error");
+		String emailUsuario = sesionesEjb.getEmailUsuario(session);
 
 		RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/mostrarProductoporCategoria.jsp");
-		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/mostrarProductoporCategoriaNocturno.jsp");
+		RequestDispatcher rsNocturna = getServletContext()
+				.getRequestDispatcher("/mostrarProductoporCategoriaNocturno.jsp");
 
 		String eseid = request.getParameter("id");
 
@@ -60,8 +67,8 @@ public class porCategoria extends HttpServlet {
 		ProductosTiendaPojo contarProd = productosEjb.contarProductosporCategoria(id);
 		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
 		ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
-		
-		
+		CarritosPojo contarCarro = carritoEjb.contarProductosCarrito(emailUsuario);
+
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("pantalla", pantalla);
 		request.setAttribute("error", error);
@@ -71,6 +78,7 @@ public class porCategoria extends HttpServlet {
 		request.setAttribute("contarProd", contarProd);
 		request.setAttribute("categorias", categorias);
 		request.setAttribute("marcas", marcas);
+		request.setAttribute("contarCarro", contarCarro);
 
 		if (pantalla == null || pantalla.equals("D")) {
 			rsPagina.forward(request, response);

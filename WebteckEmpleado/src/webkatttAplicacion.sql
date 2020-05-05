@@ -32,6 +32,7 @@ foreign key (idPlataforma)
 	on delete cascade);
 
 create table ventas(
+codigoPedido int,
 fecha date,
 idProducto int,
 emailUsuario varchar(100),
@@ -44,6 +45,7 @@ foreign key (emailUsuario)
 	on update cascade
 	on delete cascade);
 
+
 create table usuaris(
 emailUsuario varchar(100) not null primary key,
 nombre varchar(100) ,
@@ -53,6 +55,20 @@ foto varchar(100),
 administrador varchar(10),
 pantalla varchar(30) default 'D',
 activado varchar(50) default 'N');
+
+create table carritoCliente(
+id int not null primary key auto_increment,
+idProducto int,
+emailUsuario varchar(100),
+foreign key (idProducto) 
+	references productos(id)
+	on update cascade
+	on delete cascade,
+foreign key (emailUsuario) 
+	references usuaris(emailUsuario)
+	on update cascade
+	on delete cascade);
+
 
 
 create table direccionesUsuarios(
@@ -120,6 +136,10 @@ foreign key (emailUsuario)
 	references usuaris(emailUsuario)
 	on update cascade
 	on delete cascade);
+
+
+
+drop table carritoCliente;
 
 
 insert into usuaris (emailUsuario,nombre,usuario,`password`,foto,administrador) values (  'pepe@gmail.com','pepe' ,'pepe1234','1234','usuario.jpg','');
@@ -421,6 +441,37 @@ insert into preguntas (id,nombre,respuesta) values (5,'Cuanto Tardara el envio '
 
 
 
+
+insert into carritoCliente (id,idProducto,emailUsuario) values (1,1,'cris@gmail.com');
+
+insert into carritoCliente (id,idProducto,emailUsuario) values (2,3,'cris@gmail.com');
+
+
+select
+ productos.foto,productos.id,productos.precio,productos.stock,productos.titulo
+from 
+carritoCliente,productos
+where 
+ carritoCliente.idProducto= productos.id and  carritoCliente.emailUsuario = 'cris@gmail.com';
+ 
+ select
+ count(idProducto)
+ from 
+ carritoCliente
+ where
+ carritoCliente.emailUsuario = 'cris@gmail.com';
+ 
+ 
+delete from carritoCliente where idProducto= 1 and
+emailUsuario = 'cris@gmail.com';
+
+
+
+select
+*
+from 
+carritoCliente;
+
 select
 productos.titulo as ti,productos.precio,ventas.fecha,usuaris.nombre
 from 
@@ -709,10 +760,100 @@ usuaris.emailUsuario = 'pepe@gmail.com';
 		generos.nombre as genero
 		,
 		plataformas.nombre as plataforma,productos.id
-		as id
+		as ido
 		from
 		productos,plataformas,generos
 		where
 		productos.idPlataforma = plataformas.id and productos.idGenero =
 		generos.id   and
 		productos.titulo like '%xbox%';
+        
+        delete 
+        from usuaris
+        where 
+        usuaris.emailUsuario= 'cristian.realmadrid.garcia@gmail.com';
+        
+        select
+        *
+        from 
+        claveregistro;
+        
+        UPDATE usuaris
+		SET
+		activado ='s'
+		WHERE emailUsuario =
+		(select
+		emailUsuario from claveregistro where codigo = 1048);
+        
+        
+        
+        select
+        *
+        from 
+        carritoCliente;
+        
+        select
+        count(idProducto)
+        from 
+        carritoCliente;
+        
+        
+        select
+        *
+        from ventas;
+        
+        
+        
+        select
+        count(productos.precio)
+        from 
+        carritoCliente,productos
+        where
+        carritoCliente.idProducto = productos.id and
+        carritoCliente.emailUsuario = 'cris@gmail.com';
+        
+        
+        
+        select
+        count(carritoCliente.idProducto)
+        from 
+        carritoCliente
+        where
+        carritoCliente.idProducto = 1  and
+        carritoCliente.emailUsuario= 'cris@gmail.com';
+        
+        
+        select
+        productos.stock as totalStock
+        from
+        productos
+        where
+        productos.id = 1;
+        
+        update productos set productos.stock = 30 -1 where productos.id = 1;
+        
+      select
+      *
+      from
+      productos;
+      
+      
+      
+      select
+	  sum(productos.precio)
+      from 
+      carritoCliente,productos
+      where 
+      productos.id = carritoCliente.idProducto and
+      carritoCliente.emailUsuario = 'cris@gmail.com';
+      
+      
+       select
+	  sum(productos.precio)
+      from 
+      carritoCliente,productos
+      where 
+      productos.id = carritoCliente.idProducto and
+      carritoCliente.emailUsuario = 'cristian.realmadrid.garcia@gmail.com';
+      
+        

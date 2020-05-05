@@ -12,7 +12,6 @@ import modelo.Pojo.CategoriasPojo;
 import modelo.Pojo.MarcasPojo;
 import modelo.Pojo.ProductosTiendaPojo;
 
-
 @Stateless
 @LocalBean
 public class ProductosEjb {
@@ -20,8 +19,9 @@ public class ProductosEjb {
 	public ArrayList<ProductosTiendaPojo> leerTotalProductos() {
 
 		Client cliente = ClientBuilder.newClient();
-		
-		WebTarget target1 = cliente.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getTotalProductos/patata23");
+
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getTotalProductos/patata23");
 
 		ArrayList<ProductosTiendaPojo> lista = (ArrayList<ProductosTiendaPojo>) target1.request()
 				.get(new GenericType<List<ProductosTiendaPojo>>() {
@@ -29,19 +29,20 @@ public class ProductosEjb {
 
 		return lista;
 	}
-	
-		public ArrayList<ProductosTiendaPojo> leerTotalProductosMedia() {
 
-			Client cliente = ClientBuilder.newClient();
-			
-			WebTarget target1 = cliente.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getTopMediaProductos/patata23");
+	public ArrayList<ProductosTiendaPojo> leerTotalProductosMedia() {
 
-			ArrayList<ProductosTiendaPojo> lista = (ArrayList<ProductosTiendaPojo>) target1.request()
-					.get(new GenericType<List<ProductosTiendaPojo>>() {
-					});
+		Client cliente = ClientBuilder.newClient();
 
-			return lista;
-		}
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getTopMediaProductos/patata23");
+
+		ArrayList<ProductosTiendaPojo> lista = (ArrayList<ProductosTiendaPojo>) target1.request()
+				.get(new GenericType<List<ProductosTiendaPojo>>() {
+				});
+
+		return lista;
+	}
 
 	/**
 	 * tenemos un arraylist de los tipos de accidentes
@@ -77,7 +78,6 @@ public class ProductosEjb {
 		return lista;
 	}
 
-
 	public ArrayList<ProductosTiendaPojo> BuscarProductoporNombreTienda(String titulo) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -105,27 +105,25 @@ public class ProductosEjb {
 		return lista;
 	}
 
-	
 	public ArrayList<ProductosTiendaPojo> leerProductoidCategoria(int id) {
 
 		Client cliente = ClientBuilder.newClient();
 
-		WebTarget target1 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getProductoTiendaCategoriaid/patata23/" + id);
+		WebTarget target1 = cliente.target(
+				"http://localhost:8080/WebteckEmpleado/ControladorRest/getProductoTiendaCategoriaid/patata23/" + id);
 
 		ArrayList<ProductosTiendaPojo> lista = (ArrayList<ProductosTiendaPojo>) target1.request()
 				.get(new GenericType<List<ProductosTiendaPojo>>() {
 				});
 		return lista;
 	}
-	
-	
+
 	public ArrayList<ProductosTiendaPojo> leerProductoidMarca(int id) {
 
 		Client cliente = ClientBuilder.newClient();
 
-		WebTarget target1 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getProductoTiendaMarcaid/patata23/" + id);
+		WebTarget target1 = cliente.target(
+				"http://localhost:8080/WebteckEmpleado/ControladorRest/getProductoTiendaMarcaid/patata23/" + id);
 
 		ArrayList<ProductosTiendaPojo> lista = (ArrayList<ProductosTiendaPojo>) target1.request()
 				.get(new GenericType<List<ProductosTiendaPojo>>() {
@@ -133,18 +131,18 @@ public class ProductosEjb {
 		return lista;
 	}
 
-	
 	public ProductosTiendaPojo contarProductosporCategoria(int id) {
 
 		Client cliente = ClientBuilder.newClient();
 
-		WebTarget target1 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/contarProductoporCategoria/patata23/" + id);
+		WebTarget target1 = cliente.target(
+				"http://localhost:8080/WebteckEmpleado/ControladorRest/contarProductoporCategoria/patata23/" + id);
 
 		ProductosTiendaPojo prod = target1.request().get(ProductosTiendaPojo.class);
 
 		return prod;
 	}
+
 	public ProductosTiendaPojo contarProductosporMarca(int id) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -156,9 +154,18 @@ public class ProductosEjb {
 
 		return prod;
 	}
-	
-	
-	
+
+	public ProductosTiendaPojo ProductoporSuID(int id) {
+
+		Client cliente = ClientBuilder.newClient();
+
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/ProductoporID/patata23/" + id);
+
+		ProductosTiendaPojo prod = target1.request().get(ProductosTiendaPojo.class);
+
+		return prod;
+	}
 	public ArrayList<CategoriasPojo> leerCategoriaId(int id) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -171,13 +178,13 @@ public class ProductosEjb {
 				});
 		return lista;
 	}
-	
-	public ArrayList<MarcasPojo> leerMarcasId( int id ) {
+
+	public ArrayList<MarcasPojo> leerMarcasId(int id) {
 
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target1 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getMarcaId/patata23/"+ id);
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getMarcaId/patata23/" + id);
 
 		ArrayList<MarcasPojo> lista = (ArrayList<MarcasPojo>) target1.request()
 				.get(new GenericType<List<MarcasPojo>>() {
@@ -185,7 +192,16 @@ public class ProductosEjb {
 
 		return lista;
 	}
-	
-	
-	
+
+	public void updateCarritoCantidad(int stock, int cantidad, int idProducto) {
+
+		Client cliente = ClientBuilder.newClient();
+
+		WebTarget target2 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/updateCantidadProducto/patata23/" + stock
+						+ "/" + cantidad + "/" + idProducto);
+
+		target2.request().get();
+	}
+
 }

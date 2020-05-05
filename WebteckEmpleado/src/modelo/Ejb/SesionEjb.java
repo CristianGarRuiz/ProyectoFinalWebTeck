@@ -44,6 +44,14 @@ public class SesionEjb {
 		return pantalla;
 
 	}
+	
+	public String getEmailUsuario(HttpSession session) {
+		String emailUsuario;
+		emailUsuario = (String) session.getAttribute("emailUsuario");
+
+		return emailUsuario;
+
+	}
 
 	/**
 	 * este metodo comprueba que no sea nula la session y cambia el valor de

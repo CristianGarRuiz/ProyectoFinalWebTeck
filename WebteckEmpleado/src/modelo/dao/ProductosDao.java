@@ -10,7 +10,6 @@ import modelo.Pojo.MarcaPojo;
 import modelo.Pojo.ProductoPojo;
 import modelo.Pojo.ProductoTiendaPojo;
 import modelo.dao.mappers.ProductoMapper;
-import modelo.dao.mappers.UsuarioMapper;
 
 public class ProductosDao {
 
@@ -85,7 +84,7 @@ public class ProductosDao {
 		}
 
 	}
-	
+
 	public ArrayList<MarcaPojo> leerMarcaId(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -126,7 +125,6 @@ public class ProductosDao {
 
 	}
 
-	
 	public ArrayList<ProductoTiendaPojo> leerProductosTiendaMarcaid(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -139,6 +137,7 @@ public class ProductosDao {
 		}
 
 	}
+
 	public ProductoTiendaPojo contarProductoCategoria(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -151,7 +150,7 @@ public class ProductosDao {
 		}
 
 	}
-	
+
 	public ProductoTiendaPojo contarProductoMarca(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -237,6 +236,17 @@ public class ProductosDao {
 		try {
 			ProductoMapper accidenteEdi = sqlSession.getMapper(ProductoMapper.class);
 			accidenteEdi.updateProducto(producto);
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public void updateProductoCantidad(int stock, int cantidad, int idProducto) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ProductoMapper accidenteEdi = sqlSession.getMapper(ProductoMapper.class);
+			accidenteEdi.updateProductoCantidad(stock, cantidad, idProducto);
 			sqlSession.commit();
 		} finally {
 			sqlSession.close();

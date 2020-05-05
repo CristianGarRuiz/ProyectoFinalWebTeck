@@ -1,14 +1,7 @@
 @charset "UTF-8";
 
 .cajaDatosUsuario {
-	display: flex;
-	position: relative;
-	margin-top: 20%;
-	border: 2px solid;
-	width: 34%;
-	align-content: center;
-	text-align: center;
-	border-radius: 3%;
+	margin-top: -2%;
 }
 
 #EditarDireccion {
@@ -19,33 +12,34 @@
 }
 
 #TituloDire {
-	position: relative;
-	display: flex;
-	margin-left: 37%;
-	margin-top: 3%;
+	border: 3px solid;
+	border-radius: 5px;
 }
 
 #DatosDirrecion {
 	position: relative;
 	display: flex;
 }
-
-.Direccion_Usuarios {
-	position: relative;
-	display: inline-grid;
-	border: 2px solid;
-	height: 62%;
-	width: 26%;
-	margin-left: -1%;
-	margin-top: 19%;
-	border-radius: 3%;
+#cajaDatosUSU {
+	border-radius: 3px;
+	border: 3px solid;
 }
 
-.Datos_usuarios {
-	margin-top: -8%;
-	display: flex;
+#cajaSinDirecc {
+	border-radius: 3px;
+	border: 3px solid;
+}
+
+#OpcionesDireccion{
 	position: relative;
-	margin-left: 38%;
-	height: 43%;
-	width: 66%;
+	display: flex;
+	margin-top: -18%;
+}
+
+#FichaProducto:hover {
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px rgba(49, 138, 172, 1);
+	transition: all 0.2s ease;
+	text-decoration: none;
+	cursor: pointer
 }

@@ -7,7 +7,8 @@
 <%@ page import="modelo.Pojo.UsuariosPojo"%>
 <%@ page import="modelo.Pojo.DireccionesPojo"%>
 <%@ page import="modelo.Pojo.CategoriasPojo"%>
-<%@ page import="modelo.Pojo.MarcasPojo" %>
+<%@ page import="modelo.Pojo.MarcasPojo"%>
+<%@ page import="modelo.Pojo.CarritosPojo" %>
 
 
 
@@ -47,9 +48,11 @@
 
 		ArrayList<DireccionesPojo> direccionesUsuarios = (ArrayList<DireccionesPojo>) request
 				.getAttribute("direccionesUsuarios");
+		
+		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-		<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -79,7 +82,7 @@
 								}
 							%>
 						</div></li>
-						<li class="nav-items dropdown"><a
+					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Marcas</a>
 						<div class="dropdown-menu">
 							<%
@@ -101,9 +104,10 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="Login"><button type="submit"
+							<a  id="Login12" class="dropdown-item" href="Login"><button type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
-							<a class="dropdown-item" href="LogeaUsuarios"><button type="submit"
+							<a  id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
+									type="submit"
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
@@ -154,9 +158,13 @@
 										onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
 									<a class="dropdown-item" href="#"><button type='button'
 											onClick='window.location.replace("comprasUsuarios")'>Ver
-											compras realizadas</button> </a>
-											<a class="dropdown-item" href="#"><button type='button'
-											onClick='window.location.replace("FichaUsuario")'>Datos Usuario</button> </a>
+											compras realizadas</button> </a> <a class="dropdown-item" href="#"><button
+											type='button'
+											onClick='window.location.replace("FichaUsuario")'>Datos
+											Usuario</button> </a> <a class="dropdown-item" href="#"><button
+											type='button'
+											onClick='window.location.replace("cambioPantalla")'>Cambiar
+											Pantalla</button> </a>
 							</div>
 						</div>
 
@@ -172,22 +180,40 @@
 					<%
 						}
 					%>
+					<%
+						if (usu != null) {
+					%>
+
+					<ul class="checkout">
+						<a style="margin-right: 2%" href="VerCarrito"> <i
+							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+							id="checkout_items" class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+						</a>
+					</ul>
+
+					<%
+						} else {
+					%>
 					<ul class="checkout">
 						<a style="margin-right: 2%" href="#"> <i
 							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							id="checkout_items" class="checkout_items">0</span>
+							id="checkout_items" class="checkout_items">Logeate</span>
 						</a>
 					</ul>
+
+
+					<%
+						}
+					%>
 			</div>
 	</nav>
 	</div>
 	</nav>
 
-	<div class="container"
-		style="margin-top: 10%; position: relative; display: inline-grid; align-content: center; height: 808px; width: 60%; margin-left: 19%; margin-right: auto; border-radius: 2%;">
+	<div id="CajaGlobalPerfil" class="container col-xs-10 col-md-9  col-xl-10" style="margin-top: 16%;">
 		<div class="row">
-			<div class="col text-center" style="margin-top: -20%">
-				<h2>Datos del Usuario</h2>
+			<div id="cajaDatosUSU" class="col-sm-7 col-md-7 col-xl-7">
+				<h2>Datos del Usuario : </h2>
 				<div class="Datos_usuarios">
 
 					<!-- Slide 1 -->
@@ -206,170 +232,23 @@
 								</div>
 								<div class="favorite favorite_left"></div>
 								<div class="email_Usuario">
-									<span> Email Cliente : <%=prod.getEmailUsuario()%></span>
+									<h4>
+										Email Cliente :
+										<%=prod.getEmailUsuario()%></h4>
 								</div>
 								<div class="nombre_Usuario">
-									<h6 class="product_name">
-										<span> Nombre Usuario : <%=prod.getUsuario()%></span>
-									</h6>
+									<h4 class="product_name">
+										<h4>
+											Nombre Usuario :
+											<%=prod.getUsuario()%></h4>
+									</h4>
 								</div>
 								<div class="nombre_Cliente">
-									<h6 class="product_name">
-										<span> Nombre Cliente<%=prod.getNombre()%></span>
-									</h6>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<%
-					}
-					}
-				%>
-
-				<!-- Slide 2 -->
-				<%
-					if ((direccionesUsuarios != null) && (direccionesUsuarios.size() > 0)) {
-				%>
-				<div class="container" id="TituloDire">
-					<div class="row">
-
-						<h3>Direccion del Usuario</h3>
-					</div>
-				</div>
-
-				<%
-					for (DireccionesPojo prod : direccionesUsuarios) {
-				%>
-				<div class="container">
-					<div class="row">
-						<div class="col text-center" style="margin-top: -17%;">
-							<div class="Direccion_Usuarios">
-								<div class="Direccion_Item">
-									<div class="Datos_Item">
-										<div class="Direccion">
-											<span> Calle : <%=prod.getDireccion()%></span>
-										</div>
-										<div class="Localidad_Item"></div>
-										<div class=" Provincia_Item flex-column align-items-center">
-											<span> Provincia : <%=prod.getProvincia()%></span>
-										</div>
-										<div class="Vivienda_Item">
-											<h6 class="product_name">
-												<span> Vivienda : <%=prod.getVivienda()%></span>
-											</h6>
-											<div class="CodigoPostal_Item">
-												<span> CP: <%=prod.getCodigoPostal()%></span>
-											</div>
-											<div class="Localidad_Item">
-												<span> Localidad : <%=prod.getLocalidad()%></span>
-											</div>
-										</div>
-										<div class="OpcionesDireccion">
-											<a class="bestSellerProd" href='EditarDireccion'> Editar
-												Direccion </a> <a class="bestSellerProd"
-												href='EliminarDireccion'> Eliminar Direccion </a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<%
-					}
-
-					} else {
-				%>
-
-				<div class="container">
-					<div class="row">
-						<div class="SinDatosDireccion">
-							<h4>No tiene Direccion Añadida</h4>
-							<p>Pulsa Aqui Para Añadir Una</p>
-							<button type="button" id="DatosDirrecion" class="btn btn-primary"
-								data-toggle="modal" data-target="#myModal3">Añadir
-								Direccion</button>
-						</div>
-					</div>
-					<!-- The Modal -->
-					<div class="modal" id="myModal3">
-						<div class="modal-dialog">
-							<div class="modal-content">
-
-								<!-- Modal Header -->
-								<div class="modal-header">
-									<h4 class="modal-title">añadir Direccion</h4>
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-								</div>
-
-								<!-- Modal body -->
-								<div class="modal-body">
-									<form action="InsertarDireccion" class="needs-validation"
-										novalidate method="post">
-										<div class="form-group">
-											<label for="uname">Direccion:</label> <input type="text"
-												class="form-control" id="direccion"
-												placeholder="Enter Direccion" name="direccion" required>
-											<div class="valid-feedback">Valid.</div>
-											<div class="invalid-feedback">Please fill out this
-												field.</div>
-										</div>
-										<div class="form-group">
-											<label for="pwd">Vivienda:</label> <input type="text"
-												class="form-control" id="vivienda"
-												placeholder="Enter Vivienda" name="vivienda" required>
-											<div class="valid-feedback">Valid.</div>
-											<div class="invalid-feedback">Please fill out this
-												field.</div>
-										</div>
-
-										<div class="form-group">
-											<label for="pwd">Localidad:</label> <input type="text"
-												class="form-control" id="localidad"
-												placeholder="Enter Localidad" name="localidad" required>
-											<div class="valid-feedback">Valid.</div>
-											<div class="invalid-feedback">Please fill out this
-												field.</div>
-										</div>
-
-										<div class="form-group">
-											<label for="pwd">Provincia:</label> <input type="text"
-												class="form-control" id="provincia"
-												placeholder="Enter provincia" name="provincia" required>
-											<div class="valid-feedback">Valid.</div>
-											<div class="invalid-feedback">Please fill out this
-												field.</div>
-										</div>
-
-										<div class="form-group">
-											<label for="pwd">Codigo Postal :</label> <input type="number"
-												class="form-control" id="codigoPostal"
-												placeholder="Enter CP" name="codigoPostal" required>
-											<div class="valid-feedback">Valid.</div>
-											<div class="invalid-feedback">Please fill out this
-												field.</div>
-										</div>
-
-										<div class="form-group form-check">
-											<label class="form-check-label"> <input
-												class="form-check-input" type="checkbox" name="remember"
-												required> Acepta los Terminos de Nuestra Pagina.
-												<div class="valid-feedback">Valid.</div>
-												<div class="invalid-feedback">Check this checkbox to
-													continue.</div>
-											</label>
-										</div>
-										<button type="submit" class="btn btn-primary">Guardar
-											Direccion</button>
-									</form>
-								</div>
-
-								<!-- Modal footer -->
-								<div class="modal-footer">
-									<button type="button" class="btn btn-danger"
-										data-dismiss="modal">Close</button>
+									<h4 class="product_name">
+										<h4>
+											Nombre Cliente :
+											<%=prod.getNombre()%></h4>
+									</h4>
 								</div>
 
 							</div>
@@ -377,7 +256,162 @@
 					</div>
 				</div>
 			</div>
+			<%
+				}
+				}
+			%>
+
+			<!-- Slide 2 -->
+			<%
+				if ((direccionesUsuarios != null) && (direccionesUsuarios.size() > 0)) {
+			%>
+			<div class="container  col-sm-4 col-md-4 col-xl-4 " id="TituloDire">
+
+
+				<h3>Direccion del Usuario : </h3>
+
+
+				<%
+					for (DireccionesPojo prod : direccionesUsuarios) {
+				%>
+
+				<div class="Direccion_Usuarios">
+					<div class="Direccion_Item">
+						<div class="Datos_Item">
+							<div class="Direccion">
+								<h4>
+									Calle :
+									<%=prod.getDireccion()%></h4>
+							</div>
+							<div class="Localidad_Item"></div>
+							<div class=" Provincia_Item flex-column align-items-center">
+								<h4>
+									Provincia :
+									<%=prod.getProvincia()%></h4>
+							</div>
+							<div class="Vivienda_Item">
+								<h4 class="product_name">
+									<h4>
+										Vivienda :
+										<%=prod.getVivienda()%></h4>
+								</h4>
+								<div class="CodigoPostal_Item">
+									<h4>
+										CP:
+										<%=prod.getCodigoPostal()%></h4>
+								</div>
+								<div class="Localidad_Item">
+									<h4>
+										Localidad :
+										<%=prod.getLocalidad()%></h4>
+								</div>
+							</div>
+							<div id="OpcionesDireccion" class="OpcionesDireccion">
+								<a  style="text-decoration: none;" class="bestSellerProd" href='EditarDireccion'> Editar
+									Direccion </a> <a  style="text-decoration: none;" class="bestSellerProd" href='EliminarDireccion'>
+									Eliminar Direccion </a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+	</div>
+	<%
+		}
+
+		} else {
+	%>
+
+	<div id="cajaSinDirecc" class="container col-sm-4 col-md-4 col-xl-4">
+		<div class="row">
+			<div class="SinDatosDireccion">
+				<h4>No tiene Direccion Añadida</h4>
+				<p>Pulsa Aqui Para Añadir Una</p>
+				<button type="button" id="DatosDirrecion" class="btn btn-primary"
+					data-toggle="modal" data-target="#myModal3">Añadir
+					Direccion</button>
+			</div>
+		</div>
+		<!-- The Modal -->
+		<div class="modal" id="myModal3">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">añadir Direccion</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						<form action="InsertarDireccion" class="needs-validation"
+							novalidate method="post">
+							<div class="form-group">
+								<label for="uname">Direccion:</label> <input type="text"
+									class="form-control" id="direccion"
+									placeholder="Enter Direccion" name="direccion" required>
+								<div class="valid-feedback">Valid.</div>
+								<div class="invalid-feedback">Please fill out this field.</div>
+							</div>
+							<div class="form-group">
+								<label for="pwd">Vivienda:</label> <input type="text"
+									class="form-control" id="vivienda" placeholder="Enter Vivienda"
+									name="vivienda" required>
+								<div class="valid-feedback">Valid.</div>
+								<div class="invalid-feedback">Please fill out this field.</div>
+							</div>
+
+							<div class="form-group">
+								<label for="pwd">Localidad:</label> <input type="text"
+									class="form-control" id="localidad"
+									placeholder="Enter Localidad" name="localidad" required>
+								<div class="valid-feedback">Valid.</div>
+								<div class="invalid-feedback">Please fill out this field.</div>
+							</div>
+
+							<div class="form-group">
+								<label for="pwd">Provincia:</label> <input type="text"
+									class="form-control" id="provincia"
+									placeholder="Enter provincia" name="provincia" required>
+								<div class="valid-feedback">Valid.</div>
+								<div class="invalid-feedback">Please fill out this field.</div>
+							</div>
+
+							<div class="form-group">
+								<label for="pwd">Codigo Postal :</label> <input type="number"
+									class="form-control" id="codigoPostal" placeholder="Enter CP"
+									name="codigoPostal" required>
+								<div class="valid-feedback">Valid.</div>
+								<div class="invalid-feedback">Please fill out this field.</div>
+							</div>
+
+							<div class="form-group form-check">
+								<label class="form-check-label"> <input
+									class="form-check-input" type="checkbox" name="remember"
+									required> Acepta los Terminos de Nuestra Pagina.
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">Check this checkbox to
+										continue.</div>
+								</label>
+							</div>
+							<button type="submit" class="btn btn-primary">Guardar
+								Direccion</button>
+						</form>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
 	</div>
 	<%
 		}

@@ -28,6 +28,7 @@ public class SesionesEjb {
 			session.setAttribute("usuario", usuario);
 			session.setMaxInactiveInterval(30 * 60);
 			session.setAttribute("pantalla", usuario.getPantalla());
+			session.setAttribute("emailUsuario", usuario.getEmailUsuario());
 		}
 
 	}
@@ -37,6 +38,7 @@ public class SesionesEjb {
 			session.invalidate();
 		}
 	}
+
 	/**
 	 * este metodo recoge de la session el valor pantalla
 	 * 
@@ -49,6 +51,14 @@ public class SesionesEjb {
 		pantalla = (String) session.getAttribute("pantalla");
 
 		return pantalla;
+
+	}
+
+	public String getEmailUsuario(HttpSession session) {
+		String emailUsuario;
+		emailUsuario = (String) session.getAttribute("emailUsuario");
+
+		return emailUsuario;
 
 	}
 

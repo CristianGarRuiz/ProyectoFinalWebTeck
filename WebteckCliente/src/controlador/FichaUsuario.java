@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import modelo.Ejb.CarritosEjb;
 import modelo.Ejb.DireccionesEjb;
 import modelo.Ejb.ProductosEjb;
 import modelo.Ejb.SesionesEjb;
 import modelo.Ejb.UsuariosEjb;
+import modelo.Pojo.CarritosPojo;
 import modelo.Pojo.CategoriasPojo;
 import modelo.Pojo.DireccionesPojo;
 import modelo.Pojo.MarcasPojo;
@@ -38,6 +41,8 @@ public class FichaUsuario extends HttpServlet {
 	
 	@EJB
 	ProductosEjb productosEjb;
+	@EJB
+	CarritosEjb carritoEjb;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -53,6 +58,7 @@ public class FichaUsuario extends HttpServlet {
 		ArrayList<UsuariosPojo> datosUsuario = usuarioEjb.leerDatosUsuario(emailUsuario);
 		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
 		ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
+		CarritosPojo contarCarro = carritoEjb.contarProductosCarrito(emailUsuario);
 
 		request.setAttribute("error", error);
 		request.setAttribute("usuario", usuario);
@@ -61,6 +67,7 @@ public class FichaUsuario extends HttpServlet {
 		request.setAttribute("datosUsuario", datosUsuario);
 		request.setAttribute("categorias", categorias);
 		request.setAttribute("marcas", marcas);
+		request.setAttribute("contarCarro", contarCarro);
 
 		rs.forward(request, response);
 

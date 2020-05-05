@@ -10,4 +10,6 @@ public interface VentasMapper {
 	public ArrayList<VentasPojo> leerProductosporFecha(@Param("inicio") String inicio, @Param("fin") String fin);
 
 	public ArrayList<VentasPojo> leerProductosporEmail(@Param("emailUsuario") String emailUsuario);
+
+	public void insertarVenta(VentasPojo venta);
 }

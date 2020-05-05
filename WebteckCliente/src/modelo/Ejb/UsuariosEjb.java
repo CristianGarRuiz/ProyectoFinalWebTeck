@@ -132,14 +132,6 @@ public class UsuariosEjb {
 	 * @param usuario
 	 */
 
-//	public void pantallaUsuario(String pantalla,String usuario ) {
-//		daoUsuario userDao = new daoUsuario();
-//		userDao.pantallaUsuario(pantalla, usuario);
-//	}
-//	
-
-	// ESTE NOSE SI LO HE PASADO BIEN PORQUE
-	// ANTES NO TENIA UNA ENTIDAD POJO COMO ABAJO
 	public void pantallaUsuario(String pantalla, String usuario) {
 
 		Client cliente = ClientBuilder.newClient();
