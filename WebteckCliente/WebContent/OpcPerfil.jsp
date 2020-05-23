@@ -52,7 +52,7 @@
 		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav id="navPrinc" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -329,12 +329,12 @@
 				<h4>No tiene Direccion Añadida</h4>
 				<p>Pulsa Aqui Para Añadir Una</p>
 				<button type="button" id="DatosDirrecion" class="btn btn-primary"
-					data-toggle="modal" data-target="#myModal3">Añadir
+					data-toggle="modal" data-target="#myModal">Añadir
 					Direccion</button>
 			</div>
 		</div>
 		<!-- The Modal -->
-		<div class="modal" id="myModal3">
+		<div class="modal" id="myModal">
 			<div class="modal-dialog">
 				<div class="modal-content">
 

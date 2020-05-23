@@ -10,7 +10,7 @@
 		<result property='precio' column='precio' />
 		<result property='fecha' column='fecha' />
 		<result property='nombre' column='nombre' />
-			<result property='codigoPedido' column='codigoPedido' />
+		<result property='codigoPedido' column='codigoPedido' />
 	</resultMap>
 
 	<select id="leerProductosporFecha" resultMap="datosVentas">

@@ -2,7 +2,9 @@ package controlador;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.ejb.EJB;
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelo.Ejb.CarritosEjb;
+import modelo.Ejb.MailsEjb;
 import modelo.Ejb.PreguntasEjb;
 import modelo.Ejb.ProductosEjb;
 import modelo.Ejb.SesionesEjb;
@@ -22,9 +25,10 @@ import modelo.Pojo.MarcasPojo;
 import modelo.Pojo.ProductosTiendaPojo;
 import modelo.Pojo.UsuariosPojo;
 
-@WebServlet("/Principal")
-public class Principal extends HttpServlet {
+@WebServlet("/FormularioAyudaCliente")
+public class FormularioAyudaCliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	@EJB
 	UsuariosEjb usuarioEjb;
 
@@ -39,10 +43,11 @@ public class Principal extends HttpServlet {
 
 	@EJB
 	CarritosEjb carritoEjb;
+	@EJB
+	MailsEjb mailEjb;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
 		UsuariosPojo usuario = sesionesEjb.usuariosLogeado(session);
 
@@ -58,8 +63,9 @@ public class Principal extends HttpServlet {
 			ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
 			ArrayList<ProductosTiendaPojo> productosMedia = productosEjb.leerTotalProductosMedia();
 
-			RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/Principal.jsp");
-			RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/PrincipalNocturna.jsp");
+			RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/formClienteMensaje.jsp");
+			RequestDispatcher rsNocturna = getServletContext()
+					.getRequestDispatcher("/formClienteMensajeNocturna.jsp");
 
 			request.setAttribute("usuario", usuario);
 			request.setAttribute("pantalla", pantalla);
@@ -85,7 +91,8 @@ public class Principal extends HttpServlet {
 			CarritosPojo contarCarro = carritoEjb.contarProductosCarrito(emailUsuario);
 
 			RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/Principal.jsp");
-			RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/PrincipalNocturna.jsp");
+			RequestDispatcher rsNocturna = getServletContext()
+					.getRequestDispatcher("/PrincipalNocturna.jsp");
 
 			request.setAttribute("usuario", usuario);
 			request.setAttribute("pantalla", pantalla);
@@ -110,35 +117,23 @@ public class Principal extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-		String error = request.getParameter("error");
-		UsuariosPojo usuario = sesionesEjb.usuariosLogeado(session);
-		String pantalla = sesionesEjb.getPantalla(session);
-		String titulo = request.getParameter("titulo");
-		String emailUsuario = sesionesEjb.getEmailUsuario(session);
+		String para = "garciaruizcristian50@gmail.com";
 
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Principal.jsp");
-		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/PaginaNocturna.jsp");
-		CarritosPojo contarCarro = carritoEjb.contarProductosCarrito(emailUsuario);
+		String remitente = request.getParameter("remitente");
 
-		request.setAttribute("usuario", usuario);
-		request.setAttribute("titulo", titulo);
-		request.setAttribute("pantalla", pantalla);
-		request.setAttribute("error", error);
-		request.setAttribute("contarCarro", contarCarro);
-		// Generamos la página para el usuario y la mostramos
+		String asunto = request.getParameter("asunto");
+		
+		String nombre = request.getParameter("nombre");
 
-		if (pantalla == null || pantalla.equals("D")) {
+		String mensaje = request.getParameter("mensaje");
 
-			ArrayList<ProductosTiendaPojo> Busquedaproducto = productosEjb.BuscarProductoporNombreTienda(titulo);
+		if (para != null && asunto != null && mensaje != null && nombre!=null && remitente!=null) {
 
-			request.setAttribute("Busquedaproducto", Busquedaproducto);
-			rs.forward(request, response);
+			mailEjb.sendMail1(para, nombre, remitente, asunto, mensaje);
+			response.sendRedirect("Principal");
 
 		} else {
-			ArrayList<ProductosTiendaPojo> Busquedaproducto = productosEjb.BuscarProductoporNombreTienda(titulo);
-			request.setAttribute("Busquedaproducto", Busquedaproducto);
-			rsNocturna.forward(request, response);
+			response.sendRedirect("FormularioAyudaCliente?error=hay ");
 
 		}
 

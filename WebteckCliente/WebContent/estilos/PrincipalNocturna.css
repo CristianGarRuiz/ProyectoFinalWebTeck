@@ -9,34 +9,8 @@
 	width: 100%;
 }
 
-.navbar {
-	border-bottom-right-radius: 8px;
-	border-bottom-left-radius: 8px;
-}
-
-#contanierValores {
-	background-color: orange;
-	margin-top: -2%;
-	display: flow-root;
-	position: relative;
-	margin-bottom: 1%;
-	border: 3px solid darkorange;
-	border-radius: 6px;
-	color: black;
-}
-
-.product-item {
-	height: 70%;
-	width: 24%;
-	border: 3px solid black;
-	padding: 3%;
-	margin-inline-start: auto;
-	margin-right: auto;
-	margin-bottom: 2%;
-	border-radius: 3%;
-	position: relative;
-	display: inline-flex;
-	margin-left: 0.7%;
+body {
+	background-color: rgb(187, 187, 187);
 }
 
 #prodImagen {
@@ -46,6 +20,32 @@
 	height: 27%;
 	margin-left: 36%;
 	cursor: pointer;
+}
+
+#contanierValores {
+	background-color: lightcyan;
+	margin-top: -2%;
+	display: flow-root;
+	position: relative;
+	margin-bottom: 1%;
+	border: 3px solid lightcyan;
+	border-radius: 6px;
+	color: black;
+}
+
+.product-item {
+	height: 70%;
+	width: 24%;
+	border: 3px solid orange;
+	padding: 3%;
+	margin-inline-start: auto;
+	margin-right: auto;
+	margin-bottom: 2%;
+	border-radius: 3%;
+	position: relative;
+	display: inline-flex;
+	margin-left: 0.7%;
+	background-color: white;
 }
 
 .bestSellerProd {
@@ -107,10 +107,6 @@
 	text-decoration: none;
 	display: block;
 }
-#navPrinc {
-		border-bottom-left-radius: 8px;
-		border-bottom-right-radius: 8px;
-	}
 
 #Datos {
 	margin-left: 11%;
@@ -130,7 +126,6 @@
 	margin-right: auto;
 	cursor: pointer;
 	text-decoration: none;
-	color: dodgerblue;
 }
 
 #BusquedaTitulo {
@@ -152,6 +147,30 @@
 	text-decoration: none;
 	cursor: pointer
 }
+
+#BusquedaFiltro {
+	display: inline-grid;
+	position: relative;
+	background-color: cadetblue;
+	border-radius: 3px;
+	margin-left: 4%;
+	margin-top: 0.4%;
+}
+
+#MejorValorados {
+	background-color: white;
+	position: relative;
+	display: flex;
+	margin-left: 8%;
+	border-radius: 6px;
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
+
+#navPrinc {
+		border-bottom-left-radius: 8px;
+		border-bottom-right-radius: 8px;
+	}
 
 #FichaProducto {
 	background-color: orange;
@@ -279,6 +298,7 @@
 	width: 100% !important;
 }
 
+
 /* The Modal (background) */
 .modal56 {
 	display: none; /* Hidden by default */
@@ -371,3 +391,4 @@ to {
 		width: 50%;
 	}
 }
+

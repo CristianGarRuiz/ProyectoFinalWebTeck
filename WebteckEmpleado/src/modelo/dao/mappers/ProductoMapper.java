@@ -18,6 +18,9 @@ public interface ProductoMapper {
 	public ArrayList<MarcaPojo> leerMarcaId(@Param("id") int id);
 
 	public ArrayList<ProductoTiendaPojo> leerProductosTienda(@Param("id") int id);
+	
+	public ArrayList<ProductoTiendaPojo> productosFiltro(@Param("idMarca") int idMarca,@Param("idCategoria") int idCategoria,
+			@Param("precioIni") int precioIni,@Param("precioFin") int precioFin );
 
 	public ArrayList<ProductoTiendaPojo> leerProductosCategoriaid(@Param("id") int id);
 

@@ -11,6 +11,33 @@
 	position: relative;
 	display: inline-grid;
 	margin-left: 0.7%;
+	background-color: white;
+}
+
+#TitulosValo {
+	background-color: white;
+	border-radius: 3px;
+	display: inline-grid;
+	position: relative;
+	margin-left: 4%;
+}
+#navPrinc {
+		border-bottom-left-radius: 8px;
+		border-bottom-right-radius: 8px;
+	}
+
+#Section {
+	background-color: white;
+	position: relative;
+	display: flex;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	margin-left: 4%;
+	border-radius: 4px;
+}
+
+body {
+	background-color: rgb(187, 187, 187);
 }
 
 #imgValor {
@@ -21,10 +48,6 @@
 	margin-left: 10%;
 	margin-top: -2%;
 }
-#navPrinc {
-		border-bottom-left-radius: 8px;
-		border-bottom-right-radius: 8px;
-	}
 
 #Pregunta {
 	position: static;
@@ -192,116 +215,3 @@
 	text-decoration: none;
 	cursor: pointer;
 }
-
-#fotofichaProd {
-	text-align: center;
-	height: 30%;
-	width: 30%;
-	margin-right: auto;
-	margin-left: auto;
-	display: flex;
-	position: relative;
-	cursor: pointer;
-}
-
-
-/* The Modal (background) */
-.modal56 {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	padding-top: 100px; /* Location of the box */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
-}
-
-/* Modal Content (image) */
-.modal56-content {
-	margin: auto;
-	display: block;
-	width: 80%;
-	max-width: 700px;
-}
-
-/* Caption of Modal Image */
-#caption {
-	margin: auto;
-	display: block;
-	width: 80%;
-	max-width: 700px;
-	text-align: center;
-	color: #ccc;
-	padding: 10px 0;
-	height: 150px;
-	
-}
-
-/* Add Animation */
-.modal56-content, #caption {
-	-webkit-animation-name: zoom;
-	-webkit-animation-duration: 0.6s;
-	animation-name: zoom;
-	animation-duration: 0.6s;
-}
-
-@
--webkit-keyframes zoom {
-	from {-webkit-transform: scale(0)
-}
-
-to {
-	-webkit-transform: scale(1)
-}
-
-}
-@
-keyframes zoom {
-	from {transform: scale(0)
-}
-
-to {
-	transform: scale(1)
-}
-
-/* The Close Button */
-.close13 {
-	position: absolute;
-	top: 15px;
-	right: 35px;
-	color: #f1f1f1;
-	font-size: 70px;
-	font-weight: bold;
-	transition: 0.3s;
-	float: right;
-}
-
-#imgant {
-	border-radius: px;
-	cursor: pointer;
-	transition: 0.3s;
-}
-
-.close13:hover, .close13:focus {
-	color: #bbb;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-/* 100% Image Width on Smaller Screens */
-@media
-only
-screen
-and
-(max-width:
-700px)
-{
-.modal56-content {
-	width: 50%;
-}
-
-

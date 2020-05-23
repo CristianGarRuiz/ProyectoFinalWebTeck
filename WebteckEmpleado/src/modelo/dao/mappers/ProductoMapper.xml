@@ -70,6 +70,15 @@
 	</resultMap>
 
 
+<resultMap type="ProductoTienda" id="FiltroBusqueda">
+		<id property='id' column='id' />
+		<result property='titulo' column='titulo' />
+		<result property='anyo' column='anyo' />
+		<result property='precio' column='precio' />
+		<result property='stock' column='stock' />
+		<result property='foto' column='foto' />
+	</resultMap>
+
 	<select id="leerTotalProductosMedia" resultMap="tiendaProducto">
 		SELECT
 		round(AVG(v.valoraciones))as valoraciones ,p.titulo as titulo,p.foto
@@ -107,11 +116,26 @@
 		productos.idPlataforma =
 		plataformas.id and productos.idGenero =
 		generos.id and
-		productos.titulo
-		like '%'
-		#{titulo}
-		'%';
+		productos.titulo like '%'#{titulo}'%';
 	</select>
+	
+	<select id="productosFiltro" resultMap="FiltroBusqueda">
+		
+	  select
+          productos.titulo as titulo ,productos.anyo as anyo ,productos.precio as precio ,productos.foto as foto ,productos.stock as stock,productos.id as id
+      from
+          productos,plataformas,generos
+      where 
+          productos.idGenero = generos.id and plataformas.id = productos.idPlataforma and
+          productos.idGenero=#{idMarca} and productos.idPlataforma=#{idCategoria} and
+          productos.precio between #{precioIni} and #{precioFin};
+		
+		
+	</select>
+	
+	
+	
+	
 
 	<select id="leerProductos" resultMap="datosProducto">
 		select

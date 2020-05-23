@@ -1,19 +1,15 @@
-
-<%@page import="javax.naming.InitialContext"%>
+<%@page import="modelo.Pojo.CarritosPojo"%>
+<%@page import="modelo.Pojo.MarcasPojo"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="javax.naming.Context"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@page import="modelo.Pojo.CarritosPojo"%>
 <%@ page import="modelo.Pojo.UsuariosPojo"%>
-<%@ page import="modelo.Pojo.DireccionesPojo"%>
+<%@ page import="modelo.Pojo.ProductosTiendaPojo"%>
 <%@ page import="modelo.Pojo.CategoriasPojo"%>
-<%@ page import="modelo.Pojo.MarcasPojo" %>
-
+<%@ page import="modelo.Pojo.PreguntasPojo"%>
 <!DOCTYPE html>
 <html>
-<head>
 <head>
 <title>Webteck</title>
 <meta charset="utf-8">
@@ -34,24 +30,34 @@
 	crossorigin="anonymous">
 <link rel="icon" type="imagenes/iconIma.gif" href="iconIma.gif">
 <link type="text/css" href="estilos/Principal.css" rel="stylesheet" />
-<link type="text/css" href="estilos/FichaUsuario.css" rel="stylesheet" />
 </head>
-</head>
+<body>
 
-
-<body style="background-image: url(imagenes/fondoLogin.png)">
 
 	<%
 		String error = (String) request.getParameter("error");
-	CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
-	%>
+		String emailUsuario = (String) request.getParameter("emailUsuario");
 
-	<%
-		DireccionesPojo prod = (DireccionesPojo) request.getAttribute("direccion");
 		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
+
+		PreguntasPojo preguntas = (PreguntasPojo) request.getAttribute("preguntas");
+
+		ArrayList<ProductosTiendaPojo> productosTienda = (ArrayList<ProductosTiendaPojo>) request
+				.getAttribute("productosTienda");
+
+		ArrayList<ProductosTiendaPojo> productosMedia = (ArrayList<ProductosTiendaPojo>) request
+				.getAttribute("productosMedia");
+
+		String titulo = (String) request.getAttribute("titulo");
+		String pregunta = (String) request.getAttribute("pregunta");
+		ArrayList<ProductosTiendaPojo> Busquedaproducto = (ArrayList<ProductosTiendaPojo>) request
+				.getAttribute("Busquedaproducto");
+
+		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav id="navPrinc"
+		class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -64,8 +70,8 @@
 		<div class="container-fluid  col-sm-11">
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="Informacion.jsp">Informacion</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="Informacion.jsp">Informacion</a></li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categorias</a>
 						<div class="dropdown-menu">
@@ -86,7 +92,7 @@
 						<div class="dropdown-menu">
 							<%
 								ArrayList<MarcasPojo> marca = (ArrayList<MarcasPojo>) request.getAttribute("marcas");
-								if (cate != null) {
+								if (marca != null) {
 									for (MarcasPojo d : marca) {
 
 										out.println("<a class='dropdown-item' href='porMarca?id=" + d.getId()
@@ -103,7 +109,7 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a id="Login12" class="dropdown-item" href="Login"><button
+							<a id="Login12" class="dropdown-item" href="Logins"><button
 									type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
 							<a id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
@@ -136,7 +142,7 @@
 						if ((usu != null) && (usu.getUsuario() != null)) {
 					%>
 					<div id="Datos col-sm-12 col-md-12">
-						<img alt="" src="Imagenes/<%=usu.getFoto()%>"
+						<img alt="" src=" Imagenes/<%=usu.getFoto()%> "
 							style="height: 35px; border-radius: 4%;"><br /> <br />
 						<p
 							style="color: white; margin-left: 37px; margin-bottom: 48%; margin-top: -34%; width: 106%">
@@ -187,8 +193,9 @@
 
 					<ul class="checkout">
 						<a style="margin-right: 2%" href="VerCarrito"> <i
-							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span style="margin-left: 46%;"
-							id="checkout_items" class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+							style="margin-left: 46%;" id="checkout_items"
+							class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
 						</a>
 					</ul>
 
@@ -211,75 +218,47 @@
 	</nav>
 	</div>
 	</nav>
-	
-	<div id="EditarDireccion" class="container">
 
-		<%
-			if (prod == null) {
-				out.println("<br/>");
-				out.println("<br/>");
-				out.println("<a href=\"Login\"> Login</a>");
-			} else {
-				out.println("<form class='form-horizontal'  action=\"EditarDireccion\" method=\"post\">");
-
-				out.println(
-						"<input type=\"hidden\" name=\"emailUsuario\" value=\"" + prod.getEmailUsuario() + "\" /> ");
-				out.println("<input type=\"hidden\" name=\"id\" value=\"" + prod.getId() + "\" /> ");
-				out.println("<label for=\"Titulo\">Titulo:</label>");
-				out.println("<input type=\"text\" name=\"Direccion\" value=\"" + prod.getDireccion() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"Localidad\">: Localidad</label>");
-				out.println("<input type=\"text\" name=\"Localidad\" value=\"" + prod.getLocalidad() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"Provincia\">Provincia:</label>");
-				out.println("<input type=\"text\" name=\"Provincia\" value=\"" + prod.getProvincia() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"Vivienda\">Vivienda:</label>");
-				out.println("<input type=\"text\" name=\"Vivienda\" value=\"" + prod.getVivienda() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"CodigoPostal\">CP:</label>");
-				out.println(
-						"<input type=\"number\" name=\"CodigoPostal\" value=\"" + prod.getCodigoPostal() + "\" /> ");
-				out.println("<br/>");
-				out.print("<br><br>");
-				out.print(
-						"<button id='ButtonRetorno' type='button' onClick='window.location.replace('Principal')'>Volver atras</button>");
-				out.println("<input type= \"submit\" value= \"Editar\" /> ");
-				out.println("</form>");
-			}
-		%>
-
+	<div class="container"
+		style="position: relative; display: block; margin-top: 7%;">
+		<h2>Envianos un mensaje para Ayudarte</h2>
+		<form class="form-horizontal" action="FormularioAyudaCliente"
+			method="post">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="email">Email:</label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control" id="email"
+						placeholder="Enter email" name="remitente">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="asunto">asunto:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="pwd"
+						placeholder="Enter asusnto" name="asunto">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="nombre">Nombre Cliente:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="pwd"
+						placeholder="Enter nombre" name="nombre">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="mensaje">Mensaje:</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" name="mensaje"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">Enviar
+						Mensaje</button>
+				</div>
+			</div>
+		</form>
 	</div>
 
-
-	<%
-		if (usu != null) {
-	%>
-	<script>
-		window.onload = function() {
-			document.getElementById("Login12").setAttribute('href', '#');
-			document.getElementById("Login13").setAttribute('href', '#');
-		}
-	</script>
-	<%
-		}
-	%>
-
-
-
-	<%
-		if (usu == null) {
-	%>
-	<script>
-		window.onload = function() {
-			alert("No esta Logeado para esta Funcion");
-			window.location = 'Pagina';
-		}
-	</script>
-	<%
-		}
-	%>
-
 </body>
-
 </html>

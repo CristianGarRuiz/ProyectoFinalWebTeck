@@ -71,6 +71,16 @@ public class ProductoEjb {
 		return ProductoDao.leerProductosTienda(id);
 
 	}
+	
+	public ArrayList<ProductoTiendaPojo> productosFiltro(int idMarca ,int idCategoria,int precioIni, int precioFin) throws SQLException {
+
+		ProductosDao ProductoDao = new ProductosDao();
+		return ProductoDao.productosFiltro( idMarca, idCategoria, precioIni, precioFin);
+
+	}
+	
+	
+	
 	public ArrayList<ProductoTiendaPojo> leerProductoTiendaCategoriaid(int id) throws SQLException {
 
 		ProductosDao ProductoDao = new ProductosDao();

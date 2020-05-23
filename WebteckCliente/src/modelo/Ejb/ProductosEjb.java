@@ -166,6 +166,7 @@ public class ProductosEjb {
 
 		return prod;
 	}
+
 	public ArrayList<CategoriasPojo> leerCategoriaId(int id) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -202,6 +203,20 @@ public class ProductosEjb {
 						+ "/" + cantidad + "/" + idProducto);
 
 		target2.request().get();
+	}
+
+	public ArrayList<ProductosTiendaPojo> leerProductosFiltro(int idMarca, int idCategoria,
+			int precioIni, int precioFin) {
+
+		Client cliente = ClientBuilder.newClient();
+
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/leerProductosFiltro/patata23/"+ idMarca + "/" + idCategoria + "/" + precioIni + "/" + precioFin);
+
+		ArrayList<ProductosTiendaPojo> lista = (ArrayList<ProductosTiendaPojo>) target1.request()
+				.get(new GenericType<List<ProductosTiendaPojo>>() {
+				});
+		return lista;
 	}
 
 }

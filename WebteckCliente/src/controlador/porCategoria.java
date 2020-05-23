@@ -55,8 +55,7 @@ public class porCategoria extends HttpServlet {
 		String emailUsuario = sesionesEjb.getEmailUsuario(session);
 
 		RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/mostrarProductoporCategoria.jsp");
-		RequestDispatcher rsNocturna = getServletContext()
-				.getRequestDispatcher("/mostrarProductoporCategoriaNocturno.jsp");
+		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/mostrarProductoporCategoriaNocturna.jsp");
 
 		String eseid = request.getParameter("id");
 

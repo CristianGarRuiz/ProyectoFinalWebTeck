@@ -1,6 +1,8 @@
 package controlador;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,8 +17,8 @@ import modelo.Ejb.SesionesEjb;
 import modelo.Ejb.UsuariosEjb;
 import modelo.Pojo.UsuariosPojo;
 
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Logins")
+public class Logins extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final Logger loggerError = (Logger) LoggerFactory.getLogger("Error");
@@ -75,12 +77,15 @@ public class Login extends HttpServlet {
 			UsuariosPojo usuario = null;
 
 			usuario = usuariosEJB.leerDato(nombre, pass);
-
-			String activado = usuario.getActivado();
+			
+			
+			
+			
+			
 			// Si no tenemos usuario, es una sesión no válida y la invalidamos
-			if (usuario == null || activado.equals("N")) {
+			if (usuario == null || usuario.getActivado().equals("n")  || usuario.getActivado().equals("N")) {
 				sesionesEJB.logoutUsuario(session);
-				response.sendRedirect("Login?error=hay");
+				response.sendRedirect("Logins?error=hay");
 				loggerError.error("Error al al Logearse " + usuario);
 			} else {
 				// Añadimos el usuario a la sesión

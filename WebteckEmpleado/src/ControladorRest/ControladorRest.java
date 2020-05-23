@@ -93,6 +93,23 @@ public class ControladorRest {
 		}
 		return producto;
 	}
+	
+	
+	@GET
+	@Path("/leerProductosFiltro/{token}/{idMarca}/{idCategoria}/{precioIni}/{precioFin}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<ProductoTiendaPojo> productosFiltro(@PathParam("token") String token,
+			@PathParam("idMarca") int idMarca, @PathParam("idCategoria") int idCategoria, @PathParam("precioIni") int precioIni, @PathParam("precioFin") int precioFin)
+			throws SQLException {
+
+		ArrayList<ProductoTiendaPojo> producto = null;
+		if (token.equals("patata23")) {
+			producto = productoEjb.productosFiltro(idMarca, idCategoria, precioIni, precioFin);
+		}
+		return producto;
+	}
+	
+	
 
 	@GET
 	@Path("/getProductoTiendaMarcaid/{token}/{id}")

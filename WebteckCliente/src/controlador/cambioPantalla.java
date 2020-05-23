@@ -36,7 +36,7 @@ public class cambioPantalla extends HttpServlet {
 		String pantalla = sesionesEjb.getPantalla(session);
 
 		// enviar a una o otro jsp segun el valor de pantalla
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Principal.jsp");
+		RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/Principal.jsp");
 		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/PrincipalNocturna.jsp");
 
 //las request de los atributos que estancio al principio
@@ -49,14 +49,14 @@ public class cambioPantalla extends HttpServlet {
 		// con el ejbSession cmabiaPantalla guardar el valor en la session
 		if (pantalla.equals("D")) {
 
-			rsNocturna.forward(request, response);
+			response.sendRedirect("Principal");
 			//cambio el valor de pantalla del usuario recogio en la session
 			usuarioEjb.pantallaUsuario("N", usuario.getUsuario());
 			//cambio el valor pantalla en la session
 			sesionesEjb.cambiarPantalla(session, "N");
 
 		} else {
-			rs.forward(request, response);
+			response.sendRedirect("Principal");
 			usuarioEjb.pantallaUsuario("D", usuario.getUsuario());
 			sesionesEjb.cambiarPantalla(session, "D");
 		}

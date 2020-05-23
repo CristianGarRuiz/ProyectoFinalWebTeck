@@ -14,7 +14,10 @@
 	background-color: white;
 	border-radius: 3px;
 }
-
+#navPrinc {
+		border-bottom-left-radius: 8px;
+		border-bottom-right-radius: 8px;
+	}
 #idCarrito {
 	background-color: white;
 	border-radius: 3px;

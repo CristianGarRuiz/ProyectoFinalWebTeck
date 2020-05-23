@@ -30,7 +30,7 @@
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 	crossorigin="anonymous">
 <link rel="icon" type="imagenes/iconIma.gif" href="iconIma.gif">
-<link type="text/css" href="estilos/BusquedaProducto.css"
+<link type="text/css" href="estilos/BusquedaProductoNocturna.css"
 	rel="stylesheet" />
 
 </head>
@@ -56,7 +56,7 @@
 		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-	<nav id="navPrinc" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<nav  id="navPrinc" class="navbar navbar-expand-sm   fixed-top" style="background-color: orange;">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -69,8 +69,8 @@
 		<div class="container-fluid  col-sm-11">
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link"
-						href="Informacion.jsp">Informacion</a></li>
+					<li class="nav-item"><a class="nav-link" href="Informacion.jsp">Informacion</a>
+					</li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categorias</a>
 						<div class="dropdown-menu">
@@ -120,7 +120,7 @@
 
 			<div class="container-fluid col-sm-5 col-md-6">
 
-				<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<nav class="navbar navbar-expand-sm " style="background-color: orange;">
 
 					<form class="form-inline" action="Principal" method="post">
 						<input class="form-control mr-sm-2" type="text" name="titulo"
@@ -134,7 +134,7 @@
 
 
 				</nav>
-				<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+				<nav class="navbar navbar-expand-sm" style="background-color: orange;">
 					<!-- Brand/logo -->
 
 					<%
@@ -192,9 +192,8 @@
 
 					<ul class="checkout">
 						<a style="margin-right: 2%" href="VerCarrito"> <i
-							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							style="margin-left: 46%;" id="checkout_items"
-							class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span style="margin-left: 46%;"
+							id="checkout_items" class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
 						</a>
 					</ul>
 
@@ -235,7 +234,8 @@
 				<div class='product discount product_filter'>
 					<div class='product_image'>
 
-						<img id="fotofichaProd" src='Imagenes/<%=prod.getFoto()%>' alt=''>
+						<img style="text-align: center;" src='Imagenes/'
+							<%=prod.getFoto()%> alt=''>
 					</div>
 					<div class='favorite favorite_left'></div>
 					<div
@@ -610,51 +610,15 @@
 </body>
 
 <%
-	if (usu != null) {
-%>
-<script>
-	window.onload = function() {
-		document.getElementById("Login12").setAttribute('href', '#');
-		document.getElementById("Login13").setAttribute('href', '#');
-	}
-</script>
-<%
-	}
-%>
-
-
-<!-- The Modal -->
-	<div id="myModal33" class="modal56">
-		<span
-			style="float: right; position: relative; display: flex; font-size: 72px; color: white; cursor: pointer;"
-			class="close13">&times;</span> <img
-			style="position: relative; display: flex; height: 97%; width: 30%; margin-bottom: 3%; margin-top: 2%; margin-left: auto; margin-right: auto;"
-			class="modal-content" id="img02">
-		<div id="caption"></div>
-	</div>
-
-	<script>
-		// Get the modal
-		var modal = document.getElementById("myModal33");
-
-		// Get the image and insert it inside the modal - use its "alt" text as a caption
-		var img = document.getElementById("fotofichaProd");
-		var modalImg = document.getElementById("img02");
-		var captionText = document.getElementById("caption");
-		img.onclick = function() {
-			modal.style.display = "block";
-			modalImg.src = this.src;
-			captionText.innerHTML = this.alt;
-		}
-
-		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close13")[0];
-
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
-			modal.style.display = "none";
-		}
-	</script>
-
-
+			if (usu != null) {
+		%>
+		<script>
+			window.onload = function() {
+				document.getElementById("Login12").setAttribute('href', '#');
+				document.getElementById("Login13").setAttribute('href', '#');
+			}
+		</script>
+		<%
+			}
+		%>
 </html>

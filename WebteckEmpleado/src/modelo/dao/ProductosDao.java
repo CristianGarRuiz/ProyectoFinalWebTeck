@@ -111,6 +111,23 @@ public class ProductosDao {
 		}
 
 	}
+	
+	public ArrayList<ProductoTiendaPojo> productosFiltro( int idMarca,int idCategoria, int precioIni,int precioFin) {
+
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ProductoMapper leerProducto = sqlSession.getMapper(ProductoMapper.class);
+			return leerProducto.productosFiltro(idMarca, idCategoria, precioIni, precioFin);
+
+		} finally {
+			sqlSession.close();
+		}
+
+	}
+
+	
+	
+	
 
 	public ArrayList<ProductoTiendaPojo> leerProductosTiendaCategoriaid(int id) {
 

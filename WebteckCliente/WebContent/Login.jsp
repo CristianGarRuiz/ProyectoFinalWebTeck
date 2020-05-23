@@ -69,7 +69,7 @@
 		</p>
 	</div>
 	<div id="Formulario" class="container">
-		<form class="form-horizontal" action="Login" method="post">
+		<form class="form-horizontal" action="Logins" method="post">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="Usuario"><i
 					class='fas fa-user' style='margin-top: 2%; font-size: 24px'></i>Usuario:</label>

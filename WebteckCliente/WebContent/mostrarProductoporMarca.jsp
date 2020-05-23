@@ -45,7 +45,7 @@
 	%>
 
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav id="navPrinc" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -58,8 +58,8 @@
 		<div class="container-fluid  col-sm-11">
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="#texto">Informacion</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="Informacion.jsp">Informacion</a></li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categorias</a>
 						<div class="dropdown-menu">
@@ -97,9 +97,10 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a id="Login12" class="dropdown-item" href="Login"><button type="submit"
+							<a id="Login12" class="dropdown-item" href="Login"><button
+									type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
-							<a  id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
+							<a id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
 									type="submit"
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
@@ -128,7 +129,7 @@
 					<%
 						if ((usu != null) && (usu.getUsuario() != null)) {
 					%>
-					<div id="Datos">
+					<div id="Datos col-sm-12 col-md-12">
 						<img alt="" src="Imagenes/<%=usu.getFoto()%>"
 							style="height: 35px; border-radius: 4%;"><br /> <br />
 						<p
@@ -173,6 +174,7 @@
 					<%
 						}
 					%>
+
 					<%
 						if (usu != null) {
 					%>
@@ -180,7 +182,8 @@
 					<ul class="checkout">
 						<a style="margin-right: 2%" href="VerCarrito"> <i
 							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							id="checkout_items" class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+							style="margin-left: 46%;" id="checkout_items"
+							class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
 						</a>
 					</ul>
 
@@ -203,6 +206,7 @@
 	</nav>
 	</div>
 	</nav>
+
 
 
 	<h3 style="text-align: center; margin-top: 9%;">Productos de
@@ -282,19 +286,19 @@
 
 		</div>
 	</div>
-	
+
 	<%
-			if (usu != null) {
-		%>
-		<script>
-			window.onload = function() {
-				document.getElementById("Login12").setAttribute('href', '#');
-				document.getElementById("Login13").setAttribute('href', '#');
-			}
-		</script>
-		<%
-			}
-		%>
+		if (usu != null) {
+	%>
+	<script>
+		window.onload = function() {
+			document.getElementById("Login12").setAttribute('href', '#');
+			document.getElementById("Login13").setAttribute('href', '#');
+		}
+	</script>
+	<%
+		}
+	%>
 
 </body>
 </html>

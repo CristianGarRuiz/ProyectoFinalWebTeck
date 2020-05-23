@@ -32,7 +32,7 @@
 			UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
 	%>
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav id="navPrinc" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">

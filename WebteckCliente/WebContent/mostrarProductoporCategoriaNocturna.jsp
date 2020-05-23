@@ -1,19 +1,13 @@
-
-<%@page import="javax.naming.InitialContext"%>
+<%@page import="modelo.Pojo.ProductosTiendaPojo"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="javax.naming.Context"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%@page import="modelo.Pojo.CarritosPojo"%>
 <%@ page import="modelo.Pojo.UsuariosPojo"%>
-<%@ page import="modelo.Pojo.DireccionesPojo"%>
 <%@ page import="modelo.Pojo.CategoriasPojo"%>
-<%@ page import="modelo.Pojo.MarcasPojo" %>
-
+<%@ page import="modelo.Pojo.MarcasPojo"%>
+<%@page import="modelo.Pojo.CarritosPojo"%>
 <!DOCTYPE html>
 <html>
-<head>
 <head>
 <title>Webteck</title>
 <meta charset="utf-8">
@@ -33,25 +27,25 @@
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 	crossorigin="anonymous">
 <link rel="icon" type="imagenes/iconIma.gif" href="iconIma.gif">
-<link type="text/css" href="estilos/Principal.css" rel="stylesheet" />
-<link type="text/css" href="estilos/FichaUsuario.css" rel="stylesheet" />
+<link type="text/css" href="estilos/PrincipalNocturna.css"
+	rel="stylesheet" />
 </head>
-</head>
-
-
-<body style="background-image: url(imagenes/fondoLogin.png)">
-
+<body>
 	<%
 		String error = (String) request.getParameter("error");
-	CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
-	%>
 
-	<%
-		DireccionesPojo prod = (DireccionesPojo) request.getAttribute("direccion");
 		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
+
+		ArrayList<CategoriasPojo> categoriasID = (ArrayList<CategoriasPojo>) request.getAttribute("categoriasID");
+
+		ArrayList<ProductosTiendaPojo> productosCategoriaid = (ArrayList<ProductosTiendaPojo>) request
+				.getAttribute("productosCategoriaid");
+
+		ProductosTiendaPojo contarProd = (ProductosTiendaPojo) request.getAttribute("contarProd");
+		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav id="navPrinc" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -212,45 +206,86 @@
 	</div>
 	</nav>
 	
-	<div id="EditarDireccion" class="container">
 
-		<%
-			if (prod == null) {
-				out.println("<br/>");
-				out.println("<br/>");
-				out.println("<a href=\"Login\"> Login</a>");
-			} else {
-				out.println("<form class='form-horizontal'  action=\"EditarDireccion\" method=\"post\">");
 
-				out.println(
-						"<input type=\"hidden\" name=\"emailUsuario\" value=\"" + prod.getEmailUsuario() + "\" /> ");
-				out.println("<input type=\"hidden\" name=\"id\" value=\"" + prod.getId() + "\" /> ");
-				out.println("<label for=\"Titulo\">Titulo:</label>");
-				out.println("<input type=\"text\" name=\"Direccion\" value=\"" + prod.getDireccion() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"Localidad\">: Localidad</label>");
-				out.println("<input type=\"text\" name=\"Localidad\" value=\"" + prod.getLocalidad() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"Provincia\">Provincia:</label>");
-				out.println("<input type=\"text\" name=\"Provincia\" value=\"" + prod.getProvincia() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"Vivienda\">Vivienda:</label>");
-				out.println("<input type=\"text\" name=\"Vivienda\" value=\"" + prod.getVivienda() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"CodigoPostal\">CP:</label>");
-				out.println(
-						"<input type=\"number\" name=\"CodigoPostal\" value=\"" + prod.getCodigoPostal() + "\" /> ");
-				out.println("<br/>");
-				out.print("<br><br>");
-				out.print(
-						"<button id='ButtonRetorno' type='button' onClick='window.location.replace('Principal')'>Volver atras</button>");
-				out.println("<input type= \"submit\" value= \"Editar\" /> ");
-				out.println("</form>");
-			}
-		%>
 
+	<h3 style="text-align: center; margin-top: 9%;">Productos de
+		categoria</h3>
+	<h5>
+		Total Productos :
+		<%=contarProd.getTitulo()%></h5>
+	<div class="main-content  col-sm-5 col-md-12 col-lg-12">
+		<div class="row">
+
+			<%
+				if (productosCategoriaid != null) {
+			%>
+
+
+			<%
+				for (ProductosTiendaPojo prod : productosCategoriaid) {
+			%>
+
+			<div class='product-item'>
+				<div class='product discount product_filter'>
+					<div class='product_image'>
+
+						<img src='Imagenes/' <%=prod.getFoto()%> alt=''>
+					</div>
+					<div class='favorite favorite_left'></div>
+					<div
+						class='product_bubble product_bubble_right product_bubble_red
+						d-flex flex-column align-items-center'>
+						<span> <%
+ 	int productosZero = prod.getStock();
+
+ 			if (prod.getStock() > 10) {
+ %> <span style="color: green;"> Disponibles: <%=prod.getStock()%></span>
+							<%
+								} else if (prod.getStock() <= 5) {
+							%> <span style="color: red;"> Disponibles: <%=prod.getStock()%></span>
+							<%
+								} else if (productosZero == 0) {
+							%> <span style="color: red"> No Disponibles : <%=prod.getStock()%></span>
+							<%
+								} else {
+							%> <span style="color: green;"> Disponibles: <%=prod.getStock()%></span>
+							<%
+								}
+							%></span>
+					</div>
+					<div class='product_info'>
+						<h6 class='product_name'>
+							<a> <%=prod.getTitulo()%></a>
+						</h6>
+						<div class='product_price'>
+							<span> <%=prod.getPrecio()%> $
+							</span>
+						</div>
+					</div>
+					<div
+						style="position: relative; display: flex; margin-left: 11%; height: 23%; width: 132%; padding: 0%; flex-wrap: wrap;">
+						<a id="CarritoTienda" href='Editar?id=<%=prod.getId()%>'>
+							Añadir a Carrito </a><br> <br>
+						</n>
+						<br> <a id="FichaProducto" href='Ficha?id=<%=prod.getId()%>'>
+							Ver Producto </a>
+					</div>
+				</div>
+
+
+
+
+			</div>
+			<%
+				}
+			%>
+			<%
+				}
+			%>
+
+		</div>
 	</div>
-
 
 	<%
 		if (usu != null) {
@@ -265,21 +300,5 @@
 		}
 	%>
 
-
-
-	<%
-		if (usu == null) {
-	%>
-	<script>
-		window.onload = function() {
-			alert("No esta Logeado para esta Funcion");
-			window.location = 'Pagina';
-		}
-	</script>
-	<%
-		}
-	%>
-
 </body>
-
 </html>

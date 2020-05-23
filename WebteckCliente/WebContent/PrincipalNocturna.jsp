@@ -1,3 +1,4 @@
+<%@page import="modelo.Pojo.CarritosPojo"%>
 <%@page import="modelo.Pojo.MarcasPojo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -28,13 +29,15 @@
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 	crossorigin="anonymous">
 <link rel="icon" type="imagenes/iconIma.gif" href="iconIma.gif">
-<link type="text/css" href="estilos/Principal.css" rel="stylesheet" />
+<link type="text/css" href="estilos/PrincipalNocturna.css"
+	rel="stylesheet" />
 </head>
-<body style="background-color: gray;">
+<body>
 
 
 	<%
 		String error = (String) request.getParameter("error");
+		String emailUsuario = (String) request.getParameter("emailUsuario");
 
 		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
 
@@ -50,9 +53,12 @@
 		String pregunta = (String) request.getAttribute("pregunta");
 		ArrayList<ProductosTiendaPojo> Busquedaproducto = (ArrayList<ProductosTiendaPojo>) request
 				.getAttribute("Busquedaproducto");
+
+		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav id="navPrinc" class="navbar navbar-expand-sm  fixed-top"
+		style="background-color: orange;">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -65,8 +71,8 @@
 		<div class="container-fluid  col-sm-11">
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="#texto">Informacion</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="Informacion.jsp">Informacion</a></li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categorias</a>
 						<div class="dropdown-menu">
@@ -82,12 +88,12 @@
 								}
 							%>
 						</div></li>
-						<li class="nav-items dropdown"><a
+					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Marcas</a>
 						<div class="dropdown-menu">
 							<%
 								ArrayList<MarcasPojo> marca = (ArrayList<MarcasPojo>) request.getAttribute("marcas");
-								if (cate != null) {
+								if (marca != null) {
 									for (MarcasPojo d : marca) {
 
 										out.println("<a class='dropdown-item' href='porMarca?id=" + d.getId()
@@ -104,9 +110,11 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a  id="Login12" class="dropdown-item" href="Login"><button type="submit"
+							<a id="Login12" class="dropdown-item" href="Logins"><button
+									type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
-							<a   id="Login13" class="dropdown-item" href="LogeaUsuarios"><button type="submit"
+							<a id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
+									type="submit"
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
@@ -114,7 +122,7 @@
 
 			<div class="container-fluid col-sm-5 col-md-6">
 
-				<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<nav class="navbar navbar-expand-sm ">
 
 					<form class="form-inline" action="Principal" method="post">
 						<input class="form-control mr-sm-2" type="text" name="titulo"
@@ -128,14 +136,14 @@
 
 
 				</nav>
-				<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+				<nav class="navbar navbar-expand-sm ">
 					<!-- Brand/logo -->
 
 					<%
 						if ((usu != null) && (usu.getUsuario() != null)) {
 					%>
-					<div id="Datos">
-						<img alt="" src="Imagenes/<%=usu.getFoto()%>"
+					<div id="Datos col-sm-12 col-md-12">
+						<img alt="" src=" Imagenes/<%=usu.getFoto()%> "
 							style="height: 35px; border-radius: 4%;"><br /> <br />
 						<p
 							style="color: white; margin-left: 37px; margin-bottom: 48%; margin-top: -34%; width: 106%">
@@ -157,11 +165,13 @@
 										onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
 									<a class="dropdown-item" href="#"><button type='button'
 											onClick='window.location.replace("comprasUsuarios")'>Ver
-											compras realizadas</button> </a>
-											<a class="dropdown-item" href="#"><button type='button'
-											onClick='window.location.replace("FichaUsuario")'>Datos Usuario</button> </a>
-											<a class="dropdown-item" href="#"><button type='button'
-											onClick='window.location.replace("cambioPantalla")'>Cambiar Modo</button> </a>
+											compras realizadas</button> </a> <a class="dropdown-item" href="#"><button
+											type='button'
+											onClick='window.location.replace("FichaUsuario")'>Datos
+											Usuario</button> </a> <a class="dropdown-item" href="#"><button
+											type='button'
+											onClick='window.location.replace("cambioPantalla")'>Cambiar
+											Pantalla</button> </a>
 							</div>
 						</div>
 
@@ -177,12 +187,34 @@
 					<%
 						}
 					%>
+
+					<%
+						if (usu != null) {
+					%>
+
+					<ul class="checkout">
+						<a style="margin-right: 2%" href="VerCarrito"> <i
+							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+							style="margin-left: 46%;" id="checkout_items"
+							class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+						</a>
+					</ul>
+
+					<%
+						} else {
+					%>
 					<ul class="checkout">
 						<a style="margin-right: 2%" href="#"> <i
 							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							id="checkout_items" class="checkout_items">0</span>
+							id="checkout_items" class="checkout_items">Logeate</span>
 						</a>
 					</ul>
+
+
+					<%
+						}
+					%>
+				
 			</div>
 	</nav>
 	</div>
@@ -209,7 +241,7 @@
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="imagenes/lenovolegi.jpg" alt="LenovoLegion" width="700"
+				<img src="imagenes/lenovolegi.jpg" alt="lenovoLegion" width="700"
 					height="300">
 				<div class="carousel-caption">
 					<h3>Lenovo LEGION</h3>
@@ -235,43 +267,57 @@
 	</div>
 	<div class="container-fluid col-md-8">
 		<h2 class="texto">Filtro de Busqueda</h2>
-		<form action="/action_page.php" method="post">
-			<div class="form-group col-md-5">
-				<input type="text" class="form-control" id="email"
-					placeholder="Producto..." name="FiltroProducto">
-			</div>
+		<form action="FiltroBusquedasPrincipal" method="post">
 			<div class="container-fluid col-md-12">
 				<div class="form-group row col-sm-5 col-md-12">
 					<div class="form-group">
-						<select class="form-control" id="sel1">
-							<option>Categorias</option>
-							<option>2</option>
+						<select name="Categorias" class="form-control" id="sel1" required="required">
+							<option value="">Categorias</option>
+							<%
+								ArrayList<CategoriasPojo> cates = (ArrayList<CategoriasPojo>) request.getAttribute("categorias");
+								if (cates != null) {
+									for (CategoriasPojo d : cates) {
+
+										out.println(" <option value=" + d.getId() + ">" + d.getNombre() + "</option>");
+
+									}
+								}
+							%>
 						</select>
 					</div>
 					<div class="form-group">
-						<select class="form-control" id="sel1">
-							<option>Precio</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-						</select>
+						<input type="number" name="precioIni"
+							placeholder="Precio Minimo .." required="required">
 					</div>
 					<div class="form-group">
-						<select class="form-control" id="sel1">
-							<option>Marcas</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-						</select>
+						<input type="number" name="precioFin"
+							placeholder="Precio Maximo .." required="required">
 					</div>
 					<div class="form-group">
-						<button id="BotonForm" type="button" class="btn-success">Buscar</button>
+						<select name="Marcas" class="form-control" id="sel2" required="required">
+							<option value="">Marcas</option>
+							<%
+								ArrayList<MarcasPojo> marcas = (ArrayList<MarcasPojo>) request.getAttribute("marcas");
+								if (marcas != null) {
+									for (MarcasPojo d : marcas) {
+
+										out.println(" <option value=" + d.getId() + ">" + d.getNombre() + "</option>");
+
+									}
+								}
+							%>
+
+						</select>
+					</div>
+
+					<div class="form-group">
+						<button id="BotonForm" type="submit" class="btn-success">Buscar</button>
 					</div>
 				</div>
 			</div>
+		</form>
 	</div>
-	</form>
-	</div>
+
 
 	<div class="best_sellers">
 		<div class="container">
@@ -300,8 +346,9 @@
 							<div class="owl-item product_slider_item">
 								<div class="product-item">
 									<div class="product discount">
-										<div class="product_image">
-											<img src="Imagenes/" <%=prod.getFoto()%> alt="">
+										<div class="product_image" id="prodImagen">
+											<img src="Imagenes/<%=prod.getFoto()%>" alt=""
+												style="display: flex; position: relative; height: 98%; width: 42%;">
 										</div>
 										<div class="favorite favorite_left"></div>
 										<div
@@ -359,11 +406,31 @@
 											<%
 												}
 											%>
+										
+										<div
+											style="position: relative; display: flex; margin-left: -15%; height: 19%; width: 132%; padding: 0%; flex-wrap: wrap;">
+											<%
+												if (usu == null) {
+											%>
 
+											<a id="CarritoTienda" onclick="Productoad()">Añadir a
+												Carrito </a>
 
-											<a class="bestSellerProd" href='Editar?id=<%=prod.getId()%>'>
-												Añadir a Carrito </a> <a class="bestSellerProd"
+											<%
+												} else {
+											%>
+											<a id="CarritoTienda"
+												href='AñadirCarrito?id=<%=prod.getId()%>'> Añadir a
+												Carrito </a>
+											<%
+												}
+											%>
+
+											<br> <br>
+											</n>
+											<br> <a id="FichaProducto"
 												href='Ficha?id=<%=prod.getId()%>'> Ver Producto </a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -396,7 +463,7 @@
 	</div>
 
 	<h3 style="text-align: center">Productos</h3>
-	<div class="main-content  col-sm-5 col-md-12 col-lg-12">
+	<div class="main-content  col-sm-12 col-md-12 col-lg-12">
 		<div class="row">
 
 			<%
@@ -408,9 +475,10 @@
 
 			<div class='product-item'>
 				<div class='product discount product_filter'>
-					<div class='product_image'>
+					<div class='product_image' id="prodImagen">
 
-						<img src='Imagenes/' <%=prod.getFoto()%> alt=''>
+						<img src="Imagenes/<%=prod.getFoto()%>" id="imgant" alt=''
+							style="display: flex; position: relative; height: 172%; width: 51%; margin-top: -24%">
 					</div>
 					<div class='favorite favorite_left'></div>
 					<div
@@ -444,9 +512,33 @@
 						</div>
 					</div>
 					<div
-						style="position: relative; display: flex; margin-left: 11%; height: 23%; width: 132%; padding: 0%; flex-wrap: wrap;">
-						<a id="CarritoTienda" href='Editar?id=<%=prod.getId()%>'>
-							Añadir a Carrito </a><br> <br>
+						style="position: relative; display: flex; margin-left: -15%; height: 20%; width: 120%; padding: 0%; flex-wrap: wrap;">
+
+						<%
+							int totalstock = prod.getStock();
+									if (totalstock == 0) {
+						%>
+
+						<button id="CarritoTienda" onclick="AlertStock()">No hay
+							existencias</button>
+
+						<%
+							} else if (usu == null) {
+						%>
+
+						<a id="CarritoTienda" onclick="Productoad()">Añadir a Carrito
+						</a>
+
+						<%
+							} else {
+						%>
+						<a id="CarritoTienda" href='AñadirCarrito?id=<%=prod.getId()%>'>
+							Añadir a Carrito </a>
+						<%
+							}
+						%>
+
+						<br> <br>
 						</n>
 						<br> <a id="FichaProducto" href='Ficha?id=<%=prod.getId()%>'>
 							Ver Producto </a>
@@ -581,12 +673,20 @@
 
 					<h2>Siguenos en :</h2>
 					<hr>
-					<a class="Icon" href="https://twitter.com/login"
-						<button type="submit"> <i class='fab fa-twitter' style='font-size:36px; '> </i></button>></a>
-					<a class="Icon" href="https://www.facebook.com/"
-						<button type="submit"> <i class='fab fa-facebook-square' style='font-size:36px'></i></button>></a>
-					<a class="Icon" href="https://www.youtube.com/"
-						<button type="submit"><i class='fab fa-youtube' style='font-size:36px;color: red'></i> </button>></a>
+					<a class="Icon" href="https://twitter.com/login">
+						<button type="submit">
+							<i class='fab fa-twitter' style='font-size: 36px; color: #27bcf8'></i>
+						</button>
+					</a> <a class="Icon" href="https://www.facebook.com/">
+						<button type="submit">
+							<i class='fab fa-facebook-square'
+								style='font-size: 36px; color: #43c3f3'></i>
+						</button>
+					</a> <a class="Icon" href="https://www.youtube.com/">
+						<button type="submit">
+							<i class='fab fa-youtube' style='font-size: 36px; color: red'></i>
+						</button>
+					</a>
 				</div>
 
 				<div class="container col-md-2">
@@ -608,18 +708,84 @@
 
 		</div>
 	</div>
-</body>
 
-<%
-			if (usu != null) {
-		%>
-		<script>
-			window.onload = function() {
-				document.getElementById("Login12").setAttribute('href', '#');
-				document.getElementById("Login13").setAttribute('href', '#');
-			}
-		</script>
-		<%
-			}
-		%>
+	<%
+		if (error != null) {
+	%>
+	<h4 style="color: red;">Error en el usuario o password/o no estas
+		Registrado</h4>
+	<div id="contaLoginBotonesError" class="container col-sm-11 col-md-6">
+		<button id="botonErrorLogin" type='button'
+			onClick='window.location.replace("LogeaUsuarios")'>Registrate</button>
+		<button id="botonErrorLogin" type='button'
+			onClick='window.location.replace("Login")'>Reintentar</button>
+		<button id="botonErrorLogin" type='button'
+			onClick='window.location.replace("updateContraseña")'>Cambiar
+			Contraseña</button>
+	</div>
+	<%
+		}
+	%>
+
+	<%
+		if (usu != null) {
+	%>
+	<script>
+		window.onload = function() {
+			document.getElementById("Login12").setAttribute('href', '#');
+			document.getElementById("Login13").setAttribute('href', '#');
+		}
+	</script>
+	<%
+		}
+	%>
+
+
+	<script>
+		function AlertStock() {
+			alert("lo sentimos , No hay existencias !");
+		}
+	</script>
+
+
+	<script>
+		function Productoad() {
+			alert("lo sentimos , Logeate o Registrate para poder Comprar !");
+		}
+	</script>
+
+
+	<!-- The Modal -->
+	<div id="myModal33" class="modal56">
+		<span
+			style="float: right; position: relative; display: flex; font-size: 72px; color: white; cursor: pointer;"
+			class="close13">&times;</span> <img
+			style="position: relative; display: flex; height: 97%; width: 30%; margin-bottom: 3%; margin-top: 2%; margin-left: auto; margin-right: auto;"
+			class="modal-content" id="img02">
+		<div id="caption"></div>
+	</div>
+
+	<script>
+		// Get the modal
+		var modal = document.getElementById("myModal33");
+
+		// Get the image and insert it inside the modal - use its "alt" text as a caption
+		var img = document.getElementById("imgant");
+		var modalImg = document.getElementById("img02");
+		var captionText = document.getElementById("caption");
+		img.onclick = function() {
+			modal.style.display = "block";
+			modalImg.src = this.src;
+			captionText.innerHTML = this.alt;
+		}
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close13")[0];
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+	</script>
+</body>
 </html>

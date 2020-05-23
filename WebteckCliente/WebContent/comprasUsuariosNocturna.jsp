@@ -1,19 +1,14 @@
-
-<%@page import="javax.naming.InitialContext"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="javax.naming.Context"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@page import="modelo.Pojo.CarritosPojo"%>
 <%@ page import="modelo.Pojo.UsuariosPojo"%>
-<%@ page import="modelo.Pojo.DireccionesPojo"%>
+<%@ page import="modelo.Pojo.VentaPojo"%>
+<%@page import="modelo.Pojo.CarritosPojo"%>
 <%@ page import="modelo.Pojo.CategoriasPojo"%>
-<%@ page import="modelo.Pojo.MarcasPojo" %>
-
+<%@ page import="modelo.Pojo.MarcasPojo"%>
 <!DOCTYPE html>
 <html>
-<head>
 <head>
 <title>Webteck</title>
 <meta charset="utf-8">
@@ -33,25 +28,24 @@
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 	crossorigin="anonymous">
 <link rel="icon" type="imagenes/iconIma.gif" href="iconIma.gif">
-<link type="text/css" href="estilos/Principal.css" rel="stylesheet" />
-<link type="text/css" href="estilos/FichaUsuario.css" rel="stylesheet" />
+<link type="text/css" href="estilos/PrincipalNocturna.css"
+	rel="stylesheet" />
 </head>
-</head>
+<body>
 
-
-<body style="background-image: url(imagenes/fondoLogin.png)">
 
 	<%
 		String error = (String) request.getParameter("error");
-	CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
-	%>
 
-	<%
-		DireccionesPojo prod = (DireccionesPojo) request.getAttribute("direccion");
 		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
-	%>
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+		ArrayList<VentaPojo> ventasCliente = (ArrayList<VentaPojo>) request.getAttribute("ventasCliente");
+
+		String emailUsuario = (String) request.getAttribute("emailUsuario");
+
+		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
+	%>
+	<nav class="navbar navbar-expand-sm  fixed-top" style="background-color: orange;">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -64,8 +58,8 @@
 		<div class="container-fluid  col-sm-11">
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="Informacion.jsp">Informacion</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="Informacion.jsp">Informacion</a></li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categorias</a>
 						<div class="dropdown-menu">
@@ -115,7 +109,7 @@
 
 			<div class="container-fluid col-sm-5 col-md-6">
 
-				<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<nav class="navbar navbar-expand-sm  ">
 
 					<form class="form-inline" action="Principal" method="post">
 						<input class="form-control mr-sm-2" type="text" name="titulo"
@@ -129,7 +123,7 @@
 
 
 				</nav>
-				<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+				<nav class="navbar navbar-expand-sm">
 					<!-- Brand/logo -->
 
 					<%
@@ -187,8 +181,9 @@
 
 					<ul class="checkout">
 						<a style="margin-right: 2%" href="VerCarrito"> <i
-							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span style="margin-left: 46%;"
-							id="checkout_items" class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+							style="margin-left: 46%;" id="checkout_items"
+							class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
 						</a>
 					</ul>
 
@@ -211,75 +206,67 @@
 	</nav>
 	</div>
 	</nav>
-	
-	<div id="EditarDireccion" class="container">
+
+	<div class="container"
+		style="position: relative; display: inline-flex; margin-top: 9%;">
 
 		<%
-			if (prod == null) {
-				out.println("<br/>");
-				out.println("<br/>");
-				out.println("<a href=\"Login\"> Login</a>");
-			} else {
-				out.println("<form class='form-horizontal'  action=\"EditarDireccion\" method=\"post\">");
-
-				out.println(
-						"<input type=\"hidden\" name=\"emailUsuario\" value=\"" + prod.getEmailUsuario() + "\" /> ");
-				out.println("<input type=\"hidden\" name=\"id\" value=\"" + prod.getId() + "\" /> ");
-				out.println("<label for=\"Titulo\">Titulo:</label>");
-				out.println("<input type=\"text\" name=\"Direccion\" value=\"" + prod.getDireccion() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"Localidad\">: Localidad</label>");
-				out.println("<input type=\"text\" name=\"Localidad\" value=\"" + prod.getLocalidad() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"Provincia\">Provincia:</label>");
-				out.println("<input type=\"text\" name=\"Provincia\" value=\"" + prod.getProvincia() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"Vivienda\">Vivienda:</label>");
-				out.println("<input type=\"text\" name=\"Vivienda\" value=\"" + prod.getVivienda() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"CodigoPostal\">CP:</label>");
-				out.println(
-						"<input type=\"number\" name=\"CodigoPostal\" value=\"" + prod.getCodigoPostal() + "\" /> ");
-				out.println("<br/>");
+			if (ventasCliente != null && emailUsuario != null && emailUsuario != "") {
+				out.print("<Busqueda Producto>");
+				out.print("Recuperacion de comprar del usuario : " + emailUsuario);
 				out.print("<br><br>");
-				out.print(
-						"<button id='ButtonRetorno' type='button' onClick='window.location.replace('Principal')'>Volver atras</button>");
-				out.println("<input type= \"submit\" value= \"Editar\" /> ");
-				out.println("</form>");
+				out.print("<table class=table table-hover table-responsive>");
+				out.print("<th> Codigo Venta Producto :</th>");
+				out.print("<th> Nombre Producto :</th>");
+				out.print("<th> Fecha de la Compra :</th>");
+				out.print("<th> Precio Producto :</th>");
+				out.print("<th> Nombre del Usuario de la Compra:</th>");
+				out.print("</tr>");
+
+				for (VentaPojo juga : ventasCliente) {
+
+					out.print("<tr>");
+					out.print("<td>" + juga.getCodigoPedido() + "</td>");
+					out.print("<td>" + juga.getTitulo() + "</td>");
+					out.print("<td>" + juga.getFecha() + "</td>");
+					out.print("<td>" + juga.getPrecio() + "$" + "</td>");
+					out.print("<td>" + juga.getNombre() + "</td>");
+
+				}
+				out.print("</table>");
+
+			} else {
+				out.print("<h4>No tenemos Ventas</h4>");
+			}
+		%>
+	</div>
+
+	<button type='button' onClick='window.location.replace("Principal")'>Volver
+		a Principal</button>
+
+	<%
+		if (error != null) {
+	%>
+	<h4 style="color: red;">
+		<h4>Fechas sin Resultados</h4>
+		<button type='button' onClick='window.location.replace("Pagina")'>VolveraIntentar</button>
+		<%
 			}
 		%>
 
-	</div>
 
-
-	<%
-		if (usu != null) {
-	%>
-	<script>
-		window.onload = function() {
-			document.getElementById("Login12").setAttribute('href', '#');
-			document.getElementById("Login13").setAttribute('href', '#');
-		}
-	</script>
-	<%
-		}
-	%>
-
-
-
-	<%
-		if (usu == null) {
-	%>
-	<script>
-		window.onload = function() {
-			alert("No esta Logeado para esta Funcion");
-			window.location = 'Pagina';
-		}
-	</script>
-	<%
-		}
-	%>
-
+		<%
+			if (usu != null) {
+		%>
+		<script>
+			window.onload = function() {
+				document.getElementById("Login12").setAttribute('href', '#');
+				document.getElementById("Login13").setAttribute('href', '#');
+			}
+		</script>
+		<%
+			}
+		%>
+	
 </body>
-
 </html>

@@ -56,7 +56,7 @@ public class comprasUsuarios extends HttpServlet {
 		String error = request.getParameter("error");
 
 		RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/comprasUsuarios.jsp");
-		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/comprasUsuariosNocturno.jsp");
+		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/comprasUsuariosNocturna.jsp");
 
 		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
 		ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
