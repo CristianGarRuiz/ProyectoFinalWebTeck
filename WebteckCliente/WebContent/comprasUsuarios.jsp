@@ -96,7 +96,7 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a id="Login12" class="dropdown-item" href="Login"><button
+							<a id="Login12" class="dropdown-item" href="Logins"><button
 									type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
 							<a id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
@@ -205,7 +205,7 @@
 	</div>
 	</nav>
 	
-	<div class="container"
+	<div class="table-responsive"
 		style="position: relative; display: inline-flex; margin-top: 9%;">
 
 		<%
@@ -213,7 +213,7 @@
 				out.print("<Busqueda Producto>");
 				out.print("Recuperacion de comprar del usuario : " + emailUsuario);
 				out.print("<br><br>");
-				out.print("<table class=table table-hover table-responsive>");
+				out.print("<table class=table>");
 				out.print("<th> Codigo Venta Producto :</th>");
 				out.print("<th> Nombre Producto :</th>");
 				out.print("<th> Fecha de la Compra :</th>");

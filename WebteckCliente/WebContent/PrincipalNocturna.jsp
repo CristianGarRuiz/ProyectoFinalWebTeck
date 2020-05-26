@@ -29,8 +29,7 @@
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 	crossorigin="anonymous">
 <link rel="icon" type="imagenes/iconIma.gif" href="iconIma.gif">
-<link type="text/css" href="estilos/PrincipalNocturna.css"
-	rel="stylesheet" />
+<link type="text/css" href="estilos/PrincipalNocturna.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -57,8 +56,8 @@
 		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-	<nav id="navPrinc" class="navbar navbar-expand-sm  fixed-top"
-		style="background-color: orange;">
+	<nav id="navPrinc"
+		class="navbar navbar-expand-sm fixed-top" style="background-color: orange;">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -122,7 +121,7 @@
 
 			<div class="container-fluid col-sm-5 col-md-6">
 
-				<nav class="navbar navbar-expand-sm ">
+				<nav class="navbar navbar-expand-sm" style="background-color: orange;">
 
 					<form class="form-inline" action="Principal" method="post">
 						<input class="form-control mr-sm-2" type="text" name="titulo"
@@ -136,7 +135,7 @@
 
 
 				</nav>
-				<nav class="navbar navbar-expand-sm ">
+				<nav class="navbar navbar-expand-sm "style="background-color: orange;">
 					<!-- Brand/logo -->
 
 					<%
@@ -271,7 +270,8 @@
 			<div class="container-fluid col-md-12">
 				<div class="form-group row col-sm-5 col-md-12">
 					<div class="form-group">
-						<select name="Categorias" class="form-control" id="sel1" required="required">
+						<select name="Categorias" class="form-control" id="sel1"
+							required="required">
 							<option value="">Categorias</option>
 							<%
 								ArrayList<CategoriasPojo> cates = (ArrayList<CategoriasPojo>) request.getAttribute("categorias");
@@ -294,7 +294,8 @@
 							placeholder="Precio Maximo .." required="required">
 					</div>
 					<div class="form-group">
-						<select name="Marcas" class="form-control" id="sel2" required="required">
+						<select name="Marcas" class="form-control" id="sel2"
+							required="required">
 							<option value="">Marcas</option>
 							<%
 								ArrayList<MarcasPojo> marcas = (ArrayList<MarcasPojo>) request.getAttribute("marcas");
@@ -348,7 +349,7 @@
 									<div class="product discount">
 										<div class="product_image" id="prodImagen">
 											<img src="Imagenes/<%=prod.getFoto()%>" alt=""
-												style="display: flex; position: relative; height: 98%; width: 42%;">
+												style="height: 98%; width: 42%; margin-left: 30%; margin-top: -9%;">
 										</div>
 										<div class="favorite favorite_left"></div>
 										<div
@@ -371,8 +372,7 @@
 
 													if ((valoracion > 0) && (valoracion <= 3)) {
 										%>
-											height: 21%; position: relative; display: flex; width: 59%;
-											margin-left: 51%; margin-bottom: 1%; margin-top: -12%; <img
+											<img
 												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
 												id="imgValor" alt="" src="imagenes/img1Estrella.jpg">
 
@@ -408,7 +408,7 @@
 											%>
 										
 										<div
-											style="position: relative; display: flex; margin-left: -15%; height: 19%; width: 132%; padding: 0%; flex-wrap: wrap;">
+											style="position: relative; display: flex; margin-left: auto; margin-right: auto; flex-wrap: wrap;">
 											<%
 												if (usu == null) {
 											%>
@@ -477,8 +477,8 @@
 				<div class='product discount product_filter'>
 					<div class='product_image' id="prodImagen">
 
-						<img src="Imagenes/<%=prod.getFoto()%>" id="imgant" alt=''
-							style="display: flex; position: relative; height: 172%; width: 51%; margin-top: -24%">
+						<img id="imgant" src="Imagenes/<%=prod.getFoto()%>" alt=''
+							style="height: 160%; width: 27%; margin-top: -15%; margin-left: 36%;">
 					</div>
 					<div class='favorite favorite_left'></div>
 					<div
@@ -511,8 +511,7 @@
 							</span>
 						</div>
 					</div>
-					<div
-						style="position: relative; display: flex; margin-left: -15%; height: 20%; width: 120%; padding: 0%; flex-wrap: wrap;">
+					<div style="position: relative; display: flex; flex-wrap: wrap;">
 
 						<%
 							int totalstock = prod.getStock();
@@ -654,16 +653,16 @@
 					<h2>Informacion :</h2>
 					<hr>
 					<ol class="nav-item">
-						<a id="" class="nav-link" href="#Habilidades">Sobre</a>
+						<a id="" class="nav-link" href="Informacion.jsp">Sobre</a>
 					</ol>
 					<ol class="nav-item">
-						<a id="" class="nav-link" href="#Habilidades">Acceso</a>
+						<a id="" class="nav-link" href="Login.jsp">Acceso</a>
 					</ol>
 					<ol class="nav-item">
-						<a id="" class="nav-link" href="#Habilidades">Blog</a>
+						<a id="" class="nav-link" href="Informacion.jsp">Blog</a>
 					</ol>
 					<ol class="nav-item">
-						<a id="" class="nav-link" href="#Habilidades">Contacto</a>
+						<a id="" class="nav-link" href="FormularioAyudaCliente">Contacto</a>
 					</ol>
 
 
@@ -754,7 +753,6 @@
 		}
 	</script>
 
-
 	<!-- The Modal -->
 	<div id="myModal33" class="modal56">
 		<span
@@ -787,5 +785,7 @@
 			modal.style.display = "none";
 		}
 	</script>
+
+
 </body>
 </html>

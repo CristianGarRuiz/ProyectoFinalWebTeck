@@ -46,7 +46,8 @@
 		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-	<nav id="navPrinc" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav id="navPrinc"
+		class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -98,9 +99,10 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a  id="Login12" class="dropdown-item" href="Login"><button type="submit"
+							<a id="Login12" class="dropdown-item" href="Logins"><button
+									type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
-							<a  id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
+							<a id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
 									type="submit"
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
@@ -296,15 +298,25 @@
 </body>
 
 <%
-			if (usu != null) {
-		%>
-		<script>
-			window.onload = function() {
-				document.getElementById("Login12").setAttribute('href', '#');
-				document.getElementById("Login13").setAttribute('href', '#');
-			}
-		</script>
-		<%
-			}
-		%>
+	if (usu != null) {
+%>
+<script>
+	window.onload = function() {
+		document.getElementById("Login12").setAttribute('href', '#');
+		document.getElementById("Login13").setAttribute('href', '#');
+	}
+</script>
+<%
+	}
+%>
+
+
+<%
+	if (error != null) {
+%>
+<h4 style="color: red;">No tenemos concidencias Registrado</h4>
+<%
+	}
+%>
+
 </html>

@@ -175,6 +175,34 @@ public class ControladorRest {
 		}
 		return producto;
 	}
+	
+	
+	@GET
+	@Path("/comprobarnombreUsuario/{token}/{usuario}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public UsuarioPojo comprobarUsuario(@PathParam("token") String token, @PathParam("usuario") String NombreUsuario)
+			throws SQLException {
+
+		UsuarioPojo usuario = null;
+		if (token.equals("patata23")) {
+			usuario = usuarioEjb.comprobarUsuario(NombreUsuario);
+		}
+		return usuario;
+	}
+	
+	
+	@GET
+	@Path("/comprobaremailUsuario/{token}/{emailUsuario}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public UsuarioPojo comprobarEmailUsuario(@PathParam("token") String token, @PathParam("emailUsuario") String emailUsuario)
+			throws SQLException {
+
+		UsuarioPojo usuario = null;
+		if (token.equals("patata23")) {
+			usuario = usuarioEjb.comprobarEmailUsario(emailUsuario);
+		}
+		return usuario;
+	}
 
 	@GET
 	@Path("/contarSumaCarrito/{token}/{emailUsuario}")

@@ -56,7 +56,8 @@
 		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-	<nav id="navPrinc" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav id="navPrinc"
+		class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -108,7 +109,7 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a id="Login12" class="dropdown-item" href="Login"><button
+							<a id="Login12" class="dropdown-item" href="Logins"><button
 									type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
 							<a id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
@@ -215,13 +216,12 @@
 				
 			</div>
 	</nav>
-	</div>
-	</nav>
+	
 
 
-	<div class="main-content  col-sm-5 col-md-12 col-lg-12">
+	<div class="container">
 
-		<h3 style="text-align: center">Productos</h3>
+		<h3 style="text-align: center; margin-top: 8%; margin-bottom: -3%;">Productos</h3>
 		<div class="row">
 
 			<%
@@ -231,7 +231,7 @@
 				for (ProductosTiendaPojo prod : productosTienda) {
 			%>
 
-			<div id="fichaProd" class='product-item'>
+			<div id="fichaProd" class='product-item col  col-sm-4 col-md-6'>
 				<div class='product discount product_filter'>
 					<div class='product_image'>
 
@@ -280,10 +280,25 @@
 						<div id="demo" class="collapse"><%=prod.getDescripcion()%></div>
 					</div>
 				</div>
+				<%
+					if (usu == null) {
+				%>
 
-				<a id="CarritoTienda" href='Editar?id=<%=prod.getId()%>'> Añadir
-					a Carrito </a> <a id="FichaProducto" href='Pricnipal'>Volver a
-					Principal </a>
+				<a id="CarritoTienda" onclick="Productoad()">Añadir a Carrito </a>
+
+				<%
+					} else {
+				%>
+				<a id="CarritoTienda" href='AñadirCarrito?id=<%=prod.getId()%>'>
+					Añadir a Carrito </a>
+				<%
+					}
+				%>
+
+				<br> <br>
+				</n>
+				<br> <a id="FichaProducto" href='Ficha?id=<%=prod.getId()%>'>
+					Ver Producto </a>
 
 
 			</div>
@@ -624,37 +639,48 @@
 
 
 <!-- The Modal -->
-	<div id="myModal33" class="modal56">
-		<span
-			style="float: right; position: relative; display: flex; font-size: 72px; color: white; cursor: pointer;"
-			class="close13">&times;</span> <img
-			style="position: relative; display: flex; height: 97%; width: 30%; margin-bottom: 3%; margin-top: 2%; margin-left: auto; margin-right: auto;"
-			class="modal-content" id="img02">
-		<div id="caption"></div>
-	</div>
+<div id="myModal33" class="modal56">
+	<span
+		style="float: right; position: relative; display: flex; font-size: 72px; color: white; cursor: pointer;"
+		class="close13">&times;</span> <img
+		style="position: relative; display: flex; height: 97%; width: 30%; margin-bottom: 3%; margin-top: 2%; margin-left: auto; margin-right: auto;"
+		class="modal-content" id="img02">
+	<div id="caption"></div>
+</div>
 
-	<script>
-		// Get the modal
-		var modal = document.getElementById("myModal33");
+<script>
+	// Get the modal
+	var modal = document.getElementById("myModal33");
 
-		// Get the image and insert it inside the modal - use its "alt" text as a caption
-		var img = document.getElementById("fotofichaProd");
-		var modalImg = document.getElementById("img02");
-		var captionText = document.getElementById("caption");
-		img.onclick = function() {
-			modal.style.display = "block";
-			modalImg.src = this.src;
-			captionText.innerHTML = this.alt;
-		}
+	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	var img = document.getElementById("fotofichaProd");
+	var modalImg = document.getElementById("img02");
+	var captionText = document.getElementById("caption");
+	img.onclick = function() {
+		modal.style.display = "block";
+		modalImg.src = this.src;
+		captionText.innerHTML = this.alt;
+	}
 
-		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close13")[0];
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close13")[0];
 
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
-			modal.style.display = "none";
-		}
-	</script>
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+</script>
+<script>
+	function AlertStock() {
+		alert("lo sentimos , No hay existencias !");
+	}
+</script>
 
+
+<script>
+	function Productoad() {
+		alert("lo sentimos , Logeate o Registrate para poder Comprar !");
+	}
+</script>
 
 </html>

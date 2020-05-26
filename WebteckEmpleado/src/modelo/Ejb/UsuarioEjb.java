@@ -29,6 +29,38 @@ public class UsuarioEjb {
 		return userDAO.leerDatosEmpleado(user, paswd);
 
 	}
+	
+	
+	public UsuarioPojo comprobarUsuario (String NombreUsuario) throws SQLException {
+
+		UsuarioDao userDAO = new UsuarioDao();
+		return userDAO.comprobarUsuario(NombreUsuario);
+
+	}
+	
+	public UsuarioPojo comprobarEmailUsario (String emailUsuario) throws SQLException {
+
+		UsuarioDao userDAO = new UsuarioDao();
+		return userDAO.comprobarEmailUsuario(emailUsuario);
+
+	}
+	
+	
+	public UsuarioPojo comprobarUsuarioEmpleado (String NombreUsuario) throws SQLException {
+
+		EmpleadoDao userDAO = new EmpleadoDao();
+		return userDAO.comprobarUsuarioEmpleado(NombreUsuario);
+
+	}
+	
+	public UsuarioPojo comprobarEmailUsarioEmpleado (String emailUsuario) throws SQLException {
+
+		EmpleadoDao userDAO = new EmpleadoDao();
+		return userDAO.comprobarEmailUsuarioEmpleado(emailUsuario);
+
+	}
+	
+	
 	public void eliminarEmpleado(String emailUsuario) throws SQLException {
 		EmpleadoDao userDao = new EmpleadoDao();
 		userDao.eliminarEmpleado(emailUsuario);

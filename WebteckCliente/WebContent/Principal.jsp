@@ -56,7 +56,8 @@
 		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-	<nav  id="navPrinc" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav id="navPrinc"
+		class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -215,8 +216,7 @@
 				
 			</div>
 	</nav>
-	</div>
-	</nav>
+	
 
 
 	<div id="demo" class="carousel slide" data-ride="carousel">
@@ -269,7 +269,8 @@
 			<div class="container-fluid col-md-12">
 				<div class="form-group row col-sm-5 col-md-12">
 					<div class="form-group">
-						<select name="Categorias" class="form-control" id="sel1" required="required">
+						<select name="Categorias" class="form-control" id="sel1"
+							required="required">
 							<option value="">Categorias</option>
 							<%
 								ArrayList<CategoriasPojo> cates = (ArrayList<CategoriasPojo>) request.getAttribute("categorias");
@@ -292,7 +293,8 @@
 							placeholder="Precio Maximo .." required="required">
 					</div>
 					<div class="form-group">
-						<select name="Marcas" class="form-control" id="sel2" required="required">
+						<select name="Marcas" class="form-control" id="sel2"
+							required="required">
 							<option value="">Marcas</option>
 							<%
 								ArrayList<MarcasPojo> marcas = (ArrayList<MarcasPojo>) request.getAttribute("marcas");
@@ -346,7 +348,7 @@
 									<div class="product discount">
 										<div class="product_image" id="prodImagen">
 											<img src="Imagenes/<%=prod.getFoto()%>" alt=""
-												style="display: flex; position: relative; height: 98%; width: 42%;">
+												style="height: 98%; width: 42%; margin-left: 30%; margin-top: -9%;">
 										</div>
 										<div class="favorite favorite_left"></div>
 										<div
@@ -369,8 +371,7 @@
 
 													if ((valoracion > 0) && (valoracion <= 3)) {
 										%>
-											height: 21%; position: relative; display: flex; width: 59%;
-											margin-left: 51%; margin-bottom: 1%; margin-top: -12%; <img
+											<img
 												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
 												id="imgValor" alt="" src="imagenes/img1Estrella.jpg">
 
@@ -404,31 +405,31 @@
 											<%
 												}
 											%>
+										
+										<div
+											style="position: relative; display: flex; margin-left: auto; margin-right: auto; flex-wrap: wrap;">
+											<%
+												if (usu == null) {
+											%>
 
+											<a id="CarritoTienda" onclick="Productoad()">Añadir a
+												Carrito </a>
 
-											<div
-						style="position: relative; display: flex; margin-left: -15%; height: 19%; width: 132%; padding: 0%; flex-wrap: wrap;">
-						<%
-							 if (usu == null) {
-						%>
+											<%
+												} else {
+											%>
+											<a id="CarritoTienda"
+												href='AñadirCarrito?id=<%=prod.getId()%>'> Añadir a
+												Carrito </a>
+											<%
+												}
+											%>
 
-						<a id="CarritoTienda" onclick="Productoad()">Añadir a Carrito
-						</a>
-
-						<%
-							} else {
-						%>
-						<a id="CarritoTienda" href='AñadirCarrito?id=<%=prod.getId()%>'>
-							Añadir a Carrito </a>
-						<%
-							}
-						%>
-
-						<br> <br>
-						</n>
-						<br> <a id="FichaProducto" href='Ficha?id=<%=prod.getId()%>'>
-							Ver Producto </a>
-					</div>
+											<br> <br>
+											</n>
+											<br> <a id="FichaProducto"
+												href='Ficha?id=<%=prod.getId()%>'> Ver Producto </a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -476,7 +477,7 @@
 					<div class='product_image' id="prodImagen">
 
 						<img id="imgant" src="Imagenes/<%=prod.getFoto()%>" alt=''
-							style="display: flex; position: relative; height: 172%; width: 51%; margin-top: -24%">
+							style="height: 160%; width: 27%; margin-top: -15%; margin-left: 36%;">
 					</div>
 					<div class='favorite favorite_left'></div>
 					<div
@@ -509,8 +510,7 @@
 							</span>
 						</div>
 					</div>
-					<div
-						style="position: relative; display: flex; margin-left: -15%; height: 20%; width: 120%; padding: 0%; flex-wrap: wrap;">
+					<div style="position: relative; display: flex; flex-wrap: wrap;">
 
 						<%
 							int totalstock = prod.getStock();
@@ -752,7 +752,7 @@
 		}
 	</script>
 
-<!-- The Modal -->
+	<!-- The Modal -->
 	<div id="myModal33" class="modal56">
 		<span
 			style="float: right; position: relative; display: flex; font-size: 72px; color: white; cursor: pointer;"

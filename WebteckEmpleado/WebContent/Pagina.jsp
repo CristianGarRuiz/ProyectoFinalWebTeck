@@ -95,7 +95,7 @@
 				%>
 				<div id="Datos">
 					<img alt="" src="Imagenes/<%=usu.getFoto()%>"
-						style="height: 35px; border-radius: 4%;"><br /> <br />
+						style="height: 35px; border-radius: 4%;margin-left: 11%;"><br /> <br />
 					<p
 						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
 						Bienvenido :
@@ -132,7 +132,7 @@
 			if (producto != null && usu != null) {
 				out.print("<h3>Total Productos :</h3>");
 				out.print(
-						"<table class= table table-responsive table-xs table-sm table-striped table-bordered table-hover >");
+						"<table class= table>");
 				out.print("<th> Imagen:</th>");
 				out.print("<th> Nombre:</th>");
 				out.print("<th> Descripcion:</th>");
@@ -144,9 +144,8 @@
 				out.print("</tr>");
 
 				for (ProductoPojo prod : producto) {
-
 					out.print("<tr>");
-					out.print("<td> <img src= Imagenes/'" + prod.getFoto() + "'  alt=''></td>");
+					out.print("<td> <img src= \"Imagenes/" + prod.getFoto() + "\"style='height: 30%;width: 24%;	margin-left: auto;		margin-right: auto;'' ></td>");
 					out.print("<td>" + prod.getTitulo() + "</td>");
 					out.print("<td>" + prod.getDescripcion() + "</td>");
 					out.print("<td>" + prod.getAnyo() + "</td>");

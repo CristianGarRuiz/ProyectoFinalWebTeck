@@ -97,7 +97,7 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a id="Login12" class="dropdown-item" href="Login"><button
+							<a id="Login12" class="dropdown-item" href="Logins"><button
 									type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
 							<a id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
@@ -230,7 +230,8 @@
 				<div class='product discount product_filter'>
 					<div class='product_image'>
 
-						<img src='Imagenes/' <%=prod.getFoto()%> alt=''>
+						<img src="Imagenes/<%=prod.getFoto()%>" alt=""
+												style="height: 98%; width: 42%; margin-left: 30%; margin-top: -9%;">
 					</div>
 					<div class='favorite favorite_left'></div>
 					<div
@@ -264,7 +265,7 @@
 						</div>
 					</div>
 					<div
-						style="position: relative; display: flex; margin-left: 11%; height: 23%; width: 132%; padding: 0%; flex-wrap: wrap;">
+						style="position: relative; display: flex; margin-left: -14%; height: 23%; width: 132%; padding: 0%; flex-wrap: wrap;">
 						<a id="CarritoTienda" href='Editar?id=<%=prod.getId()%>'>
 							Añadir a Carrito </a><br> <br>
 						</n>
@@ -299,6 +300,17 @@
 	<%
 		}
 	%>
+	<script>
+		function AlertStock() {
+			alert("lo sentimos , No hay existencias !");
+		}
+	</script>
 
+
+	<script>
+		function Productoad() {
+			alert("lo sentimos , Logeate o Registrate para poder Comprar !");
+		}
+	</script>
 </body>
 </html>

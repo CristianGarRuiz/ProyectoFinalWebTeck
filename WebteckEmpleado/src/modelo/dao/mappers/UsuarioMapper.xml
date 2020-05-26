@@ -18,7 +18,8 @@
 		resultMap="datosUsuarios">
 
 		select
-		usuaris.emailUsuario,usuaris.nombre,usuaris.usuario ,usuaris.foto
+		usuaris.emailUsuario,usuaris.nombre,usuaris.usuario
+		,usuaris.foto
 		from
 		usuaris
 		where
@@ -47,6 +48,55 @@
 		#{password}
 
 	</select>
+
+	<select id='comprobarUsuario'
+		resultType='modelo.Pojo.UsuarioPojo'>
+		select
+		*
+		from
+		usuaris
+		where
+		usuaris.usuario = #{usuario};
+
+	</select>
+
+
+	<select id='comprobarEmailUsario'
+		resultType='modelo.Pojo.UsuarioPojo'>
+		select
+		*
+		from
+		usuaris
+		where
+		usuaris.emailUsuario = #{emailUsuario};
+
+	</select>
+
+
+	<select id='comprobarUsuarioEmpleado'
+		resultType='modelo.Pojo.UsuarioPojo'>
+		select
+		*
+		from
+		empleados
+		where
+		empleados.usuario = #{usuario};
+
+	</select>
+
+
+	<select id='comprobarEmailUsarioEmpleado'
+		resultType='modelo.Pojo.UsuarioPojo'>
+		select
+		*
+		from
+		empleados
+		where
+		empleados.emailUsuario= #{emailUsuario};
+
+	</select>
+
+
 
 
 	<select id='getFoto' resultType='modelo.Pojo.UsuarioPojo'>
@@ -119,15 +169,16 @@
 		password = #{password}
 		WHERE usuaris.emailUsuario = #{emailUsuario}
 	</update>
-	
-	
-	
+
+
+
 	<update id='updateImagen' parameterType='UsuarioPojo'>
 		UPDATE
 		usuaris
 		SET
 
-		foto = #{foto}
+		foto =
+		#{foto}
 		WHERE usuaris.emailUsuario = #{emailUsuario}
 	</update>
 

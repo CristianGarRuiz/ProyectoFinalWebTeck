@@ -104,7 +104,7 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a  id="Login12" class="dropdown-item" href="Login"><button type="submit"
+							<a  id="Login12" class="dropdown-item" href="Logins"><button type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
 							<a  id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
 									type="submit"

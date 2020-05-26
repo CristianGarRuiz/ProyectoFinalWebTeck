@@ -45,6 +45,7 @@ public class LogeaUsuarios extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String error = request.getParameter("error");
+		String error1 = request.getParameter("error1");
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Pagina.jsp");
 		RequestDispatcher rsLogear = getServletContext().getRequestDispatcher("/Logear.jsp");
 		// Intentamos obtener el usuario de la sesión
@@ -53,6 +54,7 @@ public class LogeaUsuarios extends HttpServlet {
 		// recojo la request de las variables instanciadas
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("error", error);
+		request.setAttribute("error1", error1);
 
 		if (usuario != null) {
 			// Ya está logeado, lo redirigimos a la principal
@@ -96,24 +98,39 @@ public class LogeaUsuarios extends HttpServlet {
 		usu.setActivado("n");
 
 		try {
+			String Nombreusuario = request.getParameter("usuario");
+			String emailUsuario = request.getParameter("emailUsuario");
+			UsuariosPojo usuar = null;
+			UsuariosPojo emai = null;
 
-			// codigo lo asocio cada vez que se registra un usuario
-			int codigo = usuariosEJB.añadirUsuario(usu);
+			usuar = usuariosEJB.comprobarnombreUsuario(Nombreusuario);
+			emai = usuariosEJB.comprobaremailUsuario(emailUsuario);
 
-			request.setAttribute("codigo", codigo);
-			// esta variable enlace hace referencia ejb con metodo que genera un enlace y le
-			// paso el codigo
-			String enlace = generadorEnlaceEJB.generarEnlace(codigo);
-			request.setAttribute("enlace", enlace);
-			// este ejb enviar elcorreo con email del usuario y el enlace
-			mailEJB.sendMail(usu.getEmailUsuario(), enlace, "Codigo Activacion ");
-			// Creo la pagina
-			rsCorreo.forward(request, response);
+			if ((usuar == null) && (emai == null)) {
+
+				// codigo lo asocio cada vez que se registra un usuario
+				int codigo = usuariosEJB.añadirUsuario(usu);
+
+				request.setAttribute("codigo", codigo);
+				// esta variable enlace hace referencia ejb con metodo que genera un enlace y le
+				// paso el codigo
+				String enlace = generadorEnlaceEJB.generarEnlace(codigo);
+				request.setAttribute("enlace", enlace);
+				// este ejb enviar elcorreo con email del usuario y el enlace
+				mailEJB.sendMail(usu.getEmailUsuario(), enlace, "Codigo Activacion ");
+				// Creo la pagina
+				rsCorreo.forward(request, response);
+
+			} else {
+				response.sendRedirect("LogeaUsuarios?error1=hay");
+
+			}
 
 		} catch (Exception e) {
 			loggerError.error(e.getMessage() + "Error en añadirusuario / enlace de codigo/enviar el correo ");
 			response.sendRedirect("LogeaUsuarios?error=Hay");
 		}
+
 	}
 
 }

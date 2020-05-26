@@ -30,23 +30,21 @@
 	width: 24%;
 	border: 3px solid black;
 	padding: 3%;
-	margin-inline-start: auto;
 	margin-right: auto;
 	margin-bottom: 2%;
 	border-radius: 3%;
 	position: relative;
-	display: inline-flex;
 	margin-left: 0.7%;
 }
 
-#prodImagen {
-	display: flex;
-	position: relative;
-	height: 16px;
-	height: 27%;
-	margin-left: 36%;
-	cursor: pointer;
-}
+/* #prodImagen { */
+/* 	display: flex; */
+/* 	position: relative; */
+/* 	height: 16px; */
+/* 	height: 27%; */
+/* 	margin-left: 36%; */
+/* 	cursor: pointer; */
+/* } */
 
 .bestSellerProd {
 	height: 10%;
@@ -121,7 +119,7 @@
 #CarritoTienda {
 	background-color: orange;
 	margin-top: 3%;
-	height: 84%;
+	height: 55%;
 	width: 84%;
 	text-align: center;
 	border: 2px solid cornflowerblue;
@@ -156,7 +154,7 @@
 #FichaProducto {
 	background-color: orange;
 	margin-top: 3%;
-	height: 84%;
+	height: 55%;
 	width: 84%;
 	text-align: center;
 	border: 2px solid cornflowerblue;

@@ -21,6 +21,37 @@ public class EmpleadoDao {
 		}
 
 	}
+	
+	public UsuarioPojo comprobarUsuarioEmpleado(String NombreUsuario) {
+
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			UsuarioMapper leerDatosUsu = sqlSession.getMapper(UsuarioMapper.class);
+			UsuarioPojo a = leerDatosUsu.comprobarUsuarioEmpleado(NombreUsuario);
+
+			return a;
+
+		} finally {
+			sqlSession.close();
+		}
+
+	}
+	
+	public UsuarioPojo comprobarEmailUsuarioEmpleado(String emailUsuario) {
+
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			UsuarioMapper leerDatosUsu = sqlSession.getMapper(UsuarioMapper.class);
+			UsuarioPojo a = leerDatosUsu.comprobarEmailUsarioEmpleado(emailUsuario);
+
+			return a;
+
+		} finally {
+			sqlSession.close();
+		}
+
+	}
+	
 
 	public String getFoto(UsuarioPojo usuario) {
 

@@ -17,6 +17,14 @@ public interface UsuarioMapper {
 	 */
 	public UsuarioPojo leerDatos(@Param("usuario") String user, @Param("password") String paswd);
 
+	public UsuarioPojo comprobarUsuario(@Param("usuario") String NombreUsuario);
+
+	public UsuarioPojo comprobarEmailUsario(@Param("emailUsuario") String emailUsuario);
+
+	public UsuarioPojo comprobarUsuarioEmpleado(@Param("usuario") String NombreUsuario);
+
+	public UsuarioPojo comprobarEmailUsarioEmpleado(@Param("emailUsuario") String emailUsuario);
+
 	public ArrayList<UsuarioPojo> getDatosUsuarioporEmailUsuario(@Param("emailUsuario") String emailUsuario);
 
 	public UsuarioPojo leerDatosEmpleado(@Param("usuario") String user, @Param("password") String paswd);

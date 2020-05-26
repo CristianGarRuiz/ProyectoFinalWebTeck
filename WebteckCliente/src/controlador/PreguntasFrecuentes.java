@@ -98,15 +98,30 @@ public class PreguntasFrecuentes extends HttpServlet {
 		request.setAttribute("contarCarro", contarCarro);
 		if (pantalla == null || pantalla.equals("D")) {
 
+			if(pregunta != null) {
+			
 			ArrayList<PreguntasPojo> preguntas = preguntasEjb.RespuestaPreguntas(pregunta);
 
 			request.setAttribute("preguntas", preguntas);
 			rs1.forward(request, response);
+			
+			}else {
+				
+				response.sendRedirect("PreguntasFrecuentes?error= No hay");
+				
+			}
 
 		} else {
+			
+			if(pregunta != null) {
 			ArrayList<PreguntasPojo> preguntas = preguntasEjb.RespuestaPreguntas(pregunta);
 			request.setAttribute("preguntas", preguntas);
 			rsNocturna.forward(request, response);
+			
+			}else{
+				response.sendRedirect("PreguntasFrecuentes?error= No hay");
+				
+			}
 
 		}
 

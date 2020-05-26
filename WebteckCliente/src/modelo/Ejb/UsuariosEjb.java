@@ -64,6 +64,34 @@ public class UsuariosEjb {
 		return usuario.getFoto();
 
 	}
+	
+	public UsuariosPojo comprobarnombreUsuario(String Nombreusuario) throws SQLException {
+
+		Client cliente = ClientBuilder.newClient();
+
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/comprobarnombreUsuario/patata23/" + Nombreusuario);
+
+		UsuariosPojo usuario = target1.request().get(UsuariosPojo.class);
+
+		return usuario;
+
+	}
+	
+	
+	public UsuariosPojo comprobaremailUsuario(String emailUsuario) throws SQLException {
+
+		Client cliente = ClientBuilder.newClient();
+
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/comprobaremailUsuario/patata23/" + emailUsuario);
+
+		UsuariosPojo usuario = target1.request().get(UsuariosPojo.class);
+
+		return usuario;
+
+	}
+	
 
 	/**
 	 * este metodo añade un usuario a la bd y genera un codigo random llama a la

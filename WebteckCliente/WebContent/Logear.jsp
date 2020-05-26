@@ -33,7 +33,8 @@
 </head>
 <body style="background-image: url(imagenes/fondoLogin.png)">
 	<%
- 		String error = (String) request.getParameter("error");
+		String error = (String) request.getParameter("error");
+		String error1 = (String) request.getParameter("error1");
 		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
 	%>
 
@@ -49,40 +50,44 @@
 				<label class="control-label col-sm-2" for="emailUsuario"><i
 					class='fas fa-user' style='margin-top: 2%; font-size: 24px'></i>Email:</label>
 				<div class="col-sm-10">
-					<input type="email" required="" class="form-control" id="emailUsuario"
-						placeholder="Entrar email" name="emailUsuario">
+					<input type="email" required="required" class="form-control"
+						id="emailUsuario" placeholder="Entrar email" name="emailUsuario">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="nombre"><i
 					class='fas fa-lock' style='font-size: 24px'></i> Nombre:</label>
 				<div class="col-sm-10">
-					<input type="text" required="" class="form-control" id="nombre"
-						placeholder="Entar nombre" name="nombre">
+					<input type="text" required="required" class="form-control"
+						id="nombre" placeholder="Entar nombre" name="nombre">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd"><i
 					class='fas fa-lock' style='font-size: 24px'></i> Contraseña:</label>
 				<div class="col-sm-10">
-					<input type="password" required="" class="form-control" id="pwd"
-						placeholder="Entar password" name="password">
+					<input type="password" required="required" class="form-control"
+						id="pwd" placeholder="Entar password" name="password"
+						pattern="^[a-z0-9_-]{3,15}$"
+						title="El número de referencia consta de mas de 2 digitos">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd"><i
 					class='fas fa-user' style='font-size: 24px'></i> Usuario:</label>
 				<div class="col-sm-10">
-					<input type="text" required="" class="form-control" id="usuario"
-						placeholder="Entar usuario" name="usuario">
+					<input type="text" required="required" class="form-control"
+						id="usuario" placeholder="Entar usuario" name="usuario"
+						pattern="^[a-z0-9_-]{3,15}$"
+						title="El número de referencia consta de mas de 2 digitos">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd"><i
 					class='far fa-image' style='font-size: 24px'></i>Imagen:</label>
 				<div class="col-sm-10">
-					<input type="file" required="" class="form-control" id="pwd"
-						placeholder="Entar Imagen" name="foto">
+					<input type="file" required="required" class="form-control"
+						id="pwd" placeholder="Entar Imagen" name="foto">
 				</div>
 			</div>
 			<div class="form-group">
@@ -102,7 +107,8 @@
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button  id="CancelarLog" type='button' class="btn btn-info" onClick='window.location.replace("Principal")'>Cancelar</button>
+					<button id="CancelarLog" type='button' class="btn btn-info"
+						onClick='window.location.replace("Principal")'>Cancelar</button>
 				</div>
 			</div>
 		</form>
@@ -122,8 +128,24 @@
 	<%
 		}
 	%>
-	
-	
+
+
+	<%
+		if (error1 != null) {
+	%>
+	<h3 id="errorLogear" style="margin-left: 28%; margin-top: 2%; color: red;">Usuario
+		o email ya existen en nuestra Aplicacion</h3>
+	<div id="botLog"
+		style="position: relative; display: flex; margin-left: 42%; margin-right: auto">
+		<button type='button' onClick='window.location.replace("Principal")'>VolverPrincipal</button>
+		<button type='button' onClick='window.location.replace("Logear")'>Reintentar</button>
+	</div>
+
+	<%
+		}
+	%>
+
+
 
 </body>
 </html>

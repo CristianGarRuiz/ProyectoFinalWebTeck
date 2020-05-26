@@ -87,14 +87,30 @@ public class LogearUsuarios extends HttpServlet {
 
 		// poongo manualmente el activado del usuario en n
 		usu.setActivado("n");
+		
+		String emailUsuario=request.getParameter("emailUsuario");
+		UsuarioPojo email = null;
+		String NombreUsuario =request.getParameter("usuario") ;
+		UsuarioPojo nom = null;
 
 		try {
+			email=usuariosEJB.comprobarEmailUsarioEmpleado(emailUsuario);
+			nom=usuariosEJB.comprobarUsuarioEmpleado(NombreUsuario);
 
-			usuariosEJB.AñadirEmpleado(usu);
-         
-			rsCorreo.forward(request, response);
+			if((email==null) && (nom==null)) {
+				usuariosEJB.AñadirEmpleado(usu);
+		         
+				rsCorreo.forward(request, response);
+				
+				loggerNormal.debug("Añadidoo el empleado sin problemas");
+				
+			}else {
+				response.sendRedirect("LogearUsuarios?error=hay");
+				
+			}
 			
-			loggerNormal.debug("Añadidoo el empleado sin problemas");
+			
+			
 
 		} catch (Exception e) {
 			loggerError.error(e.getMessage() + "Error en añadirusuario / enlace de codigo/enviar el correo ");

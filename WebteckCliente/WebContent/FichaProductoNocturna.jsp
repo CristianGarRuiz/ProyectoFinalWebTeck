@@ -108,7 +108,7 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a id="Login12" class="dropdown-item" href="Login"><button
+							<a id="Login12" class="dropdown-item" href="Logins"><button
 									type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
 							<a id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
@@ -281,9 +281,27 @@
 					</div>
 				</div>
 
-				<a id="CarritoTienda" href='Editar?id=<%=prod.getId()%>'> Añadir
-					a Carrito </a> <a id="FichaProducto" href='Pricnipal'>Volver a
-					Principal </a>
+				<%
+												if (usu == null) {
+											%>
+
+											<a id="CarritoTienda" onclick="Productoad()">Añadir a
+												Carrito </a>
+
+											<%
+												} else {
+											%>
+											<a id="CarritoTienda"
+												href='AñadirCarrito?id=<%=prod.getId()%>'> Añadir a
+												Carrito </a>
+											<%
+												}
+											%>
+
+											<br> <br>
+											</n>
+											<br> <a id="FichaProducto"
+												href='Ficha?id=<%=prod.getId()%>'> Ver Producto </a>
 
 
 			</div>
@@ -621,4 +639,18 @@
 		<%
 			}
 		%>
+		
+		
+			<script>
+		function AlertStock() {
+			alert("lo sentimos , No hay existencias !");
+		}
+	</script>
+
+
+	<script>
+		function Productoad() {
+			alert("lo sentimos , Logeate o Registrate para poder Comprar !");
+		}
+	</script>
 </html>

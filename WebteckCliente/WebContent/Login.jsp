@@ -85,7 +85,7 @@
 					<input type="password" required="" class="form-control" id="pwd"
 						placeholder="Entar password" name="password" required
 						pattern="^[a-z0-9_-]{3,15}$"
-						title="El número de referencia consta de 3 letras mayúsculas y 4 dígitos." />
+						title="El número de referencia consta de mas de 2 digitos" />
 				</div>
 			</div>
 			<div class="form-group">

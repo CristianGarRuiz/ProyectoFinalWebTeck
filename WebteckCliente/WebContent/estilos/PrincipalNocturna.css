@@ -13,14 +13,14 @@ body {
 	background-color: rgb(187, 187, 187);
 }
 
-#prodImagen {
-	display: flex;
-	position: relative;
-	height: 16px;
-	height: 27%;
-	margin-left: 36%;
-	cursor: pointer;
-}
+/* #prodImagen { */
+/* 	display: flex; */
+/* 	position: relative; */
+/* 	height: 16px; */
+/* 	height: 27%; */
+/* 	margin-left: 36%; */
+/* 	cursor: pointer; */
+/* } */
 
 #contanierValores {
 	background-color: lightcyan;
@@ -43,7 +43,6 @@ body {
 	margin-bottom: 2%;
 	border-radius: 3%;
 	position: relative;
-	display: inline-flex;
 	margin-left: 0.7%;
 	background-color: white;
 }
