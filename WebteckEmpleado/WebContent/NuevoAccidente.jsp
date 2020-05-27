@@ -34,7 +34,7 @@
 
 	<%
 		String error = (String) request.getParameter("error");
-			UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
+		UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
 	%>
 
 
@@ -56,7 +56,10 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="Crear">Añadir
 							Producto</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="InformacionCliente">InformacionCliente</a></li>
 					<li class="nav-item"><a class="nav-link" href="InfoVentas">InfoVentas</a>
+
 					</li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
@@ -134,11 +137,9 @@
 				for="Año">Año:</label> <input type="number" name="Anyo"
 				required="required" placeholder="Año" /> <br /> <br /> <label
 				for="Precio">Precio:</label> <input type="number" name="Precio"
-				required="required" placeholder="Precio" /> <br /> <br />
-				<label
+				required="required" placeholder="Precio" /> <br /> <br /> <label
 				for="Precio">Stock:</label> <input type="number" name="Stock"
-				required="required" placeholder="Stock" /> <br /> <br /> 
-				<label
+				required="required" placeholder="Stock" /> <br /> <br /> <label
 				for="Descripcion">Descripcion:</label> <input type="text"
 				name="Descripcion" required="required" placeholder="Descripcion.." />
 			<br /> <label for="Descripcion">Foto:</label> <input type="File"
@@ -147,20 +148,20 @@
 			<br /> <label for="marca">Marca:</label> <select name="Marca">
 				<%
 					ArrayList<MarcaPojo> mar = (ArrayList<MarcaPojo>) request.getAttribute("marca");
-									if (mar != null) {
-										for (MarcaPojo d : mar) {
-											out.print("<option value='" + d.getId() + "'>" + d.getNombre() + "</option>");
-										}
-									}
+					if (mar != null) {
+						for (MarcaPojo d : mar) {
+							out.print("<option value='" + d.getId() + "'>" + d.getNombre() + "</option>");
+						}
+					}
 				%>
 			</select> <label for="categoria">Categoria:</label> <select name=Categoria>
 				<%
 					ArrayList<CategoriaPojo> cate = (ArrayList<CategoriaPojo>) request.getAttribute("categoria");
-							if (cate != null) {
-								for (CategoriaPojo d : cate) {
-									out.print("<option value='" + d.getId() + "'>" + d.getNombre() + "</option>");
-								}
-							}
+					if (cate != null) {
+						for (CategoriaPojo d : cate) {
+							out.print("<option value='" + d.getId() + "'>" + d.getNombre() + "</option>");
+						}
+					}
 				%>
 
 			</select> <br /> <br /> <input id="Crear" type="submit" value="Crear" />
@@ -169,7 +170,7 @@
 		</form>
 	</div>
 
-<%
+	<%
 		if (usu != null) {
 	%>
 	<script>
@@ -186,16 +187,16 @@
 	%>
 	<script>
 		window.onload = function() {
-			 alert("No esta Logeado para esta Funcion");
-			 window.location='Pagina'; 
+			alert("No esta Logeado para esta Funcion");
+			window.location = 'Pagina';
 		}
 	</script>
 	<%
 		}
 	%>
-	
-	
-	
+
+
+
 
 </body>
 </html>

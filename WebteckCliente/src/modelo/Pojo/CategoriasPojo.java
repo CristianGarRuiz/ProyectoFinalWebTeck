@@ -1,5 +1,11 @@
 package modelo.Pojo;
 
+/**
+ * este pojo es el pojo de las categorias
+ * 
+ * @author cristian
+ *
+ */
 public class CategoriasPojo {
 
 	private int id;

@@ -10,61 +10,108 @@ import modelo.dao.UsuarioDao;
 import modelo.dao.CodigoDAO;
 import modelo.Pojo.UsuarioPojo;
 
-
 @Stateless
 @LocalBean
 public class UsuarioEjb {
 
+	/**
+	 * este metodo recupera un usuario por el nombre de usuario y el pasword
+	 * 
+	 * @param user
+	 * @param paswd
+	 * @return
+	 * @throws SQLException
+	 */
 	public UsuarioPojo leerDatos(String user, String paswd) throws SQLException {
 
 		UsuarioDao userDAO = new UsuarioDao();
 		return userDAO.leerDatos(user, paswd);
 
 	}
-	
-	
-	public UsuarioPojo leerDatosEmpleado (String user, String paswd) throws SQLException {
+
+	/**
+	 * este metodo recupera un empleado por su nombre y su password
+	 * 
+	 * @param user
+	 * @param paswd
+	 * @return
+	 * @throws SQLException
+	 */
+	public UsuarioPojo leerDatosEmpleado(String user, String paswd) throws SQLException {
 
 		EmpleadoDao userDAO = new EmpleadoDao();
 		return userDAO.leerDatosEmpleado(user, paswd);
 
 	}
-	
-	
-	public UsuarioPojo comprobarUsuario (String NombreUsuario) throws SQLException {
+
+	/**
+	 * este metodo comprueba que el nombre de usuario ya exite
+	 * 
+	 * @param NombreUsuario
+	 * @return
+	 * @throws SQLException
+	 */
+	public UsuarioPojo comprobarUsuario(String NombreUsuario) throws SQLException {
 
 		UsuarioDao userDAO = new UsuarioDao();
 		return userDAO.comprobarUsuario(NombreUsuario);
 
 	}
-	
-	public UsuarioPojo comprobarEmailUsario (String emailUsuario) throws SQLException {
+
+	/**
+	 * este metodo comprueba que el email de usuario ya existe
+	 * 
+	 * @param emailUsuario
+	 * @return
+	 * @throws SQLException
+	 */
+	public UsuarioPojo comprobarEmailUsario(String emailUsuario) throws SQLException {
 
 		UsuarioDao userDAO = new UsuarioDao();
 		return userDAO.comprobarEmailUsuario(emailUsuario);
 
 	}
-	
-	
-	public UsuarioPojo comprobarUsuarioEmpleado (String NombreUsuario) throws SQLException {
+
+	/**
+	 * este metodo comprubea que el nombre de usuario de empleado ya existe
+	 * 
+	 * @param NombreUsuario
+	 * @return
+	 * @throws SQLException
+	 */
+	public UsuarioPojo comprobarUsuarioEmpleado(String NombreUsuario) throws SQLException {
 
 		EmpleadoDao userDAO = new EmpleadoDao();
 		return userDAO.comprobarUsuarioEmpleado(NombreUsuario);
 
 	}
-	
-	public UsuarioPojo comprobarEmailUsarioEmpleado (String emailUsuario) throws SQLException {
+
+	/**
+	 * este metodo comprubea que el email del empleado ya existe
+	 * 
+	 * @param emailUsuario
+	 * @return
+	 * @throws SQLException
+	 */
+
+	public UsuarioPojo comprobarEmailUsarioEmpleado(String emailUsuario) throws SQLException {
 
 		EmpleadoDao userDAO = new EmpleadoDao();
 		return userDAO.comprobarEmailUsuarioEmpleado(emailUsuario);
 
 	}
-	
-	
+
+	/**
+	 * este metodo elimina un empleado por su email
+	 * 
+	 * @param emailUsuario
+	 * @throws SQLException
+	 */
 	public void eliminarEmpleado(String emailUsuario) throws SQLException {
 		EmpleadoDao userDao = new EmpleadoDao();
 		userDao.eliminarEmpleado(emailUsuario);
 	}
+
 	/**
 	 * este metodo recoge la foto de los usuario
 	 * 
@@ -82,27 +129,33 @@ public class UsuarioEjb {
 	}
 
 	/**
-	 * este metodo añade un usuario a la bd y genera un codigo random llama a la
-	 * estacnia de insertar codigo y le pasa el codigo generado ycon el correo
-	 * asociado y devuelve el codigo
+	 * este metodo añade un empleado
 	 * 
 	 * @param usu
-	 * @return 
+	 * @return
 	 * @return
 	 * @throws SQLException
 	 */
-	
+
 	public void AñadirEmpleado(UsuarioPojo usu) throws SQLException {
 		EmpleadoDao userDao = new EmpleadoDao();
 		userDao.AñadirEmpleado(usu);
 
-
 	}
-	
+
+	/**
+	 * este metodo añade al usuario y al mismo tiempo añade el codigo de activacion
+	 * con le usuario asociado a ese codigo
+	 * 
+	 * @param usu
+	 * @param codigo
+	 * @return
+	 * @throws SQLException
+	 */
 	public int añadirUsuario(UsuarioPojo usu, int codigo) throws SQLException {
 		UsuarioDao userDao = new UsuarioDao();
 		userDao.AñadirUsuarios(usu);
-		
+
 		CodigoDAO codigoDao = new CodigoDAO();
 		codigoDao.insertCodigo(codigo, usu.getEmailUsuario());
 		return codigo;
@@ -132,8 +185,14 @@ public class UsuarioEjb {
 		userDao.activarUsuario(codigo);
 	}
 
-	
-	public ArrayList<UsuarioPojo> getDatosUsuarioporEmailUsuario(String emailUsuario)  throws SQLException {
+	/**
+	 * este metodo recupera los datos de usuario por su email
+	 * 
+	 * @param emailUsuario
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<UsuarioPojo> getDatosUsuarioporEmailUsuario(String emailUsuario) throws SQLException {
 		UsuarioDao userDao = new UsuarioDao();
 		return userDao.getDatosUsuarioporEmailUsuario(emailUsuario);
 
@@ -160,13 +219,22 @@ public class UsuarioEjb {
 		UsuarioDao userDao = new UsuarioDao();
 		userDao.pantallaUsuario(pantalla, usuario);
 	}
-	
-	
+
+	/**
+	 * este metodo modifica la contraseña del usuario
+	 * 
+	 * @param usu
+	 */
 	public void updateContraseña(UsuarioPojo usu) {
 		UsuarioDao userDao = new UsuarioDao();
 		userDao.updateContraseña(usu);
 	}
-	
+
+	/**
+	 * este metodo modifica la imagen del usuario
+	 * 
+	 * @param usu
+	 */
 	public void updateImagen(UsuarioPojo usu) {
 		UsuarioDao userDao = new UsuarioDao();
 		userDao.updateImagen(usu);

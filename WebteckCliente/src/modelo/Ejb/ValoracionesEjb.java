@@ -10,8 +10,6 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
-
-import modelo.Pojo.ProductosTiendaPojo;
 import modelo.Pojo.ValorcionesPojo;
 
 @Stateless
@@ -19,7 +17,7 @@ import modelo.Pojo.ValorcionesPojo;
 public class ValoracionesEjb {
 
 	/**
-	 * apartir de un nuevo accidente del pojo crea un accidente
+	 * apartir de un nueva valoracion del pojo crea una nueva valoracion
 	 * 
 	 * @param accidente
 	 */
@@ -33,6 +31,11 @@ public class ValoracionesEjb {
 		target2.request().put(Entity.json(valor));
 	}
 
+	/**
+	 * este metodo crea un nuevo comentario
+	 * 
+	 * @param valor
+	 */
 	public void añadirComentario(ValorcionesPojo valor) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -43,6 +46,12 @@ public class ValoracionesEjb {
 		target2.request().put(Entity.json(valor));
 	}
 
+	/**
+	 * este metodo recupera todo los comentarios por la id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<ValorcionesPojo> leerComentario(int id) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -56,6 +65,12 @@ public class ValoracionesEjb {
 		return lista;
 	}
 
+	/**
+	 * este metodo recupera todas las valoraciones por id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<ValorcionesPojo> leerValoracion(int id) {
 
 		Client cliente = ClientBuilder.newClient();

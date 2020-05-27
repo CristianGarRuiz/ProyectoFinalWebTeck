@@ -63,7 +63,10 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="Crear">Añadir
 							Producto</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="InformacionCliente">InformacionCliente</a></li>
 					<li class="nav-item"><a class="nav-link" href="InfoVentas">InfoVentas</a>
+
 					</li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>

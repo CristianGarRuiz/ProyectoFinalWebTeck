@@ -1,6 +1,11 @@
 package modelo.Pojo;
 
-
+/**
+ * este pojo es el pojo de los productos
+ * 
+ * @author cristian
+ *
+ */
 public class ProductoPojo {
 
 	private int id;
@@ -17,8 +22,8 @@ public class ProductoPojo {
 		super();
 	}
 
-	public ProductoPojo(int id, String titulo, int anyo, String foto, String descripcion, int precio,int stock, int idGenero,
-			int idPlataforma) {
+	public ProductoPojo(int id, String titulo, int anyo, String foto, String descripcion, int precio, int stock,
+			int idGenero, int idPlataforma) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -26,7 +31,7 @@ public class ProductoPojo {
 		this.foto = foto;
 		this.descripcion = descripcion;
 		this.precio = precio;
-		this.stock=stock;
+		this.stock = stock;
 		this.idGenero = idGenero;
 		this.idPlataforma = idPlataforma;
 	}
@@ -103,5 +108,4 @@ public class ProductoPojo {
 		this.stock = stock;
 	}
 
-	
 }

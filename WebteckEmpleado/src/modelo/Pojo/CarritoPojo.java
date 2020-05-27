@@ -1,5 +1,11 @@
 package modelo.Pojo;
 
+/**
+ * este pojo es el pojo del carrito
+ * 
+ * @author cristian
+ *
+ */
 public class CarritoPojo {
 
 	private int id;

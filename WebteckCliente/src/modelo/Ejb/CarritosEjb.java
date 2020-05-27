@@ -15,6 +15,11 @@ import modelo.Pojo.CarritosPojo;
 @Stateless
 public class CarritosEjb {
 
+	/**
+	 * Este metodo añade un producto al carro
+	 * 
+	 * @param carrito
+	 */
 	public void añadirProductoCarro(CarritosPojo carrito) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -24,6 +29,13 @@ public class CarritosEjb {
 
 		target2.request().put(Entity.json(carrito));
 	}
+
+	/**
+	 * este metodo le los porductos del carro por el emai lde usuario
+	 * 
+	 * @param emailUsuario
+	 * @return
+	 */
 
 	public ArrayList<CarritosPojo> leerCarrito(String emailUsuario) {
 
@@ -38,6 +50,13 @@ public class CarritosEjb {
 		return lista;
 	}
 
+	/**
+	 * este metodo elimina los productos edl carro por id de producto y por email de
+	 * usuario
+	 * 
+	 * @param idProducto
+	 * @param emailUsuario
+	 */
 	public void eliminarProductoCarro(int idProducto, String emailUsuario) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -48,6 +67,12 @@ public class CarritosEjb {
 		target2.request().delete(CarritosPojo.class);
 	}
 
+	/**
+	 * este porducto cuenta los prodcutos del carro
+	 * 
+	 * @param emailUsuario
+	 * @return
+	 */
 	public CarritosPojo contarProductosCarrito(String emailUsuario) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -60,6 +85,13 @@ public class CarritosEjb {
 		return Totalcarrito;
 	}
 
+	/**
+	 * este metodo cuenta la cantidad de porductos del carro
+	 * 
+	 * @param idProducto
+	 * @param emailUsuario
+	 * @return
+	 */
 	public CarritosPojo contarProductosCantidadCarro(int idProducto, String emailUsuario) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -72,8 +104,13 @@ public class CarritosEjb {
 
 		return Totalcarrito;
 	}
-	
 
+	/**
+	 * este metodo suma el precio total de los productos
+	 * 
+	 * @param emailUsuario
+	 * @return
+	 */
 	public CarritosPojo sumaCarro(String emailUsuario) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -85,6 +122,5 @@ public class CarritosEjb {
 
 		return prod;
 	}
-
 
 }

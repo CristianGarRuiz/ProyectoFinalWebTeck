@@ -1,5 +1,11 @@
 package modelo.Pojo;
 
+/**
+ * este pojo es el pojo de la busqueda de productos
+ * 
+ * @author cristian
+ *
+ */
 public class BusquedasPojo {
 
 	private int id;

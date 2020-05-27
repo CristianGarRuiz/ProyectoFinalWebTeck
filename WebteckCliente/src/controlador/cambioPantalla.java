@@ -3,7 +3,6 @@ package controlador;
 import java.io.IOException;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +17,7 @@ import modelo.Pojo.UsuariosPojo;
 @WebServlet("/cambioPantalla")
 public class cambioPantalla extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 
 	@EJB
 	UsuariosEjb usuarioEjb;
@@ -35,10 +35,6 @@ public class cambioPantalla extends HttpServlet {
 		// creo la variable para recoger la pantalla de la session
 		String pantalla = sesionesEjb.getPantalla(session);
 
-		// enviar a una o otro jsp segun el valor de pantalla
-		RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/Principal.jsp");
-		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/PrincipalNocturna.jsp");
-
 //las request de los atributos que estancio al principio
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("pantalla", pantalla);
@@ -50,9 +46,9 @@ public class cambioPantalla extends HttpServlet {
 		if (pantalla.equals("D")) {
 
 			response.sendRedirect("Principal");
-			//cambio el valor de pantalla del usuario recogio en la session
+			// cambio el valor de pantalla del usuario recogio en la session
 			usuarioEjb.pantallaUsuario("N", usuario.getUsuario());
-			//cambio el valor pantalla en la session
+			// cambio el valor pantalla en la session
 			sesionesEjb.cambiarPantalla(session, "N");
 
 		} else {

@@ -15,14 +15,21 @@ import modelo.Pojo.PreguntasPojo;
 @LocalBean
 public class PreguntasEjb {
 
+	/**
+	 * este metodo recupera una lista de pregunsta asociadas a una palabra
+	 * 
+	 * @param pregunta
+	 * @return
+	 */
 	public ArrayList<PreguntasPojo> RespuestaPreguntas(String pregunta) {
 
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target1 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getRespuesta/patata23/"  + pregunta);
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/getRespuesta/patata23/" + pregunta);
 
-		ArrayList<PreguntasPojo> lista = (ArrayList<PreguntasPojo>) target1.request().get(new GenericType<List<PreguntasPojo>>() {
+		ArrayList<PreguntasPojo> lista = (ArrayList<PreguntasPojo>) target1.request()
+				.get(new GenericType<List<PreguntasPojo>>() {
 				});
 
 		return lista;

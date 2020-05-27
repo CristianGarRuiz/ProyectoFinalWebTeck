@@ -10,6 +10,12 @@ import modelo.Pojo.UsuarioPojo;
 @LocalBean
 public class SesionEjb {
 
+	/**
+	 * recupera la session asociada la usuario
+	 * 
+	 * @param session
+	 * @return
+	 */
 	public UsuarioPojo usuariosLogeado(HttpSession session) {
 
 		UsuarioPojo usuario = null;
@@ -22,6 +28,12 @@ public class SesionEjb {
 
 	}
 
+	/**
+	 * abre la session al usuario con intervalo de tiempo
+	 * 
+	 * @param session
+	 * @param usuario
+	 */
 	public void loginUsuario(HttpSession session, UsuarioPojo usuario) {
 
 		if (session != null) {
@@ -31,12 +43,23 @@ public class SesionEjb {
 
 	}
 
+	/**
+	 * cierra la session del usuario
+	 * 
+	 * @param session
+	 */
 	public void logoutUsuario(HttpSession session) {
 		if (session != null) {
 			session.invalidate();
 		}
 	}
 
+	/**
+	 * recupera el valora de pantalla de la session
+	 * 
+	 * @param session
+	 * @return
+	 */
 	public String getPantalla(HttpSession session) {
 		String pantalla;
 		pantalla = (String) session.getAttribute("pantalla");
@@ -44,7 +67,13 @@ public class SesionEjb {
 		return pantalla;
 
 	}
-	
+
+	/**
+	 * recupera el email de usuario de la session
+	 * 
+	 * @param session
+	 * @return
+	 */
 	public String getEmailUsuario(HttpSession session) {
 		String emailUsuario;
 		emailUsuario = (String) session.getAttribute("emailUsuario");

@@ -88,15 +88,21 @@ public class LogearUsuarios extends HttpServlet {
 		// poongo manualmente el activado del usuario en n
 		usu.setActivado("n");
 		
+		//Vuelvo a recoger los valores de email y usuario los estancia en 
+		//una variable y los comprobare
 		String emailUsuario=request.getParameter("emailUsuario");
 		UsuarioPojo email = null;
 		String NombreUsuario =request.getParameter("usuario") ;
 		UsuarioPojo nom = null;
 
 		try {
+			//Aqui compruebo con dos ejb que los email y los nombre de usuario
+			//no existe en bd ya 
 			email=usuariosEJB.comprobarEmailUsarioEmpleado(emailUsuario);
 			nom=usuariosEJB.comprobarUsuarioEmpleado(NombreUsuario);
 
+			//Si los datos son nulos significa que no existen empleados con esos datos 
+			// y luego inserto
 			if((email==null) && (nom==null)) {
 				usuariosEJB.AñadirEmpleado(usu);
 		         
@@ -113,7 +119,7 @@ public class LogearUsuarios extends HttpServlet {
 			
 
 		} catch (Exception e) {
-			loggerError.error(e.getMessage() + "Error en añadirusuario / enlace de codigo/enviar el correo ");
+			loggerError.error(e.getMessage() + "Error en añadirusuario ");
 			response.sendRedirect("LogearUsuarios?error=Hay");
 		}
 	}

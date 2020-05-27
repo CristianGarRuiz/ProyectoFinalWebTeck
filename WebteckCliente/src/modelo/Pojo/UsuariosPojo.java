@@ -1,5 +1,11 @@
 package modelo.Pojo;
 
+/**
+ * este pojo es el pojo de los datos del usuario
+ * 
+ * @author cristian
+ *
+ */
 public class UsuariosPojo {
 
 	private String emailUsuario;
@@ -91,5 +97,5 @@ public class UsuariosPojo {
 	public void setActivado(String activado) {
 		this.activado = activado;
 	}
-	
+
 }

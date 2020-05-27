@@ -1,16 +1,14 @@
-
-<%@page import="javax.naming.InitialContext"%>
-<%@page import="javax.naming.Context"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@page import="modelo.Pojo.UsuarioPojo"%>
+<%@ page import="modelo.Pojo.UsuarioPojo"%>
+<%@ page import="modelo.Pojo.VentasPojo"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>ControlVentas</title>
+<title>ControlEmpleados</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -37,11 +35,9 @@
 
 	<%
 		String error = (String) request.getParameter("error");
-	%>
-
-	<%
 		UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
-		String titulo = (String) request.getAttribute("titulo");
+		ArrayList<VentasPojo> ventasCliente = (ArrayList<VentasPojo>) request.getAttribute("ventasCliente");
+		ArrayList<UsuarioPojo> datosCliente = (ArrayList<UsuarioPojo>) request.getAttribute("datosCliente");
 	%>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
@@ -60,8 +56,6 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="Crear">Añadir
 							Producto</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="InformacionCliente">InformacionCliente</a></li>
 					<li class="nav-item"><a class="nav-link" href="InfoVentas">InfoVentas</a>
 					</li>
 					<li class="nav-items dropdown"><a
@@ -70,7 +64,8 @@
 							<a id="Login12" class="dropdown-item" href="Login"><button
 									type="submit"
 									<i class="fas fa-door-open" style="font-size:18px"></i>></button>Login</a>
-							<a id="Login13" class="dropdown-item" href="LogearUsuarios"><button
+
+							<a id="Login13" class="dropdown-item" href="ComprobarAdmin"><button
 									type="submit"
 									<i class="fas fa-portrait" style="font-size:19px"></i>></button>Registro</a>
 						</div></li>
@@ -82,21 +77,27 @@
 		style="margin-top: 4%;">
 		<div class="row">
 			<ul>
-				<h5 style="margin-top: 20%">Control de Administrador</h5>
+				<h5 style="margin-top: 20%">Control de Empleados</h5>
 
 				<%
 					if (usu == null) {
 				%>
 				<div id="Datos">
 					<p
-						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">No
-						Registrado</p>
+						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
+						No Registrado <i class='far fa-user-circle'
+							style='margin-left: 48%; font-size: 28px; color: white; align-items: center; display: contents;'></i>
+					</p>
+
+
 				</div>
 				<%
 					} else {
 				%>
 				<div id="Datos">
-					<img alt="" src="Imagenes/<%=usu.getFoto()%>"><br /> <br />
+					<img alt="" src="Imagenes/<%=usu.getFoto()%>"
+						style="height: 35px; border-radius: 4%; margin-left: 11%;"><br />
+					<br />
 					<p
 						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
 						Bienvenido :
@@ -127,11 +128,68 @@
 		</div>
 	</div>
 
-
-	<FORM action="ComprobarAdmin" method="post">
-		Contraseña Administrador: <INPUT type="password" name="codigo" /> <BR />
-		<INPUT type="submit" value="Validar Credenciales" />
+	<FORM action="InformacionCliente" method="post">
+		emailUsuario : <INPUT type="text" name="emailUsuario" /> <BR /> <INPUT
+			type="submit" value="Buscar" />
 	</FORM>
+
+
+	<div class="table-responsive">
+
+		<%
+			if (datosCliente != null && usu != null) {
+				out.print("<h3>Informacion Cliente :</h3>");
+				out.print("<table class= table>");
+				out.print("<th> Imagen:</th>");
+				out.print("<th> Nombre:</th>");
+				out.print("<th> Usuario:</th>");
+				out.print("<th> emailUsuario:</th>");
+				out.print("</tr>");
+
+				for (UsuarioPojo usua : datosCliente) {
+					out.print("<tr>");
+					out.print("<td> <img src= \"Imagenes/" + usua.getFoto()
+							+ "\"style='height: 30%;width: 24%;	margin-left: auto;		margin-right: auto;'' ></td>");
+					out.print("<td>" + usua.getNombre() + "</td>");
+					out.print("<td>" + usua.getUsuario() + "</td>");
+					out.print("<td>" + usua.getEmailUsuario() + "</td>");
+					out.print("</tr>");
+
+				}
+				out.print("</table>");
+			}
+		%>
+
+
+	</div>
+
+	<div class="table-responsive">
+
+		<%
+			if (ventasCliente != null && usu != null) {
+				out.print("<h3>Compras Cliente :</h3>");
+				out.print("<table class= table>");
+				out.print("<th> Codigo Pedido:</th>");
+				out.print("<th> Fecha:</th>");
+				out.print("<th> Nombre:</th>");
+				out.print("<th> Precio:</th>");
+				out.print("<th> Nombre Prod:</th>");
+				out.print("</tr>");
+
+				for (VentasPojo vent : ventasCliente) {
+					out.print("<tr>");
+					out.print("<td>" + vent.getCodigoPedido() + "</td>");
+					out.print("<td>" + vent.getFecha() + "</td>");
+					out.print("<td>" + vent.getNombre() + "</td>");
+					out.print("<td>" + vent.getPrecio() + "€" + "</td>");
+					out.print("<td>" + vent.getTitulo() + "</td>");
+					out.print("</tr>");
+
+				}
+				out.print("</table>");
+			} 
+		%>
+	</div>
 
 	<%
 		if (usu != null) {
@@ -146,6 +204,29 @@
 		}
 	%>
 
+
+	<%
+		if (error != null) {
+	%>
+	<h4 style="color: red;">
+		<h4>Fechas sin Resultados</h4>
+		<button type='button' onClick='window.location.replace("Pagina")'>VolveraIntentar</button>
+		<%
+			}
+		%>
+		<%
+			if (usu == null) {
+		%>
+		<script>
+			window.onload = function() {
+				alert("No esta Logeado para esta Funcion");
+				window.location = 'Pagina';
+			}
+		</script>
+		<%
+			}
+		%>
+	
 </body>
 <footer class="container-fluid text-center bg-dark">
 	<h3 id="nombre">Cristian Garcia</h3>

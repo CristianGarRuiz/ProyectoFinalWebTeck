@@ -1,8 +1,6 @@
 package modelo.Ejb;
 
-import java.io.File;
 import java.util.Properties;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.mail.Authenticator;
@@ -20,6 +18,15 @@ import javax.mail.internet.MimeMultipart;
 @Stateless
 @LocalBean
 public class MailsEjb {
+
+	/**
+	 * este metodo crea un email y luego lo envia con los parametro que le pasamos
+	 * 
+	 * @param para
+	 * @param mensaje
+	 * @param ausnto
+	 * @throws MessagingException
+	 */
 
 	public void sendMail(String para, String mensaje, String ausnto) throws MessagingException {
 
@@ -51,7 +58,17 @@ public class MailsEjb {
 		message.setContent(multipart);
 		Transport.send(message);
 	}
-	public void sendMail1(String para, String nombre,String remitente, String asunto, String mensaje) {
+
+	/**
+	 * este metodo crear y envia un email con los parametro pasados
+	 * 
+	 * @param para
+	 * @param nombre
+	 * @param remitente
+	 * @param asunto
+	 * @param mensaje
+	 */
+	public void sendMail1(String para, String nombre, String remitente, String asunto, String mensaje) {
 
 		Properties prop = new Properties();
 		prop.put("mail.smtp.auth", true);
@@ -60,32 +77,32 @@ public class MailsEjb {
 		prop.put("mail.smtp.port", 587);
 		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
-        Session session = Session.getInstance(prop, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-            	return new PasswordAuthentication("garciaruizcristian50@gmail.com", "Cristiano_7");
-            }
-        });
+		Session session = Session.getInstance(prop, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("garciaruizcristian50@gmail.com", "Cristiano_7");
+			}
+		});
 
-        try {
-                Message message = new MimeMessage(session);
-                
-                message.setFrom(new InternetAddress(remitente));
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(para));
-                message.setSubject(asunto);
-                message.setText(nombre);
+		try {
+			Message message = new MimeMessage(session);
 
-                MimeBodyPart mimeBodyPart = new MimeBodyPart();
-                mimeBodyPart.setContent(mensaje, "text/html");
-                Multipart multipart = new MimeMultipart();
-                multipart.addBodyPart(mimeBodyPart);    	                
+			message.setFrom(new InternetAddress(remitente));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(para));
+			message.setSubject(asunto);
+			message.setText(nombre);
 
-                message.setContent(multipart);
-                Transport.send(message);
+			MimeBodyPart mimeBodyPart = new MimeBodyPart();
+			mimeBodyPart.setContent(mensaje, "text/html");
+			Multipart multipart = new MimeMultipart();
+			multipart.addBodyPart(mimeBodyPart);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+			message.setContent(multipart);
+			Transport.send(message);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

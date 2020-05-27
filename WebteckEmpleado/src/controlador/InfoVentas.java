@@ -38,14 +38,19 @@ public class InfoVentas extends HttpServlet {
     
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//Recupero la session
 		HttpSession session = request.getSession();
+		//creos la estancia de la parametro error
 		String error = request.getParameter("error");
+		//Recupero la session asociada al usuario
 		UsuarioPojo usuario = sesionesEjb.usuariosLogeado(session);
 		
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/infoVentas.jsp");
+		//Recojo los atributos creados 
 		request.setAttribute("error", error);
 		request.setAttribute("usuario", usuario);
+		
+		//y envio a la pagina 
 		rs.forward(request, response);
 		
 	}
@@ -54,10 +59,12 @@ public class InfoVentas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		// creoa la variable inico y fin para las fecha
+		// creo la variable inico y fin para las fecha
 		String inicio = request.getParameter("inicio");
 		String fin = request.getParameter("fin");
+		//creo la variable error
 		String error = null;
+		//Recupero la session asociada al usuario
 		UsuarioPojo usuario = sesionesEjb.usuariosLogeado(session);
 		// dispache para la pagina
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/infoVentas.jsp");

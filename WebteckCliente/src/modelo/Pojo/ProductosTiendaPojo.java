@@ -1,5 +1,11 @@
 package modelo.Pojo;
 
+/**
+ * este pojo es el pojo de los productos de la tienda
+ * 
+ * @author cristian
+ *
+ */
 public class ProductosTiendaPojo {
 
 	private int id;
@@ -22,7 +28,7 @@ public class ProductosTiendaPojo {
 	}
 
 	public ProductosTiendaPojo(int id, String titulo, int anyo, String foto, String descripcion, int precio, int stock,
-			String genero, String plataforma, String comentario, int valoracion, String usuario,String fotoUsuario) {
+			String genero, String plataforma, String comentario, int valoracion, String usuario, String fotoUsuario) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -38,8 +44,6 @@ public class ProductosTiendaPojo {
 		this.usuario = usuario;
 		this.fotoUsuario = fotoUsuario;
 	}
-	
-	
 
 	public String getFotoUsuario() {
 		return fotoUsuario;

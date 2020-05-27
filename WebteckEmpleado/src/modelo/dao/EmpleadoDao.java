@@ -7,6 +7,14 @@ import modelo.dao.mappers.UsuarioMapper;
 
 public class EmpleadoDao {
 
+	/**
+	 * este metodo recupera un empleado por usuario y password
+	 * 
+	 * @param user
+	 * @param paswd
+	 * @return
+	 */
+
 	public UsuarioPojo leerDatosEmpleado(String user, String paswd) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -21,7 +29,13 @@ public class EmpleadoDao {
 		}
 
 	}
-	
+
+	/**
+	 * este metodo comprueba el nombre de usuario
+	 * 
+	 * @param NombreUsuario
+	 * @return
+	 */
 	public UsuarioPojo comprobarUsuarioEmpleado(String NombreUsuario) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -36,7 +50,13 @@ public class EmpleadoDao {
 		}
 
 	}
-	
+
+	/**
+	 * este metodo comprubea el emial del usuario
+	 * 
+	 * @param emailUsuario
+	 * @return
+	 */
 	public UsuarioPojo comprobarEmailUsuarioEmpleado(String emailUsuario) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -51,8 +71,13 @@ public class EmpleadoDao {
 		}
 
 	}
-	
 
+	/**
+	 * este metodo recupera la foto del usuario
+	 * 
+	 * @param usuario
+	 * @return
+	 */
 	public String getFoto(UsuarioPojo usuario) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -67,13 +92,18 @@ public class EmpleadoDao {
 		}
 	}
 
+	/**
+	 * este meotdo añade un empleado nuevo
+	 * 
+	 * @param usu
+	 */
 	public void AñadirEmpleado(UsuarioPojo usu) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 
 			UsuarioMapper AñadirEmpleado = sqlSession.getMapper(UsuarioMapper.class);
-			AñadirEmpleado.AñadirEmpleado(usu.getEmailUsuario(), usu.getNombre(), usu.getUsuario(),
-					usu.getPassword(), usu.getFoto());
+			AñadirEmpleado.AñadirEmpleado(usu.getEmailUsuario(), usu.getNombre(), usu.getUsuario(), usu.getPassword(),
+					usu.getFoto());
 			sqlSession.commit();
 
 		} finally {

@@ -12,7 +12,11 @@ import modelo.Pojo.ProductoTiendaPojo;
 import modelo.dao.mappers.ProductoMapper;
 
 public class ProductosDao {
-
+	/**
+	 * este metodo recupera una lista de productos
+	 * 
+	 * @return
+	 */
 	public ArrayList<ProductoPojo> leerTotalProductos() {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -27,6 +31,11 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo recupera una lista de porductos
+	 * 
+	 * @return
+	 */
 	public ArrayList<ProductoTiendaPojo> leerTotalTienda() {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -41,6 +50,11 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo recupera una lista de productos
+	 * 
+	 * @return
+	 */
 	public ArrayList<ProductoTiendaPojo> leerTotalProductosMedia() {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -55,6 +69,12 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo lee el producto por su id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ProductoPojo leerProductos(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -70,6 +90,12 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo recupera las categoria por la id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<CategoriaPojo> leerCategoriaId(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -85,6 +111,12 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo recupera las marcas por la id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<MarcaPojo> leerMarcaId(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -99,6 +131,12 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo recupera una lista de productos por su id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<ProductoTiendaPojo> leerProductosTienda(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -111,8 +149,17 @@ public class ProductosDao {
 		}
 
 	}
-	
-	public ArrayList<ProductoTiendaPojo> productosFiltro( int idMarca,int idCategoria, int precioIni,int precioFin) {
+
+	/**
+	 * este metodo filtra por valores para recuperar un producto
+	 * 
+	 * @param idMarca
+	 * @param idCategoria
+	 * @param precioIni
+	 * @param precioFin
+	 * @return
+	 */
+	public ArrayList<ProductoTiendaPojo> productosFiltro(int idMarca, int idCategoria, int precioIni, int precioFin) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -125,10 +172,12 @@ public class ProductosDao {
 
 	}
 
-	
-	
-	
-
+	/**
+	 * este metodo le los productos por id de la categoria
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<ProductoTiendaPojo> leerProductosTiendaCategoriaid(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -142,6 +191,12 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo lee los porductos por la id de la marca
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<ProductoTiendaPojo> leerProductosTiendaMarcaid(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -155,6 +210,12 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo cuenta los porductos por id de categoria
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ProductoTiendaPojo contarProductoCategoria(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -168,6 +229,12 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo cuenta los porductos por la id de la marca
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ProductoTiendaPojo contarProductoMarca(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -181,6 +248,12 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo busca un porducto por su nombre
+	 * 
+	 * @param titulo
+	 * @return
+	 */
 	public ArrayList<BusquedaPojo> BuscarProductoporNombre(String titulo) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -194,6 +267,12 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo busqueda los productos por el nombre
+	 * 
+	 * @param titulo
+	 * @return
+	 */
 	public ArrayList<ProductoTiendaPojo> BuscarProductoporNombreTienda(String titulo) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -207,6 +286,11 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo muestra una lista de todas las marcas
+	 * 
+	 * @return
+	 */
 	public ArrayList<MarcaPojo> leerTotalMarcas() {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -221,6 +305,11 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo recupera una lista de todas las categorias
+	 * 
+	 * @return
+	 */
 	public ArrayList<CategoriaPojo> leerTotalCategorias() {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -235,6 +324,11 @@ public class ProductosDao {
 
 	}
 
+	/**
+	 * este metodo elimina los productos por su id
+	 * 
+	 * @param id
+	 */
 	public void eliminarProducto(int id) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -248,6 +342,11 @@ public class ProductosDao {
 		}
 	}
 
+	/**
+	 * este metodo modifica los productos
+	 * 
+	 * @param producto
+	 */
 	public void updateProducto(ProductoPojo producto) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -259,6 +358,13 @@ public class ProductosDao {
 		}
 	}
 
+	/**
+	 * este metodo modifica el stock de los porductos
+	 * 
+	 * @param stock
+	 * @param cantidad
+	 * @param idProducto
+	 */
 	public void updateProductoCantidad(int stock, int cantidad, int idProducto) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -270,6 +376,11 @@ public class ProductosDao {
 		}
 	}
 
+	/**
+	 * este metodo inserta productos nuevos
+	 * 
+	 * @param producto
+	 */
 	public void insertProducto(ProductoPojo producto) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {

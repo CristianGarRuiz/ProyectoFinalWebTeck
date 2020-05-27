@@ -8,11 +8,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-
 @Stateless
 @LocalBean
 /**
  * este metodo guarda la imagen del usuario
+ * 
  * @author cristian
  *
  */
@@ -21,7 +21,7 @@ public class ImageneEjb {
 	private static final String UPLOAD_DIRECTORY = "Imagenes";
 
 	public String guardarImagen(HttpServletRequest request, ServletContext context)
-			throws IOException,  ServletException {
+			throws IOException, ServletException {
 
 		String uploadPath = context.getRealPath("") + File.separator + UPLOAD_DIRECTORY;
 		File uploadDir = new File(uploadPath);

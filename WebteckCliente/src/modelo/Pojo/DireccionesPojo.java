@@ -1,5 +1,11 @@
 package modelo.Pojo;
 
+/**
+ * este pojo es el pojo de la direcciones del cliente
+ * 
+ * @author cristian
+ *
+ */
 public class DireccionesPojo {
 
 	private int id;

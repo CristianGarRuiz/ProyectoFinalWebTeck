@@ -16,6 +16,12 @@ import modelo.Pojo.ProductosTiendaPojo;
 @LocalBean
 public class ProductosEjb {
 
+	/**
+	 * este metodo recupera todos los productos
+	 * 
+	 * @return
+	 */
+
 	public ArrayList<ProductosTiendaPojo> leerTotalProductos() {
 
 		Client cliente = ClientBuilder.newClient();
@@ -30,6 +36,11 @@ public class ProductosEjb {
 		return lista;
 	}
 
+	/**
+	 * este metodo recupera todos los productos mejor valorados
+	 * 
+	 * @return
+	 */
 	public ArrayList<ProductosTiendaPojo> leerTotalProductosMedia() {
 
 		Client cliente = ClientBuilder.newClient();
@@ -45,7 +56,7 @@ public class ProductosEjb {
 	}
 
 	/**
-	 * tenemos un arraylist de los tipos de accidentes
+	 * tenemos un arraylist de los tipos de marcas
 	 * 
 	 * @return
 	 */
@@ -64,6 +75,11 @@ public class ProductosEjb {
 		return lista;
 	}
 
+	/**
+	 * este metodo recupera una lista de categorias
+	 * 
+	 * @return
+	 */
 	public ArrayList<CategoriasPojo> leerTotalCategorias() {
 
 		Client cliente = ClientBuilder.newClient();
@@ -78,6 +94,12 @@ public class ProductosEjb {
 		return lista;
 	}
 
+	/**
+	 * este metodo recupera una lista de productos por nombre
+	 * 
+	 * @param titulo
+	 * @return
+	 */
 	public ArrayList<ProductosTiendaPojo> BuscarProductoporNombreTienda(String titulo) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -92,6 +114,12 @@ public class ProductosEjb {
 		return lista;
 	}
 
+	/**
+	 * este metod recupero una lista de productos por id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<ProductosTiendaPojo> leerProducto(int id) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -105,6 +133,12 @@ public class ProductosEjb {
 		return lista;
 	}
 
+	/**
+	 * este metodo recupera los productos por id de categoria
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<ProductosTiendaPojo> leerProductoidCategoria(int id) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -118,6 +152,12 @@ public class ProductosEjb {
 		return lista;
 	}
 
+	/**
+	 * este metodo recupera los productos por la id de la marca
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<ProductosTiendaPojo> leerProductoidMarca(int id) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -131,6 +171,12 @@ public class ProductosEjb {
 		return lista;
 	}
 
+	/**
+	 * este metodo cuenta los prodcutos por la id de la categoria
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ProductosTiendaPojo contarProductosporCategoria(int id) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -143,6 +189,12 @@ public class ProductosEjb {
 		return prod;
 	}
 
+	/**
+	 * este metodo cuenta los productos por la de id de la marca
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ProductosTiendaPojo contarProductosporMarca(int id) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -155,6 +207,12 @@ public class ProductosEjb {
 		return prod;
 	}
 
+	/**
+	 * este metodo recupera un producto por su id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ProductosTiendaPojo ProductoporSuID(int id) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -167,6 +225,12 @@ public class ProductosEjb {
 		return prod;
 	}
 
+	/**
+	 * este metodo recuper una lista de categoria por la id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<CategoriasPojo> leerCategoriaId(int id) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -180,6 +244,12 @@ public class ProductosEjb {
 		return lista;
 	}
 
+	/**
+	 * este metod recupera una lista de marcas por id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public ArrayList<MarcasPojo> leerMarcasId(int id) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -194,6 +264,13 @@ public class ProductosEjb {
 		return lista;
 	}
 
+	/**
+	 * este metodo modifca el stock del producto
+	 * 
+	 * @param stock
+	 * @param cantidad
+	 * @param idProducto
+	 */
 	public void updateCarritoCantidad(int stock, int cantidad, int idProducto) {
 
 		Client cliente = ClientBuilder.newClient();
@@ -205,13 +282,24 @@ public class ProductosEjb {
 		target2.request().get();
 	}
 
-	public ArrayList<ProductosTiendaPojo> leerProductosFiltro(int idMarca, int idCategoria,
-			int precioIni, int precioFin) {
+	/**
+	 * este metodo aplica los filtro a un producto y recupera ese porducto con los
+	 * parametro
+	 * 
+	 * @param idMarca
+	 * @param idCategoria
+	 * @param precioIni
+	 * @param precioFin
+	 * @return
+	 */
+	public ArrayList<ProductosTiendaPojo> leerProductosFiltro(int idMarca, int idCategoria, int precioIni,
+			int precioFin) {
 
 		Client cliente = ClientBuilder.newClient();
 
 		WebTarget target1 = cliente
-				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/leerProductosFiltro/patata23/"+ idMarca + "/" + idCategoria + "/" + precioIni + "/" + precioFin);
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/leerProductosFiltro/patata23/" + idMarca
+						+ "/" + idCategoria + "/" + precioIni + "/" + precioFin);
 
 		ArrayList<ProductosTiendaPojo> lista = (ArrayList<ProductosTiendaPojo>) target1.request()
 				.get(new GenericType<List<ProductosTiendaPojo>>() {

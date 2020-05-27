@@ -15,18 +15,30 @@ import modelo.Pojo.VentaPojo;
 @LocalBean
 public class VentaEjb {
 
+	/**
+	 * este metodo lee los productos por email del usuario
+	 * 
+	 * @param emailUsuario
+	 * @return
+	 */
 	public ArrayList<VentaPojo> leerProductosporEmail(String emailUsuario) {
 
 		Client cliente = ClientBuilder.newClient();
 
-		WebTarget target1 = cliente	.target("http://localhost:8080/WebteckEmpleado/ControladorRest/leerProductosporEmail/patata23/"+ emailUsuario);
+		WebTarget target1 = cliente.target(
+				"http://localhost:8080/WebteckEmpleado/ControladorRest/leerProductosporEmail/patata23/" + emailUsuario);
 
 		ArrayList<VentaPojo> lista = (ArrayList<VentaPojo>) target1.request().get(new GenericType<List<VentaPojo>>() {
 		});
 
 		return lista;
 	}
-	
+
+	/**
+	 * este metodo añade una nueva venta
+	 * 
+	 * @param venta
+	 */
 	public void añadirVenta(VentaPojo venta) {
 
 		Client cliente = ClientBuilder.newClient();

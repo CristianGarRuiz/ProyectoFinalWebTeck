@@ -9,6 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 import modelo.Ejb.SesionesEjb;
 import modelo.Ejb.UsuariosEjb;
 import modelo.Pojo.UsuariosPojo;
@@ -16,6 +20,8 @@ import modelo.Pojo.UsuariosPojo;
 @WebServlet("/cambiarContra")
 public class cambiarContra extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger loggerError = (Logger) LoggerFactory.getLogger("Error");
+	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
 	@EJB
 	UsuariosEjb usuariosEJB;
 
@@ -38,9 +44,11 @@ public class cambiarContra extends HttpServlet {
 
 		RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/Principal.jsp");
 
-
+		// recupero los valores de jsp del formulario
 		String password = request.getParameter("password");
 		String emailUsuario = request.getParameter("emailUsuario");
+
+		// si no son nulos esos valores
 
 		if (password != null && emailUsuario != null) {
 
@@ -48,12 +56,15 @@ public class cambiarContra extends HttpServlet {
 			usu.setEmailUsuario(emailUsuario);
 			usu.setPassword(password);
 
+			// llamo al ejb y moidfico la contraseña
 			usuariosEJB.updateContraseña(usu);
 			rsPagina.forward(request, response);
+			loggerNormal.debug("se cambiado la contraseña correctamente");
 
 		} else {
-			
+
 			response.sendRedirect("error?=Hay");
+			loggerError.error("error al cambiar la contraseña");
 
 		}
 

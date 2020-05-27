@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 import modelo.Ejb.SesionEjb;
 
 
@@ -22,6 +26,7 @@ import modelo.Ejb.SesionEjb;
 @WebServlet("/Logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
 	/**
 	 * EJB para trabajar con sesiones
 	 */
@@ -40,6 +45,7 @@ public class Logout extends HttpServlet {
 		if (session != null) {
 
 			sesionesEjb.logoutUsuario(session);
+			loggerNormal.debug("Cerrada la sesion con exito del usuario");
 		}
 
 		rs.forward(request, response);

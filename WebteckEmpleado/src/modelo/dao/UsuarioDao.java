@@ -7,7 +7,19 @@ import modelo.dao.MyBatisUtil;
 import modelo.Pojo.UsuarioPojo;
 import modelo.dao.mappers.UsuarioMapper;
 
+/**
+ * 
+ * @author cristian
+ *
+ */
 public class UsuarioDao {
+	/**
+	 * este metodo recupera un usuario por su nombre de usuario y su password
+	 * 
+	 * @param user
+	 * @param paswd
+	 * @return
+	 */
 	public UsuarioPojo leerDatos(String user, String paswd) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -23,7 +35,12 @@ public class UsuarioDao {
 
 	}
 
-	
+	/**
+	 * este metodo comprubea el nomrbe de usuario y lo retorna si existe
+	 * 
+	 * @param NombreUsuario
+	 * @return
+	 */
 	public UsuarioPojo comprobarUsuario(String NombreUsuario) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -38,7 +55,13 @@ public class UsuarioDao {
 		}
 
 	}
-	
+
+	/**
+	 * este metodo comprueba el nombre del email y lo retorna si ya existe en bd
+	 * 
+	 * @param emailUsuario
+	 * @return
+	 */
 	public UsuarioPojo comprobarEmailUsuario(String emailUsuario) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -53,9 +76,14 @@ public class UsuarioDao {
 		}
 
 	}
-	
-	
-	
+
+	/**
+	 * este metodo recupera los datos de un usuario por su email
+	 * 
+	 * @param emailUsuario
+	 * @return
+	 */
+
 	public ArrayList<UsuarioPojo> getDatosUsuarioporEmailUsuario(String emailUsuario) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -68,8 +96,7 @@ public class UsuarioDao {
 		}
 
 	}
-	
-	
+
 	/**
 	 * este metodo recojo la foto del usuario que hace entra ne la pagina
 	 * 
@@ -109,6 +136,7 @@ public class UsuarioDao {
 			sqlSession.close();
 		}
 	}
+
 	/**
 	 * este metodo elimina un usuario por su cuenta de correo
 	 * 
@@ -205,8 +233,12 @@ public class UsuarioDao {
 		}
 
 	}
-	
-	
+
+	/**
+	 * este metodo modifica la contraseña de un usuario
+	 * 
+	 * @param usu
+	 */
 	public void updateContraseña(UsuarioPojo usu) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -217,8 +249,12 @@ public class UsuarioDao {
 			sqlSession.close();
 		}
 	}
-	
-	
+
+	/**
+	 * este metodo modifica la imagen de un usuario
+	 * 
+	 * @param usu
+	 */
 	public void updateImagen(UsuarioPojo usu) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {

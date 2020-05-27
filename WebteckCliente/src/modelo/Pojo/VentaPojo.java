@@ -1,5 +1,11 @@
 package modelo.Pojo;
 
+/**
+ * este pojo es el pojo de las ventas con los datos necesistados
+ * 
+ * @author cristian
+ *
+ */
 public class VentaPojo {
 
 	private String titulo;
@@ -27,8 +33,6 @@ public class VentaPojo {
 
 	}
 
-	
-	
 	public int getCodigoPedido() {
 		return codigoPedido;
 	}

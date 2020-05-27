@@ -11,6 +11,7 @@ import ch.qos.logback.classic.Logger;
 
 /**
  * Clase de utilidad para obtener una configuraciónn de MyBatis
+ * 
  * @author daw
  *
  */
@@ -21,7 +22,7 @@ public class MyBatisUtil {
 	 * Logger
 	 */
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(MyBatisUtil.class);
-	
+
 	/**
 	 * Constructor privado
 	 */
@@ -44,6 +45,7 @@ public class MyBatisUtil {
 
 	/**
 	 * Obtiene una SqlSessionFactory
+	 * 
 	 * @return La SqlSessionFactory
 	 */
 	public static SqlSessionFactory getSqlSessionFactory() {

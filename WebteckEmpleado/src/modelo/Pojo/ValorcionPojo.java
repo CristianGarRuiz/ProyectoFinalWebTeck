@@ -1,5 +1,11 @@
 package modelo.Pojo;
 
+/**
+ * este pojo es el pojo de las valoraciones de productos
+ * 
+ * @author cristian
+ *
+ */
 public class ValorcionPojo {
 	private int id;
 	private int idProducto;

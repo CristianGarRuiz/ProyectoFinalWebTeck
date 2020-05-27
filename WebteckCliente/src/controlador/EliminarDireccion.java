@@ -2,7 +2,6 @@ package controlador;
 
 import java.io.IOException;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,18 +31,23 @@ public class EliminarDireccion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// Recupero la sesion
 		HttpSession session = request.getSession();
+		// Asocio la sesion al usuario logeado
 		UsuariosPojo usuario = sesionesEjb.usuariosLogeado(session);
+		// Estancio la variable error
 		String error = request.getParameter("error");
+		// recupero el email de usuario
 		String emailUsuario = usuario.getEmailUsuario();
 
+		// Paso la request de las variable que utilizo
 		request.setAttribute("error", error);
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("emailUsuario", emailUsuario);
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Principal.jsp");
 
 		try {
 
+			// Elimino la direccion por el email de usuario
 			direccionEjb.eliminarDireccion(emailUsuario);
 		} catch (Exception e) {
 			loggerError.error(e.getMessage() + "Error al eliminar una direccion de un usuario con el email propio");

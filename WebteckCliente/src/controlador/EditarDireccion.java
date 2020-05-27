@@ -43,6 +43,7 @@ public class EditarDireccion extends HttpServlet {
 
 	@EJB
 	ProductosEjb productosEjb;
+
 	// Recojo el ejb de accidentes porque lo necessito para realizar un update de un
 	// accidente
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -54,8 +55,6 @@ public class EditarDireccion extends HttpServlet {
 		// creo el redigidor de la pagina editar
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/EditarDireccion.jsp");
 		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
-		
-		
 
 		UsuariosPojo usuario = sesionesEjb.usuariosLogeado(session);
 
@@ -63,11 +62,10 @@ public class EditarDireccion extends HttpServlet {
 
 		DireccionesPojo direccion = null;
 		try {
-			direccion= direccionEjb.getDireccion(emailUsuario);
+			direccion = direccionEjb.getDireccion(emailUsuario);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 
 		// paso la estancia a la pagina
 		request.setAttribute("direccion", direccion);
@@ -80,7 +78,7 @@ public class EditarDireccion extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		// Creo las variable que me hacen falta
 		String emailUsuario = request.getParameter("emailUsuario");
 		String direccion = request.getParameter("Direccion");
@@ -88,20 +86,17 @@ public class EditarDireccion extends HttpServlet {
 		String localidad = request.getParameter("Localidad");
 		String provincia = request.getParameter("Provincia");
 		String codigo = request.getParameter("CodigoPostal");
-		
 
 		// Pasa las varibale que son String a int por su formato del pojo
 		int codigoPostal = Integer.parseInt(codigo);
-	
 
 		// Compruebo que los datos no sean nulos
 		try {
-			if ((emailUsuario != null) && (direccion != null) && (vivienda != null) && (localidad != null) && (provincia != null)
-					&& (codigo != null) ) {
+			if ((emailUsuario != null) && (direccion != null) && (vivienda != null) && (localidad != null)
+					&& (provincia != null) && (codigo != null)) {
 				// Creo la instancia del pojo de accidentes.
 				DireccionesPojo d = new DireccionesPojo();
 
-				
 //Cambio los valores antiguos por los nuevos
 				d.setEmailUsuario(emailUsuario);
 				d.setDireccion(direccion);
@@ -109,16 +104,17 @@ public class EditarDireccion extends HttpServlet {
 				d.setProvincia(provincia);
 				d.setVivienda(vivienda);
 				d.setCodigoPostal(codigoPostal);
-				
+
 //y Modifico los datos
 				direccionEjb.updateDireccion(d);
+				loggerNormal.debug(" Realizando un update de los datos de la direccion email " + emailUsuario
+						+ " Con los datos " + "direccion : " + direccion + "Localidad: " + localidad + "provincia : "
+						+ provincia + "Vivienda: " + vivienda + " CodigoPostal :" + codigoPostal);
 
 			}
 		} catch (Exception e) {
-//			loggerNormal.debug(" Realizando un update de los datos del accidentecon id " + id + " Con los datos "
-//					+ "Titulo: " + Titulo + "Año: " + Año + "Precio : " + Precio + "Descripcion: " + Descricion
-//					+ " Stock" + Stock + " Marca" + Marca + " Categoria" + Categoria);
-//			loggerError.error("Error al realizar un update de las estadisticas de los jugadores");
+
+			loggerError.error("Error al realizar un update de las direcciones  de los clientes");
 
 		}
 		// Finalmente enviamos a la página principal

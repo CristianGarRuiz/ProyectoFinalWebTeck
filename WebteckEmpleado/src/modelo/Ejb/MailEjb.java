@@ -20,6 +20,14 @@ import javax.mail.internet.MimeMultipart;
 @LocalBean
 public class MailEjb {
 
+	/**
+	 * este metodo genera un email con los parametro que le pasamos
+	 * 
+	 * @param para
+	 * @param mensaje
+	 * @param ausnto
+	 * @throws MessagingException
+	 */
 	public void sendMail(String para, String mensaje, String ausnto) throws MessagingException {
 
 		Properties prop = new Properties();

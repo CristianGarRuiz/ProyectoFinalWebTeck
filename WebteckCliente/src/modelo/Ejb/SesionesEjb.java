@@ -10,6 +10,11 @@ import modelo.Pojo.UsuariosPojo;
 @LocalBean
 public class SesionesEjb {
 
+	/**
+	 * este metodo recuerpa una sesion asociada a un usuario
+	 * @param session
+	 * @return
+	 */
 	public UsuariosPojo usuariosLogeado(HttpSession session) {
 
 		UsuariosPojo usuario = null;
@@ -22,6 +27,11 @@ public class SesionesEjb {
 
 	}
 
+	/**
+	 * este metodo crea la sesion del usuario
+	 * @param session
+	 * @param usuario
+	 */
 	public void loginUsuario(HttpSession session, UsuariosPojo usuario) {
 
 		if (session != null) {
@@ -33,6 +43,10 @@ public class SesionesEjb {
 
 	}
 
+	/**
+	 * este metod cierran la sesion del usuario
+	 * @param session
+	 */
 	public void logoutUsuario(HttpSession session) {
 		if (session != null) {
 			session.invalidate();
@@ -54,6 +68,11 @@ public class SesionesEjb {
 
 	}
 
+	/**
+	 * este metodo recoge el email del usuario de la sesion
+	 * @param session
+	 * @return
+	 */
 	public String getEmailUsuario(HttpSession session) {
 		String emailUsuario;
 		emailUsuario = (String) session.getAttribute("emailUsuario");

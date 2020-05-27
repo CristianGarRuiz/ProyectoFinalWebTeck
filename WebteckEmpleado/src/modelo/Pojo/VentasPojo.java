@@ -1,5 +1,11 @@
 package modelo.Pojo;
 
+/**
+ * este pojo es el pojo de las ventas con los valores usados
+ * 
+ * @author cristian
+ *
+ */
 public class VentasPojo {
 
 	private String titulo;

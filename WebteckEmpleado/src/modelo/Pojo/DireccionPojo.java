@@ -1,5 +1,11 @@
 package modelo.Pojo;
 
+/**
+ * este pojo es el pojo de las direcciones
+ * 
+ * @author cristian
+ *
+ */
 public class DireccionPojo {
 	private int id;
 	private String direccion;
@@ -26,10 +32,6 @@ public class DireccionPojo {
 		this.emailUsuario = emailUsuario;
 	}
 
-	
-	
-	
-	
 	public int getId() {
 		return id;
 	}

@@ -7,6 +7,12 @@ import modelo.Pojo.CarritoPojo;
 import modelo.dao.mappers.CarritoMapper;
 
 public class CarritoDao {
+	
+	/**
+	 * este metodo conecta a bd para eliminar un producto del carro 
+	 * @param idProducto
+	 * @param emailUsuario
+	 */
 
 	public void eliminarProductoCarro( int idProducto,String emailUsuario) {
 
@@ -21,6 +27,12 @@ public class CarritoDao {
 		}
 	}
 
+	
+	/**
+	 * este metodo conecta con bd para insertar productos al carro
+	 * 
+	 * @param carrito
+	 */
 	public void insertProductoCarrito(CarritoPojo carrito) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -32,7 +44,11 @@ public class CarritoDao {
 		}
 	}
 	
-	
+	/**
+	 * este metodo conecta con bd y calcula el precio total de los porductos del carro
+	 * @param emailUsuario
+	 * @return
+	 */
 	public CarritoPojo SumaCarrito(String emailUsuario) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -46,6 +62,11 @@ public class CarritoDao {
 
 	}
 
+	/**
+	 * este metodo conecta con bd lee los porductos del carro asociados con cada email de usuario
+	 * @param emailUsuario
+	 * @return
+	 */
 	public ArrayList<CarritoPojo> ProductoCarritoporEmail(String emailUsuario) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -59,6 +80,13 @@ public class CarritoDao {
 
 	}
 
+	
+	/**
+	 * este conecta con bd y cuenta los porductos del carro por email de usuario
+	 * para luego hacer un count de la lista de productos
+	 * @param emailUsuario
+	 * @return
+	 */
 	public CarritoPojo contarProductoCarrito(String emailUsuario) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
@@ -72,7 +100,12 @@ public class CarritoDao {
 
 	}
 	
-	
+	/**
+	 * este metodo conecta con bd y cuenta el total de los porductos del carro
+	 * @param idProducto
+	 * @param emailUsuario
+	 * @return
+	 */
 	public CarritoPojo contarProductoCarritoCantidad(int idProducto,String emailUsuario) {
 
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();

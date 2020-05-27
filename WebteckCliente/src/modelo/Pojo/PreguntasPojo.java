@@ -1,5 +1,12 @@
 package modelo.Pojo;
 
+/**
+ * este pojo es el pojo de las preguntas
+ * 
+ * @author cristian
+ *
+ */
+
 public class PreguntasPojo {
 
 	private int id;
