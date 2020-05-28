@@ -127,7 +127,7 @@ public class Principal extends HttpServlet {
 			// Comprubo el valor de pantalla
 			if (pantalla == null || pantalla.equals("D")) {
 				rsPagina.forward(request, response);
-				loggerNormal.debug("Entrando correctamente ne pagina diurna");
+				loggerNormal.debug("Entrando correctamente en pagina diurna");
 			} else {
 				rsNocturna.forward(request, response);
 				loggerNormal.debug("Entrando correctamente ne pagina Nocturna");

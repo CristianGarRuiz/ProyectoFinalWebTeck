@@ -105,7 +105,7 @@
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
-			</div>
+			
 
 			<div class="container-fluid col-sm-5 col-md-6">
 
@@ -202,9 +202,9 @@
 					%>
 				
 			</div>
+			</div>
 	</nav>
-	</div>
-	</nav>
+	
 	
 
 

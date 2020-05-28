@@ -117,7 +117,7 @@
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
-			</div>
+			
 
 			<div class="container-fluid col-sm-5 col-md-6">
 
@@ -214,6 +214,7 @@
 						}
 					%>
 				
+			</div>
 			</div>
 	</nav>
 
@@ -657,7 +658,7 @@
 						<a id="" class="nav-link" href="Informacion.jsp">Blog</a>
 					</ol>
 					<ol class="nav-item">
-						<a id="" class="nav-link" href="FormularioAyudaCliente">Contacto</a>
+						<a id="" class="nav-link" href="FormularioAyudaCliente" >Contacto</a>
 					</ol>
 
 

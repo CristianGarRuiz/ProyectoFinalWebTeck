@@ -12,12 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Logger;
+import modelo.Ejb.CarritosEjb;
 import modelo.Ejb.DireccionesEjb;
 import modelo.Ejb.ProductosEjb;
 import modelo.Ejb.SesionesEjb;
 import modelo.Ejb.UsuariosEjb;
+import modelo.Pojo.CarritosPojo;
 import modelo.Pojo.CategoriasPojo;
 import modelo.Pojo.DireccionesPojo;
+import modelo.Pojo.MarcasPojo;
 import modelo.Pojo.UsuariosPojo;
 
 /**
@@ -34,6 +37,9 @@ public class EditarDireccion extends HttpServlet {
 	@EJB
 
 	DireccionesEjb direccionEjb;
+	
+	@EJB
+	CarritosEjb carritoEjb;
 
 	@EJB
 	UsuariosEjb usuarioEjb;
@@ -55,10 +61,14 @@ public class EditarDireccion extends HttpServlet {
 		// creo el redigidor de la pagina editar
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/EditarDireccion.jsp");
 		ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
+		// Recupero todas las marcas
+		ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
 
 		UsuariosPojo usuario = sesionesEjb.usuariosLogeado(session);
 
 		String emailUsuario = usuario.getEmailUsuario();
+		// cuento el total de productos del carro
+				CarritosPojo contarCarro = carritoEjb.contarProductosCarrito(emailUsuario);
 
 		DireccionesPojo direccion = null;
 		try {
@@ -70,7 +80,9 @@ public class EditarDireccion extends HttpServlet {
 		// paso la estancia a la pagina
 		request.setAttribute("direccion", direccion);
 		request.setAttribute("usuario", usuario);
+		request.setAttribute("marcas", marcas);
 		request.setAttribute("categorias", categorias);
+		request.setAttribute("contarCarro", contarCarro);
 		// Redirijo a la pagina
 		rs.forward(request, response);
 

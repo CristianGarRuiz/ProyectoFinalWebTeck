@@ -9,7 +9,8 @@
 <%@ page import="modelo.Pojo.UsuariosPojo"%>
 <%@ page import="modelo.Pojo.DireccionesPojo"%>
 <%@ page import="modelo.Pojo.CategoriasPojo"%>
-<%@ page import="modelo.Pojo.MarcasPojo" %>
+<%@ page import="modelo.Pojo.MarcasPojo"%>
+<%@ page import="modelo.Pojo.CarritosPojo"%>
 
 <!DOCTYPE html>
 <html>
@@ -43,10 +44,7 @@
 
 	<%
 		String error = (String) request.getParameter("error");
-	CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
-	%>
-
-	<%
+		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 		DireccionesPojo prod = (DireccionesPojo) request.getAttribute("direccion");
 		UsuariosPojo usu = (UsuariosPojo) request.getAttribute("usuario");
 	%>
@@ -64,8 +62,8 @@
 		<div class="container-fluid  col-sm-11">
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="Informacion.jsp">Informacion</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="Informacion.jsp">Informacion</a></li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categorias</a>
 						<div class="dropdown-menu">
@@ -111,7 +109,7 @@
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
-			</div>
+		
 
 			<div class="container-fluid col-sm-5 col-md-6">
 
@@ -187,8 +185,9 @@
 
 					<ul class="checkout">
 						<a style="margin-right: 2%" href="VerCarrito"> <i
-							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span style="margin-left: 46%;"
-							id="checkout_items" class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+							style="margin-left: 46%;" id="checkout_items"
+							class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
 						</a>
 					</ul>
 
@@ -208,10 +207,20 @@
 					%>
 				
 			</div>
+			</div>
 	</nav>
+
+
+	<div id="infoLog"
+		style="position: relative; display: flex; margin-top: 11%; margin-bottom: -11%; margin-left: 40%; margin-right: auto"
+		class="container">
+		<h2 id="TextLogin">Editar Direccion</h2>
+		<p>
+			<i class='fa fa-address-card-o'
+				style='margin-left: 44%; font-size: 58px; color: black'></i>
+		</p>
 	</div>
-	</nav>
-	
+
 	<div id="EditarDireccion" class="container">
 
 		<%
@@ -220,30 +229,50 @@
 				out.println("<br/>");
 				out.println("<a href=\"Login\"> Login</a>");
 			} else {
-				out.println("<form class='form-horizontal'  action=\"EditarDireccion\" method=\"post\">");
+				out.println("<form class=\"form-horizontal\"  action=\"EditarDireccion\" method=\"post\">");
 
 				out.println(
 						"<input type=\"hidden\" name=\"emailUsuario\" value=\"" + prod.getEmailUsuario() + "\" /> ");
 				out.println("<input type=\"hidden\" name=\"id\" value=\"" + prod.getId() + "\" /> ");
-				out.println("<label for=\"Titulo\">Titulo:</label>");
-				out.println("<input type=\"text\" name=\"Direccion\" value=\"" + prod.getDireccion() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"Localidad\">: Localidad</label>");
+
+				out.println("<div class='form-group>'");
+				out.println("<label class='control-label col-sm-2' for=\"Direccion\">Direccion:</label>");
+				out.println("<div class='col-sm-10'>");
+				out.println("<input  type=\"text\" name=\"Direccion\" value=\"" + prod.getDireccion() + "\" /> ");
+				out.println("</div>");
+				out.println("</div>");
+
+				out.println("<div class='form-group>'");
+				out.println("<label class='control-label col-sm-2' for=\"Localidad\">: Localidad</label>");
+				out.println("<div class='col-sm-10'>");
 				out.println("<input type=\"text\" name=\"Localidad\" value=\"" + prod.getLocalidad() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"Provincia\">Provincia:</label>");
+				out.println("</div>");
+				out.println("</div>");
+
+				out.println("<div class='form-group>'");
+				out.println("<label class='control-label col-sm-2' for=\"Provincia\">Provincia:</label>");
+				out.println("<div class='col-sm-10'>");
 				out.println("<input type=\"text\" name=\"Provincia\" value=\"" + prod.getProvincia() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"Vivienda\">Vivienda:</label>");
+				out.println("</div>");
+				out.println("</div>");
+
+				out.println("<div class='form-group>'");
+				out.println("<label  class='control-label col-sm-2' for=\"Vivienda\">Vivienda:</label>");
+				out.println("<div class='col-sm-10'>");
 				out.println("<input type=\"text\" name=\"Vivienda\" value=\"" + prod.getVivienda() + "\" /> ");
-				out.println("<br/>");
-				out.println("<label for=\"CodigoPostal\">CP:</label>");
+				out.println("</div>");
+				out.println("</div>");
+
+				out.println("<div class='form-group>'");
+				out.println("<label class='control-label col-sm-2' for=\"CodigoPostal\">CP:</label>");
+				out.println("<div class='col-sm-10'>");
 				out.println(
 						"<input type=\"number\" name=\"CodigoPostal\" value=\"" + prod.getCodigoPostal() + "\" /> ");
-				out.println("<br/>");
+				out.println("</div>");
+				out.println("</div>");
 				out.print("<br><br>");
 				out.print(
-						"<button id='ButtonRetorno' type='button' onClick='window.location.replace('Principal')'>Volver atras</button>");
+						"<button style=\"height: 9%;border-radius: 7px;text-decoration: none;\"  id=\"botonErrorLogin\" type=\"button\" onClick=\"window.location.replace('Principal')\">Volver a Principal</button>");
 				out.println("<input type= \"submit\" value= \"Editar\" /> ");
 				out.println("</form>");
 			}
