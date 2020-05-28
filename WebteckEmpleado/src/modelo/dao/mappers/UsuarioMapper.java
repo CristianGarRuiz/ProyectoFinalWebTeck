@@ -173,4 +173,11 @@ public interface UsuarioMapper {
 	 */
 	public void updateImagen(UsuarioPojo usu);
 
+	/**
+	 * este metodo cmabia la imagen del empleado
+	 * 
+	 * @param usu
+	 */
+	public void updateImagenEmpleado(UsuarioPojo usu);
+
 }

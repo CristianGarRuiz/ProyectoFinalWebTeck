@@ -135,7 +135,7 @@ public class PagarCarrito extends HttpServlet {
 				// añadirlo a ventas
 				ventaEjb.añadirVenta(ven);
 
-				String mensaje = " Buenas Tardes " + ven.getEmailUsuario() + " \n " + " Su pedido Ya estas en marcha "
+				String mensaje = " Buenas Tardes " + ven.getEmailUsuario() + " <br> " + " Su pedido Ya estas en marcha "
 						+ "\n" + " Codigo de PEDIDO : " + ven.getCodigoPedido() + " \n " + " Ticket de la Compra"
 						+ " \n " + " Producto comprado : " + prod.getTitulo() + " Precio Pagado : " + prod.getPrecio()
 						+ " Cantidad de Productos 1 : " + cantidad1 + " Total de la Compra : " + totalVenta

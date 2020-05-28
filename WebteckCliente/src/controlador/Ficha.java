@@ -133,15 +133,11 @@ public class Ficha extends HttpServlet {
 		// lo paso a integer
 		Integer valoraciones = Integer.valueOf(valora);
 
-		// recupero el comentario
-		String comentario = request.getParameter("comentario");
-
 		// Paso los atributos
 		request.setAttribute("error", error);
 		request.setAttribute("idProducto", idProducto);
 		request.setAttribute("emailUsuario", emailUsuario);
 		request.setAttribute("valoraciones", valoraciones);
-		request.setAttribute("comentario", comentario);
 		request.setAttribute("pantalla", pantalla);
 
 		// Compruebo que no sea nulo
@@ -154,32 +150,12 @@ public class Ficha extends HttpServlet {
 
 			// Añado la valoracion
 			valoracionesEjb.añadirValoracion(v);
-
+			response.sendRedirect("Principal");
 			loggerNormal.debug("Se añadido la valroacion correctamente");
 		} else {
-			response.sendRedirect("error?Hay");
+
 			loggerError.error("No se ha podido insertar la valoracion");
-		}
-
-		// Compruebo que no sea nulo
-		if (comentario != null) {
-
-			ValorcionesPojo v = new ValorcionesPojo();
-
-			v.setComentarios(comentario);
-			v.setEmailUsuario(emailUsuario);
-			v.setIdProducto(idProducto);
-
-			// añado el comentario
-			valoracionesEjb.añadirComentario(v);
-			response.sendRedirect("Principal");
-			loggerNormal.debug("SE ha comentado correctamente el producto");
-
-			// Comentar
-
-		} else {
 			response.sendRedirect("error?Hay");
-			loggerError.error("No se ha podido comentar el producto");
 		}
 	}
 

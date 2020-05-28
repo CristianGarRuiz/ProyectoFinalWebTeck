@@ -206,7 +206,7 @@
 	</nav>
 
 
-	<div class="table-responsive">
+	<div class="main-content  col-sm-5 col-md-12 col-lg-12">
 
 		<h3  id="BusquedaTitulo" style="text-align: center">
 			Busqueda Producto por : <%=titulo%></h3>
@@ -216,7 +216,7 @@
 			if (Busquedaproducto != null && titulo != null && titulo != "") {
 				out.print("<Busqueda Producto>");
 				out.print("<br><br>");
-				out.print("<table class=table");
+				out.print("<table class=table table-hover table-responsive>");
 				out.print("<th> Nombre Producto :</th>");
 				out.print("<th> Año Producto :</th>");
 				out.print("<th> Precio Producto :</th>");

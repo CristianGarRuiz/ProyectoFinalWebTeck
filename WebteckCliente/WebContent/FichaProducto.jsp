@@ -216,10 +216,10 @@
 				
 			</div>
 	</nav>
-	
 
 
-	<div class="container">
+
+	<div class="main-content col-sm-12 col-md-12">
 
 		<h3 style="text-align: center; margin-top: 8%; margin-bottom: -3%;">Productos</h3>
 		<div class="row">
@@ -233,7 +233,7 @@
 
 			<div id="fichaProd" class='product-item col  col-sm-4 col-md-6'>
 				<div class='product discount product_filter'>
-					<div class='product_image'>
+					<div class='product_image'id="prodImagen">
 
 						<img id="fotofichaProd" src='Imagenes/<%=prod.getFoto()%>' alt=''>
 					</div>
@@ -365,7 +365,7 @@
 											<option value="9">9</option>
 											<option value="10">10</option>
 										</select>
-										<button class="añadirValor" type="submit" name="ComentButton">Comentar</button>
+										<button class="añadirValor" type="submit" name="ComentButton">Valorar</button>
 
 									</form>
 								</div>
@@ -395,7 +395,7 @@
 
 
 					<div class="media border p-3">
-						<img src="Imagenes/" <%=prods.getFoto()%>>
+						<img src='Imagenes/<%=prods.getFoto()%>' style="width: 3%;" alt=''>
 						<div class="media-body">
 							<h7> Usuario : <%=prods.getEmailUsuario()%> </h7>
 							<p style="margin-top: 1%;">
@@ -491,7 +491,7 @@
 
 								<!-- Modal body -->
 								<div id="cuerpoModal" class="modal-body">
-									<form action="Ficha" method="post">
+									<form action="AñadirComentario" method="post">
 										<input type="hidden" name="id" value="<%=prod.getId()%>">
 										Comentario:
 										<textarea type="text" name="comentario" id="comen"></textarea>
@@ -520,7 +520,7 @@
 					%>
 
 					<div class="media border p-3">
-						<img src="Imagenes/" <%=prods.getFoto()%> alt="">
+						<img src='Imagenes/<%=prods.getFoto()%>' style="width: 3%;" alt=''>
 						<div class="media-body">
 							<h7> Usuario : <%=prods.getEmailUsuario()%> </h7>
 							<p>

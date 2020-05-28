@@ -68,7 +68,8 @@
 		from
 		usuaris
 		where
-		usuaris.emailUsuario = #{emailUsuario};
+		usuaris.emailUsuario =
+		#{emailUsuario};
 
 	</select>
 
@@ -92,7 +93,8 @@
 		from
 		empleados
 		where
-		empleados.emailUsuario= #{emailUsuario};
+		empleados.emailUsuario=
+		#{emailUsuario};
 
 	</select>
 
@@ -180,6 +182,17 @@
 		foto =
 		#{foto}
 		WHERE usuaris.emailUsuario = #{emailUsuario}
+	</update>
+
+
+	<update id='updateImagenEmpleado' parameterType='UsuarioPojo'>
+		UPDATE
+		empleados
+		SET
+
+		foto =
+		#{foto}
+		WHERE empleados.emailUsuario = #{emailUsuario}
 	</update>
 
 </mapper>

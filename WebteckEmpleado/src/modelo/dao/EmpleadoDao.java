@@ -130,4 +130,20 @@ public class EmpleadoDao {
 		}
 	}
 
+	/**
+	 * este metodo cambia la imagen del empleado
+	 * 
+	 * @param usu
+	 */
+	public void updateImagenEmpleado(UsuarioPojo usu) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			UsuarioMapper accidenteEdi = sqlSession.getMapper(UsuarioMapper.class);
+			accidenteEdi.updateImagenEmpleado(usu);
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}
+	}
+
 }

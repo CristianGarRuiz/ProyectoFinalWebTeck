@@ -154,8 +154,8 @@ public class Principal extends HttpServlet {
 		String emailUsuario = sesionesEjb.getEmailUsuario(session);
 
 		// Los dispcher de un o otro jsp
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Principal.jsp");
-		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/PaginaNocturna.jsp");
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/ProductosBusqueda.jsp");
+		RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/ProductosBusquedaNocturna.jsp");
 
 		// Contar los porductos del carro
 		CarritosPojo contarCarro = carritoEjb.contarProductosCarrito(emailUsuario);

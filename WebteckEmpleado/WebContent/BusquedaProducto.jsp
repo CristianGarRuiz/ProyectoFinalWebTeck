@@ -99,20 +99,22 @@
 				%>
 				<div id="Datos">
 					<img alt="" src="Imagenes/<%=usu.getFoto()%>"
-						style="height: 35px; border-radius: 4%;"><br /> <br />
+						style="height: 35px; border-radius: 4%; margin-left: 14%;"><br />
+					<br />
 					<p
 						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
 						Bienvenido :
 						<%=usu.getUsuario()%></p>
 
-					<div id="Menuopciones" class="dropdown">
+					<div id="Menuopciones" style="margin-left: 8%; margin-top: 4%;"
+						class="dropdown">
 						<button class="btn btn-secondary dropdown-toggle" type="button"
 							id="dropdownMenuButton" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false">Opciones
 							Usuario</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							<a class="dropdown-item" href="#"><button type='button'
-									onClick='window.location.replace("cambiarImagen")'>Cambiar
+									onClick='window.location.replace("cambiarImagenEmpleado")'>Cambiar
 									Imagen</button></a> <a class="dropdown-item" href="#"><button
 									type='button' onClick='window.location.replace("Logout")'>Cerrar
 									Sesion</button></a> <a class="dropdown-item" href="#">

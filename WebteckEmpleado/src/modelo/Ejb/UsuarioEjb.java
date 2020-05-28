@@ -239,5 +239,14 @@ public class UsuarioEjb {
 		UsuarioDao userDao = new UsuarioDao();
 		userDao.updateImagen(usu);
 	}
+	
+	/**
+	 * este metodo cambia la imagen del empleado
+	 * @param usu
+	 */
+	public void updateImagenEmpleado(UsuarioPojo usu) {
+		EmpleadoDao userDao = new EmpleadoDao();
+		userDao.updateImagenEmpleado(usu);
+	}
 
 }

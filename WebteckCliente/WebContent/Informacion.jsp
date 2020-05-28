@@ -594,7 +594,8 @@ body {
 
 				<div class="media col-sm-4 col-md-8">
 					<div class="media-left">
-						<img src="avatar.jfif" class="media-object" style="width: 45px">
+						<img src="Imagenes/usuario.jpeg" class="media-object"
+							style="width: 45px">
 					</div>
 					<div class="media-body">
 						<h4 class="media-heading">
@@ -605,20 +606,22 @@ body {
 						<!-- Nested media object -->
 						<div class="media">
 							<div class="media-left">
-								<img src="ava.jfif" class="media-object" style="width: 45px">
+								<img src="Imagenes/usuario.jpeg" class="media-object"
+									style="width: 45px">
 							</div>
 							<div class="media-body">
 								<h4 class="media-heading">
 									Marta Diaz <small><i>Posteado en Marzo 30, 2017</i></small>
 								</h4>
-								<p>Muy bien ,tube un problemas con un producto y se
+								<p>Muy bien ,tuve unos problemas con un producto y se
 									soluciono</p>
 							</div>
 						</div>
 						<!-- Nested media object -->
 						<div class="media">
 							<div class="media-left">
-								<img src="avatar.jfif" class="media-object" style="width: 45px">
+								<img src="Imagenes/usuario.jpeg" class="media-object"
+									style="width: 45px">
 							</div>
 							<div class="media-body">
 								<h4 class="media-heading">
@@ -660,12 +663,20 @@ body {
 		id="Footer">
 		<p id="Cop">&copy; WEBTECK.com
 		<p>
-			<a class="Icon" href="https://twitter.com/login"
-				<button type="submit"> <i class='fab fa-twitter' style='font-size:36px; '></i></button>></a>
-			<a class="Icon" href="https://www.facebook.com/"
-				<button type="submit"> <i class='fab fa-facebook-square' style='font-size:36px'></i></button>></a>
-			<a class="Icon" href="https://www.youtube.com/"
-				<button type="submit"><i class='fab fa-youtube' style='font-size:36px;color: red'></i> </button>></a>
+			<a class="Icon" href="https://twitter.com/login">
+				<button type="submit">
+					<i class='fab fa-twitter' style='font-size: 36px; color: #27bcf8'></i>
+				</button>
+			</a> <a class="Icon" href="https://www.facebook.com/">
+				<button type="submit">
+					<i class='fab fa-facebook-square'
+						style='font-size: 36px; color: #43c3f3'></i>
+				</button>
+			</a> <a class="Icon" href="https://www.youtube.com/">
+				<button type="submit">
+					<i class='fab fa-youtube' style='font-size: 36px; color: red'></i>
+				</button>
+			</a>
 	</div>
 </body>
 </html>

@@ -216,7 +216,7 @@
 				
 			</div>
 	</nav>
-	
+
 
 
 	<div id="demo" class="carousel slide" data-ride="carousel">
@@ -348,13 +348,9 @@
 									<div class="product discount">
 										<div class="product_image" id="prodImagen">
 											<img src="Imagenes/<%=prod.getFoto()%>" alt=""
-												style="height: 98%; width: 42%; margin-left: 30%; margin-top: -9%;">
+												style="height: 94%; width: 30%; margin-left: 35%; margin-top: -5%;">
 										</div>
 										<div class="favorite favorite_left"></div>
-										<div
-											class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
-											<span><%=prod.getPrecio()%></span>
-										</div>
 										<div class="product_info">
 											<h6 class="product_name">
 												<a href="single.html"><%=prod.getTitulo()%></a>
@@ -372,33 +368,33 @@
 													if ((valoracion > 0) && (valoracion <= 3)) {
 										%>
 											<img
-												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												style="height: 21%; position: relative; display: flex; width: 30%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
 												id="imgValor" alt="" src="imagenes/img1Estrella.jpg">
 
 											<%
 												} else if ((valoracion >= 3) && (valoracion == 4)) {
 											%>
 											<img
-												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												style="height: 21%; position: relative; display: flex; width: 30%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
 												id="imgValor" alt="" src="imagenes/img2Estrella.jpg">
 											<%
 												} else if ((valoracion > 4) && (valoracion <= 6)) {
 											%>
 											<img
-												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												style="height: 21%; position: relative; display: flex; width: 30%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
 												id="imgValor" alt="" src="imagenes/img3Estrella.jpg">
 											<%
 												} else if (valoracion >= 6 && (valoracion <= 8)) {
 											%>
 
 											<img
-												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												style="height: 21%; position: relative; display: flex; width: 30%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
 												id="imgValor" alt="" src="imagenes/img4Estrella.jpg">
 											<%
 												} else if (valoracion > 8 && (valoracion <= 10)) {
 											%>
 											<img
-												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												style="height: 21%; position: relative; display: flex; width: 30%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
 												id="imgValor" alt="" src="imagenes/img5Estrella.jpg">
 
 
@@ -566,8 +562,8 @@
 							<i class="fa fa-truck" aria-hidden="true"></i>
 						</div>
 						<div class="benefit_content">
-							<h6>free shipping</h6>
-							<p>Suffered Alteration in Some Form</p>
+							<h6>Envio Gratis</h6>
+							<p>Segun precio Producto</p>
 						</div>
 					</div>
 				</div>
@@ -577,8 +573,8 @@
 							<i class="fa fa-money" aria-hidden="true"></i>
 						</div>
 						<div class="benefit_content">
-							<h6>cach on delivery</h6>
-							<p>The Internet Tend To Repeat</p>
+							<h6>Todo lo prepramos nosotros</h6>
+							<p>Reparto en menos de 4 dias</p>
 						</div>
 					</div>
 				</div>
@@ -588,8 +584,8 @@
 							<i class="fa fa-undo" aria-hidden="true"></i>
 						</div>
 						<div class="benefit_content">
-							<h6>45 days return</h6>
-							<p>Making it Look Like Readable</p>
+							<h6>45 dias de reembolso</h6>
+							<p>Haciendo posible tu pedido deseado</p>
 						</div>
 					</div>
 				</div>
@@ -693,10 +689,10 @@
 					<hr>
 					<p style="color: white">Contactos</p>
 					<p style="color: white">
-						<i class='fas fa-location-arrow'></i> 1234 walstres ,Australia
+						<i class='fas fa-location-arrow'></i> 1234 Palma ,Mallorca
 					</p>
 					<p style="color: white">
-						<i class='fas fa-mail-bulk'></i> hello@gmail.com
+						<i class='fas fa-mail-bulk'></i> garciaruizcristian50@gmail.com
 					</p>
 					<p style="color: white">
 						<i class='fas fa-phone-alt'></i>tel:(123)4556+5646

@@ -349,7 +349,7 @@
 									<div class="product discount">
 										<div class="product_image" id="prodImagen">
 											<img src="Imagenes/<%=prod.getFoto()%>" alt=""
-												style="height: 98%; width: 42%; margin-left: 30%; margin-top: -9%;">
+												style="height: 94%; width: 30%; margin-left: 35%; margin-top: -5%;">
 										</div>
 										<div class="favorite favorite_left"></div>
 										<div
@@ -373,33 +373,33 @@
 													if ((valoracion > 0) && (valoracion <= 3)) {
 										%>
 											<img
-												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												style="height: 21%; position: relative; display: flex; width: 30%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
 												id="imgValor" alt="" src="imagenes/img1Estrella.jpg">
 
 											<%
 												} else if ((valoracion >= 3) && (valoracion == 4)) {
 											%>
 											<img
-												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												style="height: 21%; position: relative; display: flex; width: 30%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
 												id="imgValor" alt="" src="imagenes/img2Estrella.jpg">
 											<%
 												} else if ((valoracion > 4) && (valoracion <= 6)) {
 											%>
 											<img
-												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												style="height: 21%; position: relative; display: flex; width: 30%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
 												id="imgValor" alt="" src="imagenes/img3Estrella.jpg">
 											<%
 												} else if (valoracion >= 6 && (valoracion <= 8)) {
 											%>
 
 											<img
-												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												style="height: 21%; position: relative; display: flex; width: 30%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
 												id="imgValor" alt="" src="imagenes/img4Estrella.jpg">
 											<%
 												} else if (valoracion > 8 && (valoracion <= 10)) {
 											%>
 											<img
-												style="height: 21%; position: relative; display: flex; width: 59%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
+												style="height: 21%; position: relative; display: flex; width: 30%; margin-left: 51%; margin-bottom: 1%; margin-top: -12%;"
 												id="imgValor" alt="" src="imagenes/img5Estrella.jpg">
 
 

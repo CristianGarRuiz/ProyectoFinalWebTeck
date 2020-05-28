@@ -74,14 +74,18 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="Crear">Añadir
 							Producto</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="InformacionCliente">InformacionCliente</a></li>
 					<li class="nav-item"><a class="nav-link" href="InfoVentas">InfoVentas</a>
 					</li>
+
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a id="Login12" class="dropdown-item" href="Login"><button type="submit"
+							<a id="Login12" class="dropdown-item" href="Login"><button
+									type="submit"
 									<i class="fas fa-door-open" style="font-size:18px"></i>></button>Login</a>
-							<a id="Login13"  class="dropdown-item" href="ComprobarAdmin"><button
+							<a id="Login13" class="dropdown-item" href="ComprobarAdmin"><button
 									type="submit"
 									<i class="fas fa-portrait" style="font-size:19px"></i>></button>Registro</a>
 						</div></li>
@@ -108,7 +112,8 @@
 				%>
 				<div id="Datos">
 					<img alt="" src="Imagenes/<%=usu.getFoto()%>"
-						style="height: 35px; border-radius: 4%;"><br /> <br />
+						style="height: 35px; border-radius: 4%; margin-left: 14%;"><br />
+					<br />
 					<p
 						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
 						Bienvenido :
@@ -121,7 +126,7 @@
 							Usuario</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							<a class="dropdown-item" href="#"><button type='button'
-									onClick='window.location.replace("cambiarImagen")'>Cambiar
+									onClick='window.location.replace("cambiarImagenEmpleado")'>Cambiar
 									Imagen</button></a> <a class="dropdown-item" href="#"><button
 									type='button' onClick='window.location.replace("Logout")'>Cerrar
 									Sesion</button></a> <a class="dropdown-item" href="#">
@@ -149,30 +154,30 @@
 
 	<%
 		if (vents != null && inicio != null && fin != null && inicio != "" && fin != "") {
-		out.print("<Ventas por Fechas>");
-		out.print("Fechas : " + inicio + ": " + fin);
-		out.print("<br><br>");
-		out.print("<table class=table table-hover>");
-		out.print("<th> Nombre Producto :</th>");
-		out.print("<th> Precio Producto :</th>");
-		out.print("<th> Fecha Venta :</th>");
-		out.print("<th> Nombre Cliente:</th>");
-		out.print("</tr>");
+			out.print("<Ventas por Fechas>");
+			out.print("Fechas : " + inicio + ": " + fin);
+			out.print("<br><br>");
+			out.print("<table class=table table-hover>");
+			out.print("<th> Nombre Producto :</th>");
+			out.print("<th> Precio Producto :</th>");
+			out.print("<th> Fecha Venta :</th>");
+			out.print("<th> Nombre Cliente:</th>");
+			out.print("</tr>");
 
-		for (VentasPojo juga : vents) {
+			for (VentasPojo juga : vents) {
 
-			out.print("<tr>");
-			out.print("<td>" + juga.getTitulo() + "</td>");
-			out.print("<td>" + juga.getPrecio() + "$" + "</td>");
-			out.print("<td>" + juga.getFecha() + "</td>");
-			out.print("<td>" + juga.getNombre() + "</td>");
+				out.print("<tr>");
+				out.print("<td>" + juga.getTitulo() + "</td>");
+				out.print("<td>" + juga.getPrecio() + "$" + "</td>");
+				out.print("<td>" + juga.getFecha() + "</td>");
+				out.print("<td>" + juga.getNombre() + "</td>");
 
-		}
-		out.print("</table>");
-
-			} else {
-		out.print("<h4>Introduce Fechas</h4>");
 			}
+			out.print("</table>");
+
+		} else {
+			out.print("<h4>Introduce Fechas</h4>");
+		}
 	%>
 	<%
 		if (usu != null) {

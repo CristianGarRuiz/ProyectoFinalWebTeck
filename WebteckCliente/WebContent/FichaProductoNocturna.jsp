@@ -56,7 +56,8 @@
 		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-<nav  id="navPrinc" class="navbar navbar-expand-sm   fixed-top" style="background-color: orange;">
+	<nav id="navPrinc" class="navbar navbar-expand-sm fixed-top"
+		style="background-color: orange;">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -69,8 +70,8 @@
 		<div class="container-fluid  col-sm-11">
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="Informacion.jsp">Informacion</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="Informacion.jsp">Informacion</a></li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categorias</a>
 						<div class="dropdown-menu">
@@ -120,7 +121,8 @@
 
 			<div class="container-fluid col-sm-5 col-md-6">
 
-				<nav class="navbar navbar-expand-sm " style="background-color: orange;">
+				<nav class="navbar navbar-expand-sm"
+					style="background-color: orange;">
 
 					<form class="form-inline" action="Principal" method="post">
 						<input class="form-control mr-sm-2" type="text" name="titulo"
@@ -134,7 +136,8 @@
 
 
 				</nav>
-				<nav class="navbar navbar-expand-sm" style="background-color: orange;">
+				<nav class="navbar navbar-expand-sm "
+					style="background-color: orange;">
 					<!-- Brand/logo -->
 
 					<%
@@ -192,8 +195,9 @@
 
 					<ul class="checkout">
 						<a style="margin-right: 2%" href="VerCarrito"> <i
-							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span style="margin-left: 46%;"
-							id="checkout_items" class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+							style="margin-left: 46%;" id="checkout_items"
+							class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
 						</a>
 					</ul>
 
@@ -214,13 +218,12 @@
 				
 			</div>
 	</nav>
-	</div>
-	</nav>
 
 
-	<div class="main-content  col-sm-5 col-md-12 col-lg-12">
 
-		<h3 style="text-align: center">Productos</h3>
+	<div class="main-content col-sm-12 col-md-12">
+
+		<h3 style="text-align: center; margin-top: 8%; margin-bottom: -3%;">Productos</h3>
 		<div class="row">
 
 			<%
@@ -230,12 +233,11 @@
 				for (ProductosTiendaPojo prod : productosTienda) {
 			%>
 
-			<div id="fichaProd" class='product-item'>
+			<div id="fichaProd" class='product-item col  col-sm-4 col-md-6'>
 				<div class='product discount product_filter'>
 					<div class='product_image'>
 
-						<img style="text-align: center;" src='Imagenes/'
-							<%=prod.getFoto()%> alt=''>
+						<img id="fotofichaProd" src='Imagenes/<%=prod.getFoto()%>' alt=''>
 					</div>
 					<div class='favorite favorite_left'></div>
 					<div
@@ -280,28 +282,25 @@
 						<div id="demo" class="collapse"><%=prod.getDescripcion()%></div>
 					</div>
 				</div>
+				<%
+					if (usu == null) {
+				%>
+
+				<a id="CarritoTienda" onclick="Productoad()">Añadir a Carrito </a>
 
 				<%
-												if (usu == null) {
-											%>
+					} else {
+				%>
+				<a id="CarritoTienda" href='AñadirCarrito?id=<%=prod.getId()%>'>
+					Añadir a Carrito </a>
+				<%
+					}
+				%>
 
-											<a id="CarritoTienda" onclick="Productoad()">Añadir a
-												Carrito </a>
-
-											<%
-												} else {
-											%>
-											<a id="CarritoTienda"
-												href='AñadirCarrito?id=<%=prod.getId()%>'> Añadir a
-												Carrito </a>
-											<%
-												}
-											%>
-
-											<br> <br>
-											</n>
-											<br> <a id="FichaProducto"
-												href='Ficha?id=<%=prod.getId()%>'> Ver Producto </a>
+				<br> <br>
+				</n>
+				<br> <a id="FichaProducto" href='Ficha?id=<%=prod.getId()%>'>
+					Ver Producto </a>
 
 
 			</div>
@@ -368,7 +367,7 @@
 											<option value="9">9</option>
 											<option value="10">10</option>
 										</select>
-										<button class="añadirValor" type="submit" name="ComentButton">Comentar</button>
+										<button class="añadirValor" type="submit" name="ComentButton">Valorar</button>
 
 									</form>
 								</div>
@@ -398,7 +397,7 @@
 
 
 					<div class="media border p-3">
-						<img src="Imagenes/" <%=prods.getFoto()%>>
+						<img src='Imagenes/<%=prods.getFoto()%>' style="width: 3%;" alt=''>
 						<div class="media-body">
 							<h7> Usuario : <%=prods.getEmailUsuario()%> </h7>
 							<p style="margin-top: 1%;">
@@ -494,7 +493,7 @@
 
 								<!-- Modal body -->
 								<div id="cuerpoModal" class="modal-body">
-									<form action="Ficha" method="post">
+									<form action="AñadirComentario" method="post">
 										<input type="hidden" name="id" value="<%=prod.getId()%>">
 										Comentario:
 										<textarea type="text" name="comentario" id="comen"></textarea>
@@ -523,7 +522,7 @@
 					%>
 
 					<div class="media border p-3">
-						<img src="Imagenes/" <%=prods.getFoto()%> alt="">
+						<img src='Imagenes/<%=prods.getFoto()%>' style="width: 3%;" alt=''>
 						<div class="media-body">
 							<h7> Usuario : <%=prods.getEmailUsuario()%> </h7>
 							<p>
@@ -628,29 +627,62 @@
 </body>
 
 <%
-			if (usu != null) {
-		%>
-		<script>
-			window.onload = function() {
-				document.getElementById("Login12").setAttribute('href', '#');
-				document.getElementById("Login13").setAttribute('href', '#');
-			}
-		</script>
-		<%
-			}
-		%>
-		
-		
-			<script>
-		function AlertStock() {
-			alert("lo sentimos , No hay existencias !");
-		}
-	</script>
+	if (usu != null) {
+%>
+<script>
+	window.onload = function() {
+		document.getElementById("Login12").setAttribute('href', '#');
+		document.getElementById("Login13").setAttribute('href', '#');
+	}
+</script>
+<%
+	}
+%>
 
 
-	<script>
-		function Productoad() {
-			alert("lo sentimos , Logeate o Registrate para poder Comprar !");
-		}
-	</script>
+<!-- The Modal -->
+<div id="myModal33" class="modal56">
+	<span
+		style="float: right; position: relative; display: flex; font-size: 72px; color: white; cursor: pointer;"
+		class="close13">&times;</span> <img
+		style="position: relative; display: flex; height: 97%; width: 30%; margin-bottom: 3%; margin-top: 2%; margin-left: auto; margin-right: auto;"
+		class="modal-content" id="img02">
+	<div id="caption"></div>
+</div>
+
+<script>
+	// Get the modal
+	var modal = document.getElementById("myModal33");
+
+	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	var img = document.getElementById("fotofichaProd");
+	var modalImg = document.getElementById("img02");
+	var captionText = document.getElementById("caption");
+	img.onclick = function() {
+		modal.style.display = "block";
+		modalImg.src = this.src;
+		captionText.innerHTML = this.alt;
+	}
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close13")[0];
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+</script>
+<script>
+	function AlertStock() {
+		alert("lo sentimos , No hay existencias !");
+	}
+</script>
+
+
+<script>
+	function Productoad() {
+		alert("lo sentimos , Logeate o Registrate para poder Comprar !");
+	}
+</script>
+
 </html>

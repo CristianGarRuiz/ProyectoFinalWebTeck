@@ -116,7 +116,9 @@
 		productos.idPlataforma =
 		plataformas.id and productos.idGenero =
 		generos.id and
-		productos.titulo like '%'#{titulo}'%';
+		productos.titulo 
+		like '%' #{titulo}
+		'%';
 	</select>
 	
 	<select id="productosFiltro" resultMap="FiltroBusqueda">
@@ -264,8 +266,7 @@
 		FROM
 		valoraciones v
 		INNER JOIN productos p ON p.id = v.idProducto
-		GROUP BY
-		v.idProducto;
+		GROUP BY v.idProducto;
 
 	</select>
 
