@@ -25,6 +25,11 @@ public interface UsuarioMapper {
 	 */
 
 	public UsuarioPojo comprobarUsuario(@Param("usuario") String NombreUsuario);
+	
+	
+	
+	
+	public int contarUsuarios();
 
 	/**
 	 * este metod comprueba el email del usuario ya existe

@@ -29,7 +29,8 @@
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 	crossorigin="anonymous">
 <link rel="icon" type="imagenes/iconIma.gif" href="iconIma.gif">
-<link type="text/css" href="estilos/PrincipalNocturna.css" rel="stylesheet" />
+<link type="text/css" href="estilos/PrincipalNocturna.css"
+	rel="stylesheet" />
 </head>
 <body>
 
@@ -56,8 +57,8 @@
 		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-	<nav id="navPrinc"
-		class="navbar navbar-expand-sm fixed-top" style="background-color: orange;">
+	<nav id="navPrinc" class="navbar navbar-expand-sm fixed-top"
+		style="background-color: orange;">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -117,107 +118,109 @@
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
-		
-
-			<div class="container-fluid col-sm-5 col-md-6">
-
-				<nav class="navbar navbar-expand-sm" style="background-color: orange;">
-
-					<form class="form-inline" action="Principal" method="post">
-						<input class="form-control mr-sm-2" type="text" name="titulo"
-							placeholder="Buscar...">
-						<button class="btn btn-info" id="BotonBusqueda" type="submit">Buscar</button>
-					</form>
 
 
+				<div class="container-fluid col-sm-5 col-md-6">
 
+					<nav class="navbar navbar-expand-sm"
+						style="background-color: orange;">
+
+						<form class="form-inline" action="Principal" method="post">
+							<input class="form-control mr-sm-2" type="text" name="titulo"
+								required="required" placeholder="Buscar...">
+							<button class="btn btn-info" id="BotonBusqueda" type="submit">Buscar</button>
+						</form>
 
 
 
-				</nav>
-				<nav class="navbar navbar-expand-sm "style="background-color: orange;">
-					<!-- Brand/logo -->
 
-					<%
-						if ((usu != null) && (usu.getUsuario() != null)) {
-					%>
-					<div id="Datos col-sm-12 col-md-12">
-						<img alt="" src=" Imagenes/<%=usu.getFoto()%> "
-							style="height: 35px; border-radius: 4%;"><br /> <br />
-						<p
-							style="color: white; margin-left: 37px; margin-bottom: 48%; margin-top: -34%; width: 106%">
-							Bienvenido :
-							<%=usu.getUsuario()%></p>
 
-						<div id="Menuopciones" class="dropdown">
-							<button class="btn btn-secondary dropdown-toggle" type="button"
-								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false">Opciones
-								Usuario</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#"><button type='button'
-										onClick='window.location.replace("cambiarImagenUsuario")'>Cambiar
-										Imagen</button></a> <a class="dropdown-item" href="#"><button
-										type='button' onClick='window.location.replace("Logout")'>Cerrar
-										Sesion</button></a> <a class="dropdown-item" href="#">
-									<button type='button'
-										onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
+
+					</nav>
+					<nav class="navbar navbar-expand-sm "
+						style="background-color: orange;">
+						<!-- Brand/logo -->
+
+						<%
+							if ((usu != null) && (usu.getUsuario() != null)) {
+						%>
+						<div id="Datos col-sm-12 col-md-12">
+							<img alt="" src=" Imagenes/<%=usu.getFoto()%> "
+								style="height: 35px; border-radius: 4%;"><br /> <br />
+							<p
+								style="color: white; margin-left: 37px; margin-bottom: 48%; margin-top: -34%; width: 106%">
+								Bienvenido :
+								<%=usu.getUsuario()%></p>
+
+							<div id="Menuopciones" class="dropdown">
+								<button class="btn btn-secondary dropdown-toggle" type="button"
+									id="dropdownMenuButton" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">Opciones
+									Usuario</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 									<a class="dropdown-item" href="#"><button type='button'
-											onClick='window.location.replace("comprasUsuarios")'>Ver
-											compras realizadas</button> </a> <a class="dropdown-item" href="#"><button
-											type='button'
-											onClick='window.location.replace("FichaUsuario")'>Datos
-											Usuario</button> </a> <a class="dropdown-item" href="#"><button
-											type='button'
-											onClick='window.location.replace("cambioPantalla")'>Cambiar
-											Pantalla</button> </a>
+											onClick='window.location.replace("cambiarImagenUsuario")'>Cambiar
+											Imagen</button></a> <a class="dropdown-item" href="#"><button
+											type='button' onClick='window.location.replace("Logout")'>Cerrar
+											Sesion</button></a> <a class="dropdown-item" href="#">
+										<button type='button'
+											onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
+										<a class="dropdown-item" href="#"><button type='button'
+												onClick='window.location.replace("comprasUsuarios")'>Ver
+												compras realizadas</button> </a> <a class="dropdown-item" href="#"><button
+												type='button'
+												onClick='window.location.replace("FichaUsuario")'>Datos
+												Usuario</button> </a> <a class="dropdown-item" href="#"><button
+												type='button'
+												onClick='window.location.replace("cambioPantalla")'>Cambiar
+												Pantalla</button> </a>
+								</div>
 							</div>
+
 						</div>
+						<%
+							} else {
+						%>
 
-					</div>
-					<%
-						} else {
-					%>
-
-					<a class="navbar-brand" href="#">
-						<p>No Registrado</p>
-					</a>
-
-					<%
-						}
-					%>
-
-					<%
-						if (usu != null) {
-					%>
-
-					<ul class="checkout">
-						<a style="margin-right: 2%" href="VerCarrito"> <i
-							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							style="margin-left: 46%;" id="checkout_items"
-							class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+						<a class="navbar-brand" href="#">
+							<p>No Registrado</p>
 						</a>
-					</ul>
 
-					<%
-						} else {
-					%>
-					<ul class="checkout">
-						<a style="margin-right: 2%" href="#"> <i
-							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							id="checkout_items" class="checkout_items">Logeate</span>
-						</a>
-					</ul>
+						<%
+							}
+						%>
+
+						<%
+							if (usu != null) {
+						%>
+
+						<ul class="checkout">
+							<a style="margin-right: 2%" href="VerCarrito"> <i
+								class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+								style="margin-left: 46%;" id="checkout_items"
+								class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+							</a>
+						</ul>
+
+						<%
+							} else {
+						%>
+						<ul class="checkout">
+							<a style="margin-right: 2%" href="#"> <i
+								class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+								id="checkout_items" class="checkout_items">Logeate</span>
+							</a>
+						</ul>
 
 
-					<%
-						}
-					%>
-				
-			</div>
+						<%
+							}
+						%>
+					
+				</div>
 			</div>
 	</nav>
-	
+
 
 
 	<div id="demo" class="carousel slide" data-ride="carousel">
@@ -567,8 +570,8 @@
 							<i class="fa fa-truck" aria-hidden="true"></i>
 						</div>
 						<div class="benefit_content">
-							<h6>free shipping</h6>
-							<p>Suffered Alteration in Some Form</p>
+							<h6>Envio Gratis</h6>
+							<p>Segun precio Producto</p>
 						</div>
 					</div>
 				</div>
@@ -578,8 +581,8 @@
 							<i class="fa fa-money" aria-hidden="true"></i>
 						</div>
 						<div class="benefit_content">
-							<h6>cach on delivery</h6>
-							<p>The Internet Tend To Repeat</p>
+							<h6>Todo lo prepramos nosotros</h6>
+							<p>Reparto en menos de 4 dias</p>
 						</div>
 					</div>
 				</div>
@@ -589,8 +592,8 @@
 							<i class="fa fa-undo" aria-hidden="true"></i>
 						</div>
 						<div class="benefit_content">
-							<h6>45 days return</h6>
-							<p>Making it Look Like Readable</p>
+							<h6>45 dias de reembolso</h6>
+							<p>Haciendo posible tu pedido deseado</p>
 						</div>
 					</div>
 				</div>
@@ -600,7 +603,7 @@
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
 						</div>
 						<div class="benefit_content">
-							<h6>opening all week</h6>
+							<h6>Abierto los 365 dias del año</h6>
 							<p>8AM - 09PM</p>
 						</div>
 					</div>
@@ -656,7 +659,7 @@
 						<a id="" class="nav-link" href="Informacion.jsp">Sobre</a>
 					</ol>
 					<ol class="nav-item">
-						<a id="" class="nav-link" href="Login.jsp">Acceso</a>
+						<a id="Login14" class="nav-link" href="Login.jsp">Acceso</a>
 					</ol>
 					<ol class="nav-item">
 						<a id="" class="nav-link" href="Informacion.jsp">Blog</a>
@@ -694,10 +697,10 @@
 					<hr>
 					<p style="color: white">Contactos</p>
 					<p style="color: white">
-						<i class='fas fa-location-arrow'></i> 1234 walstres ,Australia
+						<i class='fas fa-location-arrow'></i> 1234 Palma ,Mallorca
 					</p>
 					<p style="color: white">
-						<i class='fas fa-mail-bulk'></i> hello@gmail.com
+						<i class='fas fa-mail-bulk'></i> garciaruizcristian50@gmail.com
 					</p>
 					<p style="color: white">
 						<i class='fas fa-phone-alt'></i>tel:(123)4556+5646
@@ -733,6 +736,7 @@
 		window.onload = function() {
 			document.getElementById("Login12").setAttribute('href', '#');
 			document.getElementById("Login13").setAttribute('href', '#');
+			document.getElementById("Login14").setAttribute('href', '#');
 		}
 	</script>
 	<%

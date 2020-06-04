@@ -48,93 +48,98 @@ public class Principal extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		try {
 
-		// Recupero la session
-		HttpSession session = request.getSession();
-		// Asociado la sesion al usuario loegado
-		UsuariosPojo usuario = sesionesEjb.usuariosLogeado(session);
+			// Recupero la session
+			HttpSession session = request.getSession();
+			// Asociado la sesion al usuario loegado
 
-		// Recupero el valor de pantalla de la sesion
-		String pantalla = sesionesEjb.getPantalla(session);
-		// Recupero el email de la session
-		String emailUsuario = sesionesEjb.getEmailUsuario(session);
+			UsuariosPojo usuario = sesionesEjb.usuariosLogeado(session);
 
-		// Estancio variable error
-		String error = request.getParameter("error");
+			// Recupero el valor de pantalla de la sesion
+			String pantalla = sesionesEjb.getPantalla(session);
+			// Recupero el email de la session
+			String emailUsuario = sesionesEjb.getEmailUsuario(session);
 
-		// Compruebo que el email del usuario no sea nulo
-		if (emailUsuario == null) {
+			// Estancio variable error
+			String error = request.getParameter("error");
 
-			// Recupero todod los productos
-			ArrayList<ProductosTiendaPojo> productosTienda = productosEjb.leerTotalProductos();
-			// Recupero todas las categorias
-			ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
-			// Recupero todas las marcas
-			ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
-			// Recupero total de productos media
-			ArrayList<ProductosTiendaPojo> productosMedia = productosEjb.leerTotalProductosMedia();
+			// Compruebo que el email del usuario no sea nulo
+			if (emailUsuario == null) {
 
-			// Dispacher de un jps o otro
-			RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/Principal.jsp");
-			RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/PrincipalNocturna.jsp");
+				// Recupero todod los productos
+				ArrayList<ProductosTiendaPojo> productosTienda = productosEjb.leerTotalProductos();
+				// Recupero todas las categorias
+				ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
+				// Recupero todas las marcas
+				ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
+				// Recupero total de productos media
+				ArrayList<ProductosTiendaPojo> productosMedia = productosEjb.leerTotalProductosMedia();
 
-			// Paso los atributod¡s
-			request.setAttribute("usuario", usuario);
-			request.setAttribute("pantalla", pantalla);
-			request.setAttribute("productosTienda", productosTienda);
-			request.setAttribute("productosMedia", productosMedia);
-			request.setAttribute("categorias", categorias);
-			request.setAttribute("marcas", marcas);
-			request.setAttribute("error", error);
+				// Dispacher de un jps o otro
+				RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/Principal.jsp");
+				RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/PrincipalNocturna.jsp");
 
-			// Compruebo el valor de pantalla
-			if (pantalla == null || pantalla.equals("D")) {
-				rsPagina.forward(request, response);
-				loggerNormal.debug("Entrando correctamente ne pagina diurna");
+				// Paso los atributod¡s
+				request.setAttribute("usuario", usuario);
+				request.setAttribute("pantalla", pantalla);
+				request.setAttribute("productosTienda", productosTienda);
+				request.setAttribute("productosMedia", productosMedia);
+				request.setAttribute("categorias", categorias);
+				request.setAttribute("marcas", marcas);
+				request.setAttribute("error", error);
+
+				// Compruebo el valor de pantalla
+				if (pantalla == null || pantalla.equals("D")) {
+					rsPagina.forward(request, response);
+					loggerNormal.debug("Entrando correctamente ne pagina diurna");
+				} else {
+					rsNocturna.forward(request, response);
+					loggerNormal.debug("Entrando correctamente ne pagina Nocturna");
+				}
+
 			} else {
-				rsNocturna.forward(request, response);
-				loggerNormal.debug("Entrando correctamente ne pagina Nocturna");
+				// Recupero todos los productos
+				ArrayList<ProductosTiendaPojo> productosTienda = productosEjb.leerTotalProductos();
+				// Recupero todas las categorias
+				ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
+				// Recupero todas las marcas
+				ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
+				// Recupero los porductos con mejor media
+				ArrayList<ProductosTiendaPojo> productosMedia = productosEjb.leerTotalProductosMedia();
+
+				// cuento el total de productos del carro
+				CarritosPojo contarCarro = carritoEjb.contarProductosCarrito(emailUsuario);
+
+				// Dispacher de un a o otro jsp
+				RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/Principal.jsp");
+				RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/PrincipalNocturna.jsp");
+
+				// Paso los atributos
+				request.setAttribute("usuario", usuario);
+				request.setAttribute("pantalla", pantalla);
+				request.setAttribute("productosTienda", productosTienda);
+				request.setAttribute("productosMedia", productosMedia);
+				request.setAttribute("categorias", categorias);
+				request.setAttribute("marcas", marcas);
+				request.setAttribute("error", error);
+				request.setAttribute("contarCarro", contarCarro);
+				request.setAttribute("emailUsuario", emailUsuario);
+
+				// Comprubo el valor de pantalla
+				if (pantalla == null || pantalla.equals("D")) {
+					rsPagina.forward(request, response);
+					loggerNormal.debug("Entrando correctamente en pagina diurna");
+				} else {
+					rsNocturna.forward(request, response);
+					loggerNormal.debug("Entrando correctamente ne pagina Nocturna");
+				}
+
 			}
-
-		} else {
-			// Recupero todos los productos
-			ArrayList<ProductosTiendaPojo> productosTienda = productosEjb.leerTotalProductos();
-			// Recupero todas las categorias
-			ArrayList<CategoriasPojo> categorias = productosEjb.leerTotalCategorias();
-			// Recupero todas las marcas
-			ArrayList<MarcasPojo> marcas = productosEjb.leerTotalMarcas();
-			// Recupero los porductos con mejor media
-			ArrayList<ProductosTiendaPojo> productosMedia = productosEjb.leerTotalProductosMedia();
-
-			// cuento el total de productos del carro
-			CarritosPojo contarCarro = carritoEjb.contarProductosCarrito(emailUsuario);
-
-			// Dispacher de un a o otro jsp
-			RequestDispatcher rsPagina = getServletContext().getRequestDispatcher("/Principal.jsp");
-			RequestDispatcher rsNocturna = getServletContext().getRequestDispatcher("/PrincipalNocturna.jsp");
-
-			// Paso los atributos
-			request.setAttribute("usuario", usuario);
-			request.setAttribute("pantalla", pantalla);
-			request.setAttribute("productosTienda", productosTienda);
-			request.setAttribute("productosMedia", productosMedia);
-			request.setAttribute("categorias", categorias);
-			request.setAttribute("marcas", marcas);
-			request.setAttribute("error", error);
-			request.setAttribute("contarCarro", contarCarro);
-			request.setAttribute("emailUsuario", emailUsuario);
-
-			// Comprubo el valor de pantalla
-			if (pantalla == null || pantalla.equals("D")) {
-				rsPagina.forward(request, response);
-				loggerNormal.debug("Entrando correctamente en pagina diurna");
-			} else {
-				rsNocturna.forward(request, response);
-				loggerNormal.debug("Entrando correctamente ne pagina Nocturna");
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
 
 		}
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

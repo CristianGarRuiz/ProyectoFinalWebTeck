@@ -117,104 +117,104 @@
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
-			
-
-			<div class="container-fluid col-sm-5 col-md-6">
-
-				<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-
-					<form class="form-inline" action="Principal" method="post">
-						<input class="form-control mr-sm-2" type="text" name="titulo"
-							placeholder="Buscar...">
-						<button class="btn btn-info" id="BotonBusqueda" type="submit">Buscar</button>
-					</form>
 
 
+				<div class="container-fluid col-sm-5 col-md-6">
+
+					<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+						<form class="form-inline" action="Principal" method="post">
+							<input class="form-control mr-sm-2" type="text" name="titulo"
+								required="required" placeholder="Buscar...">
+							<button class="btn btn-info" id="BotonBusqueda" type="submit">Buscar</button>
+						</form>
 
 
 
 
-				</nav>
-				<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
-					<!-- Brand/logo -->
 
-					<%
-						if ((usu != null) && (usu.getUsuario() != null)) {
-					%>
-					<div id="Datos col-sm-12 col-md-12">
-						<img alt="" src="Imagenes/<%=usu.getFoto()%>"
-							style="height: 35px; border-radius: 4%;"><br /> <br />
-						<p
-							style="color: white; margin-left: 37px; margin-bottom: 48%; margin-top: -34%; width: 106%">
-							Bienvenido :
-							<%=usu.getUsuario()%></p>
 
-						<div id="Menuopciones" class="dropdown">
-							<button class="btn btn-secondary dropdown-toggle" type="button"
-								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false">Opciones
-								Usuario</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#"><button type='button'
-										onClick='window.location.replace("cambiarImagenUsuario")'>Cambiar
-										Imagen</button></a> <a class="dropdown-item" href="#"><button
-										type='button' onClick='window.location.replace("Logout")'>Cerrar
-										Sesion</button></a> <a class="dropdown-item" href="#">
-									<button type='button'
-										onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
+					</nav>
+					<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+						<!-- Brand/logo -->
+
+						<%
+							if ((usu != null) && (usu.getUsuario() != null)) {
+						%>
+						<div id="Datos col-sm-12 col-md-12">
+							<img alt="" src="Imagenes/<%=usu.getFoto()%>"
+								style="height: 35px; border-radius: 4%;"><br /> <br />
+							<p
+								style="color: white; margin-left: 37px; margin-bottom: 48%; margin-top: -34%; width: 106%">
+								Bienvenido :
+								<%=usu.getUsuario()%></p>
+
+							<div id="Menuopciones" class="dropdown">
+								<button class="btn btn-secondary dropdown-toggle" type="button"
+									id="dropdownMenuButton" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">Opciones
+									Usuario</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 									<a class="dropdown-item" href="#"><button type='button'
-											onClick='window.location.replace("comprasUsuarios")'>Ver
-											compras realizadas</button> </a> <a class="dropdown-item" href="#"><button
-											type='button'
-											onClick='window.location.replace("FichaUsuario")'>Datos
-											Usuario</button> </a> <a class="dropdown-item" href="#"><button
-											type='button'
-											onClick='window.location.replace("cambioPantalla")'>Cambiar
-											Pantalla</button> </a>
+											onClick='window.location.replace("cambiarImagenUsuario")'>Cambiar
+											Imagen</button></a> <a class="dropdown-item" href="#"><button
+											type='button' onClick='window.location.replace("Logout")'>Cerrar
+											Sesion</button></a> <a class="dropdown-item" href="#">
+										<button type='button'
+											onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
+										<a class="dropdown-item" href="#"><button type='button'
+												onClick='window.location.replace("comprasUsuarios")'>Ver
+												compras realizadas</button> </a> <a class="dropdown-item" href="#"><button
+												type='button'
+												onClick='window.location.replace("FichaUsuario")'>Datos
+												Usuario</button> </a> <a class="dropdown-item" href="#"><button
+												type='button'
+												onClick='window.location.replace("cambioPantalla")'>Cambiar
+												Pantalla</button> </a>
+								</div>
 							</div>
+
 						</div>
+						<%
+							} else {
+						%>
 
-					</div>
-					<%
-						} else {
-					%>
-
-					<a class="navbar-brand" href="#">
-						<p>No Registrado</p>
-					</a>
-
-					<%
-						}
-					%>
-
-					<%
-						if (usu != null) {
-					%>
-
-					<ul class="checkout">
-						<a style="margin-right: 2%" href="VerCarrito"> <i
-							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							style="margin-left: 46%;" id="checkout_items"
-							class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+						<a class="navbar-brand" href="#">
+							<p>No Registrado</p>
 						</a>
-					</ul>
 
-					<%
-						} else {
-					%>
-					<ul class="checkout">
-						<a style="margin-right: 2%" href="#"> <i
-							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							id="checkout_items" class="checkout_items">Logeate</span>
-						</a>
-					</ul>
+						<%
+							}
+						%>
+
+						<%
+							if (usu != null) {
+						%>
+
+						<ul class="checkout">
+							<a style="margin-right: 2%" href="VerCarrito"> <i
+								class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+								style="margin-left: 46%;" id="checkout_items"
+								class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+							</a>
+						</ul>
+
+						<%
+							} else {
+						%>
+						<ul class="checkout">
+							<a style="margin-right: 2%" href="#"> <i
+								class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+								id="checkout_items" class="checkout_items">Logeate</span>
+							</a>
+						</ul>
 
 
-					<%
-						}
-					%>
-				
-			</div>
+						<%
+							}
+						%>
+					
+				</div>
 			</div>
 	</nav>
 
@@ -234,7 +234,7 @@
 
 			<div id="fichaProd" class='product-item col  col-sm-4 col-md-6'>
 				<div class='product discount product_filter'>
-					<div class='product_image'id="prodImagen">
+					<div class='product_image' id="prodImagen">
 
 						<img id="fotofichaProd" src='Imagenes/<%=prod.getFoto()%>' alt=''>
 					</div>
@@ -580,7 +580,7 @@
 						<a id="" class="nav-link" href="#Habilidades">Sobre</a>
 					</ol>
 					<ol class="nav-item">
-						<a id="" class="nav-link" href="#Habilidades">Acceso</a>
+						<a id="Login14" class="nav-link" href="#Habilidades">Acceso</a>
 					</ol>
 					<ol class="nav-item">
 						<a id="" class="nav-link" href="#Habilidades">Blog</a>
@@ -596,12 +596,20 @@
 
 					<h2>Siguenos en :</h2>
 					<hr>
-					<a class="Icon" href="https://twitter.com/login"
-						<button type="submit"> <i class='fab fa-twitter' style='font-size:36px; '> </i></button>></a>
-					<a class="Icon" href="https://www.facebook.com/"
-						<button type="submit"> <i class='fab fa-facebook-square' style='font-size:36px'></i></button>></a>
-					<a class="Icon" href="https://www.youtube.com/"
-						<button type="submit"><i class='fab fa-youtube' style='font-size:36px;color: red'></i> </button>></a>
+					<a class="Icon" href="https://twitter.com/login">
+						<button type="submit">
+							<i class='fab fa-twitter' style='font-size: 36px; color: #27bcf8'></i>
+						</button>
+					</a> <a class="Icon" href="https://www.facebook.com/">
+						<button type="submit">
+							<i class='fab fa-facebook-square'
+								style='font-size: 36px; color: #43c3f3'></i>
+						</button>
+					</a> <a class="Icon" href="https://www.youtube.com/">
+						<button type="submit">
+							<i class='fab fa-youtube' style='font-size: 36px; color: red'></i>
+						</button>
+					</a>
 				</div>
 
 				<div class="container col-md-2">
@@ -632,6 +640,7 @@
 	window.onload = function() {
 		document.getElementById("Login12").setAttribute('href', '#');
 		document.getElementById("Login13").setAttribute('href', '#');
+		document.getElementById("Login14").setAttribute('href', '#');
 	}
 </script>
 <%

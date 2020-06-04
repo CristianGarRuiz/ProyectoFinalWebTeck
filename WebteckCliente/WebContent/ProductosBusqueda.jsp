@@ -3,10 +3,10 @@
 	pageEncoding="UTF-8"%>
 
 <%@ page import="modelo.Pojo.UsuariosPojo"%>
-<%@ page import="modelo.Pojo.CategoriasPojo" %>
-<%@ page import="modelo.Pojo.MarcasPojo" %>
+<%@ page import="modelo.Pojo.CategoriasPojo"%>
+<%@ page import="modelo.Pojo.MarcasPojo"%>
 <%@ page import="modelo.Pojo.ProductosTiendaPojo"%>
-<%@ page import="modelo.Pojo.CarritosPojo" %>
+<%@ page import="modelo.Pojo.CarritosPojo"%>
 
 <!DOCTYPE html>
 <html>
@@ -29,7 +29,8 @@
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 	crossorigin="anonymous">
 <link rel="icon" type="imagenes/iconIma.gif" href="iconIma.gif">
-<link type="text/css" href="estilos/BusquedaProducto.css" rel="stylesheet" />
+<link type="text/css" href="estilos/BusquedaProducto.css"
+	rel="stylesheet" />
 
 </head>
 <body>
@@ -44,11 +45,12 @@
 		String titulo = (String) request.getAttribute("titulo");
 		ArrayList<ProductosTiendaPojo> Busquedaproducto = (ArrayList<ProductosTiendaPojo>) request
 				.getAttribute("Busquedaproducto");
-		
+
 		CarritosPojo contarCarrito = (CarritosPojo) request.getAttribute("contarCarro");
 	%>
 
-		<nav id="navPrinc" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<nav id="navPrinc"
+		class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
 		<a class=" navbar-brand" href="Principal.html"> <img
 			src="imagenes/iconIma.gif" alt=""
 			style="height: 35px; border-radius: 4%;">
@@ -61,7 +63,7 @@
 		<div class="container-fluid  col-sm-11">
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="#texto">Informacion</a>
+					<li class="nav-item"><a class="nav-link" href="Informacion.jsp">Informacion</a>
 					</li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Categorias</a>
@@ -78,7 +80,7 @@
 								}
 							%>
 						</div></li>
-						<li class="nav-items dropdown"><a
+					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Marcas</a>
 						<div class="dropdown-menu">
 							<%
@@ -100,115 +102,119 @@
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a id="Login12" class="dropdown-item" href="Logins"><button type="submit"
+							<a id="Login12" class="dropdown-item" href="Logins"><button
+									type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
-							<a  id="Login13" class="dropdown-item" href="LogeaUsuarios"><button type="submit"
+							<a id="Login13" class="dropdown-item" href="LogeaUsuarios"><button
+									type="submit"
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
-			
-			<div class="container-fluid col-sm-5 col-md-6">
 
-				<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<div class="container-fluid col-sm-5 col-md-6">
 
-					<form class="form-inline" action="Principal" method="post">
-						<input class="form-control mr-sm-2" type="text" name="titulo"
-							placeholder="Buscar...">
-						<button class="btn btn-info" id="BotonBusqueda" type="submit">Buscar</button>
-					</form>
+					<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
-
+						<form class="form-inline" action="Principal" method="post">
+							<input class="form-control mr-sm-2" type="text" name="titulo" required="required"
+								placeholder="Buscar...">
+							<button class="btn btn-info" id="BotonBusqueda" type="submit">Buscar</button>
+						</form>
 
 
 
 
-				</nav>
-				<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
-					<!-- Brand/logo -->
 
-					<%
-						if ((usu != null) && (usu.getUsuario() != null)) {
-					%>
-					<div id="Datos">
-						<img alt="" src="Imagenes/<%=usu.getFoto()%>"
-							style="height: 35px; border-radius: 4%;"><br /> <br />
-						<p
-							style="color: white; margin-left: 37px; margin-bottom: 48%; margin-top: -34%; width: 106%">
-							Bienvenido :
-							<%=usu.getUsuario()%></p>
 
-						<div id="Menuopciones" class="dropdown">
-							<button class="btn btn-secondary dropdown-toggle" type="button"
-								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false">Opciones
-								Usuario</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#"><button type='button'
-										onClick='window.location.replace("cambiarImagenUsuario")'>Cambiar
-										Imagen</button></a> <a class="dropdown-item" href="#"><button
-										type='button' onClick='window.location.replace("Logout")'>Cerrar
-										Sesion</button></a> <a class="dropdown-item" href="#">
-									<button type='button'
-										onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
+					</nav>
+					<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+						<!-- Brand/logo -->
+
+						<%
+							if ((usu != null) && (usu.getUsuario() != null)) {
+						%>
+						<div id="Datos">
+							<img alt="" src="Imagenes/<%=usu.getFoto()%>"
+								style="height: 35px; border-radius: 4%;"><br /> <br />
+							<p
+								style="color: white; margin-left: 37px; margin-bottom: 48%; margin-top: -34%; width: 106%">
+								Bienvenido :
+								<%=usu.getUsuario()%></p>
+
+							<div id="Menuopciones" class="dropdown">
+								<button class="btn btn-secondary dropdown-toggle" type="button"
+									id="dropdownMenuButton" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">Opciones
+									Usuario</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 									<a class="dropdown-item" href="#"><button type='button'
-											onClick='window.location.replace("comprasUsuarios")'>Ver
-											compras realizadas</button> </a> <a class="dropdown-item" href="#"><button
-											type='button'
-											onClick='window.location.replace("FichaUsuario")'>Datos
-											Usuario</button> </a> <a class="dropdown-item" href="#"><button
-											type='button'
-											onClick='window.location.replace("cambioPantalla")'>Cambiar
-											Pantalla</button> </a>
+											onClick='window.location.replace("cambiarImagenUsuario")'>Cambiar
+											Imagen</button></a> <a class="dropdown-item" href="#"><button
+											type='button' onClick='window.location.replace("Logout")'>Cerrar
+											Sesion</button></a> <a class="dropdown-item" href="#">
+										<button type='button'
+											onClick='window.location.replace("OpcUsuarioEliminar")'>BajaUsuario</button>
+										<a class="dropdown-item" href="#"><button type='button'
+												onClick='window.location.replace("comprasUsuarios")'>Ver
+												compras realizadas</button> </a> <a class="dropdown-item" href="#"><button
+												type='button'
+												onClick='window.location.replace("FichaUsuario")'>Datos
+												Usuario</button> </a> <a class="dropdown-item" href="#"><button
+												type='button'
+												onClick='window.location.replace("cambioPantalla")'>Cambiar
+												Pantalla</button> </a>
+								</div>
 							</div>
+
 						</div>
+						<%
+							} else {
+						%>
 
-					</div>
-					<%
-						} else {
-					%>
-
-					<a class="navbar-brand" href="#">
-						<p>No Registrado</p>
-					</a>
-
-					<%
-						}
-					%>
-					<%
-						if (usu != null) {
-					%>
-
-					<ul class="checkout">
-						<a style="margin-right: 2%" href="VerCarrito"> <i
-							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							id="checkout_items" class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+						<a class="navbar-brand" href="#">
+							<p>No Registrado</p>
 						</a>
-					</ul>
 
-					<%
-						} else {
-					%>
-					<ul class="checkout">
-						<a style="margin-right: 2%" href="#"> <i
-							class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
-							id="checkout_items" class="checkout_items">Logeate</span>
-						</a>
-					</ul>
+						<%
+							}
+						%>
+						<%
+							if (usu != null) {
+						%>
+
+						<ul class="checkout">
+							<a style="margin-right: 2%" href="VerCarrito"> <i
+								class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+								id="checkout_items" class="checkout_items"><%=contarCarrito.getIdProducto()%></span>
+							</a>
+						</ul>
+
+						<%
+							} else {
+						%>
+						<ul class="checkout">
+							<a style="margin-right: 2%" href="#"> <i
+								class="fa fa-shopping-cart" aria-hidden="true">Carrito</i> <span
+								id="checkout_items" class="checkout_items">Logeate</span>
+							</a>
+						</ul>
 
 
-					<%
-						}
-					%>
-			</div>
+						<%
+							}
+						%>
+					
+				</div>
 			</div>
 	</nav>
-	
+
 
 
 	<div class="table-responsive">
 
-		<h3  id="BusquedaTitulo" style="text-align: center">
-			Busqueda Producto por : <%=titulo%></h3>
+		<h3 id="BusquedaTitulo" style="text-align: center">
+			Busqueda Producto por :
+			<%=titulo%></h3>
 		<div class="row"></div>
 
 		<%
@@ -222,8 +228,8 @@
 				out.print("<th> Descripcion Producto:</th>");
 				out.print("<th> Marca Producto :</th>");
 				out.print("<th> Plataforma Producto:</th>");
-				out.print("<th> Modificar :</th>");
-				out.print("<th> Eliminar : Producto:</th>");
+				out.print("<th> AÑadir Carrito :</th>");
+				out.print("<th> Ver Producto</th>");
 				out.print("</tr>");
 
 				for (ProductosTiendaPojo juga : Busquedaproducto) {
@@ -235,8 +241,21 @@
 					out.print("<td>" + juga.getDescripcion() + "</td>");
 					out.print("<td>" + juga.getGenero() + "</td>");
 					out.print("<td>" + juga.getPlataforma() + "</td>");
-					out.print("<td><a href=\"AñadirCarrito?id=" + juga.getId() + "\"> Añadir al Carrito </a></td>");
-					out.print("<td><a href=\"Ficha?id=" + juga.getId() + "\"> Ver Producto </a></td>");
+
+					int totalstock = juga.getStock();
+
+					if ((totalstock == 0)) {
+						out.print("<td><a href='#' onclick=\"AlertStock()\" > No hay existencias </a></td>");
+						out.print("<td><a href=\"Ficha?id=" + juga.getId() + "\"> Ver Producto </a></td>");
+
+					} else if (usu == null) {
+						out.print("<td><a  href='#' onclick=\"Productoad()\">Añadir Carrito </a></td>");
+						out.print("<td><a href=\"Ficha?id=" + juga.getId() + "\"> Ver Producto </a></td>");
+
+					} else {
+						out.print("<td><a href=\"AñadirCarrito?id=" + juga.getId() + "\">Añadir Producto </a></td>");
+						out.print("<td><a href=\"Ficha?id=" + juga.getId() + "\"> Ver Producto </a></td>");
+					}
 
 				}
 				out.print("</table>");
@@ -278,12 +297,20 @@
 
 					<h2>Siguenos en :</h2>
 					<hr>
-					<a class="Icon" href="https://twitter.com/login"
-						<button type="submit"> <i class='fab fa-twitter' style='font-size:36px; '> </i></button>></a>
-					<a class="Icon" href="https://www.facebook.com/"
-						<button type="submit"> <i class='fab fa-facebook-square' style='font-size:36px'></i></button>></a>
-					<a class="Icon" href="https://www.youtube.com/"
-						<button type="submit"><i class='fab fa-youtube' style='font-size:36px;color: red'></i> </button>></a>
+					<a class="Icon" href="https://twitter.com/login">
+						<button type="submit">
+							<i class='fab fa-twitter' style='font-size: 36px; color: #27bcf8'></i>
+						</button>
+					</a> <a class="Icon" href="https://www.facebook.com/">
+						<button type="submit">
+							<i class='fab fa-facebook-square'
+								style='font-size: 36px; color: #43c3f3'></i>
+						</button>
+					</a> <a class="Icon" href="https://www.youtube.com/">
+						<button type="submit">
+							<i class='fab fa-youtube' style='font-size: 36px; color: red'></i>
+						</button>
+					</a>
 				</div>
 
 				<div class="container col-md-2">
@@ -308,15 +335,29 @@
 </body>
 
 <%
-			if (usu != null) {
-		%>
-		<script>
-			window.onload = function() {
-				document.getElementById("Login12").setAttribute('href', '#');
-				document.getElementById("Login13").setAttribute('href', '#');
-			}
-		</script>
-		<%
-			}
-		%>
+	if (usu != null) {
+%>
+<script>
+	window.onload = function() {
+		document.getElementById("Login12").setAttribute('href', '#');
+		document.getElementById("Login13").setAttribute('href', '#');
+	}
+</script>
+<%
+	}
+%>
+
+<script>
+	function AlertStock() {
+		alert("lo sentimos , No hay existencias !");
+	}
+</script>
+
+
+<script>
+	function Productoad() {
+		alert("lo sentimos , Logeate o Registrate para poder Comprar !");
+	}
+</script>
+
 </html>

@@ -92,6 +92,20 @@ public class UsuariosEjb {
 
 	}
 	
+	
+	public int contarUsuarios() throws SQLException {
+
+		Client cliente = ClientBuilder.newClient();
+
+		WebTarget target1 = cliente
+				.target("http://localhost:8080/WebteckEmpleado/ControladorRest/contarUsuarios/patata23");
+
+		int usuario = target1.request().get(Integer.class);
+
+		return usuario;
+
+	}
+	
 
 	/**
 	 * este metodo añade un usuario a la bd y genera un codigo random llama a la

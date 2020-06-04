@@ -49,6 +49,18 @@
 
 	</select>
 
+
+	<select id='contarUsuarios' resultType='int'>
+		select
+		count(usuario)
+		from
+		usuaris
+		where
+		usuaris.activado='s';
+
+	</select>
+
+
 	<select id='comprobarUsuario'
 		resultType='modelo.Pojo.UsuarioPojo'>
 		select

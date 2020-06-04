@@ -48,12 +48,12 @@
 					<li class="nav-item"><a class="nav-link" href="Principal">Principal</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="Categorias">Categorias</a></li>
-					<li class="nav-item"><a class="nav-link" href="InfoVentas">InfoVentas</a>
-					</li>
+					<li class="nav-item"><a class="nav-link"
+						href="Informacion.jsp">Informacion</a></li>
 					<li class="nav-items dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="Login"><button type="submit"
+							<a class="dropdown-item" href="LogeaUsuarios"><button type="submit"
 									<i class='fas fa-door-open' style='font-size:18px'></i>></button>Login</a>
 							<a class="dropdown-item" href="LogeaUsuarios"><button type="submit"
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
@@ -106,7 +106,7 @@
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button id="CancelarLog" type="submit" class="btn btn-info"
-						onClick='window.location.replace("Pagina")'>Cancelar</button>
+						onClick='window.location.replace("Principal")'>Cancelar</button>
 				</div>
 			</div>
 		</form>
@@ -119,7 +119,7 @@
 			<button id="botonErrorLogin" type='button'
 				onClick='window.location.replace("LogeaUsuarios")'>Registrate</button>
 			<button id="botonErrorLogin" type='button'
-				onClick='window.location.replace("Login")'>Reintentar</button>
+				onClick='window.location.replace("Logins")'>Reintentar</button>
 			<button id="botonErrorLogin" type='button'
 				onClick='window.location.replace("updateContraseña")'>Cambiar
 				Contraseña</button>

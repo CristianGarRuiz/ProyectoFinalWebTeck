@@ -55,6 +55,22 @@ public class UsuarioDao {
 		}
 
 	}
+	
+	
+	public int contarUsuarios() {
+
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			UsuarioMapper leerDatosUsu = sqlSession.getMapper(UsuarioMapper.class);
+			int a = leerDatosUsu.contarUsuarios();
+
+			return a;
+
+		} finally {
+			sqlSession.close();
+		}
+
+	}
 
 	/**
 	 * este metodo comprueba el nombre del email y lo retorna si ya existe en bd

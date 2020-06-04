@@ -117,14 +117,13 @@
 									<i class='fas fa-portrait' style='font-size:19px'></i>></button>Registro</a>
 						</div></li>
 				</ul>
-			</div>
-
+			
 			<div class="container-fluid col-sm-5 col-md-6">
 
 				<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
 					<form class="form-inline" action="Principal" method="post">
-						<input class="form-control mr-sm-2" type="text" name="titulo"
+						<input class="form-control mr-sm-2" type="text" name="titulo" required="required"
 							placeholder="Buscar...">
 						<button class="btn btn-info" id="BotonBusqueda" type="submit">Buscar</button>
 					</form>
@@ -215,12 +214,13 @@
 					%>
 				
 			</div>
+			</div>
+			
 	</nav>
-	</div>
-	</nav>
+	
 
 	<div class="container"
-		style="position: relative; display: block; margin-top: 7%;">
+		style="position: relative; display: block; margin-top: 10%;">
 		<h2>Envianos un mensaje para Ayudarte</h2>
 		<form class="form-horizontal" action="FormularioAyudaCliente"
 			method="post">
@@ -235,7 +235,7 @@
 				<label class="control-label col-sm-2" for="asunto">asunto:</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="pwd"
-						placeholder="Enter asusnto" name="asunto">
+						placeholder="Enter asunto" name="asunto">
 				</div>
 			</div>
 			<div class="form-group">

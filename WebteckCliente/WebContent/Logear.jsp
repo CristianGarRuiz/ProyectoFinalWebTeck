@@ -121,8 +121,8 @@
 	<h3 id="errorLogear">Hay errores en registrar al usuario ,revisa
 		los campos !!</h3>
 	<div id="botLog">
-		<button type='button' onClick='window.location.replace("Pagina")'>VolverPrincipal</button>
-		<button type='button' onClick='window.location.replace("Logear")'>Reintentar</button>
+		<button type='button' onClick='window.location.replace("Principal")'>VolverPrincipal</button>
+		<button type='button' onClick='window.location.replace("LogeaUsuarios")'>Reintentar</button>
 	</div>
 
 	<%
@@ -138,7 +138,7 @@
 	<div id="botLog"
 		style="position: relative; display: flex; margin-left: 42%; margin-right: auto">
 		<button type='button' onClick='window.location.replace("Principal")'>VolverPrincipal</button>
-		<button type='button' onClick='window.location.replace("Logear")'>Reintentar</button>
+		<button type='button' onClick='window.location.replace("LogeaUsuarios")'>Reintentar</button>
 	</div>
 
 	<%

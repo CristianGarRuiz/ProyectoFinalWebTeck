@@ -113,7 +113,7 @@
 				<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
 					<form class="form-inline" action="Principal" method="post">
-						<input class="form-control mr-sm-2" type="text" name="titulo"
+						<input class="form-control mr-sm-2" type="text" name="titulo" required="required"
 							placeholder="Buscar...">
 						<button class="btn btn-info" id="BotonBusqueda" type="submit">Buscar</button>
 					</form>

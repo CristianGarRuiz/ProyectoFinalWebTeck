@@ -74,11 +74,10 @@
 	<%
 		if (error != null) {
 	%>
-	<h3 id="errorLogear">Hay errores en registrar al usuario ,revisa
+	<h3 id="errorLogear">Hay errores en cambiar la imagen
 		los campos !!</h3>
 	<div id="botLog">
-		<button type='button' onClick='window.location.replace("Pagina")'>VolverPrincipal</button>
-		<button type='button' onClick='window.location.replace("Logear")'>Reintentar</button>
+		<button type='button' onClick='window.location.replace("Principal")'>VolverPrincipal</button>
 	</div>
 
 	<%

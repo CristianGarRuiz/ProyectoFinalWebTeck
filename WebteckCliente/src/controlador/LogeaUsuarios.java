@@ -126,8 +126,9 @@ public class LogeaUsuarios extends HttpServlet {
 
 			}
 
-		} catch (Exception e) {
-			loggerError.error(e.getMessage() + "Error en añadirusuario / enlace de codigo/enviar el correo ");
+		} catch (Exception e ) {
+			e.printStackTrace();
+			loggerError.error(e.getMessage()  +  "Error en añadirusuario / enlace de codigo/enviar el correo ");
 			response.sendRedirect("LogeaUsuarios?error=Hay");
 		}
 

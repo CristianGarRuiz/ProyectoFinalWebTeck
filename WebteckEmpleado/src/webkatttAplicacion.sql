@@ -31,20 +31,6 @@ foreign key (idPlataforma)
 	on update cascade
 	on delete cascade);
 
-create table ventas(
-codigoPedido int,
-fecha date,
-idProducto int,
-emailUsuario varchar(100),
-foreign key (idProducto) 
-	references productos(id)
-	on update cascade
-	on delete cascade,
-foreign key (emailUsuario) 
-	references usuaris(emailUsuario)
-	on update cascade
-	on delete cascade);
-
 
 create table usuaris(
 emailUsuario varchar(100) not null primary key,
@@ -79,6 +65,20 @@ localidad varchar(50),
 provincia varchar(50),
 codigoPostal int(6),
 emailUsuario varchar(100),
+foreign key (emailUsuario) 
+	references usuaris(emailUsuario)
+	on update cascade
+	on delete cascade);
+    
+    create table ventas(
+codigoPedido int,
+fecha date,
+idProducto int,
+emailUsuario varchar(100),
+foreign key (idProducto) 
+	references productos(id)
+	on update cascade
+	on delete cascade,
 foreign key (emailUsuario) 
 	references usuaris(emailUsuario)
 	on update cascade
@@ -139,7 +139,6 @@ foreign key (emailUsuario)
 
 
 
-drop table carritoCliente;
 
 
 insert into usuaris (emailUsuario,nombre,usuario,`password`,foto,administrador) values (  'pepe@gmail.com','pepe' ,'pepe1234','1234','usuario.jpg','');
@@ -166,7 +165,7 @@ insert into generos (nombre) values ('Asus');
 
 
 
-insert into productos (titulo,precio,anyo,foto,stock,descripcion,idGenero,idPlataforma) values ('Phone 11 pro MAX',1200,2019,'Phone11proMax.jpeg',30,' Ficha técnica de: iPhone 11 Pro Max 64 Gb - Gris Espacial - Libre
+insert into productos (titulo,precio,anyo,foto,stock,descripcion,idGenero,idPlataforma) values ('Phone 11 pro MAX',1200,2019,'phone11promax.jpeg',30,' Ficha técnica de: iPhone 11 Pro Max 64 Gb - Gris Espacial - Libre
 
     Color : Gris Espacial
     Operador : Libre
@@ -442,418 +441,9 @@ insert into preguntas (id,nombre,respuesta) values (5,'Cuanto Tardara el envio '
 
 
 
-insert into carritoCliente (id,idProducto,emailUsuario) values (1,1,'cris@gmail.com');
+insert into carritoCliente (id,idProducto,emailUsuario) values (1,1,'pepe@gmail.com');
 
-insert into carritoCliente (id,idProducto,emailUsuario) values (2,3,'cris@gmail.com');
-
-
-select
- productos.foto,productos.id,productos.precio,productos.stock,productos.titulo
-from 
-carritoCliente,productos
-where 
- carritoCliente.idProducto= productos.id and  carritoCliente.emailUsuario = 'cris@gmail.com';
- 
- select
- count(idProducto)
- from 
- carritoCliente
- where
- carritoCliente.emailUsuario = 'cris@gmail.com';
- 
- 
-delete from carritoCliente where idProducto= 1 and
-emailUsuario = 'cris@gmail.com';
+insert into carritoCliente (id,idProducto,emailUsuario) values (2,3,'pepe@gmail.com');
 
 
 
-select
-*
-from 
-carritoCliente;
-
-select
-productos.titulo as ti,productos.precio,ventas.fecha,usuaris.nombre
-from 
-ventas ,productos,usuaris
-where
-ventas.idProducto= productos.id and ventas.emailUsuario= usuaris.emailUsuario and
- ventas.fecha  between '2020/02/05' and '2020/03/17';
-
-
-select
-productos.titulo ,productos.anyo,productos.precio,productos.descripcion,productos.foto
-from 
-productos ,valoraciones
-where
-productos.id = valoraciones.idProducto and
-productos.id = 1;
-
-select
-*
-from 
-productos;
-
-
-select
-*
-from 
-usuaris;
-
-delete from productos where productos.id = 2;
-
-
-select
-productos.titulo,productos.anyo,productos.precio,productos.descripcion, generos.nombre as Genero , plataformas.nombre as Plataforma
-from 
-productos , plataformas,generos
-where 
-productos.idPlataforma = plataformas.id and productos.idGenero = generos.id and
-productos.titulo like '%xbox%';
-
-	select
-		productos.titulo as titulo,productos.anyo as anyo, productos.precio as precio ,productos.descripcion as descripcion,
-		generos.nombre as genero , plataformas.nombre as plataforma
-		from
-		productos , plataformas,generos
-		where
-		productos.idPlataforma = plataformas.id and productos.idGenero = generos.id and
-		productos.titulo like '%xbox%';
-        
-      select
-		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,
-		productos.idGenero,productos.idPlataforma,productos.id
-		from
-		productos
-		where
-		productos.titulo like '%xbox%';
-        
-        select
-        *
-        from
-        comentarios,productos
-        where
-        comentarios.idProducto = productos.id;
-        
-        
-          select
-        *
-        from
-        valoraciones,productos
-        where
-        valoraciones.idProducto = productos.id;
-        
-        UPDATE
-		usuaris
-		SET
-
-		password = 12345
-		WHERE usuaris.emailUsuario = 'pepe@gmail.com';
-        
-        
-        select
-        *
-        from 
-        ventas,productos
-        where ventas.emailUsuario = 'pepe@gmail.com';
-        
-        select
-        distinct comentarios,productos.titulo
-        from
-        comentarios,productos,usuaris
-        where
-        comentarios.idProducto=productos.id and comentarios.emailUsuario= usuaris.emailUsuario and
-        usuaris.usuario = 'pepe1234';
-        
-        
-   select
-		 productos.titulo as titulo,productos.anyo as anyo, productos.precio
-		as
-		precio ,productos.stock as stock,productos.descripcion as
-		descripcion,productos.foto as foto,
-		generos.nombre as genero
-		,
-		plataformas.nombre as plataforma,productos.id 
-
-		from
-		productos,plataformas,generos
-        where
-        productos.idPlataforma = plataformas.id and productos.idGenero = generos.id 
-        and 
-        productos.id = 6;
-		
-        select
-        productos.titulo as titulo ,productos.precio as precio ,ventas.fecha as fecha ,usuaris.nombre as nombre
-		from
-		ventas ,productos,usuaris
-		where
-		ventas.idProducto= productos.id and ventas.emailUsuario= usuaris.emailUsuario and
-		ventas.emailUsuario = 'pepe@gmail.com';
-        
-        
-        select
-        *
-        from 
-        preguntas
-        where
-        preguntas.nombre like '%mi pedido%';
-        
-
-       SELECT 
-       round(AVG(valoraciones.valoraciones)), productos.titulo
-       FROM productos INNER JOIN valoraciones
-       ON productos.id = valoraciones.idProducto
-       GROUP BY productos.titulo
-       HAVING   AVG(valoraciones.valoraciones) >= 7 ;
-       
-       
-        
- SELECT
-	round(AVG(v.valoraciones))as valoraciones ,p.titulo as titulo ,p.foto as foto,p.id as id ,p.precio as precio
-FROM
-	valoraciones v
-INNER JOIN productos p ON p.id = v.idProducto
-GROUP BY v.idProducto
-having avg(v.valoraciones)>=7 limit 4 ;
-
-
-	select
-		*
-
-		from
-		productos,valoraciones
-		where
-		productos.id = valoraciones.idProducto;
-        
-        
-select
-		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,productos.id,productos.stock
-		from
-		productos;
-        
-        select
-		productos.titulo as
-		titulo,productos.anyo as anyo,
-		productos.precio
-		as
-		precio
-		,productos.stock as
-		stock,productos.descripcion as
-		descripcion,productos.foto as foto,
-		generos.nombre as genero
-		,
-		plataformas.nombre as plataforma,productos.id
-		as
-		id
-
-		from
-		productos,plataformas,generos
-		where
-		productos.idPlataforma = plataformas.id and productos.idGenero =
-		generos.id ;
-        
-       SELECT
-	round(AVG(v.valoraciones))as valoraciones ,p.titulo as titulo ,p.foto as foto,p.id as id ,p.precio as precio,p.stock as stock
-FROM
-	valoraciones v
-INNER JOIN productos p ON p.id = v.idProducto
-GROUP BY v.idProducto;
-
-
-select
-count(productos.titulo)
-from
-plataformas,productos
-where
-plataformas.id = productos.idPlataforma and
-productos.idPlataforma = 4;
-
-
-select
-*
-from
-plataformas,productos
-where
-plataformas.id = productos.idPlataforma and
-productos.idPlataforma = 4;
-
-
-select
-*
-from 
-plataformas;
-
-
-select
-*
-from 
-usuaris;
-
-select
-usuaris.emailUsuario,usuaris.nombre, usuaris.usuario ,usuaris.foto
-from 
-usuaris
-where
-usuaris.emailUsuario = 'pepe@gmail.com';
-        
- select
- *
- from
- direccionesUsuarios;
-		select
-		*
-		from
-		generos,productos
-		where
-		generos.id = productos.idGenero and
-		generos.id=1;
-        
-        	select
-		productos.titulo,productos.anyo,productos.precio,productos.descripcion,productos.foto,
-		productos.idGenero,productos.idPlataforma,productos.id,
-		productos.stock
-		from
-		productos
-		where
-		productos.idGenero =1;
- select
- *
- from 
- direccionesUsuarios;
- 
- delete 
- from 
- direccionesUsuarios
- where
- emailUsuario= 'cris@gmail.com';
- 
- select
- *
- from 
- usuaris;
- 
- select
- *
- from 
- empleados;
- 
-    UPDATE
-		usuaris
-		SET
-
-		password = 12345
-		WHERE usuaris.emailUsuario = 'pepe@gmail.com';
-        
-        insert into usuaris (emailUsuario,nombre,usuario,`password`,foto,administrador) values (  'cris@gmail.com','cris' ,'cris123','1234','usuario.jpg','');
-        
-        insert into empleados (emailUsuario,nombre,usuario,`password`,foto) values ('pepe2@gmail.com','cris' ,'cris','1234','usuario.jpg');
-
-
-
-	select
-		 distinct productos.titulo as titulo,productos.anyo as anyo,
-		productos.precio
-		as
-		precio ,productos.stock as
-		stock,productos.descripcion as
-		descripcion,productos.foto as foto,
-		generos.nombre as genero
-		,
-		plataformas.nombre as plataforma,productos.id
-		as ido
-		from
-		productos,plataformas,generos
-		where
-		productos.idPlataforma = plataformas.id and productos.idGenero =
-		generos.id   and
-		productos.titulo like '%xbox%';
-        
-        delete 
-        from usuaris
-        where 
-        usuaris.emailUsuario= 'cristian.realmadrid.garcia@gmail.com';
-        
-        select
-        *
-        from 
-        claveregistro;
-        
-        UPDATE usuaris
-		SET
-		activado ='s'
-		WHERE emailUsuario =
-		(select
-		emailUsuario from claveregistro where codigo = 1048);
-        
-        
-        
-        select
-        *
-        from 
-        carritoCliente;
-        
-        select
-        count(idProducto)
-        from 
-        carritoCliente;
-        
-        
-        select
-        *
-        from ventas;
-        
-        
-        
-        select
-        count(productos.precio)
-        from 
-        carritoCliente,productos
-        where
-        carritoCliente.idProducto = productos.id and
-        carritoCliente.emailUsuario = 'cris@gmail.com';
-        
-        
-        
-        select
-        count(carritoCliente.idProducto)
-        from 
-        carritoCliente
-        where
-        carritoCliente.idProducto = 1  and
-        carritoCliente.emailUsuario= 'cris@gmail.com';
-        
-        
-        select
-        productos.stock as totalStock
-        from
-        productos
-        where
-        productos.id = 1;
-        
-        update productos set productos.stock = 30 -1 where productos.id = 1;
-        
-      select
-      *
-      from
-      productos;
-      
-      
-      
-      select
-	  sum(productos.precio)
-      from 
-      carritoCliente,productos
-      where 
-      productos.id = carritoCliente.idProducto and
-      carritoCliente.emailUsuario = 'cris@gmail.com';
-      
-      
-       select
-	  sum(productos.precio)
-      from 
-      carritoCliente,productos
-      where 
-      productos.id = carritoCliente.idProducto and
-      carritoCliente.emailUsuario = 'cristian.realmadrid.garcia@gmail.com';
-      
-        

@@ -65,7 +65,7 @@
 		<h2 id="TextLogin">Correo Modificacion Contraseña</h2>
 		<p>
 			<i class='far fa-user-circle'
-				style='margin-left: 47%; font-size: 58px; color: black'></i>
+				style='margin-left: 27%; font-size: 58px; color: black'></i>
 		</p>
 	</div>
 	<div id="Formulario" class="container">

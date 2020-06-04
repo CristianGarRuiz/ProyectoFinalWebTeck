@@ -31,22 +31,25 @@ public class MailsEjb {
 	public void sendMail(String para, String mensaje, String ausnto) throws MessagingException {
 
 		Properties prop = new Properties();
-		prop.put("mail.smtp.auth", true);
+		prop.put("mail.smtp.auth", "true");
 		prop.put("mail.smtp.starttls.enable", "true");
-		prop.put("mail.smtp.host", "smtp.gmail.com");
+		prop.put("mail.smtp.host", "mail.ee");
 		prop.put("mail.smtp.port", 587);
-		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		prop.put("mail.smtp.ssl.trust", "*");
+		prop.put("mail.smtp.user", "webteck@mail.ee");
+		prop.put("mail.smtp.password", "pj32RACgS1");
 
 		Session session = Session.getInstance(prop, new Authenticator() {
 
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("garciaruizcristian50@gmail.com", "Cristiano_7");
+				return new PasswordAuthentication("webteck@mail.ee", "pj32RACgS1");
 			}
 		});
 
 		Message message = new MimeMessage(session);
 
+		message.setFrom(new InternetAddress("webteck@mail.ee"));
 		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(para));
 		message.setSubject(ausnto);
 
@@ -71,16 +74,19 @@ public class MailsEjb {
 	public void sendMail1(String para, String nombre, String remitente, String asunto, String mensaje) {
 
 		Properties prop = new Properties();
-		prop.put("mail.smtp.auth", true);
+		prop.put("mail.smtp.auth", "true");
 		prop.put("mail.smtp.starttls.enable", "true");
-		prop.put("mail.smtp.host", "smtp.gmail.com");
+		prop.put("mail.smtp.host", "mail.ee");
 		prop.put("mail.smtp.port", 587);
-		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		prop.put("mail.smtp.ssl.trust", "*");
+		prop.put("mail.smtp.user", "webteck@mail.ee");
+		prop.put("mail.smtp.password", "pj32RACgS1");
 
 		Session session = Session.getInstance(prop, new Authenticator() {
+
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("garciaruizcristian50@gmail.com", "Cristiano_7");
+				return new PasswordAuthentication("webteck@mail.ee", "pj32RACgS1");
 			}
 		});
 
@@ -91,6 +97,7 @@ public class MailsEjb {
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(para));
 			message.setSubject(asunto);
 			message.setText(nombre);
+			message.setFrom(new InternetAddress("webteck@mail.ee"));
 
 			MimeBodyPart mimeBodyPart = new MimeBodyPart();
 			mimeBodyPart.setContent(mensaje, "text/html");

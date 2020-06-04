@@ -98,7 +98,7 @@
 					<img alt="" src="Imagenes/<%=usu.getFoto()%>"
 						style="height: 35px; border-radius: 4%;margin-left: 11%;"><br /> <br />
 					<p
-						style="color: white; margin-left: 100px; margin-bottom: -4%; margin-top: -14%;">
+						style="color: white; margin-left: 52px; margin-bottom: -4%; margin-top: -14%;">
 						Bienvenido :
 						<%=usu.getUsuario()%></p>
 

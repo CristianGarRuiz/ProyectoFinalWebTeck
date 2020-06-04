@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
 <configuration>
-	<appender name="Normal" class="ch.qos.logback.core.FileAppender">
-		<file> /home/cristian/Escritorio/webteckEmpelados.log </file>
+	<appender name="Normal"
+		class="ch.qos.logback.core.FileAppender">
+		<file> webteckEmpelados.log </file>
 		<append>true</append>
 		<encoder>
 			<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
 		</encoder>
 	</appender>
-	
-	<appender name="ERRORFILE" class="ch.qos.logback.core.FileAppender">
-      <file> /home/cristian/Escritorio/webteckEmpleadosErrors.log </file>
-      <append>true</append>
-      <encoder>
-         <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
-      </encoder>
-   </appender>
-   
-   <logger name="Error" level="ERROR" additivity="false">
-    <appender-ref ref="ERRORFILE" />
-  </logger>
+
+	<appender name="ERRORFILE"
+		class="ch.qos.logback.core.FileAppender">
+		<file> webteckEmpleadosErrors.log </file>
+		<append>true</append>
+		<encoder>
+			<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="Error" level="ERROR" additivity="false">
+		<appender-ref ref="ERRORFILE" />
+	</logger>
 
 	<root level="debug">
 		<appender-ref ref="Normal" />

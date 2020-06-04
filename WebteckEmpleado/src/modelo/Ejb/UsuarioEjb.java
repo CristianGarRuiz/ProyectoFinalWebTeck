@@ -57,6 +57,15 @@ public class UsuarioEjb {
 		return userDAO.comprobarUsuario(NombreUsuario);
 
 	}
+	
+	
+	public int contarUsuarios() throws SQLException {
+
+		UsuarioDao userDAO = new UsuarioDao();
+		return userDAO.contarUsuarios();
+
+	}
+	
 
 	/**
 	 * este metodo comprueba que el email de usuario ya existe

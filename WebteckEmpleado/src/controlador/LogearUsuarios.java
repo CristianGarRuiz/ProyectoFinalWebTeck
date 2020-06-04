@@ -108,7 +108,7 @@ public class LogearUsuarios extends HttpServlet {
 		         
 				rsCorreo.forward(request, response);
 				
-				loggerNormal.debug("Añadidoo el empleado sin problemas");
+				loggerNormal.debug("Añadido el empleado sin problemas");
 				
 			}else {
 				response.sendRedirect("LogearUsuarios?error=hay");

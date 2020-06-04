@@ -125,7 +125,7 @@
 					style="background-color: orange;">
 
 					<form class="form-inline" action="Principal" method="post">
-						<input class="form-control mr-sm-2" type="text" name="titulo"
+						<input class="form-control mr-sm-2" type="text" name="titulo" required="required"
 							placeholder="Buscar...">
 						<button class="btn btn-info" id="BotonBusqueda" type="submit">Buscar</button>
 					</form>
@@ -582,7 +582,7 @@
 						<a id="" class="nav-link" href="#Habilidades">Sobre</a>
 					</ol>
 					<ol class="nav-item">
-						<a id="" class="nav-link" href="#Habilidades">Acceso</a>
+						<a id="Login14" class="nav-link" href="#Habilidades">Acceso</a>
 					</ol>
 					<ol class="nav-item">
 						<a id="" class="nav-link" href="#Habilidades">Blog</a>
@@ -598,12 +598,20 @@
 
 					<h2>Siguenos en :</h2>
 					<hr>
-					<a class="Icon" href="https://twitter.com/login"
-						<button type="submit"> <i class='fab fa-twitter' style='font-size:36px; '> </i></button>></a>
-					<a class="Icon" href="https://www.facebook.com/"
-						<button type="submit"> <i class='fab fa-facebook-square' style='font-size:36px'></i></button>></a>
-					<a class="Icon" href="https://www.youtube.com/"
-						<button type="submit"><i class='fab fa-youtube' style='font-size:36px;color: red'></i> </button>></a>
+					<a class="Icon" href="https://twitter.com/login">
+						<button type="submit">
+							<i class='fab fa-twitter' style='font-size: 36px; color: #27bcf8'></i>
+						</button>
+					</a> <a class="Icon" href="https://www.facebook.com/">
+						<button type="submit">
+							<i class='fab fa-facebook-square'
+								style='font-size: 36px; color: #43c3f3'></i>
+						</button>
+					</a> <a class="Icon" href="https://www.youtube.com/">
+						<button type="submit">
+							<i class='fab fa-youtube' style='font-size: 36px; color: red'></i>
+						</button>
+					</a>
 				</div>
 
 				<div class="container col-md-2">
@@ -634,6 +642,7 @@
 	window.onload = function() {
 		document.getElementById("Login12").setAttribute('href', '#');
 		document.getElementById("Login13").setAttribute('href', '#');
+		document.getElementById("Login14").setAttribute('href', '#');
 	}
 </script>
 <%

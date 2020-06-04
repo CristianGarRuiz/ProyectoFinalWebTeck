@@ -138,7 +138,7 @@ public class PagarCarrito extends HttpServlet {
 				String mensaje = " Buenas Tardes " + ven.getEmailUsuario() + " <br> " + " Su pedido Ya estas en marcha "
 						+ "\n" + " Codigo de PEDIDO : " + ven.getCodigoPedido() + " \n " + " Ticket de la Compra"
 						+ " \n " + " Producto comprado : " + prod.getTitulo() + " Precio Pagado : " + prod.getPrecio()
-						+ " Cantidad de Productos 1 : " + cantidad1 + " Total de la Compra : " + totalVenta
+						+ " Cantidad de Productos : " + cantidad1 + " Total de la Compra : " + totalVenta
 						+ " Fecha de la compra  : " + ven.getFecha();
 
 				String mensaje1 = "WEBTECK venta hecha en fecha de : " + ven.getFecha() + " Producto Vendido : "

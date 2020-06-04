@@ -14,7 +14,7 @@ public class GeneradoresEnlaceEjb {
 	 * @return
 	 */
 	public String generarEnlace(int codigo) {
-		return "http://localhost:8080/WebteckCliente/claveRegistro?codigo=" + codigo;
+		return "http://5.196.27.145:8080/WebteckCliente/claveRegistro?codigo=" + codigo;
 	}
 
 	/**
@@ -26,6 +26,6 @@ public class GeneradoresEnlaceEjb {
 
 		String info = "Ves a nuestro enlace y modifica tu contraseña, Pero sino has solicitado este correo Ignoralo , Gracias EquipoTecnico";
 
-		return info + "\r\t\n" + "http://localhost:8080/WebteckCliente/cambiarContra";
+		return info + "\r\t\n" + "http://5.196.27.145:8080/WebteckCliente/cambiarContra";
 	}
 }

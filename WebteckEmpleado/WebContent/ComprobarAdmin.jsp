@@ -129,7 +129,8 @@
 
 
 	<FORM action="ComprobarAdmin" method="post">
-		Contraseña Administrador: <INPUT type="password" name="codigo" /> <BR />
+		Contraseña Administrador: <INPUT type="password"
+			pattern="^\d{2}\d{3}?$" title="Codigo Numerico" name="codigo" /> <BR />
 		<INPUT type="submit" value="Validar Credenciales" />
 	</FORM>
 

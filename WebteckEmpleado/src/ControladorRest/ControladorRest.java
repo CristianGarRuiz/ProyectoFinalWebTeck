@@ -123,6 +123,9 @@ public class ControladorRest {
 		}
 		return producto;
 	}
+	
+	
+	
 
 	@GET
 	@Path("/getProductoTiendaCategoriaid/{token}/{id}")
@@ -149,6 +152,22 @@ public class ControladorRest {
 		}
 		return producto;
 	}
+	
+	
+	@GET
+	@Path("/contarUsuarios/{token}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public int contarUsuarios(@PathParam("token") String token)
+			throws SQLException {
+
+		int usuario = -1;
+		if (token.equals("patata23")) {
+			usuario = usuarioEjb.contarUsuarios();
+		}
+		System.out.println(usuario);
+		return usuario;
+	}
+	
 
 	@GET
 	@Path("/contarProductoCarrito/{token}/{emailUsuario}")
