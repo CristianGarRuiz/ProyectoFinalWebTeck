@@ -1,9 +1,14 @@
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="javax.naming.Context"%>
+<%@page import="modelo.Pojo.ProductoPojo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page import="modelo.Pojo.UsuarioPojo"%>
 <%@ page import="modelo.Pojo.MarcaPojo"%>
 <%@ page import="modelo.Pojo.CategoriaPojo"%>
+
+<%! ProductoPojo producto; %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +40,7 @@
 	<%
 		String error = (String) request.getParameter("error");
 		UsuarioPojo usu = (UsuarioPojo) request.getAttribute("usuario");
+		ProductoPojo e = (ProductoPojo) request.getAttribute("producto");
 	%>
 
 
@@ -131,7 +137,7 @@
 	<br>
 	<br>
 	<div id="Formulario" class="container">
-		<form class="form-horizontal" action="Crear" method="post">
+		<form class="form-horizontal" action="Crear" method="post" enctype="multipart/form-data">
 			<label for="Titulo">Titulo:</label> <input type="text" name="Titulo"
 				required="required" placeholder="Titulo.." /> <br /> <label
 				for="Año">Año:</label> <input type="number" name="Anyo"
@@ -142,8 +148,8 @@
 				required="required" placeholder="Stock" /> <br /> <br /> <label
 				for="Descripcion">Descripcion:</label> <input type="text"
 				name="Descripcion" required="required" placeholder="Descripcion.." />
-			<br /> <label for="Descripcion">Foto:</label> <input type="File"
-				name="Imagen" required="required" placeholder="Imagen .." /> <br />
+			<br /> <label for="Foto">Foto:</label> <input type="file"
+				name="Foto" id="Foto" required="required" placeholder="Imagen .." /> <br />
 
 			<br /> <label for="marca">Marca:</label> <select name="Marca">
 				<%

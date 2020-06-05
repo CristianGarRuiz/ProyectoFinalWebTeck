@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 @Stateless
 @LocalBean
@@ -48,6 +49,39 @@ public class ImageneEjb {
 				return content.substring(content.indexOf("=") + 2, content.length() - 1);
 		}
 		return "desconocido.txt";
+	}
+/**
+ * este metodo siver para subir la imagen en disco de un nuevo producto
+ * @param request
+ * @param context
+ * @return
+ * @throws IOException
+ * @throws ServletException
+ */
+	public String guardarImagen1(HttpServletRequest request, ServletContext context)
+			throws IOException, ServletException {
+
+		String uploadPath = context.getRealPath("") + File.separator + UPLOAD_DIRECTORY;
+		File uploadDir = new File(uploadPath);
+
+		if (!uploadDir.exists()) {
+			uploadDir.mkdir();
+		}
+
+		// Lo utilizaremos para guardar el nombre del archivo
+		String fileName = null;
+
+		// Obtenemos el archivo y lo guardamos a disco
+		for (Part part : request.getParts()) {
+
+			String nombre = getFileName(part);
+
+			if (!nombre.equals("desconocido.txt") && !nombre.equals("")) {
+				fileName = nombre;
+				part.write(uploadPath + File.separator + fileName);
+			}
+		}
+		return fileName;
 	}
 
 }

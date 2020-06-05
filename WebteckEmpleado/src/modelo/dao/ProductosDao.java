@@ -381,6 +381,8 @@ public class ProductosDao {
 	 * 
 	 * @param producto
 	 */
+	
+	
 	public void insertProducto(ProductoPojo producto) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {

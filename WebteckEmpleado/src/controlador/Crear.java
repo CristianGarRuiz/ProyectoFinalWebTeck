@@ -3,10 +3,11 @@ package controlador;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Logger;
+import modelo.Ejb.ImageneEjb;
 import modelo.Ejb.ProductoEjb;
 import modelo.Ejb.SesionEjb;
 import modelo.Ejb.UsuarioEjb;
@@ -23,9 +25,11 @@ import modelo.Pojo.ProductoPojo;
 import modelo.Pojo.UsuarioPojo;
 
 /**
- * Clase que crea un accidnete.
+ * Clase que crea producto nuevo
+ 
  */
 @WebServlet("/Crear")
+@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
 public class Crear extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger loggerNormal = (Logger) LoggerFactory.getLogger("Normal");
@@ -42,6 +46,9 @@ public class Crear extends HttpServlet {
 
 	@EJB
 	SesionEjb sesionesEjb;
+	
+	@EJB
+	ImageneEjb imagenesEJB;
 
 	/**
 	 * Método que trata las peticiones GET que llegan al servlet.
@@ -82,6 +89,8 @@ public class Crear extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		ServletContext context = getServletContext();
 
 		// Esta todos los parametros del pojo para poder insertar un accidente nuevo
 		// -------------------------------------------------------------------------
@@ -89,7 +98,7 @@ public class Crear extends HttpServlet {
 		String año = request.getParameter("Anyo");
 		String precio = request.getParameter("Precio");
 		String Descripcion = request.getParameter("Descripcion");
-		String Imagen = request.getParameter("Imagen");
+		String foto = imagenesEJB.guardarImagen1(request, context);
 		String stock = request.getParameter("Stock");
 		int Id_Marca = Integer.parseInt(request.getParameter("Marca"));
 		int Id_Categoria = Integer.parseInt(request.getParameter("Categoria"));
@@ -101,19 +110,19 @@ public class Crear extends HttpServlet {
 		if (Titulo != null && Descripcion != null && año != null && precio != null && stock != null) {
 			// Si nos dan información de un accidente la insertamos.
 			ProductoPojo e = new ProductoPojo();
-
+		
 			e.setTitulo(Titulo);
 			e.setAnyo(Año);
 			e.setPrecio(Precio);
 			e.setDescripcion(Descripcion);
-			e.setFoto(Imagen);
+			e.setFoto(foto);
 			e.setIdGenero(Id_Marca);
 			e.setIdPlataforma(Id_Categoria);
 			e.setStock(Stock);
 			productoEjb.insertProducto(e);
 		}
 		loggerNormal.debug(" Realizando un insert  Con los datos " + "Titulo: " + Titulo + "Año: " + Año
-				+ "Precio : " + Precio + "Descripcion: " + Descripcion + " Imagen" + Imagen + " Marca"+Id_Marca+
+				+ "Precio : " + Precio + "Descripcion: " + Descripcion  + " Marca"+Id_Marca+
 				" Plataforma" + Id_Categoria + " Stock" + Stock);
 		
 		loggerError.error("Error al insertar un producto nuevo");
